@@ -1,13 +1,4 @@
 ﻿#include <SFML/Graphics.hpp>
-#include <String>
-
-using namespace std;
-
-class Engine {
-public:             // Access specifier
-    int myNum;        // Attribute (int variable)
-    string myString;
-};
 
 int main()
 {
