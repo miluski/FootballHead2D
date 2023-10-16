@@ -1,7 +1,4 @@
 ﻿#include <SFML/Graphics.hpp>
-#include <String>
-
-using namespace std;
 
 class Engine {
 public:
