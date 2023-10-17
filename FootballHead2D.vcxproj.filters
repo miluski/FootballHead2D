@@ -22,4 +22,9 @@
   <ItemGroup>
     <None Include="SFML-2.6.0.zip" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="arial.ttf">
+      <Filter>Pliki zasobów</Filter>
+    </Font>
+  </ItemGroup>
 </Project>
