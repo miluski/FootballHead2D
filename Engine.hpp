@@ -4,12 +4,22 @@
 #include <iostream>
 #include <ctime>
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Clock.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Font.hpp>
 
 using namespace std;
+
+class Timer {
+public:
+    sf::Clock clock;
+    int checkTimer();
+};
 
 class Engine {
 public:
     void initialize();
+    Timer timer;
 };
 
 class Logs {

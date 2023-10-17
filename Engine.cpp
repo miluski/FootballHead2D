@@ -1,19 +1,39 @@
 ﻿#include "Engine.hpp"
 
 void Engine::initialize() {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
+    sf::CircleShape shape(200.f);
+    shape.setFillColor(sf::Color::Blue);
     while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (window.pollEvent(event))
+        {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        int elapsed = timer.checkTimer();
+        if (elapsed > 5) 
+            break;
+        sf::Font font;
+        if (!font.loadFromFile("arial.ttf")) {
+            std::cout << "Load Failed!" << std::endl;
+            break;
+        }
+        sf::Text text;
+        text.setFont(font);
+        text.setString("HALO");
+        text.setCharacterSize(48);
+        text.setFillColor(sf::Color::White);
         window.clear();
         window.draw(shape);
+        window.draw(text);
         window.display();
     }
+}
+
+int Timer::checkTimer() {
+    sf::Time elapsed1 = clock.getElapsedTime();
+    return elapsed1.asSeconds();
 }
 
 Logs::Logs() {
