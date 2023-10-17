@@ -15,12 +15,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FootballHead2D.cpp">
+    <ClCompile Include="Engine.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SFML-2.6.0.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="arial.ttf">
