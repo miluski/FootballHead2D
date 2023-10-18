@@ -31,6 +31,41 @@ void Engine::initialize() {
     }
 }
 
+void Settings::openSettings() {
+    sf::RenderWindow window(sf::VideoMode(200, 400), "Uruchom gre!");
+    sf::RectangleShape resolution1;
+    sf::RectangleShape resolution2;
+    sf::RectangleShape resolution3;
+    sf::Text chosenResolution;
+    sf::Font font;
+    sf::Text text1;
+    //Dodać tytuł gry
+    resolution1.setSize(sf::Vector2f(160, 50));//dodac tu res 1280x720
+    resolution1.setFillColor(sf::Color::Green);
+    resolution1.setPosition(sf::Vector2f(20, 100));
+    resolution2.setSize(sf::Vector2f(160, 50));//dodac tu res 1366x768
+    resolution2.setFillColor(sf::Color::Green);
+    resolution2.setPosition(sf::Vector2f(20, 180));
+    resolution3.setSize(sf::Vector2f(160, 50));//dodac tu res 1600x900
+    resolution3.setFillColor(sf::Color::Green);
+    resolution3.setPosition(sf::Vector2f(20, 260));
+    //Dodać przycisk graj + wywołanie engine.startupView na evencie onClick
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+                engine.startupView();
+            }
+        }
+        window.clear();
+        window.draw(resolution1);
+        window.draw(resolution2);
+        window.draw(resolution3);
+        window.display();
+    }
+}
+
 int Timer::checkTimer() {
     sf::Time elapsed1 = clock.getElapsedTime();
     return elapsed1.asSeconds();
