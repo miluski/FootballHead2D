@@ -3,11 +3,15 @@
 void Engine::startupView() {
     sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
     sf::CircleShape shape(200.f);
+    sf::Clock clock;
     shape.setFillColor(sf::Color::Blue);
+    window.setFramerateLimit(60);
     while (window.isOpen()) {
+        float currentTime = clock.restart().asSeconds();
+        float fps = 1.0f / currentTime;
+        cout << fps << endl;
         sf::Event event;
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -31,6 +35,7 @@ void Engine::startupView() {
     }
 }
 
+
 void Settings::openSettings() {
     sf::RenderWindow window(sf::VideoMode(200, 400), "Uruchom gre!");
     sf::RectangleShape resolution1;
@@ -40,15 +45,9 @@ void Settings::openSettings() {
     sf::Font font;
     sf::Text text1;
     //Dodać tytuł gry
-    resolution1.setSize(sf::Vector2f(160, 50));//dodac tu res 1280x720
-    resolution1.setFillColor(sf::Color::Green);
-    resolution1.setPosition(sf::Vector2f(20, 100));
-    resolution2.setSize(sf::Vector2f(160, 50));//dodac tu res 1366x768
-    resolution2.setFillColor(sf::Color::Green);
-    resolution2.setPosition(sf::Vector2f(20, 180));
-    resolution3.setSize(sf::Vector2f(160, 50));//dodac tu res 1600x900
-    resolution3.setFillColor(sf::Color::Green);
-    resolution3.setPosition(sf::Vector2f(20, 260));
+    setResolutionSettings(resolution1, 20, 100); //dodac tu res 1280x720
+    setResolutionSettings(resolution2, 20, 180); // 2 rozdzialka
+    setResolutionSettings(resolution3, 20, 260); // 3 rozdzialka
     //Dodać przycisk graj + wywołanie engine.startupView na evencie onClick
     while (window.isOpen()) {
         sf::Event event;
@@ -64,6 +63,12 @@ void Settings::openSettings() {
         window.draw(resolution3);
         window.display();
     }
+}
+
+void Settings::setResolutionSettings(sf::RectangleShape resolution, float X, float Y) {
+    resolution.setSize(sf::Vector2f(160, 50));
+    resolution.setFillColor(sf::Color::Green);
+    resolution.setPosition(sf::Vector2f(X, Y));
 }
 
 int Timer::checkTimer() {

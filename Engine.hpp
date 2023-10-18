@@ -23,11 +23,14 @@ class Engine {
 public:
     void startupView();
     Timer timer;
+private:
+    
 };
 
 class Settings {
 public:
     void openSettings();
+    void setResolutionSettings(sf::RectangleShape, float, float);
     Engine engine;
 };
 
