@@ -41,7 +41,6 @@ void Settings::openSettings() {
     sf::Text text1;
     sf::Text text2;
     sf::Text text3;
-    //Dodać tytuł gry
     resolution1.setSize(sf::Vector2f(160, 50));//dodac tu res 1280x720
     resolution1.setFillColor(sf::Color(25, 55, 60, 255));
     resolution1.setPosition(sf::Vector2f(20, 100));
@@ -60,8 +59,6 @@ void Settings::openSettings() {
     text2.setCharacterSize(28);
     text2.setFillColor(sf::Color::White);
     text2.setPosition(sf::Vector2f(20, 180));
-
-
     resolution3.setSize(sf::Vector2f(160, 50));//dodac tu res 1600x900
     resolution3.setFillColor(sf::Color::Green);
     resolution3.setPosition(sf::Vector2f(20, 260));
@@ -70,6 +67,16 @@ void Settings::openSettings() {
     text3.setCharacterSize(28);
     text3.setFillColor(sf::Color::White);
     text3.setPosition(sf::Vector2f(20, 260));
+    //Dodać tytuł gry
+    resolution1.setSize(sf::Vector2f(160, 50));//dodac tu res 1280x720
+    resolution1.setFillColor(sf::Color::Green);
+    resolution1.setPosition(sf::Vector2f(20, 100));
+    resolution2.setSize(sf::Vector2f(160, 50));//dodac tu res 1366x768
+    resolution2.setFillColor(sf::Color::Green);
+    resolution2.setPosition(sf::Vector2f(20, 180));
+    resolution3.setSize(sf::Vector2f(160, 50));//dodac tu res 1600x900
+    resolution3.setFillColor(sf::Color::Green);
+    resolution3.setPosition(sf::Vector2f(20, 260));
     //Dodać przycisk graj + wywołanie engine.startupView na evencie onClick
     while (window.isOpen()) {
         sf::Event event;
