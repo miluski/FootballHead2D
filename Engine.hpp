@@ -1,8 +1,11 @@
 #pragma once
+#include <ctime>
 #include <string>
 #include <fstream>
 #include <iostream>
-#include <ctime>
+#include <sstream>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Graphics/Text.hpp>
@@ -18,8 +21,14 @@ public:
 
 class Engine {
 public:
-    void initialize();
+    void startupView();
     Timer timer;
+};
+
+class Settings {
+public:
+    void openSettings();
+    Engine engine;
 };
 
 class Logs {
