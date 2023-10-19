@@ -1,33 +1,27 @@
 ﻿#include "Engine.hpp"
 
 void Engine::startupView() {
-    sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
+    string startLog = "[INFO] " + getCurrentTime() + " Main menu started ";
+    setLogContent(startLog);
+    sf::RenderWindow window(sf::VideoMode(400, 400), "Menu");
     sf::CircleShape shape(200.f);
-    sf::Clock clock;
     shape.setFillColor(sf::Color::Blue);
     window.setFramerateLimit(60);
+    sf::Text text;
+    setSettingsOf(text);
+    sf::Clock clock;
     while (window.isOpen()) {
         float currentTime = clock.restart().asSeconds();
-        float fps = 1.0f / currentTime;
-        cout << fps << endl;
+        string fpsText = getFramePerSecondText(currentTime);
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        int elapsed = timer.checkTimer();
+        int elapsed = checkTimer();
         if (elapsed > 5) 
             break;
-        sf::Font font;
-        if (!font.loadFromFile("arial.ttf")) {
-            std::cout << "Load Failed!" << std::endl;
-            break;
-        }
-        sf::Text text;
-        text.setFont(font);
-        text.setString("HALO");
-        text.setCharacterSize(48);
-        text.setFillColor(sf::Color::White);
+        setStringOf(text, fpsText);
         window.clear();
         window.draw(shape);
         window.draw(text);
@@ -35,14 +29,56 @@ void Engine::startupView() {
     }
 }
 
+string Engine::getCurrentTime() {
+    auto timeNow = chrono::system_clock::to_time_t(chrono::system_clock::now());
+    char timeStringBuffer[50] = "";
+    ctime_s(timeStringBuffer, 27, &timeNow);
+    string timeString = timeStringBuffer;
+    timeString.erase(remove(timeString.begin(), timeString.end(), '\n'), timeString.cend());
+    return timeString;
+}
 
-void Settings::openSettings() {
-    sf::RenderWindow window(sf::VideoMode(200, 400), "Uruchom gre!");
+string Engine::getFramePerSecondText(float currentTime) {
+    float fps = round(1.0f / currentTime);
+    string fpsText = to_string(fps);
+    int decimalPlacePos = fpsText.find(".000000");
+    fpsText.erase(decimalPlacePos);
+    return fpsText;
+}
+
+int Engine::checkTimer() {
+    sf::Time elapsed1 = clock.getElapsedTime();
+    return elapsed1.asSeconds();
+}
+
+void Engine::setSettingsOf(sf::Text &text) {
+    sf::Font font = loadArialFont();
+    text.setFont(font);
+    text.setCharacterSize(48);
+    text.setFillColor(sf::Color::White);
+}
+
+void Engine::setStringOf(sf::Text& text, string fpsText) {
+    text.setString("FPS: " + fpsText);
+}
+
+sf::Font Engine::loadArialFont() {
+    sf::Font font;
+    string logContent = "";
+    if (!font.loadFromFile("arial.ttf")) 
+        setLogContent("[ERROR] " + getCurrentTime() + " Unsuccessfull arial font load");
+    else 
+        setLogContent("[INFO] " + getCurrentTime() + " Arial font was successfully loaded");
+    return font;
+}
+
+void Engine::openSettings() {
+    sf::RenderWindow window(sf::VideoMode(200, 400), "Opcje uruchamiania");
     sf::RectangleShape resolution1;
     sf::RectangleShape resolution2;
     sf::RectangleShape resolution3;
     sf::Text chosenResolution;
-    sf::Font font;
+    sf::Font font = loadArialFont();
     sf::Text text1;
     sf::Text text2;
     sf::Text text3;
@@ -54,8 +90,6 @@ void Settings::openSettings() {
     text1.setCharacterSize(28);
     text1.setFillColor(sf::Color::White);
     text1.setPosition(sf::Vector2f(20, 100));
-
-
     resolution2.setSize(sf::Vector2f(160, 50));//dodac tu res 1366x768
     resolution2.setFillColor(sf::Color::Green);
     resolution2.setPosition(sf::Vector2f(20, 180));
@@ -73,16 +107,13 @@ void Settings::openSettings() {
     text3.setFillColor(sf::Color::White);
     text3.setPosition(sf::Vector2f(20, 260));
     //Dodać tytuł gry
-    setResolutionSettings(resolution1, 20, 100); //dodac tu res 1280x720
-    setResolutionSettings(resolution2, 20, 180); // 2 rozdzialka
-    setResolutionSettings(resolution3, 20, 260); // 3 rozdzialka
     //Dodać przycisk graj + wywołanie engine.startupView na evencie onClick
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
-                engine.startupView();
+                startupView();
             }
         }
         window.clear();
@@ -93,62 +124,41 @@ void Settings::openSettings() {
     }
 }
 
-void Settings::setResolutionSettings(sf::RectangleShape resolution, float X, float Y) {
-    resolution.setSize(sf::Vector2f(160, 50));
-    resolution.setFillColor(sf::Color::Green);
-    resolution.setPosition(sf::Vector2f(X, Y));
-}
-
-int Timer::checkTimer() {
-    sf::Time elapsed1 = clock.getElapsedTime();
-    return elapsed1.asSeconds();
-}
-
-Logs::Logs() {
-    this->logFilePath = "logs.log";
-}
-
-void Logs::setLogContent(string logContent) {
+void Engine::setLogContent(string logContent) {
     this->logContent = logContent;
-    if (!validateLogContentFormat())       
-        setErrorLogContent();
-}
-
-bool Logs::validateLogContentFormat() {
-    int isValidErrorStart = this->logContent.find("[ERROR]");
-    int isValidInfoStart = this->logContent.find("[INFO]");
-    int isValidDebugStart = this->logContent.find("[DEBUG]");
-    if (isValidErrorStart != string::npos || isValidInfoStart != string::npos || isValidDebugStart != string::npos) {
-        cout << this->logContent;
-        return true;
+    this->logFilePath = "logs.log";
+    if (!validateLogContentFormat()) {
+        string error = "[ERROR] " + getCurrentTime() + " Uncorrect log format";
+        this->logContent = error;
     }
-    else
-        return false;
+    saveLog();
 }
 
-void Logs::setErrorLogContent() {
-    time_t now = time(0);
-    char dateTime[50];
-    ctime_s(dateTime, 50, &now);
-    string convertedDateTime = dateTime;
-    string oldLogContent = this->logContent;
-    string error = "[ERROR] " + convertedDateTime + " Uncorrect log format, log content: " + oldLogContent;
-    this->logContent = error;
-    cout << error << endl;
-}
-
-void Logs::saveLog() {
+void Engine::saveLog() {
     fstream fileStream;
     fileStream.open(logFilePath, ios::app);
     fileStream << logContent << endl;
     fileStream.close();
 }
 
+bool Engine::validateLogContentFormat() {
+    int isValidErrorStart = this->logContent.find("[ERROR]");
+    int isValidInfoStart = this->logContent.find("[INFO]");
+    int isValidDebugStart = this->logContent.find("[DEBUG]");
+    if (isValidErrorStart != string::npos || isValidInfoStart != string::npos || isValidDebugStart != string::npos) {
+        cout << this->logContent << endl;
+        return true;
+    }
+    else
+        return false;
+}
+
+/*
+    Tutaj dodawać przyszłe metody obsługi myszki/klawiatury
+*/
+
 int main() {
-    Settings settings;
-    settings.openSettings();
-    Logs logs;
-    logs.setLogContent("[INFO] testowyLog");
-    logs.saveLog();
+    Engine engine;
+    engine.openSettings();
     return 0;
 }

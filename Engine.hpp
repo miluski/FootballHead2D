@@ -1,5 +1,6 @@
 #pragma once
 #include <ctime>
+#include <chrono>
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -7,41 +8,26 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include <SFML/System/Clock.hpp>
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/Font.hpp>
 
 using namespace std;
 
-class Timer {
-public:
-    sf::Clock clock;
-    int checkTimer();
-};
-
 class Engine {
 public:
-    void startupView();
-    Timer timer;
-private:
-    
-};
-
-class Settings {
-public:
     void openSettings();
-    void setResolutionSettings(sf::RectangleShape, float, float);
-    Engine engine;
-};
-
-class Logs {
-public:
-    Logs();
-    void setLogContent(string);
-    void saveLog();
 private:
-    bool validateLogContentFormat();
-    void setErrorLogContent();
+    sf::Clock clock;
     string logContent;
     string logFilePath;
+    void startupView();
+    string getCurrentTime();
+    string getFramePerSecondText(float);
+    int checkTimer();
+    void setSettingsOf(sf::Text &);
+    void setStringOf(sf::Text&, string);
+    sf::Font loadArialFont();
+    void installMouse();
+    void installKeyboard();
+    bool validateLogContentFormat();
+    void setLogContent(string);
+    void saveLog();
 };
