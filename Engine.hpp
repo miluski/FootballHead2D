@@ -12,9 +12,11 @@
 using namespace std;
 
 enum windowNames {STARTUP_SETTINGS=0, MENU=1, GAME=2, GAME_HELPER=3};
+enum rectNames {RESOLUTION_1=1, RESOLUTION_2=2, RESOLUTION_3=3, PLAY=4};
 
 class Engine {
 public:
+    sf::Vector2u windowSize;
     int activeWindowName;
     static Engine& getInstance() {
         static Engine engine;
@@ -24,20 +26,27 @@ public:
     void clearWindowToColor(sf::RenderWindow& window, sf::Color color);
     void clearSpriteToColor(sf::Sprite& sprite, sf::Color color);
 private:
+    sf::RectangleShape* resolution1Button = getButton(20, sf::Color::Green);
+    sf::RectangleShape* resolution2Button = getButton(100, sf::Color::Green);
+    sf::RectangleShape* resolution3Button = getButton(180, sf::Color::Green);
     sf::Clock clock;
     sf::Font font;
-    sf::Vector2u windowSize;
     string logContent;
-    void settingsWindowSetup(sf::RenderWindow*);
-    void menuWindowSetup(sf::RenderWindow*);
-    string getCurrentTime();
-    string getFramePerSecondText(float);
-    sf::Font* getArialFont();
+    sf::Clock breakClock;
     sf::Text* getText();
-    sf::Text* getText(string content);
-    sf::RectangleShape* getResolutionButton(sf::Vector2u windowSize, float);
-    bool validateLogContentFormat();
-    void setLogContent(string);
-    void saveLog();
+    sf::Font* getArialFont();
     void serveWindowCloseEvent(sf::RenderWindow&);
+    void settingsWindowSetup(sf::RenderWindow*);
+    void drawButtonsAt(sf::RenderWindow*);
+    sf::RectangleShape* getButton(float, sf::Color);
+    int getRectNameWhenMouseIsPressedIn(sf::RenderWindow*);
+    string getFramePerSecondText(float);
+    void setWidthAndHeight(sf::RectangleShape*, sf::RectangleShape*, sf::RectangleShape*);
+    void drawTextsAt(sf::RenderWindow*);
+    sf::Text* getText(string content);
+    void menuWindowSetup(sf::RenderWindow*, sf::Text, string);
+    void setLogContent(string);
+    bool validateLogContentFormat();
+    string getCurrentTime();
+    void saveLog();
 };
