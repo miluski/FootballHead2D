@@ -1,7 +1,10 @@
 ﻿#include "Engine.hpp"
 
+int globalEngineX = 400;
+int globalEngineY = 400;
+
 void Engine::startupView() {
-    sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(globalEngineX, globalEngineY), "SFML works!");
     sf::CircleShape shape(200.f);
     sf::Clock clock;
     shape.setFillColor(sf::Color::Blue);
@@ -37,24 +40,36 @@ void Engine::startupView() {
 
 
 void Settings::openSettings() {
-    sf::RenderWindow window(sf::VideoMode(200, 400), "Uruchom gre!");
+    sf::RenderWindow window(sf::VideoMode(200, 440), "Uruchom gre!");
     sf::RectangleShape resolution1;
     sf::RectangleShape resolution2;
     sf::RectangleShape resolution3;
+    sf::RectangleShape grajButton;
     sf::Text chosenResolution;
     sf::Font font;
     sf::Text text1;
     sf::Text text2;
     sf::Text text3;
+    sf::Text text4;
+    sf::IntRect r1(20, 100, 160, 50);
+    sf::IntRect r2(20, 180, 160, 50);
+    sf::IntRect r3(20, 260, 160, 50);
+    sf::IntRect r4(20, 340, 160, 50);
+    int mx = 0;
+    int my = 0;
+
+    if (!font.loadFromFile("arial.ttf")) {
+        std::cout << "Font load Failed!" << std::endl;
+    }
+
     resolution1.setSize(sf::Vector2f(160, 50));//dodac tu res 1280x720
-    resolution1.setFillColor(sf::Color(25, 55, 60, 255));
+    resolution1.setFillColor(sf::Color::Green);
     resolution1.setPosition(sf::Vector2f(20, 100));
     text1.setFont(font);
     text1.setString("1280 x 720");
     text1.setCharacterSize(28);
     text1.setFillColor(sf::Color::White);
-    text1.setPosition(sf::Vector2f(20, 100));
-
+    text1.setPosition(sf::Vector2f(27, 105));
 
     resolution2.setSize(sf::Vector2f(160, 50));//dodac tu res 1366x768
     resolution2.setFillColor(sf::Color::Green);
@@ -63,7 +78,8 @@ void Settings::openSettings() {
     text2.setString("1366 x 768");
     text2.setCharacterSize(28);
     text2.setFillColor(sf::Color::White);
-    text2.setPosition(sf::Vector2f(20, 180));
+    text2.setPosition(sf::Vector2f(27, 185));
+
     resolution3.setSize(sf::Vector2f(160, 50));//dodac tu res 1600x900
     resolution3.setFillColor(sf::Color::Green);
     resolution3.setPosition(sf::Vector2f(20, 260));
@@ -71,12 +87,23 @@ void Settings::openSettings() {
     text3.setString("1600 x 900");
     text3.setCharacterSize(28);
     text3.setFillColor(sf::Color::White);
-    text3.setPosition(sf::Vector2f(20, 260));
-    //Dodać tytuł gry
-    setResolutionSettings(resolution1, 20, 100); //dodac tu res 1280x720
-    setResolutionSettings(resolution2, 20, 180); // 2 rozdzialka
-    setResolutionSettings(resolution3, 20, 260); // 3 rozdzialka
+    text3.setPosition(sf::Vector2f(27, 265));
+
+    grajButton.setSize(sf::Vector2f(160, 50));//dodac tu res 1600x900
+    grajButton.setFillColor(sf::Color::Red);
+    grajButton.setPosition(sf::Vector2f(20, 340));
+    text4.setFont(font);
+    text4.setString("Graj!");
+    text4.setCharacterSize(28);
+    text4.setFillColor(sf::Color::White);
+    text4.setPosition(sf::Vector2f(70, 345));
+
+    //setResolutionSettings(resolution1, 20, 100); //dodac tu res 1280x720
+    //setResolutionSettings(resolution2, 20, 180); // 2 rozdzialka
+    //setResolutionSettings(resolution3, 20, 260); // 3 rozdzialka
+
     //Dodać przycisk graj + wywołanie engine.startupView na evencie onClick
+    
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -84,11 +111,69 @@ void Settings::openSettings() {
                 window.close();
                 engine.startupView();
             }
+            
+
+            if (event.type == sf::Event::MouseButtonPressed){
+                if (event.mouseButton.button == sf::Mouse::Left){
+                    mx = event.mouseButton.x;
+                    my = event.mouseButton.y;
+                    bool b1 = r1.contains(mx, my);
+                    bool b2 = r2.contains(mx, my);
+                    bool b3 = r3.contains(mx, my);
+                    bool b4 = r4.contains(mx, my);
+                    if (b1 == true){
+                        resolution1.setFillColor(sf::Color::Red);
+                        resolution2.setFillColor(sf::Color::Green);
+                        resolution3.setFillColor(sf::Color::Green);
+                    }
+                    if (b2 == true){
+                        resolution1.setFillColor(sf::Color::Green);
+                        resolution2.setFillColor(sf::Color::Red);
+                        resolution3.setFillColor(sf::Color::Green);
+                    }
+                    if (b3 == true){
+                        resolution1.setFillColor(sf::Color::Green);
+                        resolution2.setFillColor(sf::Color::Green);
+                        resolution3.setFillColor(sf::Color::Red);
+                    }
+
+                    if (b4 == true) {
+                        if (resolution1.getFillColor() == sf::Color::Red) {
+                            //uruchom silnikowi rozdzielczosc 1
+                            cout << "rozdzielczosc 1";
+                            globalEngineX = 1280;
+                            globalEngineY = 720;
+                        }
+                        else if (resolution2.getFillColor() == sf::Color::Red) {
+                            //uruchom silnikowi rozdzielczosc 2
+                            cout << "rozdzielczosc 2";
+                            globalEngineX = 1366;
+                            globalEngineY = 768;
+                        }
+                        else if (resolution3.getFillColor() == sf::Color::Red) {
+                            //uruchom silnikowi rozdzielczosc 3
+                            cout << "rozdzielczosc 3";
+                            globalEngineX = 1600;
+                            globalEngineY = 900;
+                        }
+                        else {
+                            //nic nie rob albo wyrzuc blad ze uzytkownik nie kliknal graj
+                            cout << "Zle kliknoles";
+                        }
+                    }
+                }
+            }
         }
+
         window.clear();
         window.draw(resolution1);
+        window.draw(text1);
         window.draw(resolution2);
+        window.draw(text2);
         window.draw(resolution3);
+        window.draw(text3);
+        window.draw(grajButton);
+        window.draw(text4);
         window.display();
     }
 }
