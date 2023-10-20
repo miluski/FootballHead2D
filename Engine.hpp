@@ -1,5 +1,6 @@
 #pragma once
 #include <ctime>
+#include <chrono>
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -7,41 +8,36 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include <SFML/System/Clock.hpp>
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/Font.hpp>
 
 using namespace std;
 
-class Timer {
-public:
-    sf::Clock clock;
-    int checkTimer();
-};
+enum windowNames {STARTUP_SETTINGS=0, MENU=1, GAME=2, GAME_HELPER=3};
 
 class Engine {
 public:
-    void startupView();
-    Timer timer;
+    int activeWindowName;
+    static Engine& getInstance() {
+        static Engine engine;
+        return engine;
+    }
+    void mainWindowSetup();
+    void clearWindowToColor(sf::RenderWindow& window, sf::Color color);
+    void clearSpriteToColor(sf::Sprite& sprite, sf::Color color);
 private:
-    
-};
-
-class Settings {
-public:
-    void openSettings();
-    void setResolutionSettings(sf::RectangleShape, float, float);
-    Engine engine;
-};
-
-class Logs {
-public:
-    Logs();
+    sf::Clock clock;
+    sf::Font font;
+    sf::Vector2u windowSize;
+    string logContent;
+    void settingsWindowSetup(sf::RenderWindow*);
+    void menuWindowSetup(sf::RenderWindow*);
+    string getCurrentTime();
+    string getFramePerSecondText(float);
+    sf::Font* getArialFont();
+    sf::Text* getText();
+    sf::Text* getText(string content);
+    sf::RectangleShape* getResolutionButton(sf::Vector2u windowSize, float);
+    bool validateLogContentFormat();
     void setLogContent(string);
     void saveLog();
-private:
-    bool validateLogContentFormat();
-    void setErrorLogContent();
-    string logContent;
-    string logFilePath;
+    void serveWindowCloseEvent(sf::RenderWindow&);
 };
