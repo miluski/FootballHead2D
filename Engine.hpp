@@ -25,10 +25,14 @@ public:
     void mainWindowSetup();
     void clearWindowToColor(sf::RenderWindow& window, sf::Color color);
     void clearSpriteToColor(sf::Sprite& sprite, sf::Color color);
+    void setSecondBufferTexture(sf::Texture);
 private:
+    string activeBuffer = "main";
     sf::RectangleShape* resolution1Button = getButton(20, sf::Color::Green);
     sf::RectangleShape* resolution2Button = getButton(100, sf::Color::Green);
     sf::RectangleShape* resolution3Button = getButton(180, sf::Color::Green);
+    sf::RenderTexture* mainBuffer;
+    sf::RenderTexture* secondBuffer;
     sf::Clock clock;
     sf::Font font;
     string logContent;
@@ -38,6 +42,7 @@ private:
     void serveWindowCloseEvent(sf::RenderWindow&);
     void settingsWindowSetup(sf::RenderWindow*);
     void drawButtonsAt(sf::RenderWindow*);
+    void handleBuffers(sf::RenderWindow*);
     sf::RectangleShape* getButton(float, sf::Color);
     int getRectNameWhenMouseIsPressedIn(sf::RenderWindow*);
     string getFramePerSecondText(float);

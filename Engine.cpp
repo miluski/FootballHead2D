@@ -21,11 +21,35 @@ void Engine::mainWindowSetup() {
                 menuWindowSetup(&window, *fpsTextPlace, fpsText);
             break;
             case GAME:
+                handleBuffers(&window);
             break;
             case GAME_HELPER:
             break;
         }
         window.display();
+    }
+}
+
+void Engine::setSecondBufferTexture(sf::Texture bufferTexture) {
+    secondBuffer->clear();
+    secondBuffer->draw(sf::Sprite(bufferTexture));
+    secondBuffer->display();
+}
+
+void Engine::handleBuffers(sf::RenderWindow* window) {
+    if (activeBuffer == "main") {
+        mainBuffer->clear();
+        mainBuffer->draw(sf::Sprite(secondBuffer->getTexture()));
+        mainBuffer->display();
+        window->draw(sf::Sprite(mainBuffer->getTexture()));
+        activeBuffer = "second";
+    }
+    else {
+        secondBuffer->clear();
+        secondBuffer->draw(sf::Sprite(mainBuffer->getTexture()));
+        secondBuffer->display();
+        window->draw(sf::Sprite(secondBuffer->getTexture()));
+        activeBuffer = "main";
     }
 }
 
