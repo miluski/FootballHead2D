@@ -134,6 +134,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="LineSegment.cpp" />
+    <ClCompile Include="Point2D.cpp" />
+    <ClCompile Include="PrimitiveRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SFML-2.6.0.zip" />
