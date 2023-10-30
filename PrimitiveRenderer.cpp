@@ -19,6 +19,23 @@ void PrimitiveRenderer::drawCircle(float radius, Vector2f position, Color color)
 	mainWindow->draw(circle);
 }
 
+void PrimitiveRenderer::drawSymetricCircle(float radius, Point2D startPoint, Color color) {
+	// Czterokrotna symetria
+	Engine::getInstance().clearWindowToColor(Color(58, 157, 35));
+	for (float i = 0.0f; i < 180.0f; i += 1.0f) {
+		float x = radius * cos(i);
+		float y = radius * sin(i);
+		Vertex point(Vector2f(startPoint.getX() + x, startPoint.getY() + y), color);
+		mainWindow->draw(&point, 1, Points);
+		Vertex point2(Vector2f(startPoint.getX() + x, startPoint.getY() - y), color);
+		mainWindow->draw(&point2, 1, Points);
+		Vertex point3(Vector2f(startPoint.getX() - x, startPoint.getY() + y), color);
+		mainWindow->draw(&point3, 1, Points);
+		Vertex point4(Vector2f(startPoint.getX() - x, startPoint.getY() - y), color);
+		mainWindow->draw(&point4, 1, Points);
+	}
+}
+
 void PrimitiveRenderer::drawTriangle(float radius, Vector2f position, Color color) {
 	CircleShape triangle(radius, 3);
 	triangle.setFillColor(color);
@@ -56,12 +73,45 @@ void PrimitiveRenderer::drawIncreasedLine(Vector2f startCoords, Vector2f endCoor
 }
 
 void PrimitiveRenderer::drawLine(Vector2f startCoords, Vector2f endCoords, Color color) {
-	sf::Vertex line[] =
+	Vertex line[] =
 	{
-		sf::Vertex(sf::Vector2f(startCoords.x, startCoords.y)),
-		sf::Vertex(sf::Vector2f(endCoords.x, endCoords.y))
+		Vertex(Vector2f(startCoords.x, startCoords.y)),
+		Vertex(Vector2f(endCoords.x, endCoords.y))
 	};
 	line->color = color;
 	Engine::getInstance().clearWindowToColor(Color(58, 157, 35));
-	mainWindow->draw(line, 2, sf::Lines);
+	mainWindow->draw(line, 2, Lines);
+}
+
+void PrimitiveRenderer::drawBrokenLine(vector<LineSegment> lines, Color color) {
+	Engine::getInstance().clearWindowToColor(Color(58, 157, 35));
+	for (LineSegment line : lines) {
+		Vertex lineVertex[] = {
+			Vertex(Vector2f(line.getStartPoint().getX(), line.getStartPoint().getY())),
+			Vertex(Vector2f(line.getEndPoint().getX(), line.getEndPoint().getY()))
+		};
+		lineVertex->color = color;
+		mainWindow->draw(lineVertex, 2, Lines);
+	}
+}
+
+void PrimitiveRenderer::drawEllipse(float radiusX, float radiusY, Point2D startPoint, Color color) {
+	// Czterokrotna symetria
+	Engine::getInstance().clearWindowToColor(Color(58, 157, 35));
+	for (float i = 0.0f; i < 180.0f; i += 1.0f) {
+		float x = radiusX * cos(i);
+		float y = radiusY * sin(i);
+		Vertex point(Vector2f(startPoint.getX() + x, startPoint.getY() + y), color);
+		mainWindow->draw(&point, 1, Points);
+		Vertex point2(Vector2f(startPoint.getX() + x, startPoint.getY() - y), color);
+		mainWindow->draw(&point2, 1, Points);
+		Vertex point3(Vector2f(startPoint.getX() - x, startPoint.getY() + y), color);
+		mainWindow->draw(&point3, 1, Points);
+		Vertex point4(Vector2f(startPoint.getX() - x, startPoint.getY() - y), color);
+		mainWindow->draw(&point4, 1, Points);
+	}
+}
+
+void PrimitiveRenderer::drawPolygon(vector<LineSegment> lines, Color color) {
+
 }

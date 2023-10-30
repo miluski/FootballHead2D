@@ -37,35 +37,10 @@ void Engine::settingsWindowSetup() {
 void Engine::menuWindowSetup() {
     VideoMode desktop = VideoMode::getDesktopMode();
     setFrameRateLimit();
-
-    /* Testy PrimitiveRenderer 
-        PrimitiveRenderer primitiveRenderer;
-        primitiveRenderer.drawRectangle(Vector2f(200.0f, 200.0f), Vector2f(100.0f, 100.0f), Color::White);
-        primitiveRenderer.drawCircle(50.0f, Vector2f(100.0f, 100.0f), Color::White);
-        primitiveRenderer.drawTriangle(25.0f, Vector2f(100.0f, 100.0f), Color::White);
-        primitiveRenderer.drawIncreasedLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 100.0f), Color::Blue); // m <=1
-        primitiveRenderer.drawIncreasedLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 200.0f), Color::Blue); // m przekracza 1
-        primitiveRenderer.drawLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 100.0f), Color::Blue); // zgadza się z m <=1 (linia renderowana przez mechanizm SFML)
-        primitiveRenderer.drawLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 200.0f), Color::Blue); // zgadza się z m przekracza 1 (linia renderowana przez mechanizm SFML)
-     Koniec testów */
-
-    /* Testy Point2D 
-        Point2D point2D;
-        point2D.setCoords(100.0f, 100.0f);
-        point2D.drawPoint();
-     Koniec testów */
-
-    /* Testy LineSegment 
-        Point2D startPoint;
-        Point2D endPoint;
-        startPoint.setCoords(0.0f, 0.0f);
-        endPoint.setCoords(100.0f, 100.0f);
-        LineSegment lineSegment;
-        lineSegment.setStartPoint(startPoint);
-        lineSegment.setEndPoint(endPoint);
-        lineSegment.drawLine();
-     Koniec testów */
-
+    /* Testy */
+    testPrimitiveRenderer();
+    //testPoint2D();
+    //testLineSegment();
     if (!centered) {
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
         centered = true;
@@ -331,6 +306,64 @@ void Engine::saveLog() {
     fileStream << logContent << endl;
     fileStream.close();
     cout << logContent << endl;
+}
+
+void Engine::testPrimitiveRenderer() {
+    PrimitiveRenderer primitiveRenderer;
+    //primitiveRenderer.drawRectangle(Vector2f(200.0f, 200.0f), Vector2f(100.0f, 100.0f), Color::White);
+    //primitiveRenderer.drawCircle(50.0f, Vector2f(100.0f, 100.0f), Color::White);
+    //primitiveRenderer.drawTriangle(25.0f, Vector2f(100.0f, 100.0f), Color::White);
+    //primitiveRenderer.drawIncreasedLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 100.0f), Color::Blue); // m <=1
+    //primitiveRenderer.drawIncreasedLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 200.0f), Color::Blue); // m przekracza 1
+    //primitiveRenderer.drawLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 100.0f), Color::Blue); // zgadza się z m <=1 (linia renderowana przez mechanizm SFML)
+    //primitiveRenderer.drawLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 200.0f), Color::Blue); // zgadza się z m przekracza 1 (linia renderowana przez mechanizm SFML)
+    vector<LineSegment> lines;
+    Point2D startPoint;
+    Point2D endPoint;
+    LineSegment line1;
+    LineSegment line2;
+    LineSegment line3;
+    LineSegment line4;
+    startPoint.setCoords(0.0f, 0.0f);
+    endPoint.setCoords(100.0f, 100.0f);
+    line1.setStartPoint(startPoint);
+    line1.setEndPoint(endPoint);
+    startPoint.setCoords(100.0f, 100.0f);
+    endPoint.setCoords(150.0f, 180.0f);
+    line2.setStartPoint(startPoint);
+    line2.setEndPoint(endPoint);
+    startPoint.setCoords(150.0f, 180.0f);
+    endPoint.setCoords(100.0f, 180.0f);
+    line3.setStartPoint(startPoint);
+    line3.setEndPoint(endPoint);
+    startPoint.setCoords(100.0f, 180.0f);
+    endPoint.setCoords(0.0f, 0.0f);
+    line4.setStartPoint(startPoint);
+    line4.setEndPoint(endPoint);
+    lines.push_back(line1);
+    lines.push_back(line2);
+    lines.push_back(line3);
+    lines.push_back(line4);
+    //primitiveRenderer.drawBrokenLine(lines, Color::Blue);
+    //primitiveRenderer.drawSymetricCircle(50, startPoint, Color::Blue);
+    //primitiveRenderer.drawEllipse(50, 30, startPoint, Color::Red);
+}
+
+void Engine::testPoint2D() {
+    Point2D point2D;
+    point2D.setCoords(100.0f, 100.0f);
+    point2D.drawPoint();
+}
+
+void Engine::testLineSegment() {
+    Point2D startPoint;
+    Point2D endPoint;
+    startPoint.setCoords(0.0f, 0.0f);
+    endPoint.setCoords(100.0f, 100.0f);
+    LineSegment lineSegment;
+    lineSegment.setStartPoint(startPoint);
+    lineSegment.setEndPoint(endPoint);
+    lineSegment.drawLine();
 }
 
 int main() {
