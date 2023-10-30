@@ -1,10 +1,13 @@
 #pragma once
+#define _USE_MATH_DEFINES
 #include <ctime>
+#include <cmath>
 #include <chrono>
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <vector>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -71,15 +74,10 @@ private:
     bool validateLogContentFormat();
     void saveLog();
 
-};
+    void testPrimitiveRenderer();
+    void testPoint2D();
+    void testLineSegment();
 
-class PrimitiveRenderer {
-public:
-    void drawRectangle(Vector2f size, Vector2f position, Color color);
-    void drawCircle(float radius, Vector2f position, Color color);
-    void drawTriangle(float radius, Vector2f position, Color color);
-    void drawIncreasedLine(Vector2f startCoords, Vector2f endCoords, Color color);
-    void drawLine(Vector2f startCoords, Vector2f endCoords, Color color);
 };
 
 class Point2D {
@@ -104,4 +102,17 @@ public:
 private:
     Point2D startPoint;
     Point2D endPoint;
+};
+
+class PrimitiveRenderer {
+public:
+    void drawRectangle(Vector2f size, Vector2f position, Color color);
+    void drawCircle(float radius, Vector2f position, Color color);
+    void drawSymetricCircle(float radius, Point2D startPoint, Color color);
+    void drawTriangle(float radius, Vector2f position, Color color);
+    void drawIncreasedLine(Vector2f startCoords, Vector2f endCoords, Color color);
+    void drawLine(Vector2f startCoords, Vector2f endCoords, Color color);
+    void drawBrokenLine(vector<LineSegment> lines, Color color);
+    void drawEllipse(float radiusX, float radiusY, Point2D startPoint, Color color);
+    void drawPolygon(vector<LineSegment> lines, Color color);
 };
