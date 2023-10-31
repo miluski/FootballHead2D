@@ -35,6 +35,7 @@ void Engine::settingsWindowSetup() {
 }
 
 void Engine::menuWindowSetup() {
+    /*Kuba tutaj buduj menu*/
     VideoMode desktop = VideoMode::getDesktopMode();
     setFrameRateLimit();
     /* Testy */
@@ -45,6 +46,7 @@ void Engine::menuWindowSetup() {
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
         centered = true;
     }
+    Engine::getInstance().clearWindowToColor(Color(58, 157, 35));
     window->setTitle("Menu");
     window->setSize(*windowSize);
 }
