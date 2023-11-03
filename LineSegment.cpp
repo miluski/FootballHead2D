@@ -1,5 +1,10 @@
 #include "Engine.hpp"
 
+LineSegment::LineSegment(Point2D startPoint, Point2D endPoint) {
+	this->startPoint = startPoint;
+	this->endPoint = endPoint;
+}
+
 Point2D LineSegment::getStartPoint() {
 	return startPoint;
 }
@@ -16,13 +21,13 @@ void LineSegment::setEndPoint(Point2D endPoint) {
 	this->endPoint = endPoint;
 }
 
-void LineSegment::drawLine() {
+void LineSegment::draw(Color color) {
 	PrimitiveRenderer primitiveRenderer;
-	primitiveRenderer.drawLine(Vector2f(startPoint.getX(), startPoint.getY()), Vector2f(endPoint.getX(), endPoint.getY()), Color::Black);
+	primitiveRenderer.drawLine(Vector2f(startPoint.getX(), startPoint.getY()), Vector2f(endPoint.getX(), endPoint.getY()), color);
 }
 
-void LineSegment::drawIncreasedLine() {
+void LineSegment::drawIncreased(Color color) {
 	PrimitiveRenderer primitiveRenderer;
-	primitiveRenderer.drawIncreasedLine(Vector2f(startPoint.getX(), startPoint.getY()), Vector2f(endPoint.getX(), endPoint.getY()), Color::Black);
+	primitiveRenderer.drawIncreasedLine(Vector2f(startPoint.getX(), startPoint.getY()), Vector2f(endPoint.getX(), endPoint.getY()), color);
 }
 
