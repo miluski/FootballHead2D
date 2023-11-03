@@ -8,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <queue>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -77,28 +78,36 @@ private:
     void testPrimitiveRenderer();
     void testPoint2D();
     void testLineSegment();
+    void testRectFill();
 
 };
 
 class Point2D {
 public:
+    Point2D();
+    Point2D(float x, float y);
+    Point2D(Color pixelColor, float x, float y);
     float getX();
     float getY();
+    Color getPixelColor();
+    void setPixelColor(Color pixelColor);
     void setCoords(float x, float y);
-    void drawPoint();
+    void draw();
 private:
+    Color pixelColor = Color::White;
     float x;
     float y;
 };
 
 class LineSegment {
 public:
+    LineSegment(Point2D startPoint, Point2D endPoint);
     Point2D getStartPoint();
     Point2D getEndPoint();
     void setStartPoint(Point2D startPoint);
     void setEndPoint(Point2D endPoint);
-    void drawLine();
-    void drawIncreasedLine();
+    void draw(Color color);
+    void drawIncreased(Color color);
 private:
     Point2D startPoint;
     Point2D endPoint;
@@ -114,5 +123,10 @@ public:
     void drawLine(Vector2f startCoords, Vector2f endCoords, Color color);
     void drawBrokenLine(vector<LineSegment> lines, Color color);
     void drawEllipse(float radiusX, float radiusY, Point2D startPoint, Color color);
+    bool isLinesCrossing(LineSegment line1, LineSegment line2);
     void drawPolygon(vector<LineSegment> lines, Color color);
+    void borderRectFill(Point2D point, Color fillColor, Color borderColor);
+    void floodRectFill(Point2D point, Color fillColor, Color backgroundColor);
+private:
+    RenderWindow* mainWindow = Engine::getInstance().getMainWindow();
 };

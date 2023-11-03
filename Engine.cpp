@@ -38,17 +38,17 @@ void Engine::menuWindowSetup() {
     /*Kuba tutaj buduj menu*/
     VideoMode desktop = VideoMode::getDesktopMode();
     setFrameRateLimit();
-    /* Testy */
-    testPrimitiveRenderer();
-    //testPoint2D();
-    //testLineSegment();
     if (!centered) {
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
         centered = true;
     }
-    Engine::getInstance().clearWindowToColor(Color(58, 157, 35));
     window->setTitle("Menu");
     window->setSize(*windowSize);
+    Engine::getInstance().clearWindowToColor(Color(58, 157, 35));
+    /* Testy */
+    testPrimitiveRenderer();
+    testPoint2D();
+    //testLineSegment();
 }
 
 void Engine::gameWindowSetup(float currentTime) {
@@ -320,52 +320,45 @@ void Engine::testPrimitiveRenderer() {
     //primitiveRenderer.drawLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 100.0f), Color::Blue); // zgadza się z m <=1 (linia renderowana przez mechanizm SFML)
     //primitiveRenderer.drawLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 200.0f), Color::Blue); // zgadza się z m przekracza 1 (linia renderowana przez mechanizm SFML)
     vector<LineSegment> lines;
-    Point2D startPoint;
-    Point2D endPoint;
-    LineSegment line1;
-    LineSegment line2;
-    LineSegment line3;
-    LineSegment line4;
-    startPoint.setCoords(0.0f, 0.0f);
-    endPoint.setCoords(100.0f, 100.0f);
-    line1.setStartPoint(startPoint);
-    line1.setEndPoint(endPoint);
-    startPoint.setCoords(100.0f, 100.0f);
-    endPoint.setCoords(150.0f, 180.0f);
-    line2.setStartPoint(startPoint);
-    line2.setEndPoint(endPoint);
-    startPoint.setCoords(150.0f, 180.0f);
-    endPoint.setCoords(100.0f, 180.0f);
-    line3.setStartPoint(startPoint);
-    line3.setEndPoint(endPoint);
-    startPoint.setCoords(100.0f, 180.0f);
-    endPoint.setCoords(0.0f, 0.0f);
-    line4.setStartPoint(startPoint);
-    line4.setEndPoint(endPoint);
+    Point2D startPoint(5.0f, 5.0f);
+    Point2D endPoint(100.0f, 5.0f);
+    LineSegment line1(startPoint, endPoint);
+    startPoint.setCoords(5.0f, 105.0f);
+    endPoint.setCoords(100.0f, 105.0f);
+    LineSegment line2(startPoint, endPoint);
+    startPoint.setCoords(5.0f, 5.0f);
+    endPoint.setCoords(5.0f, 105.0f);
+    LineSegment line3(startPoint, endPoint);
+    startPoint.setCoords(100.0f, 5.0f);
+    endPoint.setCoords(100.0f, 105.0f);
+    LineSegment line4(startPoint, endPoint);
     lines.push_back(line1);
     lines.push_back(line2);
     lines.push_back(line3);
     lines.push_back(line4);
+    primitiveRenderer.drawPolygon(lines, Color::Black);
+    primitiveRenderer.borderRectFill(Point2D(75.0f, 100.0f), Color::Cyan, Color::Black);
     //primitiveRenderer.drawBrokenLine(lines, Color::Blue);
     //primitiveRenderer.drawSymetricCircle(50, startPoint, Color::Blue);
     //primitiveRenderer.drawEllipse(50, 30, startPoint, Color::Red);
 }
 
 void Engine::testPoint2D() {
-    Point2D point2D;
-    point2D.setCoords(100.0f, 100.0f);
-    point2D.drawPoint();
+    Point2D point2D(75.0f, 100.0f);
+    point2D.draw();
 }
 
 void Engine::testLineSegment() {
-    Point2D startPoint;
-    Point2D endPoint;
-    startPoint.setCoords(0.0f, 0.0f);
-    endPoint.setCoords(100.0f, 100.0f);
-    LineSegment lineSegment;
-    lineSegment.setStartPoint(startPoint);
-    lineSegment.setEndPoint(endPoint);
-    lineSegment.drawLine();
+    Point2D startPoint(0.0f, 0.0f);
+    Point2D endPoint(100.0f, 100.0f);
+    LineSegment lineSegment(startPoint, endPoint);
+    lineSegment.draw(Color::Black);
+}
+
+void Engine::testRectFill() {
+    PrimitiveRenderer primitiveRenderer;
+    // 
+    primitiveRenderer.borderRectFill(Point2D(75.0f, 100.0f), Color::Cyan, Color::Black);
 }
 
 int main() {
