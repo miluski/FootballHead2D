@@ -45,7 +45,7 @@ void PrimitiveRenderer::drawIncreasedLine(Vector2f startCoords, Vector2f endCoor
 	float m = dy / dx;
 	if (abs(m) <= 1) {
 		float y = startCoords.y;
-		for (int x = startCoords.x; x <= endCoords.x; x++) {
+		for (float x = startCoords.x; x <= endCoords.x; x++) {
 			Vector2f linePointCoords(x, y);
 			Vertex linePointVertex(linePointCoords, color, Vector2f(5.0f, 0.0f));
 			pointsArray.append(linePointVertex);
@@ -55,7 +55,7 @@ void PrimitiveRenderer::drawIncreasedLine(Vector2f startCoords, Vector2f endCoor
 	else {
 		m = dx / dy;
 		float x = startCoords.x;
-		for (int y = startCoords.y; y <= endCoords.y; y++) {
+		for (float y = startCoords.y; y <= endCoords.y; y++) {
 			Vector2f linePointCoords(x, y);
 			Vertex linePointVertex(linePointCoords, color, Vector2f(5.0f, 0.0f));
 			pointsArray.append(linePointVertex);

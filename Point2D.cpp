@@ -25,18 +25,7 @@ float Point2D::getY() {
 }
 
 Color Point2D::getPixelColor() {
-	RenderWindow* mainWindow = Engine::getInstance().getMainWindow();
-	if ((this->getX() < mainWindow->getSize().x) && (this->getY() < mainWindow->getSize().y)) {
-		Texture mainWindowTexture;
-		mainWindowTexture.create(mainWindow->getSize().x, mainWindow->getSize().y);
-		mainWindowTexture.update(*mainWindow);
-		Image mainWindowImage = mainWindowTexture.copyToImage();
-		Color pixelColor = mainWindowImage.getPixel(this->getX(), this->getY());
-		setPixelColor(pixelColor);
-		return pixelColor;
-	}
-	else
-		return Color::Transparent;
+	return Color::Transparent;
 }
 
 void Point2D::setPixelColor(Color pixelColor) {

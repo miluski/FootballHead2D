@@ -11,13 +11,14 @@
 #include <queue>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
 using namespace std;
 using namespace sf;
 
-enum windowNames {STARTUP_SETTINGS=0, MENU=1, GAME=2, GAME_HELPER=3};
-enum rectNames {RESOLUTION_1=1, RESOLUTION_2=2, RESOLUTION_3=3, PLAY=4};
+enum windowNames {STARTUP_SETTINGS, MENU, GAME, GAME_HELPER};
+enum rectNames {RESOLUTION_1, RESOLUTION_2, RESOLUTION_3, PLAY};
 
 class Engine {
 public:
@@ -30,7 +31,8 @@ public:
     }
 
     void mainWindowSetup();
-    void setSecondBufferTexture(Sprite* textureSprite, Vector2u textureSize);
+    void setMainBufferTexture(Sprite* textureSprite);
+    void setSecondBufferTexture(Sprite* textureSprite);
     RenderWindow* getMainWindow();
     Texture* createTextureFrom(Text* text, Vector2i size, Color textureColor);
     Texture* createTextureFrom(Image* image, Vector2i size);
@@ -39,13 +41,14 @@ public:
 
 private:
 
-    string activeBuffer = "main";
+    string activeBuffer = "second";
     bool centered = false;
     Vector2u* windowSize = new Vector2u(400, 400);
     RenderWindow* window = new RenderWindow(VideoMode(windowSize->x, windowSize->y), "", Style::Titlebar | Style::Close);
     RectangleShape* resolution1Button = getButton(20, Color::Green);
     RectangleShape* resolution2Button = getButton(100, Color::Green);
     RectangleShape* resolution3Button = getButton(180, Color::Green);
+    Music music;
     Vector2i windowPosition;
     RenderTexture mainBuffer;
     RenderTexture secondBuffer;
@@ -68,6 +71,7 @@ private:
     string getFramePerSecondText(float currentTime);
     string getCurrentTime();
     int getRectNameWhenMouseIsPressedIn();
+    Sprite getBackground();
     void serveWindowCloseEvent();
     void drawButtons();
     void drawTexts();
@@ -129,4 +133,82 @@ public:
     void floodRectFill(Point2D point, Color fillColor, Color backgroundColor);
 private:
     RenderWindow* mainWindow = Engine::getInstance().getMainWindow();
+};
+
+class GameObject {
+public:
+    RenderWindow* mainWindow = Engine::getInstance().getMainWindow();
+    void setX(float x);
+    void setY(float y);
+    float getX();
+    float getY();
+private:    
+    Vector2f actualPosition;
+};
+
+class UpdatableObject : public virtual GameObject {
+public:
+    void update();
+};
+
+class DrawableObject : public virtual GameObject {
+public:
+    void draw();
+};
+
+class TransformableObject : public virtual GameObject {
+public:
+    void translate();
+    void rotate();
+    void scale();
+};
+
+class ShapeObject : public DrawableObject, TransformableObject {
+public:
+    Color color;
+    Vector2f size;
+    float radius;
+    virtual void draw();
+    virtual void translate();
+    virtual void rotate();
+    virtual void scale();
+};
+
+class Rectangle : public ShapeObject {
+public:
+    Rectangle(Vector2f size);
+    virtual void draw();
+    virtual void translate();
+    virtual void rotate();
+    virtual void scale();
+};
+
+class Circle : public ShapeObject {
+public:
+    Circle(float radius);
+    virtual void draw();
+    virtual void translate();
+    virtual void rotate();
+    virtual void scale();
+};
+
+class Triangle : public ShapeObject {
+public:
+    Triangle(float radius);
+    virtual void draw();
+    virtual void translate();
+    virtual void rotate();
+    virtual void scale();
+};
+
+class Player : public GameObject {
+public:
+    Player(float x, float y, Sprite playerTexture);
+    void setActualSpeed(float speed);
+    void setPlayerTexture(Sprite playerTexture);
+    float getActualSpeed();
+    Sprite getPlayerTexture();
+private:
+    float actualSpeed;
+    Sprite playerTexture;
 };

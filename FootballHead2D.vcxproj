@@ -133,19 +133,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LineSegment.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point2D.cpp" />
     <ClCompile Include="PrimitiveRenderer.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="UpdatableObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SFML-2.6.0.zip" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="arial.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,6 +3,11 @@
 void Engine::mainWindowSetup() {
     Clock fpsClock;
     font = *getArialFont();
+    setFrameRateLimit();
+    Image iconImage;
+    iconImage.loadFromFile("elements/Pilka.png");
+    window->setIcon(iconImage.getSize().x, iconImage.getSize().y, iconImage.getPixelsPtr());
+    window->setVerticalSyncEnabled(true);
     while (window->isOpen()) {
         float elapsed = breakClock.getElapsedTime().asSeconds();
         float currentTime = fpsClock.restart().asSeconds();
@@ -23,32 +28,43 @@ void Engine::mainWindowSetup() {
                 gameHelperWindowSetup();
             break;
         }
-        window->display();
     }
 }
 
 void Engine::settingsWindowSetup() {
     window->setTitle("Ustawienia gry");
-    window->clear();
+    getInstance().clearWindowToColor(Color::Black);
     drawButtons();
     drawTexts();
+    window->display();
 }
 
 void Engine::menuWindowSetup() {
-    /*Kuba tutaj buduj menu*/
     VideoMode desktop = VideoMode::getDesktopMode();
-    setFrameRateLimit();
     if (!centered) {
+        window->setTitle("Menu");
+        window->setSize(*windowSize);
+        music.openFromFile("sounds/menu_music.wav");
+        music.play();
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
         centered = true;
     }
-    window->setTitle("Menu");
-    window->setSize(*windowSize);
-    Engine::getInstance().clearWindowToColor(Color(58, 157, 35));
-    /* Testy */
-    testPrimitiveRenderer();
-    testPoint2D();
-    //testLineSegment();
+    else {
+        Texture* backgroundTexture = new Texture();
+        Sprite* backgroundSprite = new Sprite();
+        if (window->getSize().x == 1280 && window->getSize().y == 720)
+            backgroundTexture->loadFromFile("backgrounds/main/SG1280x720.png");
+        else if (window->getSize().x == 1366 && window->getSize().y == 768)
+            backgroundTexture->loadFromFile("backgrounds/main/SG1366x768.png");
+        else
+            backgroundTexture->loadFromFile("backgrounds/main/SG1600x900.png");
+        backgroundSprite->setTexture(*backgroundTexture);
+        setMainBufferTexture(backgroundSprite);
+        setSecondBufferTexture(backgroundSprite);
+        handleBuffers();
+    }
+    if (music.getStatus() != Music::Status::Playing)
+        music.play();
 }
 
 void Engine::gameWindowSetup(float currentTime) {
@@ -66,7 +82,7 @@ void Engine::gameWindowSetup(float currentTime) {
     }
     window->setTitle("FootballHead2D");
     window->setSize(*windowSize);
-    setSecondBufferTexture(&bufferTextureSprite, Vector2u(50, 50));
+    setSecondBufferTexture(&bufferTextureSprite);
     handleBuffers();
 }
 
@@ -86,21 +102,28 @@ void Engine::setWidthAndHeight(RectangleShape* resolution1Button, RectangleShape
     if (resolution1Button->getFillColor() == Color::Red) {
         windowSize->x = 1280;
         windowSize->y = 720;
-        Engine::getInstance().activeWindowName = MENU;
+        getInstance().activeWindowName = MENU;
     }
     else if (resolution2Button->getFillColor() == Color::Red) {
         windowSize->x = 1366;
         windowSize->y = 768;
-        Engine::getInstance().activeWindowName = MENU;
+        getInstance().activeWindowName = MENU;
     }
     else if (resolution3Button->getFillColor() == Color::Red) {
         windowSize->x = 1600;
         windowSize->y = 900;
-        Engine::getInstance().activeWindowName = MENU;
+        getInstance().activeWindowName = MENU;
     }
 }
 
-void Engine::setSecondBufferTexture(Sprite* textureSprite, Vector2u textureSize) {
+void Engine::setMainBufferTexture(Sprite* textureSprite) {
+    Vector2u windowSize = window->getSize();
+    mainBuffer.create(windowSize.x, windowSize.y);
+    mainBuffer.draw(*textureSprite);
+    mainBuffer.display();
+}
+
+void Engine::setSecondBufferTexture(Sprite* textureSprite) {
     Vector2u windowSize = window->getSize();
     secondBuffer.create(windowSize.x, windowSize.y);
     secondBuffer.draw(*textureSprite);
@@ -152,7 +175,7 @@ RectangleShape* Engine::getButton(float yShift, Color color) {
 Font* Engine::getArialFont() {
     Font* font = new Font();
     string logContent = "";
-    if (!font->loadFromFile("arial.ttf"))
+    if (!font->loadFromFile("fonts/arial.ttf"))
         setLogContent("[ERROR] " + getCurrentTime() + " Unsuccessfull arial font load");
     else
         setLogContent("[INFO] " + getCurrentTime() + " Arial font was successfully loaded");
@@ -197,6 +220,10 @@ int Engine::getRectNameWhenMouseIsPressedIn() {
     return -1;
 }
 
+Sprite Engine::getBackground() {
+    return Sprite();
+}
+
 Texture* Engine::createTextureFrom(Text* text, Vector2i size, Color textureColor) {
     RenderTexture renderTexture;
     renderTexture.create(size.x, size.y);
@@ -220,6 +247,10 @@ void Engine::serveWindowCloseEvent() {
             window->close();
         if (event.type == Event::MouseMoved || event.type == Event::MouseButtonPressed || event.type == Event::KeyPressed)
             breakClock.restart();
+        if (event.type == sf::Event::Resized) {
+            sf::FloatRect view(0, 0, event.size.width, event.size.height);
+            window->setView(sf::View(view));
+        }
     }
 }
 
@@ -269,17 +300,19 @@ void Engine::drawTexts() {
 
 void Engine::handleBuffers() {
     if (activeBuffer == "main") {
-        mainBuffer.draw(Sprite(secondBuffer.getTexture()));
-        mainBuffer.display();
-        window->clear(Color(58, 157, 35));
-        window->draw(Sprite(mainBuffer.getTexture()));
+        secondBuffer.draw(Sprite(mainBuffer.getTexture()));
+        secondBuffer.display();
+        mainBuffer.clear();
+        window->draw(Sprite(secondBuffer.getTexture()));
+        window->display();
         activeBuffer = "second";
     }
     else {
-        secondBuffer.draw(Sprite(mainBuffer.getTexture()));
-        secondBuffer.display();
-        window->clear(Color(58, 157, 35));
-        window->draw(Sprite(secondBuffer.getTexture()));
+        mainBuffer.draw(Sprite(secondBuffer.getTexture()));
+        mainBuffer.display();
+        secondBuffer.clear();
+        window->draw(Sprite(mainBuffer.getTexture()));
+        window->display();
         activeBuffer = "main";
     }
 }
@@ -337,7 +370,7 @@ void Engine::testPrimitiveRenderer() {
     lines.push_back(line3);
     lines.push_back(line4);
     primitiveRenderer.drawPolygon(lines, Color::Black);
-    primitiveRenderer.borderRectFill(Point2D(75.0f, 100.0f), Color::Cyan, Color::Black);
+    //primitiveRenderer.borderRectFill(Point2D(17.0f, 8.0f), Color::Cyan, Color(0,0,0));
     //primitiveRenderer.drawBrokenLine(lines, Color::Blue);
     //primitiveRenderer.drawSymetricCircle(50, startPoint, Color::Blue);
     //primitiveRenderer.drawEllipse(50, 30, startPoint, Color::Red);
@@ -353,12 +386,6 @@ void Engine::testLineSegment() {
     Point2D endPoint(100.0f, 100.0f);
     LineSegment lineSegment(startPoint, endPoint);
     lineSegment.draw(Color::Black);
-}
-
-void Engine::testRectFill() {
-    PrimitiveRenderer primitiveRenderer;
-    // 
-    primitiveRenderer.borderRectFill(Point2D(75.0f, 100.0f), Color::Cyan, Color::Black);
 }
 
 int main() {
