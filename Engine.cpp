@@ -78,7 +78,7 @@ void Engine::gameWindowSetup(string currentTime) {
     }
     else 
         setGameBackground(currentTime);
-    if (music.getStatus() != Music::Status::Playing)
+    if (music.getStatus() != Music::Status::Playing && !pause)
         music.play();
 }
 
@@ -93,19 +93,19 @@ void Engine::gameHelperWindowSetup() {
     window->setSize(*windowSize);
 }
 
-void Engine::setWidthAndHeight(RectangleShape* resolution1Button, RectangleShape* resolution2Button,
-    RectangleShape* resolution3Button) {
-    if (resolution1Button->getFillColor() == Color::Red) {
+void Engine::setWidthAndHeight(RectangleShape resolution1Button, RectangleShape resolution2Button,
+    RectangleShape resolution3Button) {
+    if (resolution1Button.getFillColor() == Color::Red) {
         windowSize->x = 1280;
         windowSize->y = 720;
         getInstance().activeWindowName = MENU;
     }
-    else if (resolution2Button->getFillColor() == Color::Red) {
+    else if (resolution2Button.getFillColor() == Color::Red) {
         windowSize->x = 1366;
         windowSize->y = 768;
         getInstance().activeWindowName = MENU;
     }
-    else if (resolution3Button->getFillColor() == Color::Red) {
+    else if (resolution3Button.getFillColor() == Color::Red) {
         windowSize->x = 1600;
         windowSize->y = 900;
         getInstance().activeWindowName = MENU;
@@ -141,14 +141,6 @@ RenderWindow* Engine::getMainWindow() {
     return window;
 }
 
-Text Engine::getText(Color color) {
-    Text text;
-    text.setFont(font);
-    text.setFillColor(color);
-    text.setCharacterSize(24);
-    return text;
-}
-
 Text Engine::getText(Color color, string content) {
     Text text;
     text.setFont(font);
@@ -158,11 +150,26 @@ Text Engine::getText(Color color, string content) {
     return text;
 }
 
-RectangleShape* Engine::getButton(float yShift, Color color) {
-    RectangleShape* button = new RectangleShape();
-    button->setSize(Vector2f(200, 50));
-    button->setFillColor(color);
-    button->setPosition(100.0f, 40.0f + yShift);
+Text Engine::getText(Color color, int fontSize, string content) {
+    Text text;
+    text.setFont(font);
+    text.setFillColor(color);
+    text.setString(content);
+    text.setCharacterSize(fontSize);
+    return text;
+}
+
+RectangleShape Engine::getButton(float yShift, Color color, Vector2f size) {
+    RectangleShape button(size);
+    button.setFillColor(color);
+    button.setPosition(100.0f, 40.0f + yShift);
+    return button;
+}
+
+RectangleShape Engine::getButton(Color color, Vector2f size, Vector2f position) {
+    RectangleShape button(size);
+    button.setFillColor(color);
+    button.setPosition(position.x, position.y);
     return button;
 }
 
@@ -243,23 +250,69 @@ void Engine::setMenuBackground() {
 }
 
 void Engine::setGameBackground(string currentTime) {
+    Vector2i mouseBounds = Mouse::getPosition(*window);
+    float mouseX = mouseBounds.x;
+    float mouseY = mouseBounds.y;
+    FloatRect pauseRect(Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f), Vector2f(150.0f, 40.0f));
+    FloatRect menuRect(Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.12f), Vector2f(150.0f, 40.0f));
+    if (!pauseRect.contains(mouseX, mouseY) && !menuRect.contains(mouseX, mouseY) && !pause) {
+        pauseTextColor = Color::White;
+        menuTextColor = Color::White;
+    }
+    else if (pauseRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            if (!pause) {
+                pause = true;
+                music.pause();
+                pauseTextColor = Color::Black;
+            }
+            else if (pause) {
+                pause = false;
+                music.play();
+                pauseTextColor = Color::White;
+            }
+        }
+        else if(!Mouse::isButtonPressed(Mouse::Left) && !pause){
+            pauseTextColor = Color::Black;
+            menuTextColor = Color::White;
+        }
+    }
+    else if (menuRect.contains(mouseX, mouseY) && !pause) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            getInstance().activeWindowName = MENU;
+            centered = false;
+            music.stop();
+            return;
+        }
+        else {
+            pauseTextColor = Color::White;
+            menuTextColor = Color::Black;
+        }
+    }
+    Sprite finallyBackgroundSprite;
     string fileName = "backgrounds/stadium/stadion" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
-    Text fpsTextPlace = getText(Color::White);
-    fpsTextPlace.setString(currentTime);
+    Text fpsTextPlace = getText(Color::White, currentTime);
+    Text pauseTextPlace = getText(pauseTextColor, 42, "PAUZA");
+    Text menuTextPlace = getText(menuTextColor, 42, "MENU");
     Texture backgroundTexture = createTextureFrom(fileName);
     Texture rightGateTexture = createTextureFrom("elements/BramkaP.png");
     Texture leftGateTexture = createTextureFrom("elements/BramkaL.png");
     Texture fpsTexture = createTextureFrom(fpsTextPlace, Vector2i(100, 100), Color::Transparent);
-    Sprite finallyBackgroundSprite;
+    Texture pauseTexture = createTextureFrom(pauseTextPlace, Vector2i(200, 200), Color::Transparent);
+    Texture menuTexture = createTextureFrom(menuTextPlace, Vector2i(150, 150), Color::Transparent);
     Sprite rightGateSprite = createSpriteFrom(&rightGateTexture, getGatePosition("right"));
     Sprite leftGateSprite = createSpriteFrom(&leftGateTexture, getGatePosition("left"));
     Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
     Sprite fpsSprite = createSpriteFrom(&fpsTexture, Vector2f(0.0f, 0.0f));
+    Sprite pauseSprite = createSpriteFrom(&pauseTexture, Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f));
+    Sprite menuSprite = createSpriteFrom(&menuTexture, Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f));
     backgroundRenderTexture->clear(Color::Transparent);
     backgroundRenderTexture->draw(backgroundSprite);
     backgroundRenderTexture->draw(leftGateSprite);
     backgroundRenderTexture->draw(rightGateSprite);
     backgroundRenderTexture->draw(fpsSprite);
+    backgroundRenderTexture->draw(pauseSprite);
+    backgroundRenderTexture->draw(menuSprite);
     backgroundRenderTexture->display();
     finallyBackgroundSprite.setTexture(backgroundRenderTexture->getTexture());
     setMainBufferTexture(finallyBackgroundSprite);
@@ -305,32 +358,32 @@ void Engine::serveWindowCloseEvent() {
 }
 
 void Engine::drawButtons() {
-    RectangleShape* playButton = getButton(260, Color::Red);
+    RectangleShape playButton = getButton(260, Color::Red, Vector2f(200, 50));
     int rectName = getRectNameWhenMouseIsPressedIn();
     switch (rectName) {
         case RESOLUTION_1:
-            resolution1Button = getButton(20, Color::Red);
-            resolution2Button = getButton(100, Color::Green);
-            resolution3Button = getButton(180, Color::Green);
+            resolution1Button = getButton(20, Color::Red, Vector2f(200, 50));
+            resolution2Button = getButton(100, Color::Green, Vector2f(200, 50));
+            resolution3Button = getButton(180, Color::Green, Vector2f(200, 50));
         break;
         case RESOLUTION_2:
-            resolution1Button = getButton(20, Color::Green);
-            resolution2Button = getButton(100, Color::Red);
-            resolution3Button = getButton(180, Color::Green);
+            resolution1Button = getButton(20, Color::Green, Vector2f(200, 50));
+            resolution2Button = getButton(100, Color::Red, Vector2f(200, 50));
+            resolution3Button = getButton(180, Color::Green, Vector2f(200, 50));
         break;
         case RESOLUTION_3:
-            resolution1Button = getButton(20, Color::Green);
-            resolution2Button = getButton(100, Color::Green);
-            resolution3Button = getButton(180, Color::Red);
+            resolution1Button = getButton(20, Color::Green, Vector2f(200, 50));
+            resolution2Button = getButton(100, Color::Green, Vector2f(200, 50));
+            resolution3Button = getButton(180, Color::Red, Vector2f(200, 50));
         break;
         case PLAY:
             setWidthAndHeight(resolution1Button, resolution2Button, resolution3Button);
         break;
     }
-    window->draw(*resolution1Button);
-    window->draw(*resolution2Button);
-    window->draw(*resolution3Button);
-    window->draw(*playButton);
+    window->draw(resolution1Button);
+    window->draw(resolution2Button);
+    window->draw(resolution3Button);
+    window->draw(playButton);
 }
 
 void Engine::drawTexts() {
