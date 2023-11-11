@@ -1,16 +1,17 @@
 #include "Engine.hpp"
 
 void Engine::mainWindowSetup() {
-    Clock fpsClock;
-    font = *getArialFont();
+    font = *getFont("arial");
     setFrameRateLimit();
     Image iconImage;
     iconImage.loadFromFile("elements/Pilka.png");
     window->setIcon(iconImage.getSize().x, iconImage.getSize().y, iconImage.getPixelsPtr());
     window->setVerticalSyncEnabled(true);
+    string fps = "";
     while (window->isOpen()) {
         float elapsed = breakClock.getElapsedTime().asSeconds();
-        float currentTime = fpsClock.restart().asSeconds();
+        float currentTime = fpsClock.getElapsedTime().asSeconds();
+        fps = getFramePerSecondText(currentTime);
         if (elapsed > 300)
             window->close();
         serveWindowCloseEvent();
@@ -22,7 +23,7 @@ void Engine::mainWindowSetup() {
                 menuWindowSetup();
             break;
             case GAME:
-                gameWindowSetup(currentTime);
+                gameWindowSetup(fps);
             break;
             case GAME_HELPER:
                 gameHelperWindowSetup();
@@ -47,43 +48,38 @@ void Engine::menuWindowSetup() {
         music.openFromFile("sounds/menu_music.wav");
         music.play();
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
+        mainBuffer.create(windowSize->x, windowSize->y);
+        secondBuffer.create(windowSize->x, windowSize->y);
         centered = true;
     }
-    else {
-        Texture* backgroundTexture = new Texture();
-        Sprite* backgroundSprite = new Sprite();
-        if (window->getSize().x == 1280 && window->getSize().y == 720)
-            backgroundTexture->loadFromFile("backgrounds/main/SG1280x720.png");
-        else if (window->getSize().x == 1366 && window->getSize().y == 768)
-            backgroundTexture->loadFromFile("backgrounds/main/SG1366x768.png");
-        else
-            backgroundTexture->loadFromFile("backgrounds/main/SG1600x900.png");
-        backgroundSprite->setTexture(*backgroundTexture);
-        setMainBufferTexture(backgroundSprite);
-        setSecondBufferTexture(backgroundSprite);
-        handleBuffers();
-    }
+    else 
+        setMenuBackground();
     if (music.getStatus() != Music::Status::Playing)
         music.play();
+    if (Keyboard::isKeyPressed(Keyboard::Left)) {
+        centered = false;
+        activeWindowName = GAME;
+    }
 }
 
-void Engine::gameWindowSetup(float currentTime) {
+void Engine::gameWindowSetup(string currentTime) {
     VideoMode desktop = VideoMode::getDesktopMode();
-    string fpsText = getFramePerSecondText(currentTime);
-    Text* fpsTextPlace = getText();
-    fpsTextPlace->setString(fpsText);
-    Texture* fpsTexture = createTextureFrom(fpsTextPlace, Vector2i(50, 50), Color(58, 157, 35));
-    Sprite bufferTextureSprite;
-    bufferTextureSprite.setTexture(*fpsTexture);
-    setFrameRateLimit();
     if (!centered) {
+        font = *getFont("Pixellari");
+        music.stop();
+        window->setTitle("FootballHead2D");
+        window->setSize(*windowSize);
+        setFrameRateLimit();
+        backgroundRenderTexture->create(window->getSize().x, window->getSize().y);
+        music.openFromFile("sounds/stadium_crowd.wav");
+        music.play();
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
         centered = true;
     }
-    window->setTitle("FootballHead2D");
-    window->setSize(*windowSize);
-    setSecondBufferTexture(&bufferTextureSprite);
-    handleBuffers();
+    else 
+        setGameBackground(currentTime);
+    if (music.getStatus() != Music::Status::Playing)
+        music.play();
 }
 
 void Engine::gameHelperWindowSetup() {
@@ -116,17 +112,15 @@ void Engine::setWidthAndHeight(RectangleShape* resolution1Button, RectangleShape
     }
 }
 
-void Engine::setMainBufferTexture(Sprite* textureSprite) {
-    Vector2u windowSize = window->getSize();
-    mainBuffer.create(windowSize.x, windowSize.y);
-    mainBuffer.draw(*textureSprite);
+void Engine::setMainBufferTexture(Sprite textureSprite) {
+    mainBuffer.clear();
+    mainBuffer.draw(textureSprite);
     mainBuffer.display();
 }
 
-void Engine::setSecondBufferTexture(Sprite* textureSprite) {
-    Vector2u windowSize = window->getSize();
-    secondBuffer.create(windowSize.x, windowSize.y);
-    secondBuffer.draw(*textureSprite);
+void Engine::setSecondBufferTexture(Sprite textureSprite) {
+    secondBuffer.clear();
+    secondBuffer.draw(textureSprite);
     secondBuffer.display();
 }
 
@@ -147,20 +141,20 @@ RenderWindow* Engine::getMainWindow() {
     return window;
 }
 
-Text* Engine::getText() {
-    Text* text = new Text();
-    text->setFont(font);
-    text->setFillColor(Color::White);
-    text->setCharacterSize(15);
+Text Engine::getText(Color color) {
+    Text text;
+    text.setFont(font);
+    text.setFillColor(color);
+    text.setCharacterSize(24);
     return text;
 }
 
-Text* Engine::getText(string content) {
-    Text* text = new Text();
-    text->setFont(font);
-    text->setFillColor(Color::White);
-    text->setString(content);
-    text->setCharacterSize(28);
+Text Engine::getText(Color color, string content) {
+    Text text;
+    text.setFont(font);
+    text.setFillColor(color);
+    text.setString(content);
+    text.setCharacterSize(28);
     return text;
 }
 
@@ -172,13 +166,13 @@ RectangleShape* Engine::getButton(float yShift, Color color) {
     return button;
 }
 
-Font* Engine::getArialFont() {
+Font* Engine::getFont(string fontName) {
     Font* font = new Font();
     string logContent = "";
-    if (!font->loadFromFile("fonts/arial.ttf"))
-        setLogContent("[ERROR] " + getCurrentTime() + " Unsuccessfull arial font load");
+    if (!font->loadFromFile("fonts/"+fontName+".ttf"))
+        setLogContent("[ERROR] " + getCurrentTime() + " Unsuccessfull " + fontName + " font load");
     else
-        setLogContent("[INFO] " + getCurrentTime() + " Arial font was successfully loaded");
+        setLogContent("[INFO] " + getCurrentTime() + " " + fontName + " font was successfully loaded");
     return font;
 }
 
@@ -220,24 +214,80 @@ int Engine::getRectNameWhenMouseIsPressedIn() {
     return -1;
 }
 
-Sprite Engine::getBackground() {
-    return Sprite();
+Vector2f Engine::getGatePosition(string gateName) {
+    Vector2u windowSize = window->getSize();
+    Vector2u firstRes = Vector2u(1280, 720);
+    Vector2u secondRes = Vector2u(1366, 768);
+    Vector2u thirdRes = Vector2u(1600, 900);
+    float firstResXPos = window->getSize().x * 0.84;
+    float secondResXPos = window->getSize().x * 0.85;
+    float thirdResXPos = window->getSize().x * 0.85;
+    float firstResYPos = window->getSize().y * 0.30;
+    float secondResYPos = window->getSize().y * 0.33;
+    float thirdResYPos = window->getSize().y * 0.38;
+    if (gateName == "left") 
+        return (windowSize == firstRes) ? (Vector2f(50.0f, firstResYPos)) : (
+            (windowSize == secondRes) ? (Vector2f(50.0f, secondResYPos)) : Vector2f(75.0f, thirdResYPos));
+    else 
+        return (windowSize == firstRes) ? (Vector2f(firstResXPos, firstResYPos)) : (
+            (windowSize == secondRes) ? (Vector2f(secondResXPos, secondResYPos)) : Vector2f(thirdResXPos, thirdResYPos));
 }
 
-Texture* Engine::createTextureFrom(Text* text, Vector2i size, Color textureColor) {
+void Engine::setMenuBackground() {
+    string fileName = "backgrounds/main/SG" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
+    Texture backgroundTexture = createTextureFrom(fileName);
+    Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
+    setMainBufferTexture(backgroundSprite);
+    setSecondBufferTexture(backgroundSprite);
+    handleBuffers();
+}
+
+void Engine::setGameBackground(string currentTime) {
+    string fileName = "backgrounds/stadium/stadion" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
+    Text fpsTextPlace = getText(Color::White);
+    fpsTextPlace.setString(currentTime);
+    Texture backgroundTexture = createTextureFrom(fileName);
+    Texture rightGateTexture = createTextureFrom("elements/BramkaP.png");
+    Texture leftGateTexture = createTextureFrom("elements/BramkaL.png");
+    Texture fpsTexture = createTextureFrom(fpsTextPlace, Vector2i(100, 100), Color::Transparent);
+    Sprite finallyBackgroundSprite;
+    Sprite rightGateSprite = createSpriteFrom(&rightGateTexture, getGatePosition("right"));
+    Sprite leftGateSprite = createSpriteFrom(&leftGateTexture, getGatePosition("left"));
+    Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
+    Sprite fpsSprite = createSpriteFrom(&fpsTexture, Vector2f(0.0f, 0.0f));
+    backgroundRenderTexture->clear(Color::Transparent);
+    backgroundRenderTexture->draw(backgroundSprite);
+    backgroundRenderTexture->draw(leftGateSprite);
+    backgroundRenderTexture->draw(rightGateSprite);
+    backgroundRenderTexture->draw(fpsSprite);
+    backgroundRenderTexture->display();
+    finallyBackgroundSprite.setTexture(backgroundRenderTexture->getTexture());
+    setMainBufferTexture(finallyBackgroundSprite);
+    setSecondBufferTexture(finallyBackgroundSprite);
+    handleBuffers();
+}
+
+Texture Engine::createTextureFrom(Text text, Vector2i size, Color textureColor) {
     RenderTexture renderTexture;
     renderTexture.create(size.x, size.y);
     renderTexture.clear(textureColor);
-    renderTexture.draw(*text);
+    renderTexture.draw(text);
     renderTexture.display();
-    Texture* texture = new Texture(renderTexture.getTexture());
+    Texture texture(renderTexture.getTexture());
     return texture;
 }
 
-Texture* Engine::createTextureFrom(Image* image, Vector2i size) {
-    Texture* texture = new Texture();
-    texture->loadFromImage(*image);
+Texture Engine::createTextureFrom(string fileName) {
+    Texture texture;
+    texture.loadFromFile(fileName);
     return texture;
+}
+
+Sprite Engine::createSpriteFrom(Texture* texture, Vector2f position) {
+    Sprite sprite;
+    sprite.setTexture(*texture);
+    sprite.setPosition(position.x, position.y);
+    return sprite;
 }
 
 void Engine::serveWindowCloseEvent() {
@@ -247,9 +297,9 @@ void Engine::serveWindowCloseEvent() {
             window->close();
         if (event.type == Event::MouseMoved || event.type == Event::MouseButtonPressed || event.type == Event::KeyPressed)
             breakClock.restart();
-        if (event.type == sf::Event::Resized) {
-            sf::FloatRect view(0, 0, event.size.width, event.size.height);
-            window->setView(sf::View(view));
+        if (event.type == Event::Resized) {
+            FloatRect view(0, 0, event.size.width, event.size.height);
+            window->setView(View(view));
         }
     }
 }
@@ -284,37 +334,41 @@ void Engine::drawButtons() {
 }
 
 void Engine::drawTexts() {
-    Text* resolution1 = getText("1280 x 720");
-    Text* resolution2 = getText("1366 x 768");
-    Text* resolution3 = getText("1600 x 900");
-    Text* startGame = getText("Uruchom gre");
-    resolution1->setPosition(130, 70);
-    resolution2->setPosition(130, 150);
-    resolution3->setPosition(130, 230);
-    startGame->setPosition(120, 310);
-    window->draw(*resolution1);
-    window->draw(*resolution2);
-    window->draw(*resolution3);
-    window->draw(*startGame);
+    Text resolution1 = getText(Color::White, "1280 x 720");
+    Text resolution2 = getText(Color::White, "1366 x 768");
+    Text resolution3 = getText(Color::White, "1600 x 900");
+    Text startGame = getText(Color::White, "Uruchom gre");
+    resolution1.setPosition(130, 70);
+    resolution2.setPosition(130, 150);
+    resolution3.setPosition(130, 230);
+    startGame.setPosition(120, 310);
+    window->draw(resolution1);
+    window->draw(resolution2);
+    window->draw(resolution3);
+    window->draw(startGame);
 }
 
 void Engine::handleBuffers() {
+    setFrameRateLimit();
     if (activeBuffer == "main") {
+        secondBuffer.clear();
         secondBuffer.draw(Sprite(mainBuffer.getTexture()));
         secondBuffer.display();
-        mainBuffer.clear();
+        window->clear();
         window->draw(Sprite(secondBuffer.getTexture()));
         window->display();
         activeBuffer = "second";
     }
     else {
+        mainBuffer.clear();
         mainBuffer.draw(Sprite(secondBuffer.getTexture()));
         mainBuffer.display();
-        secondBuffer.clear();
+        window->clear();
         window->draw(Sprite(mainBuffer.getTexture()));
         window->display();
         activeBuffer = "main";
     }
+    fpsClock.restart();
 }
 
 void Engine::clearWindowToColor(Color color) {
