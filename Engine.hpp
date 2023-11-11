@@ -20,204 +20,234 @@ using namespace sf;
 enum windowNames {STARTUP_SETTINGS, MENU, GAME, GAME_HELPER};
 enum rectNames {RESOLUTION_1, RESOLUTION_2, RESOLUTION_3, PLAY};
 
-class Engine {
-public:
+namespace Game {
 
-    int activeWindowName;
+    class Engine {
 
-    static Engine& getInstance() {
-        static Engine engine;
-        return engine;
-    }
+    public:
 
-    void mainWindowSetup();
-    void setMainBufferTexture(Sprite textureSprite);
-    void setSecondBufferTexture(Sprite textureSprite);
-    RenderWindow* getMainWindow();
-    void clearWindowToColor(Color color);
-    void clearSpriteToColor(Sprite&, Color color);
+        int activeWindowName;
+        static Engine& getInstance() {
+            static Engine engine;
+            return engine;
+        }
+        void mainWindowSetup();
+        void setMainBufferTexture(Sprite textureSprite);
+        void setSecondBufferTexture(Sprite textureSprite);
+        RenderWindow* getMainWindow();
+        void clearWindowToColor(Color color);
+        void clearSpriteToColor(Sprite&, Color color);
 
-private:
+        class GameObject {
+        public:
+            void setX(float x);
+            void setY(float y);
+            float getX();
+            float getY();
+        private:
+            Vector2f actualPosition;
+        };
 
-    string activeBuffer = "second";
-    bool centered = false;
-    bool pause = false;
-    Vector2u* windowSize = new Vector2u(400, 400);
-    RenderWindow* window = new RenderWindow(VideoMode(windowSize->x, windowSize->y), "", Style::Titlebar | Style::Close);
-    RenderTexture* backgroundRenderTexture = new RenderTexture();
-    RectangleShape resolution1Button = getButton(20, Color::Green, Vector2f(200, 50));
-    RectangleShape resolution2Button = getButton(100, Color::Green, Vector2f(200, 50));
-    RectangleShape resolution3Button = getButton(180, Color::Green, Vector2f(200, 50));
-    Color menuTextColor = Color::White;
-    Color pauseTextColor = Color::White;
-    Music music;
-    Vector2i windowPosition;
-    RenderTexture mainBuffer;
-    RenderTexture secondBuffer;
-    Clock clock;
-    Font font;
-    string logContent;
-    Clock breakClock;
-    Clock fpsClock;
+        class DrawableObject : public virtual GameObject {
+        public:
+            void draw(void);
+        };
 
-    void menuWindowSetup();
-    void settingsWindowSetup();
-    void gameWindowSetup(string currentTime);
-    void gameHelperWindowSetup();
-    void setWidthAndHeight(RectangleShape resolution1Button, RectangleShape resolution2Button, RectangleShape resolution3Button);
-    void setFrameRateLimit();
-    void setLogContent(string logContent);
-    Text getText(Color color, string content);
-    Text getText(Color color, int fontSize, string content);
-    RectangleShape getButton(float yShift, Color color, Vector2f size);
-    RectangleShape getButton(Color color, Vector2f size, Vector2f position);
-    Font* getFont(string fontName);
-    string getFramePerSecondText(float currentTime);
-    string getCurrentTime();
-    Vector2f getGatePosition(string gateName);
-    int getRectNameWhenMouseIsPressedIn();
-    void setMenuBackground();
-    void setGameBackground(string currentTime);
-    Texture createTextureFrom(Text text, Vector2i size, Color textureColor);
-    Texture createTextureFrom(string fileName);
-    Sprite createSpriteFrom(Texture* texture, Vector2f position);
-    void serveWindowCloseEvent();
-    void drawButtons();
-    void drawTexts();
-    void handleBuffers();
-    bool validateLogContentFormat();
-    void saveLog();
+        class TransformableObject : public virtual GameObject {
+        public:
+            void translate(Vector2f position);
+            void rotate(float angle);
+            void scale(Vector2f scale);
+        };
 
-    void testPrimitiveRenderer();
-    void testPoint2D();
-    void testLineSegment();
-    void testRectFill();
+        class ShapeObject : public DrawableObject, TransformableObject {
+        public:
+            virtual void draw() {};
+            virtual void translate(Vector2f position) {};
+            virtual void rotate(float angle) {};
+            virtual void scale(Vector2f scale) {};
+            void setColor(Color color) {};
+            Color getColor() {};
+        };
 
-};
+        class Rectangle : public ShapeObject {
+        public:
+            Rectangle();
+            Rectangle(Vector2f size);
+            virtual void draw();
+            virtual void translate(Vector2f position);
+            virtual void rotate(float angle);
+            virtual void scale(Vector2f scale);
+            virtual void setColor(Color color);
+            virtual Color getColor();
+        private:
+            RectangleShape rectangle;
+        };
 
-class Point2D {
-public:
-    Point2D();
-    Point2D(float x, float y);
-    Point2D(Color pixelColor, float x, float y);
-    float getX();
-    float getY();
-    Color getPixelColor();
-    void setPixelColor(Color pixelColor);
-    void setCoords(float x, float y);
-    void draw();
-private:
-    Color pixelColor = Color::White;
-    float x;
-    float y;
-};
+        class Circle : public ShapeObject {
+        public:
+            Circle(float radius);
+            virtual void draw();
+            virtual void translate(Vector2f position);
+            virtual void rotate(float angle);
+            virtual void scale(Vector2f scale);
+            virtual void setColor(Color color);
+            virtual Color getColor();
+        private:
+            CircleShape circle;
+        };
 
-class LineSegment {
-public:
-    LineSegment(Point2D startPoint, Point2D endPoint);
-    Point2D getStartPoint();
-    Point2D getEndPoint();
-    void setStartPoint(Point2D startPoint);
-    void setEndPoint(Point2D endPoint);
-    void draw(Color color);
-    void drawIncreased(Color color);
-private:
-    Point2D startPoint;
-    Point2D endPoint;
-};
+        class Triangle : public ShapeObject {
+        public:
+            Triangle(float radius);
+            virtual void draw();
+            virtual void translate(Vector2f position);
+            virtual void rotate(float angle);
+            virtual void scale(Vector2f scale);
+            virtual void setColor(Color color);
+            virtual Color getColor();
+        private:
+            CircleShape triangle;
+        };
 
-class PrimitiveRenderer {
-public:
-    void drawRectangle(Vector2f size, Vector2f position, Color color);
-    void drawCircle(float radius, Vector2f position, Color color);
-    void drawSymetricCircle(float radius, Point2D startPoint, Color color);
-    void drawTriangle(float radius, Vector2f position, Color color);
-    void drawIncreasedLine(Vector2f startCoords, Vector2f endCoords, Color color);
-    void drawLine(Vector2f startCoords, Vector2f endCoords, Color color);
-    void drawBrokenLine(vector<LineSegment> lines, Color color);
-    void drawEllipse(float radiusX, float radiusY, Point2D startPoint, Color color);
-    bool isLinesCrossing(LineSegment line1, LineSegment line2);
-    void drawPolygon(vector<LineSegment> lines, Color color);
-    void borderRectFill(Point2D point, Color fillColor, Color borderColor);
-    void floodRectFill(Point2D point, Color fillColor, Color backgroundColor);
-private:
-    RenderWindow* mainWindow = Engine::getInstance().getMainWindow();
-};
+        class Player : public GameObject {
+        public:
+            Player();
+            void setActualSpeed(float speed);
+            void setPlayerTexture(string fileName);
+            void setActualPosition(Vector2f position);
+            float getActualSpeed();
+            Vector2f getActualPosition();
+            Texture getPlayerTexture();
+        private:
+            int goals = 0;
+            float actualSpeed = 0.0f;
+            Vector2f position;
+            Texture playerTexture;
+        };
 
-class GameObject {
-public:
-    RenderWindow* mainWindow = Engine::getInstance().getMainWindow();
-    void setX(float x);
-    void setY(float y);
-    float getX();
-    float getY();
-private:    
-    Vector2f actualPosition;
-};
+        class Ball : public GameObject {
+        public:
+            Ball();
+            void setActualSpeed(float speed);
+            void setBallTexture(string fileName);
+            void setActualPosition(Vector2f position);
+            float getActualSpeed();
+            Vector2f getActualPosition();
+            Texture getBallTexture();
+        private:
+            float actualSpeed = 0.0f;
+            Vector2f position;
+            Texture ballTexture;
+        };
 
-class UpdatableObject : public virtual GameObject {
-public:
-    void update();
-};
+    private:
 
-class DrawableObject : public virtual GameObject {
-public:
-    void draw();
-};
+        string activeBuffer = "second";
+        bool centered = false;
+        bool pause = false;
+        Vector2u* windowSize = new Vector2u(400, 400);
+        RenderWindow* window = new RenderWindow(VideoMode(windowSize->x, windowSize->y), "", Style::Titlebar | Style::Close);
+        RenderTexture* backgroundRenderTexture = new RenderTexture();
+        Rectangle resolution1Button = getButton(20, Color::Green, Vector2f(200, 50));
+        Rectangle resolution2Button = getButton(100, Color::Green, Vector2f(200, 50));
+        Rectangle resolution3Button = getButton(180, Color::Green, Vector2f(200, 50));
+        Player leftPlayer;
+        Player rightPlayer;
+        Ball ball;
+        Color menuTextColor = Color::White;
+        Color pauseTextColor = Color::White;
+        Music music;
+        Vector2i windowPosition;
+        RenderTexture mainBuffer;
+        RenderTexture secondBuffer;
+        Clock clock;
+        Font font;
+        string logContent;
+        Clock breakClock;
+        Clock fpsClock;
+        void menuWindowSetup();
+        void settingsWindowSetup();
+        void gameWindowSetup(string currentTime);
+        void gameHelperWindowSetup();
+        void setWidthAndHeight(Rectangle resolution1Button, Rectangle resolution2Button, Rectangle resolution3Button);
+        void setFrameRateLimit();
+        void setLogContent(string logContent);
+        Text getText(Color color, string content);
+        Text getText(Color color, int fontSize, string content);
+        Rectangle getButton(float yShift, Color color, Vector2f size);
+        Rectangle getButton(Color color, Vector2f size, Vector2f position);
+        Font* getFont(string fontName);
+        string getFramePerSecondText(float currentTime);
+        string getCurrentTime();
+        Vector2f getGatePosition(string gateName);
+        Vector2f getPlayerPosition(string playerName);
+        int getRectNameWhenMouseIsPressedIn();
+        Player getPlayer(string playerTextureName, string playerName);
+        Ball getBall();
+        void setMenuBackground();
+        void setGameBackground(string currentTime);
+        void checkRectsActions();
+        void checkPlayerActions(Sprite* player1, Sprite* player2);
+        Texture createTextureFrom(Text text, Vector2i size, Color textureColor);
+        Texture createTextureFrom(string fileName);
+        Sprite createSpriteFrom(Texture* texture, Vector2f position);
+        void serveWindowCloseEvent();
+        void drawButtons();
+        void drawTexts();
+        void handleBuffers();
+        bool validateLogContentFormat();
+        void saveLog();
+        void testPrimitiveRenderer();
+        void testPoint2D();
+        void testLineSegment();
+        void testRectFill();
+    };
 
-class TransformableObject : public virtual GameObject {
-public:
-    void translate();
-    void rotate();
-    void scale();
-};
+    class Point2D {
+    public:
+        Point2D();
+        Point2D(float x, float y);
+        Point2D(Color pixelColor, float x, float y);
+        float getX();
+        float getY();
+        Color getPixelColor();
+        void setPixelColor(Color pixelColor);
+        void setCoords(float x, float y);
+        void draw();
+    private:
+        Color pixelColor = Color::White;
+        float x;
+        float y;
+    };
 
-class ShapeObject : public DrawableObject, TransformableObject {
-public:
-    Color color;
-    Vector2f size;
-    float radius;
-    virtual void draw();
-    virtual void translate();
-    virtual void rotate();
-    virtual void scale();
-};
+    class LineSegment {
+    public:
+        LineSegment(Point2D startPoint, Point2D endPoint);
+        Point2D getStartPoint();
+        Point2D getEndPoint();
+        void setStartPoint(Point2D startPoint);
+        void setEndPoint(Point2D endPoint);
+        void draw(Color color);
+        void drawIncreased(Color color);
+    private:
+        Point2D startPoint;
+        Point2D endPoint;
+    };
 
-class Rectangle : public ShapeObject {
-public:
-    Rectangle(Vector2f size);
-    virtual void draw();
-    virtual void translate();
-    virtual void rotate();
-    virtual void scale();
-};
-
-class Circle : public ShapeObject {
-public:
-    Circle(float radius);
-    virtual void draw();
-    virtual void translate();
-    virtual void rotate();
-    virtual void scale();
-};
-
-class Triangle : public ShapeObject {
-public:
-    Triangle(float radius);
-    virtual void draw();
-    virtual void translate();
-    virtual void rotate();
-    virtual void scale();
-};
-
-class Player : public GameObject {
-public:
-    Player(float x, float y, Sprite playerTexture);
-    void setActualSpeed(float speed);
-    void setPlayerTexture(Sprite playerTexture);
-    float getActualSpeed();
-    Sprite getPlayerTexture();
-private:
-    float actualSpeed;
-    Sprite playerTexture;
-};
+    class PrimitiveRenderer {
+    public:
+        void drawRectangle(Vector2f size, Vector2f position, Color color);
+        void drawCircle(float radius, Vector2f position, Color color);
+        void drawSymetricCircle(float radius, Point2D startPoint, Color color);
+        void drawTriangle(float radius, Vector2f position, Color color);
+        void drawIncreasedLine(Vector2f startCoords, Vector2f endCoords, Color color);
+        void drawLine(Vector2f startCoords, Vector2f endCoords, Color color);
+        void drawBrokenLine(vector<LineSegment> lines, Color color);
+        void drawEllipse(float radiusX, float radiusY, Point2D startPoint, Color color);
+        bool isLinesCrossing(LineSegment line1, LineSegment line2);
+        void drawPolygon(vector<LineSegment> lines, Color color);
+        void borderRectFill(Point2D point, Color fillColor, Color borderColor);
+        void floodRectFill(Point2D point, Color fillColor, Color backgroundColor);
+    };
+}

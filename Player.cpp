@@ -1,20 +1,27 @@
 #include "Engine.hpp"
 
-Player::Player(float x, float y, Sprite playerTexture) {
-	setX(x);
-	setY(y);
-	this->actualSpeed = 0.0f;
-	this->playerTexture = playerTexture;
+using namespace Game;
+
+Engine::Player::Player() {
+
 }
-void Player::setActualSpeed(float speed) {
+
+void Engine::Player::setActualSpeed(float speed) {
 	this->actualSpeed = speed;
 }
-void Player::setPlayerTexture(Sprite playerTexture) {
-	this->playerTexture = playerTexture;
+void Engine::Player::setPlayerTexture(string fileName) {
+	this->playerTexture.loadFromFile(fileName);
+	this->playerTexture.setSmooth(true);
 }
-float Player::getActualSpeed() {
+void Engine::Player::setActualPosition(Vector2f position) {
+	this->position = position;
+}
+float Engine::Player::getActualSpeed() {
 	return this->actualSpeed;
 }
-Sprite Player::getPlayerTexture() {
+Vector2f Engine::Player::getActualPosition() {
+	return this->position;
+}
+Texture Engine::Player::getPlayerTexture() {
 	return this->playerTexture;
 }

@@ -1,17 +1,19 @@
 #include "Engine.hpp"
 
-void GameObject::setX(float x) {
+using namespace Game;
+
+void Engine::GameObject::setX(float x) {
     actualPosition.x = x;
 }
 
-void GameObject::setY(float y) {
+void Engine::GameObject::setY(float y) {
     actualPosition.y = y;
 }
 
-float GameObject::getX() {
+float Engine::GameObject::getX() {
     return this->actualPosition.x;
 }
 
-float GameObject::getY() {
+float Engine::GameObject::getY() {
     return this->actualPosition.y;
 }
