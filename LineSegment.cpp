@@ -1,5 +1,7 @@
 #include "Engine.hpp"
 
+using namespace Game;
+
 LineSegment::LineSegment(Point2D startPoint, Point2D endPoint) {
 	this->startPoint = startPoint;
 	this->endPoint = endPoint;

@@ -1,5 +1,7 @@
 #include "Engine.hpp"
 
+using namespace Game;
+
 void Engine::mainWindowSetup() {
     font = *getFont("arial");
     setFrameRateLimit();
@@ -74,6 +76,15 @@ void Engine::gameWindowSetup(string currentTime) {
         music.openFromFile("sounds/stadium_crowd.wav");
         music.play();
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
+        leftPlayer.setPlayerTexture("elements/Haaland.png");
+        leftPlayer.setActualSpeed(5.0f);
+        leftPlayer.setActualPosition(getPlayerPosition("Haaland"));
+        rightPlayer.setPlayerTexture("elements/Ymbape.png");
+        rightPlayer.setActualSpeed(5.0f);
+        rightPlayer.setActualPosition(getPlayerPosition("Ymbape"));
+        ball.setBallTexture("elements/Pilka.png");
+        ball.setActualSpeed(1.5f);
+        ball.setActualPosition(Vector2f((getMainWindow()->getSize().x) / 2.12f, (getMainWindow()->getSize().y) / 5.0f));
         centered = true;
     }
     else 
@@ -93,19 +104,19 @@ void Engine::gameHelperWindowSetup() {
     window->setSize(*windowSize);
 }
 
-void Engine::setWidthAndHeight(RectangleShape resolution1Button, RectangleShape resolution2Button,
-    RectangleShape resolution3Button) {
-    if (resolution1Button.getFillColor() == Color::Red) {
+void Engine::setWidthAndHeight(Rectangle resolution1Button, Rectangle resolution2Button,
+    Rectangle resolution3Button) {
+    if (resolution1Button.getColor() == Color::Red) {
         windowSize->x = 1280;
         windowSize->y = 720;
         getInstance().activeWindowName = MENU;
     }
-    else if (resolution2Button.getFillColor() == Color::Red) {
+    else if (resolution2Button.getColor() == Color::Red) {
         windowSize->x = 1366;
         windowSize->y = 768;
         getInstance().activeWindowName = MENU;
     }
-    else if (resolution3Button.getFillColor() == Color::Red) {
+    else if (resolution3Button.getColor() == Color::Red) {
         windowSize->x = 1600;
         windowSize->y = 900;
         getInstance().activeWindowName = MENU;
@@ -159,17 +170,17 @@ Text Engine::getText(Color color, int fontSize, string content) {
     return text;
 }
 
-RectangleShape Engine::getButton(float yShift, Color color, Vector2f size) {
-    RectangleShape button(size);
-    button.setFillColor(color);
-    button.setPosition(100.0f, 40.0f + yShift);
+Engine::Rectangle Engine::getButton(float yShift, Color color, Vector2f size) {
+    Rectangle button(size);
+    button.setColor(color);
+    button.translate(Vector2f(100.0f, 40.0f + yShift));
     return button;
 }
 
-RectangleShape Engine::getButton(Color color, Vector2f size, Vector2f position) {
-    RectangleShape button(size);
-    button.setFillColor(color);
-    button.setPosition(position.x, position.y);
+Engine::Rectangle Engine::getButton(Color color, Vector2f size, Vector2f position) {
+    Rectangle button(size);
+    button.setColor(color);
+    button.translate(position);
     return button;
 }
 
@@ -226,16 +237,35 @@ Vector2f Engine::getGatePosition(string gateName) {
     Vector2u firstRes = Vector2u(1280, 720);
     Vector2u secondRes = Vector2u(1366, 768);
     Vector2u thirdRes = Vector2u(1600, 900);
-    float firstResXPos = window->getSize().x * 0.84;
-    float secondResXPos = window->getSize().x * 0.85;
-    float thirdResXPos = window->getSize().x * 0.85;
-    float firstResYPos = window->getSize().y * 0.30;
-    float secondResYPos = window->getSize().y * 0.33;
-    float thirdResYPos = window->getSize().y * 0.38;
+    float firstResXPos = window->getSize().x * 0.84f;
+    float secondResXPos = window->getSize().x * 0.85f;
+    float thirdResXPos = window->getSize().x * 0.85f;
+    float firstResYPos = window->getSize().y * 0.30f;
+    float secondResYPos = window->getSize().y * 0.33f;
+    float thirdResYPos = window->getSize().y * 0.38f;
     if (gateName == "left") 
         return (windowSize == firstRes) ? (Vector2f(50.0f, firstResYPos)) : (
             (windowSize == secondRes) ? (Vector2f(50.0f, secondResYPos)) : Vector2f(75.0f, thirdResYPos));
     else 
+        return (windowSize == firstRes) ? (Vector2f(firstResXPos, firstResYPos)) : (
+            (windowSize == secondRes) ? (Vector2f(secondResXPos, secondResYPos)) : Vector2f(thirdResXPos, thirdResYPos));
+}
+
+Vector2f Engine::getPlayerPosition(string playerName) {
+    Vector2u windowSize = window->getSize();
+    Vector2u firstRes = Vector2u(1280, 720);
+    Vector2u secondRes = Vector2u(1366, 768);
+    Vector2u thirdRes = Vector2u(1600, 900);
+    float firstResXPos = window->getSize().x * 0.68f;
+    float secondResXPos = window->getSize().x * 0.68f;
+    float thirdResXPos = window->getSize().x * 0.69f;
+    float firstResYPos = window->getSize().y * 0.50f;
+    float secondResYPos = window->getSize().y * 0.53f;
+    float thirdResYPos = window->getSize().y * 0.56f;
+    if (playerName == "Haaland")
+        return (windowSize == firstRes) ? (Vector2f(275.0f, firstResYPos)) : (
+            (windowSize == secondRes) ? (Vector2f(280.0f, secondResYPos)) : Vector2f(330.0f, thirdResYPos));
+    else
         return (windowSize == firstRes) ? (Vector2f(firstResXPos, firstResYPos)) : (
             (windowSize == secondRes) ? (Vector2f(secondResXPos, secondResYPos)) : Vector2f(thirdResXPos, thirdResYPos));
 }
@@ -250,6 +280,52 @@ void Engine::setMenuBackground() {
 }
 
 void Engine::setGameBackground(string currentTime) {
+    checkRectsActions();
+    Sprite finallyBackgroundSprite;
+    string fileName = "backgrounds/stadium/stadion" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
+    Text fpsTextPlace = getText(Color::White, currentTime);
+    Text pauseTextPlace = getText(pauseTextColor, 42, "PAUZA");
+    Text menuTextPlace = getText(menuTextColor, 42, "MENU");
+    Texture backgroundTexture = createTextureFrom(fileName);
+    Texture rightGateTexture = createTextureFrom("elements/BramkaP.png");
+    Texture leftGateTexture = createTextureFrom("elements/BramkaL.png");
+    Texture fpsTexture = createTextureFrom(fpsTextPlace, Vector2i(100, 100), Color::Transparent);
+    Texture pauseTexture = createTextureFrom(pauseTextPlace, Vector2i(200, 200), Color::Transparent);
+    Texture menuTexture = createTextureFrom(menuTextPlace, Vector2i(150, 150), Color::Transparent);
+    Texture leftPlayerTexture = leftPlayer.getPlayerTexture();
+    Texture rightPlayerTexture = rightPlayer.getPlayerTexture();
+    Texture ballTexture = ball.getBallTexture();
+    Sprite rightGateSprite = createSpriteFrom(&rightGateTexture, getGatePosition("right"));
+    Sprite leftGateSprite = createSpriteFrom(&leftGateTexture, getGatePosition("left"));
+    Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
+    Sprite fpsSprite = createSpriteFrom(&fpsTexture, Vector2f(0.0f, 0.0f));
+    Sprite pauseSprite = createSpriteFrom(&pauseTexture, Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f));
+    Sprite menuSprite = createSpriteFrom(&menuTexture, Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f));
+    Sprite leftPlayerSprite = createSpriteFrom(&leftPlayerTexture, leftPlayer.getActualPosition());
+    Sprite rightPlayerSprite = createSpriteFrom(&rightPlayerTexture, rightPlayer.getActualPosition());
+    Sprite ballSprite = createSpriteFrom(&ballTexture, ball.getActualPosition());
+    leftPlayerSprite.setScale(0.1f, 0.1f);
+    rightPlayerSprite.setScale(0.1f, 0.1f);
+    ballSprite.setScale(0.07f, 0.07f);
+    checkPlayerActions(&leftPlayerSprite, &rightPlayerSprite);
+    backgroundRenderTexture->clear(Color::Transparent);
+    backgroundRenderTexture->draw(backgroundSprite);
+    backgroundRenderTexture->draw(leftGateSprite);
+    backgroundRenderTexture->draw(rightGateSprite);
+    backgroundRenderTexture->draw(fpsSprite);
+    backgroundRenderTexture->draw(pauseSprite);
+    backgroundRenderTexture->draw(menuSprite);
+    backgroundRenderTexture->draw(leftPlayerSprite);
+    backgroundRenderTexture->draw(rightPlayerSprite);
+    backgroundRenderTexture->draw(ballSprite);
+    backgroundRenderTexture->display();
+    finallyBackgroundSprite.setTexture(backgroundRenderTexture->getTexture());
+    setMainBufferTexture(finallyBackgroundSprite);
+    setSecondBufferTexture(finallyBackgroundSprite);
+    handleBuffers();
+}
+
+void Engine::checkRectsActions() {
     Vector2i mouseBounds = Mouse::getPosition(*window);
     float mouseX = mouseBounds.x;
     float mouseY = mouseBounds.y;
@@ -272,7 +348,7 @@ void Engine::setGameBackground(string currentTime) {
                 pauseTextColor = Color::White;
             }
         }
-        else if(!Mouse::isButtonPressed(Mouse::Left) && !pause){
+        else if (!Mouse::isButtonPressed(Mouse::Left) && !pause) {
             pauseTextColor = Color::Black;
             menuTextColor = Color::White;
         }
@@ -289,35 +365,35 @@ void Engine::setGameBackground(string currentTime) {
             menuTextColor = Color::Black;
         }
     }
-    Sprite finallyBackgroundSprite;
-    string fileName = "backgrounds/stadium/stadion" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
-    Text fpsTextPlace = getText(Color::White, currentTime);
-    Text pauseTextPlace = getText(pauseTextColor, 42, "PAUZA");
-    Text menuTextPlace = getText(menuTextColor, 42, "MENU");
-    Texture backgroundTexture = createTextureFrom(fileName);
-    Texture rightGateTexture = createTextureFrom("elements/BramkaP.png");
-    Texture leftGateTexture = createTextureFrom("elements/BramkaL.png");
-    Texture fpsTexture = createTextureFrom(fpsTextPlace, Vector2i(100, 100), Color::Transparent);
-    Texture pauseTexture = createTextureFrom(pauseTextPlace, Vector2i(200, 200), Color::Transparent);
-    Texture menuTexture = createTextureFrom(menuTextPlace, Vector2i(150, 150), Color::Transparent);
-    Sprite rightGateSprite = createSpriteFrom(&rightGateTexture, getGatePosition("right"));
-    Sprite leftGateSprite = createSpriteFrom(&leftGateTexture, getGatePosition("left"));
-    Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
-    Sprite fpsSprite = createSpriteFrom(&fpsTexture, Vector2f(0.0f, 0.0f));
-    Sprite pauseSprite = createSpriteFrom(&pauseTexture, Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f));
-    Sprite menuSprite = createSpriteFrom(&menuTexture, Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f));
-    backgroundRenderTexture->clear(Color::Transparent);
-    backgroundRenderTexture->draw(backgroundSprite);
-    backgroundRenderTexture->draw(leftGateSprite);
-    backgroundRenderTexture->draw(rightGateSprite);
-    backgroundRenderTexture->draw(fpsSprite);
-    backgroundRenderTexture->draw(pauseSprite);
-    backgroundRenderTexture->draw(menuSprite);
-    backgroundRenderTexture->display();
-    finallyBackgroundSprite.setTexture(backgroundRenderTexture->getTexture());
-    setMainBufferTexture(finallyBackgroundSprite);
-    setSecondBufferTexture(finallyBackgroundSprite);
-    handleBuffers();
+}
+
+void Engine::checkPlayerActions(Sprite* player1, Sprite* player2) {
+    if (!pause) {
+        if (Keyboard::isKeyPressed(Keyboard::W))
+            player1->move(Vector2f(0.0f, -leftPlayer.getActualSpeed() * 9.0f));
+        if (Keyboard::isKeyPressed(Keyboard::A)) {
+            player1->move(Vector2f(-leftPlayer.getActualSpeed(), 0.0f));
+            if (!Keyboard::isKeyPressed(Keyboard::W))
+                leftPlayer.setActualPosition(player1->getPosition());
+        }
+        if (Keyboard::isKeyPressed(Keyboard::D)) {
+            player1->move(Vector2f(leftPlayer.getActualSpeed(), 0.0f));
+            if (!Keyboard::isKeyPressed(Keyboard::W))
+                leftPlayer.setActualPosition(player1->getPosition());
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Up))
+            player2->move(Vector2f(0.0f, -rightPlayer.getActualSpeed() * 9.0f));
+        if (Keyboard::isKeyPressed(Keyboard::Left)) {
+            player2->move(Vector2f(-rightPlayer.getActualSpeed(), 0.0f));
+            if (!Keyboard::isKeyPressed(Keyboard::Up))
+                rightPlayer.setActualPosition(player2->getPosition());
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Right)) {
+            player2->move(Vector2f(rightPlayer.getActualSpeed(), 0.0f));
+            if (!Keyboard::isKeyPressed(Keyboard::Up))
+                rightPlayer.setActualPosition(player2->getPosition());
+        }
+    }
 }
 
 Texture Engine::createTextureFrom(Text text, Vector2i size, Color textureColor) {
@@ -358,7 +434,7 @@ void Engine::serveWindowCloseEvent() {
 }
 
 void Engine::drawButtons() {
-    RectangleShape playButton = getButton(260, Color::Red, Vector2f(200, 50));
+    Rectangle playButton = getButton(260, Color::Red, Vector2f(200, 50));
     int rectName = getRectNameWhenMouseIsPressedIn();
     switch (rectName) {
         case RESOLUTION_1:
@@ -380,10 +456,10 @@ void Engine::drawButtons() {
             setWidthAndHeight(resolution1Button, resolution2Button, resolution3Button);
         break;
     }
-    window->draw(resolution1Button);
-    window->draw(resolution2Button);
-    window->draw(resolution3Button);
-    window->draw(playButton);
+    resolution1Button.draw();
+    resolution2Button.draw();
+    resolution3Button.draw();
+    playButton.draw();
 }
 
 void Engine::drawTexts() {
@@ -452,7 +528,7 @@ void Engine::saveLog() {
 
 void Engine::testPrimitiveRenderer() {
     PrimitiveRenderer primitiveRenderer;
-    //primitiveRenderer.drawRectangle(Vector2f(200.0f, 200.0f), Vector2f(100.0f, 100.0f), Color::White);
+    //primitiveRenderer.drawTriangle(Vector2f(200.0f, 200.0f), Vector2f(100.0f, 100.0f), Color::White);
     //primitiveRenderer.drawCircle(50.0f, Vector2f(100.0f, 100.0f), Color::White);
     //primitiveRenderer.drawTriangle(25.0f, Vector2f(100.0f, 100.0f), Color::White);
     //primitiveRenderer.drawIncreasedLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 100.0f), Color::Blue); // m <=1

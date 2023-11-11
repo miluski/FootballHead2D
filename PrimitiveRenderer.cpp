@@ -1,18 +1,19 @@
 #include "Engine.hpp"
 
+using namespace Game;
+
 void PrimitiveRenderer::drawRectangle(Vector2f size, Vector2f position, Color color) {
-	RectangleShape rectangle(size);
-	rectangle.setFillColor(color);
-	rectangle.setPosition(position);
-	mainWindow->draw(rectangle);
+	Engine::Rectangle rectangle(size);
+	rectangle.setColor(color);
+	rectangle.translate(position);
+	rectangle.draw();
 }
 
 void PrimitiveRenderer::drawCircle(float radius, Vector2f position, Color color) {
-	CircleShape circle;
-	circle.setRadius(radius);
-	circle.setFillColor(color);
-	circle.setPosition(position);
-	mainWindow->draw(circle);
+	Engine::Circle circle(radius);
+	circle.setColor(color);
+	circle.translate(position);
+	circle.draw();
 }
 
 void PrimitiveRenderer::drawSymetricCircle(float radius, Point2D startPoint, Color color) {
@@ -21,21 +22,21 @@ void PrimitiveRenderer::drawSymetricCircle(float radius, Point2D startPoint, Col
 		float x = radius * cos(i);
 		float y = radius * sin(i);
 		Vertex point(Vector2f(startPoint.getX() + x, startPoint.getY() + y), color);
-		mainWindow->draw(&point, 1, Points);
+		Engine::getInstance().getMainWindow()->draw(&point, 1, Points);
 		Vertex point2(Vector2f(startPoint.getX() + x, startPoint.getY() - y), color);
-		mainWindow->draw(&point2, 1, Points);
+		Engine::getInstance().getMainWindow()->draw(&point2, 1, Points);
 		Vertex point3(Vector2f(startPoint.getX() - x, startPoint.getY() + y), color);
-		mainWindow->draw(&point3, 1, Points);
+		Engine::getInstance().getMainWindow()->draw(&point3, 1, Points);
 		Vertex point4(Vector2f(startPoint.getX() - x, startPoint.getY() - y), color);
-		mainWindow->draw(&point4, 1, Points);
+		Engine::getInstance().getMainWindow()->draw(&point4, 1, Points);
 	}
 }
 
 void PrimitiveRenderer::drawTriangle(float radius, Vector2f position, Color color) {
-	CircleShape triangle(radius, 3);
-	triangle.setFillColor(color);
-	triangle.setPosition(position);
-	mainWindow->draw(triangle);
+	Engine::Triangle triangle(radius);
+	triangle.setColor(color);
+	triangle.translate(position);
+	triangle.draw();
 }
 
 void PrimitiveRenderer::drawIncreasedLine(Vector2f startCoords, Vector2f endCoords, Color color) {
@@ -62,7 +63,7 @@ void PrimitiveRenderer::drawIncreasedLine(Vector2f startCoords, Vector2f endCoor
 			x += m;
 		}
 	}
-	mainWindow->draw(pointsArray);
+	Engine::getInstance().getMainWindow()->draw(pointsArray);
 }
 
 void PrimitiveRenderer::drawLine(Vector2f startCoords, Vector2f endCoords, Color color) {
@@ -71,7 +72,7 @@ void PrimitiveRenderer::drawLine(Vector2f startCoords, Vector2f endCoords, Color
 		Vertex(Vector2f(startCoords.x, startCoords.y), color),
 		Vertex(Vector2f(endCoords.x, endCoords.y), color)
 	};
-	mainWindow->draw(line, 2, Lines);
+	Engine::getInstance().getMainWindow()->draw(line, 2, Lines);
 }
 
 void PrimitiveRenderer::drawBrokenLine(vector<LineSegment> lines, Color color) {
@@ -80,7 +81,7 @@ void PrimitiveRenderer::drawBrokenLine(vector<LineSegment> lines, Color color) {
 			Vertex(Vector2f(line.getStartPoint().getX(), line.getStartPoint().getY()), color, Vector2f(5.0f, 0.0f)),
 			Vertex(Vector2f(line.getEndPoint().getX(), line.getEndPoint().getY()), color, Vector2f(5.0f, 0.0f))
 		};
-		mainWindow->draw(lineVertex, 2, Lines);
+		Engine::getInstance().getMainWindow()->draw(lineVertex, 2, Lines);
 	}
 }
 
@@ -90,13 +91,13 @@ void PrimitiveRenderer::drawEllipse(float radiusX, float radiusY, Point2D startP
 		float x = radiusX * cos(i);
 		float y = radiusY * sin(i);
 		Vertex point(Vector2f(startPoint.getX() + x, startPoint.getY() + y), color);
-		mainWindow->draw(&point, 1, Points);
+		Engine::getInstance().getMainWindow()->draw(&point, 1, Points);
 		Vertex point2(Vector2f(startPoint.getX() + x, startPoint.getY() - y), color);
-		mainWindow->draw(&point2, 1, Points);
+		Engine::getInstance().getMainWindow()->draw(&point2, 1, Points);
 		Vertex point3(Vector2f(startPoint.getX() - x, startPoint.getY() + y), color);
-		mainWindow->draw(&point3, 1, Points);
+		Engine::getInstance().getMainWindow()->draw(&point3, 1, Points);
 		Vertex point4(Vector2f(startPoint.getX() - x, startPoint.getY() - y), color);
-		mainWindow->draw(&point4, 1, Points);
+		Engine::getInstance().getMainWindow()->draw(&point4, 1, Points);
 	}
 }
 
@@ -135,7 +136,7 @@ void PrimitiveRenderer::drawPolygon(vector<LineSegment> lines, Color color) {
 			Vertex(Vector2f(line.getStartPoint().getX(), line.getStartPoint().getY()), color),
 			Vertex(Vector2f(line.getEndPoint().getX(), line.getEndPoint().getY()), color)
 		};
-		mainWindow->draw(lineVertex, 2, Lines);
+		Engine::getInstance().getMainWindow()->draw(lineVertex, 2, Lines);
 	}
 }
 
