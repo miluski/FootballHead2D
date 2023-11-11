@@ -31,11 +31,9 @@ public:
     }
 
     void mainWindowSetup();
-    void setMainBufferTexture(Sprite* textureSprite);
-    void setSecondBufferTexture(Sprite* textureSprite);
+    void setMainBufferTexture(Sprite textureSprite);
+    void setSecondBufferTexture(Sprite textureSprite);
     RenderWindow* getMainWindow();
-    Texture* createTextureFrom(Text* text, Vector2i size, Color textureColor);
-    Texture* createTextureFrom(Image* image, Vector2i size);
     void clearWindowToColor(Color color);
     void clearSpriteToColor(Sprite&, Color color);
 
@@ -45,6 +43,7 @@ private:
     bool centered = false;
     Vector2u* windowSize = new Vector2u(400, 400);
     RenderWindow* window = new RenderWindow(VideoMode(windowSize->x, windowSize->y), "", Style::Titlebar | Style::Close);
+    RenderTexture* backgroundRenderTexture = new RenderTexture();
     RectangleShape* resolution1Button = getButton(20, Color::Green);
     RectangleShape* resolution2Button = getButton(100, Color::Green);
     RectangleShape* resolution3Button = getButton(180, Color::Green);
@@ -56,22 +55,28 @@ private:
     Font font;
     string logContent;
     Clock breakClock;
+    Clock fpsClock;
 
     void menuWindowSetup();
     void settingsWindowSetup();
-    void gameWindowSetup(float currentTime);
+    void gameWindowSetup(string currentTime);
     void gameHelperWindowSetup();
     void setWidthAndHeight(RectangleShape* resolution1Button, RectangleShape* resolution2Button, RectangleShape* resolution3Button);
     void setFrameRateLimit();
     void setLogContent(string logContent);
-    Text* getText();
-    Text* getText(string content);
+    Text getText(Color color);
+    Text getText(Color color, string content);
     RectangleShape* getButton(float yShift, Color color);
-    Font* getArialFont();
+    Font* getFont(string fontName);
     string getFramePerSecondText(float currentTime);
     string getCurrentTime();
+    Vector2f getGatePosition(string gateName);
     int getRectNameWhenMouseIsPressedIn();
-    Sprite getBackground();
+    void setMenuBackground();
+    void setGameBackground(string currentTime);
+    Texture createTextureFrom(Text text, Vector2i size, Color textureColor);
+    Texture createTextureFrom(string fileName);
+    Sprite createSpriteFrom(Texture* texture, Vector2f position);
     void serveWindowCloseEvent();
     void drawButtons();
     void drawTexts();
