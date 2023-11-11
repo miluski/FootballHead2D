@@ -41,12 +41,15 @@ private:
 
     string activeBuffer = "second";
     bool centered = false;
+    bool pause = false;
     Vector2u* windowSize = new Vector2u(400, 400);
     RenderWindow* window = new RenderWindow(VideoMode(windowSize->x, windowSize->y), "", Style::Titlebar | Style::Close);
     RenderTexture* backgroundRenderTexture = new RenderTexture();
-    RectangleShape* resolution1Button = getButton(20, Color::Green);
-    RectangleShape* resolution2Button = getButton(100, Color::Green);
-    RectangleShape* resolution3Button = getButton(180, Color::Green);
+    RectangleShape resolution1Button = getButton(20, Color::Green, Vector2f(200, 50));
+    RectangleShape resolution2Button = getButton(100, Color::Green, Vector2f(200, 50));
+    RectangleShape resolution3Button = getButton(180, Color::Green, Vector2f(200, 50));
+    Color menuTextColor = Color::White;
+    Color pauseTextColor = Color::White;
     Music music;
     Vector2i windowPosition;
     RenderTexture mainBuffer;
@@ -61,12 +64,13 @@ private:
     void settingsWindowSetup();
     void gameWindowSetup(string currentTime);
     void gameHelperWindowSetup();
-    void setWidthAndHeight(RectangleShape* resolution1Button, RectangleShape* resolution2Button, RectangleShape* resolution3Button);
+    void setWidthAndHeight(RectangleShape resolution1Button, RectangleShape resolution2Button, RectangleShape resolution3Button);
     void setFrameRateLimit();
     void setLogContent(string logContent);
-    Text getText(Color color);
     Text getText(Color color, string content);
-    RectangleShape* getButton(float yShift, Color color);
+    Text getText(Color color, int fontSize, string content);
+    RectangleShape getButton(float yShift, Color color, Vector2f size);
+    RectangleShape getButton(Color color, Vector2f size, Vector2f position);
     Font* getFont(string fontName);
     string getFramePerSecondText(float currentTime);
     string getCurrentTime();
