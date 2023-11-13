@@ -12,7 +12,7 @@ void Engine::mainWindowSetup() {
     string fps = "";
     while (window->isOpen()) {
         float elapsed = breakClock.getElapsedTime().asSeconds();
-        float currentTime = fpsClock.getElapsedTime().asSeconds();
+        float currentTime = fpsClock.restart().asSeconds();
         fps = getFramePerSecondText(currentTime);
         if (elapsed > 300)
             window->close();
@@ -50,6 +50,8 @@ void Engine::menuWindowSetup() {
         music.openFromFile("sounds/menu_music.wav");
         music.play();
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
+        string fileName = "backgrounds/main/SG" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
+        backgroundTexture.loadFromFile(fileName);
         mainBuffer.create(windowSize->x, windowSize->y);
         secondBuffer.create(windowSize->x, windowSize->y);
         centered = true;
@@ -67,6 +69,8 @@ void Engine::menuWindowSetup() {
 void Engine::gameWindowSetup(string currentTime) {
     VideoMode desktop = VideoMode::getDesktopMode();
     if (!centered) {
+        string fileName = "backgrounds/stadium/stadion" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
+        backgroundTexture.loadFromFile(fileName);
         font = *getFont("Pixellari");
         music.stop();
         window->setTitle("FootballHead2D");
@@ -77,10 +81,10 @@ void Engine::gameWindowSetup(string currentTime) {
         music.play();
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
         leftPlayer.setPlayerTexture("elements/Haaland.png");
-        leftPlayer.setActualSpeed(5.0f);
+        leftPlayer.setActualSpeed(10.0f);
         leftPlayer.setActualPosition(getPlayerPosition("Haaland"));
         rightPlayer.setPlayerTexture("elements/Ymbape.png");
-        rightPlayer.setActualSpeed(5.0f);
+        rightPlayer.setActualSpeed(10.0f);
         rightPlayer.setActualPosition(getPlayerPosition("Ymbape"));
         ball.setBallTexture("elements/Pilka.png");
         ball.setActualSpeed(1.5f);
@@ -271,8 +275,6 @@ Vector2f Engine::getPlayerPosition(string playerName) {
 }
 
 void Engine::setMenuBackground() {
-    string fileName = "backgrounds/main/SG" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
-    Texture backgroundTexture = createTextureFrom(fileName);
     Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
     setMainBufferTexture(backgroundSprite);
     setSecondBufferTexture(backgroundSprite);
@@ -282,13 +284,11 @@ void Engine::setMenuBackground() {
 void Engine::setGameBackground(string currentTime) {
     checkRectsActions();
     Sprite finallyBackgroundSprite;
-    string fileName = "backgrounds/stadium/stadion" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
     Text fpsTextPlace = getText(Color::White, currentTime);
     Text pauseTextPlace = getText(pauseTextColor, 42, "PAUZA");
     Text menuTextPlace = getText(menuTextColor, 42, "MENU");
-    Texture backgroundTexture = createTextureFrom(fileName);
     Texture rightGateTexture = createTextureFrom("elements/BramkaP.png");
-    Texture leftGateTexture = createTextureFrom("elements/BramkaL.png");
+    Texture leftGateTexture = createTextureFrom("elements/BramkaL.png"); 
     Texture fpsTexture = createTextureFrom(fpsTextPlace, Vector2i(100, 100), Color::Transparent);
     Texture pauseTexture = createTextureFrom(pauseTextPlace, Vector2i(200, 200), Color::Transparent);
     Texture menuTexture = createTextureFrom(menuTextPlace, Vector2i(150, 150), Color::Transparent);
@@ -298,7 +298,7 @@ void Engine::setGameBackground(string currentTime) {
     Sprite rightGateSprite = createSpriteFrom(&rightGateTexture, getGatePosition("right"));
     Sprite leftGateSprite = createSpriteFrom(&leftGateTexture, getGatePosition("left"));
     Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
-    Sprite fpsSprite = createSpriteFrom(&fpsTexture, Vector2f(0.0f, 0.0f));
+    Sprite fpsSprite =  createSpriteFrom(&fpsTexture, Vector2f(0.0f, 0.0f));
     Sprite pauseSprite = createSpriteFrom(&pauseTexture, Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f));
     Sprite menuSprite = createSpriteFrom(&menuTexture, Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f));
     Sprite leftPlayerSprite = createSpriteFrom(&leftPlayerTexture, leftPlayer.getActualPosition());
@@ -308,7 +308,7 @@ void Engine::setGameBackground(string currentTime) {
     rightPlayerSprite.setScale(0.1f, 0.1f);
     ballSprite.setScale(0.07f, 0.07f);
     checkPlayerActions(&leftPlayerSprite, &rightPlayerSprite);
-    backgroundRenderTexture->clear(Color::Transparent);
+    backgroundRenderTexture->clear();
     backgroundRenderTexture->draw(backgroundSprite);
     backgroundRenderTexture->draw(leftGateSprite);
     backgroundRenderTexture->draw(rightGateSprite);
@@ -497,7 +497,6 @@ void Engine::handleBuffers() {
         window->display();
         activeBuffer = "main";
     }
-    fpsClock.restart();
 }
 
 void Engine::clearWindowToColor(Color color) {
