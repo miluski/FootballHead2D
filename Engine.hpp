@@ -166,6 +166,7 @@ namespace Game {
         string logContent;
         Clock breakClock;
         Clock fpsClock;
+        Texture backgroundTexture;
         void menuWindowSetup();
         void settingsWindowSetup();
         void gameWindowSetup(string currentTime);
