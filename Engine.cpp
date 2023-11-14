@@ -47,13 +47,14 @@ void Engine::menuWindowSetup() {
     if (!centered) {
         window->setTitle("Menu");
         window->setSize(*windowSize);
+        mainBuffer.create(windowSize->x, windowSize->y);
+        secondBuffer.create(windowSize->x, windowSize->y);
+        backgroundRenderTexture->create(window->getSize().x, window->getSize().y);
         music.openFromFile("sounds/menu_music.wav");
         music.play();
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
         string fileName = "backgrounds/main/SG" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
         backgroundTexture.loadFromFile(fileName);
-        mainBuffer.create(windowSize->x, windowSize->y);
-        secondBuffer.create(windowSize->x, windowSize->y);
         centered = true;
     }
     else 
@@ -275,9 +276,28 @@ Vector2f Engine::getPlayerPosition(string playerName) {
 }
 
 void Engine::setMenuBackground() {
+    checkRectsActions();
+    Sprite finallyBackgroundSprite;
+    font = *getFont("Pixellari");
+    Text authorTextPlace = getText(authorTextColor, 52, "A U T O R Z Y");
+    Text pauseTextPlace = getText(pauseTextColor, 52, "O P C J E");
+    Text menuTextPlace = getText(menuTextColor, 52, "S T A R T");
+    Texture menuTexture = createTextureFrom(menuTextPlace, Vector2i(220, 60), Color::Transparent); 
+    Texture pauseTexture = createTextureFrom(pauseTextPlace, Vector2i(220, 60), Color::Transparent);
+    Texture authorTexture = createTextureFrom(authorTextPlace, Vector2i(350, 60), Color::Transparent);
     Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
-    setMainBufferTexture(backgroundSprite);
-    setSecondBufferTexture(backgroundSprite);
+    Sprite menuSprite = createSpriteFrom(&menuTexture, Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.30f));
+    Sprite pauseSprite = createSpriteFrom(&pauseTexture, Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.0f));
+    Sprite authorSprite = createSpriteFrom(&authorTexture, Vector2f((window->getSize().x) / 2.75f, (window->getSize().y) / 1.75f));
+    backgroundRenderTexture->clear(); 
+    backgroundRenderTexture->draw(backgroundSprite);
+    backgroundRenderTexture->draw(pauseSprite); 
+    backgroundRenderTexture->draw(menuSprite); 
+    backgroundRenderTexture->draw(authorSprite); 
+    backgroundRenderTexture->display(); 
+    finallyBackgroundSprite.setTexture(backgroundRenderTexture->getTexture());
+    setMainBufferTexture(finallyBackgroundSprite);
+    setSecondBufferTexture(finallyBackgroundSprite);
     handleBuffers();
 }
 
