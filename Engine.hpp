@@ -157,6 +157,7 @@ namespace Game {
         Ball ball;
         Color menuTextColor = Color::White;
         Color pauseTextColor = Color::White;
+        Color authorTextColor = Color::White;
         Music music;
         Vector2i windowPosition;
         RenderTexture mainBuffer;
