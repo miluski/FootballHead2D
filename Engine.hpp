@@ -157,7 +157,10 @@ namespace Game {
         Ball ball;
         Color menuTextColor = Color::White;
         Color pauseTextColor = Color::White;
+        Color startTextColor = Color::White;
+        Color optionsTextColor = Color::White;
         Color authorTextColor = Color::White;
+        Color exitTextColor = Color::White;
         Music music;
         Vector2i windowPosition;
         RenderTexture mainBuffer;
@@ -190,6 +193,7 @@ namespace Game {
         void setMenuBackground();
         void setGameBackground(string currentTime);
         void checkRectsActions();
+        void checkMenuRectsActions();
         void checkPlayerActions(Sprite* player1, Sprite* player2);
         Texture createTextureFrom(Text text, Vector2i size, Color textureColor);
         Texture createTextureFrom(string fileName);
