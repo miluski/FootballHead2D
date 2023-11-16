@@ -276,23 +276,23 @@ Vector2f Engine::getPlayerPosition(string playerName) {
 }
 
 void Engine::setMenuBackground() {
-    checkRectsActions();
+    checkMenuRectsActions();
     Sprite finallyBackgroundSprite;
     font = *getFont("Pixellari");
+    Text startTextPlace = getText(startTextColor, 52, "S T A R T");
+    Text optionsTextPlace = getText(optionsTextColor, 52, "O P C J E");
     Text authorTextPlace = getText(authorTextColor, 52, "A U T O R Z Y");
-    Text pauseTextPlace = getText(pauseTextColor, 52, "O P C J E");
-    Text menuTextPlace = getText(menuTextColor, 52, "S T A R T");
-    Texture menuTexture = createTextureFrom(menuTextPlace, Vector2i(220, 60), Color::Transparent); 
-    Texture pauseTexture = createTextureFrom(pauseTextPlace, Vector2i(220, 60), Color::Transparent);
+    Texture startTexture = createTextureFrom(startTextPlace, Vector2i(220, 60), Color::Transparent);
+    Texture optionsTexture = createTextureFrom(optionsTextPlace, Vector2i(220, 60), Color::Transparent);
     Texture authorTexture = createTextureFrom(authorTextPlace, Vector2i(350, 60), Color::Transparent);
     Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
-    Sprite menuSprite = createSpriteFrom(&menuTexture, Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.30f));
-    Sprite pauseSprite = createSpriteFrom(&pauseTexture, Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.0f));
+    Sprite startSprite = createSpriteFrom(&startTexture, Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.30f));
+    Sprite optionsSprite = createSpriteFrom(&optionsTexture, Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.0f));
     Sprite authorSprite = createSpriteFrom(&authorTexture, Vector2f((window->getSize().x) / 2.75f, (window->getSize().y) / 1.75f));
     backgroundRenderTexture->clear(); 
     backgroundRenderTexture->draw(backgroundSprite);
-    backgroundRenderTexture->draw(pauseSprite); 
-    backgroundRenderTexture->draw(menuSprite); 
+    backgroundRenderTexture->draw(startSprite); 
+    backgroundRenderTexture->draw(optionsSprite); 
     backgroundRenderTexture->draw(authorSprite); 
     backgroundRenderTexture->display(); 
     finallyBackgroundSprite.setTexture(backgroundRenderTexture->getTexture());
@@ -300,6 +300,72 @@ void Engine::setMenuBackground() {
     setSecondBufferTexture(finallyBackgroundSprite);
     handleBuffers();
 }
+
+void Engine::checkMenuRectsActions() {
+    Vector2i mouseBounds = Mouse::getPosition(*window);
+    float mouseX = mouseBounds.x;
+    float mouseY = mouseBounds.y;
+    FloatRect startRect(Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.30f), Vector2f(220.0f, 60.0f));
+    FloatRect optionsRect(Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.0f), Vector2f(220.0f, 60.0f));
+    FloatRect authorRect(Vector2f((window->getSize().x) / 2.75f, (window->getSize().y) / 1.75f), Vector2f(350.0f, 60.0f));
+
+
+    if (!startRect.contains(mouseX, mouseY) && !optionsRect.contains(mouseX, mouseY) && !authorRect.contains(mouseX,mouseY) ){
+        startTextColor = Color::White;
+        optionsTextColor = Color::White;
+    }
+    else if (startRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            //cout << "kliknieto start" << endl;
+            getInstance().activeWindowName = GAME;
+            centered = false;
+            return;
+        }
+        else if (!Mouse::isButtonPressed(Mouse::Left)) {
+            startTextColor = Color::Black;
+            optionsTextColor = Color::White; 
+            authorTextColor = Color::White;
+        }
+    }
+    else if (optionsRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            cout << "klikneito opcje" << endl;
+            //;
+            //centered = false;
+            //Obsluga przycisku OPCJE tutaj
+            //return;
+        }
+        else {
+            startTextColor = Color::White;
+            authorTextColor = Color::White;
+            optionsTextColor = Color::Black;
+        }
+    }
+    else if (authorRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) { 
+            cout << "klikneito autorzy" << endl;
+            //;
+            //centered = false;
+            //Obsluga przycisku OPCJE tutaj
+            //return;
+        }
+        else {
+            startTextColor = Color::White; 
+            optionsTextColor = Color::White;
+            authorTextColor = Color::Black;
+        }
+    }
+
+
+
+}
+
+
+
+
+
+
+
 
 void Engine::setGameBackground(string currentTime) {
     checkRectsActions();
@@ -351,6 +417,8 @@ void Engine::checkRectsActions() {
     float mouseY = mouseBounds.y;
     FloatRect pauseRect(Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f), Vector2f(150.0f, 40.0f));
     FloatRect menuRect(Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.12f), Vector2f(150.0f, 40.0f));
+
+
     if (!pauseRect.contains(mouseX, mouseY) && !menuRect.contains(mouseX, mouseY) && !pause) {
         pauseTextColor = Color::White;
         menuTextColor = Color::White;
