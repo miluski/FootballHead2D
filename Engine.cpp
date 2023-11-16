@@ -46,6 +46,7 @@ void Engine::menuWindowSetup() {
     VideoMode desktop = VideoMode::getDesktopMode();
     if (!centered) {
         window->setTitle("Menu");
+        font = *getFont("Pixellari");
         window->setSize(*windowSize);
         mainBuffer.create(windowSize->x, windowSize->y);
         secondBuffer.create(windowSize->x, windowSize->y);
@@ -278,22 +279,25 @@ Vector2f Engine::getPlayerPosition(string playerName) {
 void Engine::setMenuBackground() {
     checkMenuRectsActions();
     Sprite finallyBackgroundSprite;
-    font = *getFont("Pixellari");
     Text startTextPlace = getText(startTextColor, 52, "S T A R T");
     Text optionsTextPlace = getText(optionsTextColor, 52, "O P C J E");
     Text authorTextPlace = getText(authorTextColor, 52, "A U T O R Z Y");
+    Text exitTextPlace = getText(exitTextColor, 52, "W Y J S C I E");
     Texture startTexture = createTextureFrom(startTextPlace, Vector2i(220, 60), Color::Transparent);
     Texture optionsTexture = createTextureFrom(optionsTextPlace, Vector2i(220, 60), Color::Transparent);
     Texture authorTexture = createTextureFrom(authorTextPlace, Vector2i(350, 60), Color::Transparent);
+    Texture exitTexture = createTextureFrom(exitTextPlace, Vector2i(350, 60), Color::Transparent);
     Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
-    Sprite startSprite = createSpriteFrom(&startTexture, Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.30f));
-    Sprite optionsSprite = createSpriteFrom(&optionsTexture, Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.0f));
-    Sprite authorSprite = createSpriteFrom(&authorTexture, Vector2f((window->getSize().x) / 2.75f, (window->getSize().y) / 1.75f));
+    Sprite startSprite = createSpriteFrom(&startTexture, Vector2f((window->getSize().x) / 2.40f, (window->getSize().y) / 3.20f));
+    Sprite optionsSprite = createSpriteFrom(&optionsTexture, Vector2f((window->getSize().x) / 2.40f, (window->getSize().y) / 2.50f));
+    Sprite authorSprite = createSpriteFrom(&authorTexture, Vector2f((window->getSize().x) / 2.65f, (window->getSize().y) / 2.05f));
+    Sprite exitSprite = createSpriteFrom(&exitTexture, Vector2f((window->getSize().x) / 2.6f, (window->getSize().y) / 1.75f));
     backgroundRenderTexture->clear(); 
     backgroundRenderTexture->draw(backgroundSprite);
     backgroundRenderTexture->draw(startSprite); 
     backgroundRenderTexture->draw(optionsSprite); 
     backgroundRenderTexture->draw(authorSprite); 
+    backgroundRenderTexture->draw(exitSprite); 
     backgroundRenderTexture->display(); 
     finallyBackgroundSprite.setTexture(backgroundRenderTexture->getTexture());
     setMainBufferTexture(finallyBackgroundSprite);
@@ -305,12 +309,13 @@ void Engine::checkMenuRectsActions() {
     Vector2i mouseBounds = Mouse::getPosition(*window);
     float mouseX = mouseBounds.x;
     float mouseY = mouseBounds.y;
-    FloatRect startRect(Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.30f), Vector2f(220.0f, 60.0f));
-    FloatRect optionsRect(Vector2f((window->getSize().x) / 2.50f, (window->getSize().y) / 2.0f), Vector2f(220.0f, 60.0f));
-    FloatRect authorRect(Vector2f((window->getSize().x) / 2.75f, (window->getSize().y) / 1.75f), Vector2f(350.0f, 60.0f));
+    FloatRect startRect(Vector2f((window->getSize().x) / 2.40f, (window->getSize().y) / 3.20f), Vector2f(220.0f, 60.0f));
+    FloatRect optionsRect(Vector2f((window->getSize().x) / 2.40f, (window->getSize().y) / 2.5f), Vector2f(220.0f, 60.0f));
+    FloatRect authorRect(Vector2f((window->getSize().x) / 2.65f, (window->getSize().y) / 2.05f), Vector2f(350.0f, 60.0f));
+    FloatRect exitRect(Vector2f((window->getSize().x) / 2.6f, (window->getSize().y) / 1.75f), Vector2f(350.0f, 60.0f));
 
 
-    if (!startRect.contains(mouseX, mouseY) && !optionsRect.contains(mouseX, mouseY) && !authorRect.contains(mouseX,mouseY) ){
+    if (!startRect.contains(mouseX, mouseY) && !optionsRect.contains(mouseX, mouseY) && !authorRect.contains(mouseX,mouseY) && !exitRect.contains(mouseX,mouseY)){
         startTextColor = Color::White;
         optionsTextColor = Color::White;
     }
@@ -323,6 +328,7 @@ void Engine::checkMenuRectsActions() {
         }
         else if (!Mouse::isButtonPressed(Mouse::Left)) {
             startTextColor = Color::Black;
+            exitTextColor = Color::White;
             optionsTextColor = Color::White; 
             authorTextColor = Color::White;
         }
@@ -338,6 +344,7 @@ void Engine::checkMenuRectsActions() {
         else {
             startTextColor = Color::White;
             authorTextColor = Color::White;
+            exitTextColor = Color::White;
             optionsTextColor = Color::Black;
         }
     }
@@ -352,20 +359,26 @@ void Engine::checkMenuRectsActions() {
         else {
             startTextColor = Color::White; 
             optionsTextColor = Color::White;
+            exitTextColor = Color::White; 
             authorTextColor = Color::Black;
         }
     }
-
-
-
+    else if (exitRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) { 
+            cout << "klikneito wyjscie" << endl;
+            //;
+            //centered = false;
+            //Obsluga przycisku OPCJE tutaj
+            //return;
+        }
+        else {
+            startTextColor = Color::White; 
+            optionsTextColor = Color::White;
+            authorTextColor = Color::White;
+            exitTextColor = Color::Black;
+        }
+    }
 }
-
-
-
-
-
-
-
 
 void Engine::setGameBackground(string currentTime) {
     checkRectsActions();

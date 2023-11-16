@@ -160,6 +160,7 @@ namespace Game {
         Color startTextColor = Color::White;
         Color optionsTextColor = Color::White;
         Color authorTextColor = Color::White;
+        Color exitTextColor = Color::White;
         Music music;
         Vector2i windowPosition;
         RenderTexture mainBuffer;
