@@ -2,15 +2,11 @@
 
 using namespace Game;
 
-Engine::Ball::Ball() {
-
-}
-
 void Engine::Ball::setActualSpeed(float speed) {
 	this->actualSpeed = speed;
 }
-void Engine::Ball::setBallTexture(string fileName) {
-	this->ballTexture.loadFromFile(fileName);
+void Engine::Ball::setBallBitmap(BitmapHandler bitmap) {
+	this->ballBitmap = bitmap;
 }
 void Engine::Ball::setActualPosition(Vector2f position) {
 	this->position = position;
@@ -21,6 +17,6 @@ float Engine::Ball::getActualSpeed() {
 Vector2f Engine::Ball::getActualPosition() {
 	return this->position;
 }
-Texture Engine::Ball::getBallTexture() {
-	return this->ballTexture;
+Engine::BitmapHandler Engine::Ball::getBallBitmap() {
+	return this->ballBitmap;
 }

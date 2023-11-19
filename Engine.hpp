@@ -110,35 +110,70 @@ namespace Game {
             CircleShape triangle;
         };
 
-        class Player : public GameObject {
+        class BitmapHandler {
         public:
-            Player();
+            BitmapHandler();
+            BitmapHandler(string fileName);
+            BitmapHandler(Text text, Vector2i size, Color textureColor);
+            void createBitmap(Vector2f size);
+            void loadBitmapFrom(string fileName);
+            void createBitmapFrom(Text text, Vector2i size, Color textureColor);
+            BitmapHandler copy();
+            void saveBitmapTo(string fileName);
+            void deleteBitmap();
+            Texture bitmap;
+        private:
+            void setBitmap(Texture bitmap);
+        };
+
+        class AnimatedObject : public virtual GameObject {
+        public:
+            void animate();
+        };
+
+        class Player : public virtual GameObject {
+        public:
             void setActualSpeed(float speed);
-            void setPlayerTexture(string fileName);
+            void setPlayerBitmap(BitmapHandler bitmap);
             void setActualPosition(Vector2f position);
             float getActualSpeed();
             Vector2f getActualPosition();
-            Texture getPlayerTexture();
+            BitmapHandler getPlayerBitmap();
         private:
             int goals = 0;
             float actualSpeed = 0.0f;
             Vector2f position;
-            Texture playerTexture;
+            BitmapHandler playerBitmap;
         };
 
-        class Ball : public GameObject {
+        class Ball : public virtual GameObject {
         public:
-            Ball();
             void setActualSpeed(float speed);
-            void setBallTexture(string fileName);
+            void setBallBitmap(BitmapHandler bitmap);
             void setActualPosition(Vector2f position);
             float getActualSpeed();
             Vector2f getActualPosition();
-            Texture getBallTexture();
+            BitmapHandler getBallBitmap();
         private:
             float actualSpeed = 0.0f;
             Vector2f position;
-            Texture ballTexture;
+            BitmapHandler ballBitmap;
+        };
+
+        class BitmapObject : public DrawableObject {
+        public:
+            virtual void draw();
+            Sprite getSprite();
+            Sprite spriteObject;
+        };
+
+        class SpriteObject : public BitmapObject, AnimatedObject {
+        public:
+            SpriteObject();
+            SpriteObject(Texture* bitmap, Vector2f position, Vector2f scale);
+            void createSpriteFrom(Texture* bitmap, Vector2f position, Vector2f scale);
+            void createSpriteFrom(Texture* bitmap[], int bitmapArraySize, Vector2f positions[], Vector2f scales[]);
+            virtual void animate(BitmapHandler bitmap, Player* player);
         };
 
     private:
@@ -146,6 +181,8 @@ namespace Game {
         string activeBuffer = "second";
         bool centered = false;
         bool pause = false;
+        bool mute = false;
+        bool canClear = false;
         Vector2u* windowSize = new Vector2u(400, 400);
         RenderWindow* window = new RenderWindow(VideoMode(windowSize->x, windowSize->y), "", Style::Titlebar | Style::Close);
         RenderTexture* backgroundRenderTexture = new RenderTexture();
@@ -155,6 +192,11 @@ namespace Game {
         Player leftPlayer;
         Player rightPlayer;
         Ball ball;
+        BitmapHandler backgroundTexture;
+        BitmapHandler leftPlayerBitmap;
+        BitmapHandler rightPlayerBitmap;
+        BitmapHandler leftPlayerShot;
+        BitmapHandler rightPlayerShot;
         Color menuTextColor = Color::White;
         Color pauseTextColor = Color::White;
         Color startTextColor = Color::White;
@@ -170,7 +212,6 @@ namespace Game {
         string logContent;
         Clock breakClock;
         Clock fpsClock;
-        Texture backgroundTexture;
         void menuWindowSetup();
         void settingsWindowSetup();
         void gameWindowSetup(string currentTime);
@@ -188,13 +229,12 @@ namespace Game {
         Vector2f getGatePosition(string gateName);
         Vector2f getPlayerPosition(string playerName);
         int getRectNameWhenMouseIsPressedIn();
-        Player getPlayer(string playerTextureName, string playerName);
-        Ball getBall();
+        string getLoudSpeakerFileName();
         void setMenuBackground();
         void setGameBackground(string currentTime);
         void checkRectsActions();
         void checkMenuRectsActions();
-        void checkPlayerActions(Sprite* player1, Sprite* player2);
+        void checkPlayerActions(SpriteObject player1, SpriteObject player2);
         Texture createTextureFrom(Text text, Vector2i size, Color textureColor);
         Texture createTextureFrom(string fileName);
         Sprite createSpriteFrom(Texture* texture, Vector2f position);
