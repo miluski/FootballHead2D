@@ -52,27 +52,29 @@ void Engine::menuWindowSetup() {
         secondBuffer.create(windowSize->x, windowSize->y);
         backgroundRenderTexture->create(window->getSize().x, window->getSize().y);
         music.openFromFile("sounds/menu_music.wav");
-        music.play();
+        if (!mute)
+            music.play();
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
         string fileName = "backgrounds/main/SG" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
-        backgroundTexture.loadFromFile(fileName);
+        backgroundTexture.loadBitmapFrom(fileName);
         centered = true;
     }
     else 
         setMenuBackground();
-    if (music.getStatus() != Music::Status::Playing)
+    if (music.getStatus() != Music::Status::Playing && !mute)
         music.play();
-    if (Keyboard::isKeyPressed(Keyboard::Left)) {
-        centered = false;
-        activeWindowName = GAME;
-    }
 }
 
 void Engine::gameWindowSetup(string currentTime) {
     VideoMode desktop = VideoMode::getDesktopMode();
     if (!centered) {
         string fileName = "backgrounds/stadium/stadion" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
-        backgroundTexture.loadFromFile(fileName);
+        BitmapHandler ballBitmap("elements/Pilka.png");
+        leftPlayerBitmap.loadBitmapFrom("elements/Haaland.png");
+        rightPlayerBitmap.loadBitmapFrom("elements/Ymbape.png");
+        leftPlayerShot.loadBitmapFrom("elements/Haaland2.png");
+        rightPlayerShot.loadBitmapFrom("elements/Ymbape2.png");
+        backgroundTexture.loadBitmapFrom(fileName);
         font = *getFont("Pixellari");
         music.stop();
         window->setTitle("FootballHead2D");
@@ -80,22 +82,23 @@ void Engine::gameWindowSetup(string currentTime) {
         setFrameRateLimit();
         backgroundRenderTexture->create(window->getSize().x, window->getSize().y);
         music.openFromFile("sounds/stadium_crowd.wav");
-        music.play();
+        if(!mute)
+            music.play();
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
-        leftPlayer.setPlayerTexture("elements/Haaland.png");
+        leftPlayer.setPlayerBitmap(leftPlayerBitmap);
+        rightPlayer.setPlayerBitmap(rightPlayerBitmap);
+        ball.setBallBitmap(ballBitmap);
         leftPlayer.setActualSpeed(10.0f);
-        leftPlayer.setActualPosition(getPlayerPosition("Haaland"));
-        rightPlayer.setPlayerTexture("elements/Ymbape.png");
         rightPlayer.setActualSpeed(10.0f);
-        rightPlayer.setActualPosition(getPlayerPosition("Ymbape"));
-        ball.setBallTexture("elements/Pilka.png");
         ball.setActualSpeed(1.5f);
-        ball.setActualPosition(Vector2f((getMainWindow()->getSize().x) / 2.12f, (getMainWindow()->getSize().y) / 5.0f));
+        leftPlayer.setActualPosition(getPlayerPosition("Haaland"));
+        rightPlayer.setActualPosition(getPlayerPosition("Ymbape"));
+        ball.setActualPosition(Vector2f((window->getSize().x) / 2.12f, (window->getSize().y) / 5.0f));
         centered = true;
     }
     else 
         setGameBackground(currentTime);
-    if (music.getStatus() != Music::Status::Playing && !pause)
+    if (music.getStatus() != Music::Status::Playing && !pause && !mute)
         music.play();
 }
 
@@ -276,33 +279,50 @@ Vector2f Engine::getPlayerPosition(string playerName) {
             (windowSize == secondRes) ? (Vector2f(secondResXPos, secondResYPos)) : Vector2f(thirdResXPos, thirdResYPos));
 }
 
+string Engine::getLoudSpeakerFileName() {
+    Vector2i mouseBounds = Mouse::getPosition(*window);
+    float mouseX = mouseBounds.x;
+    float mouseY = mouseBounds.y;
+    FloatRect loudSpeakerRect(Vector2f((window->getSize().x) / 1.05f, 20.0f), Vector2f(60.0f, 55.0f));
+    if (loudSpeakerRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left) && !mute) {
+            music.pause();
+            mute = true;
+            sleep(seconds(0.25f));
+            return "elements/glosnikMute.png";
+        }
+        if (Mouse::isButtonPressed(Mouse::Left) && mute) {
+            music.play();
+            mute = false;
+            sleep(seconds(0.25f));
+            return "elements/glosnik.png";
+        }
+        return "elements/glosnikMute.png";
+    }
+    else if (!mute)
+        return "elements/glosnik.png";
+    else if (mute)
+        return "elements/glosnikMute.png";
+}
+
 void Engine::setMenuBackground() {
     checkMenuRectsActions();
-    Sprite finallyBackgroundSprite;
-    Text startTextPlace = getText(startTextColor, 52, "S T A R T");
-    Text optionsTextPlace = getText(optionsTextColor, 52, "O P C J E");
-    Text authorTextPlace = getText(authorTextColor, 52, "A U T O R Z Y");
-    Text exitTextPlace = getText(exitTextColor, 52, "W Y J S C I E");
-    Texture startTexture = createTextureFrom(startTextPlace, Vector2i(220, 60), Color::Transparent);
-    Texture optionsTexture = createTextureFrom(optionsTextPlace, Vector2i(220, 60), Color::Transparent);
-    Texture authorTexture = createTextureFrom(authorTextPlace, Vector2i(350, 60), Color::Transparent);
-    Texture exitTexture = createTextureFrom(exitTextPlace, Vector2i(350, 60), Color::Transparent);
-    Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
-    Sprite startSprite = createSpriteFrom(&startTexture, Vector2f((window->getSize().x) / 2.40f, (window->getSize().y) / 3.20f));
-    Sprite optionsSprite = createSpriteFrom(&optionsTexture, Vector2f((window->getSize().x) / 2.40f, (window->getSize().y) / 2.50f));
-    Sprite authorSprite = createSpriteFrom(&authorTexture, Vector2f((window->getSize().x) / 2.65f, (window->getSize().y) / 2.05f));
-    Sprite exitSprite = createSpriteFrom(&exitTexture, Vector2f((window->getSize().x) / 2.6f, (window->getSize().y) / 1.75f));
-    backgroundRenderTexture->clear(); 
-    backgroundRenderTexture->draw(backgroundSprite);
-    backgroundRenderTexture->draw(startSprite); 
-    backgroundRenderTexture->draw(optionsSprite); 
-    backgroundRenderTexture->draw(authorSprite); 
-    backgroundRenderTexture->draw(exitSprite); 
-    backgroundRenderTexture->display(); 
-    finallyBackgroundSprite.setTexture(backgroundRenderTexture->getTexture());
-    setMainBufferTexture(finallyBackgroundSprite);
-    setSecondBufferTexture(finallyBackgroundSprite);
-    handleBuffers();
+    BitmapHandler startTextBitmap(getText(startTextColor, 52, "S T A R T"), Vector2i(220, 60), Color::Transparent);
+    BitmapHandler optionsTextBitmap(getText(optionsTextColor, 52, "O P C J E"), Vector2i(220, 60), Color::Transparent);
+    BitmapHandler authorTextBitmap(getText(authorTextColor, 52, "A U T O R Z Y"), Vector2i(350, 60), Color::Transparent);
+    BitmapHandler exitTextBitmap(getText(exitTextColor, 52, "W Y J S C I E"), Vector2i(350, 60), Color::Transparent);
+    BitmapHandler loudSpeakerBitmap(getLoudSpeakerFileName());
+    Texture* bitmapArray[6] = { &backgroundTexture.bitmap, &startTextBitmap.bitmap, &optionsTextBitmap.bitmap, &authorTextBitmap.bitmap, &exitTextBitmap.bitmap,
+                                &loudSpeakerBitmap.bitmap };
+    Vector2f positions[6] = { Vector2f(0.0f, 0.0f), Vector2f((window->getSize().x) / 2.40f, (window->getSize().y) / 3.20f),
+                               Vector2f((window->getSize().x) / 2.40f, (window->getSize().y) / 2.50f), 
+                                Vector2f((window->getSize().x) / 2.65f, (window->getSize().y) / 2.05f),
+                                Vector2f((window->getSize().x) / 2.6f, (window->getSize().y) / 1.75f),
+                                Vector2f((window->getSize().x) / 1.05f, 20.0f) };
+    Vector2f scales[6] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(0.2f, 0.2f) };
+    SpriteObject gameBackground;
+    gameBackground.createSpriteFrom(bitmapArray, 6, positions, scales);
+    gameBackground.draw();
 }
 
 void Engine::checkMenuRectsActions() {
@@ -313,15 +333,13 @@ void Engine::checkMenuRectsActions() {
     FloatRect optionsRect(Vector2f((window->getSize().x) / 2.40f, (window->getSize().y) / 2.5f), Vector2f(220.0f, 60.0f));
     FloatRect authorRect(Vector2f((window->getSize().x) / 2.65f, (window->getSize().y) / 2.05f), Vector2f(350.0f, 60.0f));
     FloatRect exitRect(Vector2f((window->getSize().x) / 2.6f, (window->getSize().y) / 1.75f), Vector2f(350.0f, 60.0f));
-
-
-    if (!startRect.contains(mouseX, mouseY) && !optionsRect.contains(mouseX, mouseY) && !authorRect.contains(mouseX,mouseY) && !exitRect.contains(mouseX,mouseY)){
+    if (!startRect.contains(mouseX, mouseY) && !optionsRect.contains(mouseX, mouseY) && !authorRect.contains(mouseX,mouseY) 
+        && !exitRect.contains(mouseX,mouseY)){
         startTextColor = Color::White;
         optionsTextColor = Color::White;
     }
     else if (startRect.contains(mouseX, mouseY)) {
         if (Mouse::isButtonPressed(Mouse::Left)) {
-            //cout << "kliknieto start" << endl;
             getInstance().activeWindowName = GAME;
             centered = false;
             return;
@@ -335,7 +353,6 @@ void Engine::checkMenuRectsActions() {
     }
     else if (optionsRect.contains(mouseX, mouseY)) {
         if (Mouse::isButtonPressed(Mouse::Left)) {
-            cout << "klikneito opcje" << endl;
             //;
             //centered = false;
             //Obsluga przycisku OPCJE tutaj
@@ -350,10 +367,9 @@ void Engine::checkMenuRectsActions() {
     }
     else if (authorRect.contains(mouseX, mouseY)) {
         if (Mouse::isButtonPressed(Mouse::Left)) { 
-            cout << "klikneito autorzy" << endl;
             //;
             //centered = false;
-            //Obsluga przycisku OPCJE tutaj
+            //Obsluga przycisku AUTORZY tutaj
             //return;
         }
         else {
@@ -364,13 +380,8 @@ void Engine::checkMenuRectsActions() {
         }
     }
     else if (exitRect.contains(mouseX, mouseY)) {
-        if (Mouse::isButtonPressed(Mouse::Left)) { 
-            cout << "klikneito wyjscie" << endl;
-            //;
-            //centered = false;
-            //Obsluga przycisku OPCJE tutaj
-            //return;
-        }
+        if (Mouse::isButtonPressed(Mouse::Left))
+            window->close();
         else {
             startTextColor = Color::White; 
             optionsTextColor = Color::White;
@@ -382,46 +393,26 @@ void Engine::checkMenuRectsActions() {
 
 void Engine::setGameBackground(string currentTime) {
     checkRectsActions();
-    Sprite finallyBackgroundSprite;
-    Text fpsTextPlace = getText(Color::White, currentTime);
-    Text pauseTextPlace = getText(pauseTextColor, 42, "PAUZA");
-    Text menuTextPlace = getText(menuTextColor, 42, "MENU");
-    Texture rightGateTexture = createTextureFrom("elements/BramkaP.png");
-    Texture leftGateTexture = createTextureFrom("elements/BramkaL.png"); 
-    Texture fpsTexture = createTextureFrom(fpsTextPlace, Vector2i(100, 100), Color::Transparent);
-    Texture pauseTexture = createTextureFrom(pauseTextPlace, Vector2i(200, 200), Color::Transparent);
-    Texture menuTexture = createTextureFrom(menuTextPlace, Vector2i(150, 150), Color::Transparent);
-    Texture leftPlayerTexture = leftPlayer.getPlayerTexture();
-    Texture rightPlayerTexture = rightPlayer.getPlayerTexture();
-    Texture ballTexture = ball.getBallTexture();
-    Sprite rightGateSprite = createSpriteFrom(&rightGateTexture, getGatePosition("right"));
-    Sprite leftGateSprite = createSpriteFrom(&leftGateTexture, getGatePosition("left"));
-    Sprite backgroundSprite = createSpriteFrom(&backgroundTexture, Vector2f(0.0f, 0.0f));
-    Sprite fpsSprite =  createSpriteFrom(&fpsTexture, Vector2f(0.0f, 0.0f));
-    Sprite pauseSprite = createSpriteFrom(&pauseTexture, Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f));
-    Sprite menuSprite = createSpriteFrom(&menuTexture, Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f));
-    Sprite leftPlayerSprite = createSpriteFrom(&leftPlayerTexture, leftPlayer.getActualPosition());
-    Sprite rightPlayerSprite = createSpriteFrom(&rightPlayerTexture, rightPlayer.getActualPosition());
-    Sprite ballSprite = createSpriteFrom(&ballTexture, ball.getActualPosition());
-    leftPlayerSprite.setScale(0.1f, 0.1f);
-    rightPlayerSprite.setScale(0.1f, 0.1f);
-    ballSprite.setScale(0.07f, 0.07f);
-    checkPlayerActions(&leftPlayerSprite, &rightPlayerSprite);
-    backgroundRenderTexture->clear();
-    backgroundRenderTexture->draw(backgroundSprite);
-    backgroundRenderTexture->draw(leftGateSprite);
-    backgroundRenderTexture->draw(rightGateSprite);
-    backgroundRenderTexture->draw(fpsSprite);
-    backgroundRenderTexture->draw(pauseSprite);
-    backgroundRenderTexture->draw(menuSprite);
-    backgroundRenderTexture->draw(leftPlayerSprite);
-    backgroundRenderTexture->draw(rightPlayerSprite);
-    backgroundRenderTexture->draw(ballSprite);
-    backgroundRenderTexture->display();
-    finallyBackgroundSprite.setTexture(backgroundRenderTexture->getTexture());
-    setMainBufferTexture(finallyBackgroundSprite);
-    setSecondBufferTexture(finallyBackgroundSprite);
-    handleBuffers();
+    BitmapHandler leftGateBitmap("elements/BramkaL.png");
+    BitmapHandler rightGateBitmap("elements/BramkaP.png");
+    BitmapHandler fpsTextBitmap(getText(Color::White, currentTime), Vector2i(100, 100), Color::Transparent);
+    BitmapHandler pauseTextBitmap(getText(pauseTextColor, 42, "PAUZA"), Vector2i(200, 200), Color::Transparent);
+    BitmapHandler menuTextBitmap(getText(menuTextColor, 42, "MENU"), Vector2i(150, 150), Color::Transparent);
+    BitmapHandler leftPlayerBitmap = leftPlayer.getPlayerBitmap();
+    BitmapHandler rightPlayerBitmap = rightPlayer.getPlayerBitmap();
+    BitmapHandler ballBitmap = ball.getBallBitmap();
+    Texture* bitmapArray[6] = { &backgroundTexture.bitmap, &leftGateBitmap.bitmap, &rightGateBitmap.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap, 
+        &menuTextBitmap.bitmap};
+    Vector2f positions[6] = { Vector2f(0.0f, 0.0f), getGatePosition("left"), getGatePosition("right"), Vector2f(0.0f, 0.0f), 
+        Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f), Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f)};
+    Vector2f scales[6] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f)};
+    SpriteObject gameBackground;
+    gameBackground.createSpriteFrom(bitmapArray, 6, positions, scales);
+    SpriteObject leftPlayerSprite(&(leftPlayerBitmap.bitmap), leftPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
+    SpriteObject rightPlayerSprite(&(rightPlayerBitmap.bitmap), rightPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
+    SpriteObject ballSprite(&(ballBitmap.bitmap), ball.getActualPosition(), Vector2f(0.07f, 0.07f));
+    checkPlayerActions(leftPlayerSprite, rightPlayerSprite);
+    gameBackground.draw();
 }
 
 void Engine::checkRectsActions() {
@@ -430,8 +421,6 @@ void Engine::checkRectsActions() {
     float mouseY = mouseBounds.y;
     FloatRect pauseRect(Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f), Vector2f(150.0f, 40.0f));
     FloatRect menuRect(Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.12f), Vector2f(150.0f, 40.0f));
-
-
     if (!pauseRect.contains(mouseX, mouseY) && !menuRect.contains(mouseX, mouseY) && !pause) {
         pauseTextColor = Color::White;
         menuTextColor = Color::White;
@@ -442,11 +431,14 @@ void Engine::checkRectsActions() {
                 pause = true;
                 music.pause();
                 pauseTextColor = Color::Black;
+                sleep(seconds(0.25f));
             }
             else if (pause) {
                 pause = false;
-                music.play();
+                if(!mute)
+                    music.play();
                 pauseTextColor = Color::White;
+                sleep(seconds(0.25f));
             }
         }
         else if (!Mouse::isButtonPressed(Mouse::Left) && !pause) {
@@ -468,32 +460,46 @@ void Engine::checkRectsActions() {
     }
 }
 
-void Engine::checkPlayerActions(Sprite* player1, Sprite* player2) {
+void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2) {
+    Sprite player1Sprite = player1.getSprite();
+    Sprite player2Sprite = player2.getSprite();
     if (!pause) {
-        if (Keyboard::isKeyPressed(Keyboard::W))
-            player1->move(Vector2f(0.0f, -leftPlayer.getActualSpeed() * 9.0f));
-        if (Keyboard::isKeyPressed(Keyboard::A)) {
-            player1->move(Vector2f(-leftPlayer.getActualSpeed(), 0.0f));
+        if (Keyboard::isKeyPressed(Keyboard::W)) 
+            leftPlayer.setActualPosition(Vector2f(leftPlayer.getActualPosition().x, getPlayerPosition("Haaland").y - leftPlayer.getActualSpeed() * 15.0f));
+        else if (!Keyboard::isKeyPressed(Keyboard::W) && leftPlayer.getActualPosition().y!= getPlayerPosition("Haaland").y)
+            leftPlayer.setActualPosition(Vector2f(leftPlayer.getActualPosition().x, getPlayerPosition("Haaland").y));
+        else if (Keyboard::isKeyPressed(Keyboard::A)) {
+            player1Sprite.move(Vector2f(-leftPlayer.getActualSpeed(), 0.0f));
             if (!Keyboard::isKeyPressed(Keyboard::W))
-                leftPlayer.setActualPosition(player1->getPosition());
+                leftPlayer.setActualPosition(player1Sprite.getPosition());
         }
-        if (Keyboard::isKeyPressed(Keyboard::D)) {
-            player1->move(Vector2f(leftPlayer.getActualSpeed(), 0.0f));
+        else if (Keyboard::isKeyPressed(Keyboard::D)) {
+            player1Sprite.move(Vector2f(leftPlayer.getActualSpeed(), 0.0f));
             if (!Keyboard::isKeyPressed(Keyboard::W))
-                leftPlayer.setActualPosition(player1->getPosition());
+                leftPlayer.setActualPosition(player1Sprite.getPosition());
         }
         if (Keyboard::isKeyPressed(Keyboard::Up))
-            player2->move(Vector2f(0.0f, -rightPlayer.getActualSpeed() * 9.0f));
-        if (Keyboard::isKeyPressed(Keyboard::Left)) {
-            player2->move(Vector2f(-rightPlayer.getActualSpeed(), 0.0f));
+            rightPlayer.setActualPosition(Vector2f(rightPlayer.getActualPosition().x, getPlayerPosition("Ymbape").y - rightPlayer.getActualSpeed() * 15.0f));
+        else if (!Keyboard::isKeyPressed(Keyboard::Up) && rightPlayer.getActualPosition().y != getPlayerPosition("Ymbape").y)
+            rightPlayer.setActualPosition(Vector2f(rightPlayer.getActualPosition().x, getPlayerPosition("Ymbape").y));
+        else if (Keyboard::isKeyPressed(Keyboard::Left)) {
+            player2Sprite.move(Vector2f(-rightPlayer.getActualSpeed(), 0.0f));
             if (!Keyboard::isKeyPressed(Keyboard::Up))
-                rightPlayer.setActualPosition(player2->getPosition());
+                rightPlayer.setActualPosition(player2Sprite.getPosition());
         }
-        if (Keyboard::isKeyPressed(Keyboard::Right)) {
-            player2->move(Vector2f(rightPlayer.getActualSpeed(), 0.0f));
+        else if (Keyboard::isKeyPressed(Keyboard::Right)) {
+            player2Sprite.move(Vector2f(rightPlayer.getActualSpeed(), 0.0f));
             if (!Keyboard::isKeyPressed(Keyboard::Up))
-                rightPlayer.setActualPosition(player2->getPosition());
+                rightPlayer.setActualPosition(player2Sprite.getPosition());
         }
+        if (Keyboard::isKeyPressed(Keyboard::X)) 
+            player1.animate(leftPlayerShot, &leftPlayer);
+        else 
+            player1.animate(leftPlayerBitmap, &leftPlayer);
+        if(Keyboard::isKeyPressed(Keyboard::M))
+            player2.animate(rightPlayerShot, &rightPlayer);
+        else
+            player2.animate(rightPlayerBitmap, &rightPlayer);
     }
 }
 

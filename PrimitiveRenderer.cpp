@@ -17,7 +17,6 @@ void PrimitiveRenderer::drawCircle(float radius, Vector2f position, Color color)
 }
 
 void PrimitiveRenderer::drawSymetricCircle(float radius, Point2D startPoint, Color color) {
-	// Czterokrotna symetria
 	for (float i = 0.0f; i < 180.0f; i += 1.0f) {
 		float x = radius * cos(i);
 		float y = radius * sin(i);
@@ -86,7 +85,6 @@ void PrimitiveRenderer::drawBrokenLine(vector<LineSegment> lines, Color color) {
 }
 
 void PrimitiveRenderer::drawEllipse(float radiusX, float radiusY, Point2D startPoint, Color color) {
-	// Czterokrotna symetria
 	for (float i = 0.0f; i < 180.0f; i += 1.0f) {
 		float x = radiusX * cos(i);
 		float y = radiusY * sin(i);
