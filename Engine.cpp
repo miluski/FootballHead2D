@@ -408,6 +408,7 @@ void Engine::setGameBackground(string currentTime) {
     Vector2f scales[6] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f)};
     SpriteObject gameBackground;
     gameBackground.createSpriteFrom(bitmapArray, 6, positions, scales);
+    checkCollisions();
     SpriteObject leftPlayerSprite(&(leftPlayerBitmap.bitmap), leftPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
     SpriteObject rightPlayerSprite(&(rightPlayerBitmap.bitmap), rightPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
     SpriteObject ballSprite(&(ballBitmap.bitmap), ball.getActualPosition(), Vector2f(0.07f, 0.07f));
@@ -503,27 +504,13 @@ void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2) {
     }
 }
 
-Texture Engine::createTextureFrom(Text text, Vector2i size, Color textureColor) {
-    RenderTexture renderTexture;
-    renderTexture.create(size.x, size.y);
-    renderTexture.clear(textureColor);
-    renderTexture.draw(text);
-    renderTexture.display();
-    Texture texture(renderTexture.getTexture());
-    return texture;
-}
-
-Texture Engine::createTextureFrom(string fileName) {
-    Texture texture;
-    texture.loadFromFile(fileName);
-    return texture;
-}
-
-Sprite Engine::createSpriteFrom(Texture* texture, Vector2f position) {
-    Sprite sprite;
-    sprite.setTexture(*texture);
-    sprite.setPosition(position.x, position.y);
-    return sprite;
+void Engine::checkCollisions() {
+    FloatRect bottomCollisionRect(0.0f, (window->getSize().y) / 1.275f, window->getSize().x, (window->getSize().y)/2.0f);
+    FloatRect topCollisionRect(0.0f, 0.0f, window->getSize().x, (window->getSize().y) / 5.0f);
+    FloatRect leftCollisionRect(0.0f, 0.0f, (window->getSize().x) / 6.0f, window->getSize().y);
+    FloatRect rightCollisionRect((window->getSize().x) / 1.2f, 0.0f, (window->getSize().x) / 1.2f, window->getSize().y);
+    FloatRect leftGateGoalRect(0.0f, (window->getSize().y) / 3.25f, (window->getSize().x) / 6.0f, (window->getSize().y) / 2.3f);
+    FloatRect rightGateGoalRect((window->getSize().x) / 1.2f, (window->getSize().y) / 3.25f, (window->getSize().x) / 6.0f, (window->getSize().y) / 2.3f);
 }
 
 void Engine::serveWindowCloseEvent() {

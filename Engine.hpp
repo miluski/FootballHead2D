@@ -173,6 +173,7 @@ namespace Game {
             SpriteObject(Texture* bitmap, Vector2f position, Vector2f scale);
             void createSpriteFrom(Texture* bitmap, Vector2f position, Vector2f scale);
             void createSpriteFrom(Texture* bitmap[], int bitmapArraySize, Vector2f positions[], Vector2f scales[]);
+            void setCollisionRect(IntRect collisionRect);
             virtual void animate(BitmapHandler bitmap, Player* player);
         };
 
@@ -182,7 +183,6 @@ namespace Game {
         bool centered = false;
         bool pause = false;
         bool mute = false;
-        bool canClear = false;
         Vector2u* windowSize = new Vector2u(400, 400);
         RenderWindow* window = new RenderWindow(VideoMode(windowSize->x, windowSize->y), "", Style::Titlebar | Style::Close);
         RenderTexture* backgroundRenderTexture = new RenderTexture();
@@ -235,9 +235,7 @@ namespace Game {
         void checkRectsActions();
         void checkMenuRectsActions();
         void checkPlayerActions(SpriteObject player1, SpriteObject player2);
-        Texture createTextureFrom(Text text, Vector2i size, Color textureColor);
-        Texture createTextureFrom(string fileName);
-        Sprite createSpriteFrom(Texture* texture, Vector2f position);
+        void checkCollisions();
         void serveWindowCloseEvent();
         void drawButtons();
         void drawTexts();
