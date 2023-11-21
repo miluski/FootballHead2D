@@ -2,6 +2,12 @@
 
 using namespace Game;
 
+/**
+ * @brief Funkcja ustawia główne okno silnika gry.
+ *
+ * Ta funkcja inicjuje okno główne gry, konfiguruje różne elementy gry
+ * i wchodzi w pętlę zarządzającą różnymi oknami w oparciu o bieżący stan.
+ */
 void Engine::mainWindowSetup() {
     font = *getFont("arial");
     setFrameRateLimit();
@@ -34,6 +40,13 @@ void Engine::mainWindowSetup() {
     }
 }
 
+/**
+ * @brief Funkcja ustawienia okna gry.
+ *
+ * Metoda odpowiedzialna za konfigurację okna gry, ustawienie tytułu,
+ * wyczyszczenie okna do koloru czarnego, narysowanie przycisków i tekstów,
+ * oraz wyświetlenie okna.
+ */
 void Engine::settingsWindowSetup() {
     window->setTitle("Ustawienia gry");
     getInstance().clearWindowToColor(Color::Black);
@@ -42,6 +55,12 @@ void Engine::settingsWindowSetup() {
     window->display();
 }
 
+/**
+ * @brief Funkcja inicjalizująca menu główne gry.
+ *
+ * Metoda odpowiedzialna za konfigurację okna menu głównego, ustawienie tytułu, narysowanie przycisków i tekstów,
+ * oraz wyświetlenie okna.
+ */
 void Engine::menuWindowSetup() {
     VideoMode desktop = VideoMode::getDesktopMode();
     if (!centered) {
@@ -65,6 +84,14 @@ void Engine::menuWindowSetup() {
         music.play();
 }
 
+/**
+ * @brief Funkcja konfiguruje tekstury i rozmieszcza elementy na ekranie.
+ *
+ * Ta funkcja inicjuje różne elementy okna gry, w tym bitmapy graczy, czcionki,
+ * tekstury tła, muzyka i rozmiar okna. Zarządza też rozmieszczeniem wszystkich elementów na ekranie
+ *
+ * @param currentTime Bieżący czas używany podczas konfigurowania gry.
+ */
 void Engine::gameWindowSetup(string currentTime) {
     VideoMode desktop = VideoMode::getDesktopMode();
     if (!centered) {
@@ -102,6 +129,14 @@ void Engine::gameWindowSetup(string currentTime) {
         music.play();
 }
 
+/**
+ * @brief Funkcja ustawia okno pomocy gry.
+ *
+ * Ta funkcja konfiguruje okno pomocy gry, ustawiając jego limit liczby klatek na sekundę,
+ * umieszczenie go na środku pulpitu (jeśli jeszcze okno nie jest wyśrodkowane) i ustawienie
+ * tytuł okna na „Game Helper”. Dodatkowo dostosowuje rozmiar okna w oparciu o
+ * podaną rozdzielczość.
+ */
 void Engine::gameHelperWindowSetup() {
     VideoMode desktop = VideoMode::getDesktopMode();
     setFrameRateLimit();
@@ -113,6 +148,15 @@ void Engine::gameHelperWindowSetup() {
     window->setSize(*windowSize);
 }
 
+/**
+ * @brief Funkcja Ustaw szerokość i wysokość okna gry w oparciu o wybrany przycisk rozdzielczości.
+ *
+ * Ta funkcja ustawia szerokość i wysokość okna gry w oparciu o wybraną przez gracza opcję
+ *
+ * @param rozdzielczość1Przycisk Przycisk reprezentujący pierwszą rozdzielczość (1280x720).
+ * @param rozdzielczość2Button Przycisk reprezentujący drugą rozdzielczość (1366x768).
+ * @param rozdzielczość3Przycisk Przycisk reprezentujący trzecią rozdzielczość (1600x900).
+ */
 void Engine::setWidthAndHeight(Rectangle resolution1Button, Rectangle resolution2Button,
     Rectangle resolution3Button) {
     if (resolution1Button.getColor() == Color::Red) {
@@ -132,22 +176,53 @@ void Engine::setWidthAndHeight(Rectangle resolution1Button, Rectangle resolution
     }
 }
 
+/**
+ * @brief Funkcja ustawia teksturę głównego bufora.
+ *
+ * Ta funkcja czyści główny bufor, rysuje na nim określoną teksturę,
+ *, a następnie wyświetla bufor.
+ *
+ * @param teksturSprite Duszek reprezentujący teksturę do narysowania w głównym buforze.
+ */
 void Engine::setMainBufferTexture(Sprite textureSprite) {
     mainBuffer.clear();
     mainBuffer.draw(textureSprite);
     mainBuffer.display();
 }
 
+/**
+ * @brief Funkcja ustawia teksturę w drugim buforze.
+ *
+ * Metoda ta przyjmuje obiekt Sprite reprezentujący teksturę i ustawia go w drugim buforze.
+ *
+ * @param teksturySprite Obiekt Sprite charakterystyczny teksturę, która może być ustawiona w drugim buforze.
+ */
 void Engine::setSecondBufferTexture(Sprite textureSprite) {
     secondBuffer.clear();
     secondBuffer.draw(textureSprite);
     secondBuffer.display();
 }
 
+/**
+ * @brief Funkcja ogranicza liczbę klatek w grze.
+ *
+ * Metoda ta ogranicza liczbę klatek na sekunde w których działa gra.
+ *
+ */
 void Engine::setFrameRateLimit() {
     window->setFramerateLimit(60);
 }
 
+/**
+ * @brief Funkcja ustawia zawartość dziennika.
+ *
+ * Metoda ta ustawia nową zawartość dziennika na podstawie przekazanego ciągu znaków.
+ * Następnie sprawdza poprawność formatu dziennika za pomocą metody validateLogContentFormat().
+ * Jeśli format jest niepoprawny, generuje błąd i zapisuje go jako nową zawartość dziennika.
+ * Ostatecznie, wywołuje metodę saveLog() w celu zapisania zawartości dziennika.
+ *
+ * @param logContent Nowa zawartość dla dziennika do ustawienia.
+ */
 void Engine::setLogContent(string logContent) {
     this->logContent = logContent;
     if (!validateLogContentFormat()) {
@@ -157,10 +232,26 @@ void Engine::setLogContent(string logContent) {
     saveLog();
 }
 
+/**
+ * @brief Funkcja pobiera wskaźnik do głównego okna aplikacji.
+ *
+ *
+ * @return Wskaźnik do obiektu klasy RenderWindow reprezentującego główne okno.
+ */
 RenderWindow* Engine::getMainWindow() {
     return window;
 }
 
+/**
+ * @brief Funkcja tworząca obiekt tekstu z określonym kolorem i zawartością.
+ *
+ * @param color Kolor tekstu.
+ * @param content Zawartość tekstu.
+ * @return Obiekt tekstu gotowy do wyświetlenia.
+ *
+ * Tworzy obiekt tekstu, ustawiając mu odpowiednią czcionkę, kolor, zawartość,
+ * oraz rozmiar znaków. Zwraca gotowy do użycia obiekt tekstu.
+ */
 Text Engine::getText(Color color, string content) {
     Text text;
     text.setFont(font);
@@ -170,6 +261,17 @@ Text Engine::getText(Color color, string content) {
     return text;
 }
 
+/**
+ * @brief Funkcja umożliwiająca utworzenie obiektu tekstowego o określonych właściwościach.
+ *
+ * Ta funkcja tworzy obiekt tekstowy o określonym kolorze, rozmiarze czcionki i zawartości.
+ *
+ * @param color Kolor tekstu.
+ * @param FontSize Rozmiar czcionki tekstu.
+ * @param content Treść tekstu.
+ *
+* @return Obiekt tekstowy o określonych właściwościach.
+ */
 Text Engine::getText(Color color, int fontSize, string content) {
     Text text;
     text.setFont(font);
@@ -179,6 +281,14 @@ Text Engine::getText(Color color, int fontSize, string content) {
     return text;
 }
 
+/**
+ * @brief Funkcja tworząca prostokątny przycisk.
+ *
+ * @param yShift Przesunięcie w osi y dla umieszczenia przycisku.
+ * @param color Kolor przycisku.
+ * @param size Rozmiar przycisku.
+ * @return Prostokąt reprezentujący przycisk.
+ */
 Engine::Rectangle Engine::getButton(float yShift, Color color, Vector2f size) {
     Rectangle button(size);
     button.setColor(color);
@@ -186,6 +296,17 @@ Engine::Rectangle Engine::getButton(float yShift, Color color, Vector2f size) {
     return button;
 }
 
+/**
+ * @brief Funkcja tworząca obiekt typu Rectangle reprezentujący przycisk.
+ *
+ * Funkcja tworzy obiekt typu Rectangle, który może być używany jako przycisk. Ustawia dla niego kolor, rozmiar i pozycję.
+ *
+ * @param color Kolor przycisku.
+ * @param size Rozmiar przycisku (wektor 2D).
+ * @param position Pozycja przycisku (wektor 2D).
+ *
+ * @return Zwraca obiekt Rectangle reprezentujący przycisk.
+ */
 Engine::Rectangle Engine::getButton(Color color, Vector2f size, Vector2f position) {
     Rectangle button(size);
     button.setColor(color);
@@ -193,6 +314,16 @@ Engine::Rectangle Engine::getButton(Color color, Vector2f size, Vector2f positio
     return button;
 }
 
+/**
+ * @brief Funkcja pobiera obiekt Font na podstawie podanej nazwy czcionki.
+ *
+ * Ta funkcja tworzy nowy obiekt Font i próbuje załadować plik czcionki o podanej nazwie
+ * z katalogu „fonts/”. Generuje komunikaty dziennika wskazujące, czy
+ * ładowanie czcionki powiodło się lub nie.
+ *
+* @param FontName Nazwa pliku czcionki (bez rozszerzenia) do załadowania.
+ * @return Wskaźnik do załadowanego obiektu Font.
+ */
 Font* Engine::getFont(string fontName) {
     Font* font = new Font();
     string logContent = "";
@@ -203,6 +334,15 @@ Font* Engine::getFont(string fontName) {
     return font;
 }
 
+/**
+ * @brief Funkcja generująca tekst reprezentujący liczbę klatek na sekundę (FPS).
+ *
+ * Funkcja ta przyjmuje aktualny czas trwania jednej klatki (currentTime) i oblicza
+ * liczbę klatek na sekundę na podstawie odwrotności tego czasu.
+ *
+ * @param currentTime Aktualny czas trwania jednej klatki w sekundach.
+ * @return Tekst reprezentujący liczbę klatek na sekundę.
+ */
 string Engine::getFramePerSecondText(float currentTime) {
     float fps = 1.0f / currentTime;
     string fpsText = to_string(round(fps));
@@ -211,6 +351,15 @@ string Engine::getFramePerSecondText(float currentTime) {
     return fpsText;
 }
 
+/**
+ * @brief Pobiera aktualny czas jako sformatowany ciąg znaków.
+ *
+ * Ta funkcja pobiera bieżący czas systemowy i formatuje go jako ciąg znaków.
+ * Format obejmuje informację o dacie i godzinie oraz wynikowy ciąg znaków
+ * jest czyszczone w celu usunięcia znaków nowej linii.
+ *
+ * @return Ciąg zawierający bieżący czas.
+ */
 string Engine::getCurrentTime() {
     auto timeNow = chrono::system_clock::to_time_t(chrono::system_clock::now());
     char timeStringBuffer[50] = "";
@@ -220,6 +369,15 @@ string Engine::getCurrentTime() {
     return timeString;
 }
 
+/**
+ * @brief Funkcja pobiera identyfikator prostokąta po naciśnięciu lewego przycisku myszy.
+ *
+ * Ta funkcja sprawdza, czy lewy przycisk myszy jest wciśnięty i zwraca
+ * identyfikator prostokąta na podstawie pozycji myszy.
+ *
+ * @return Liczba całkowita reprezentująca identyfikator prostokąta po naciśnięciu myszki,
+ * Lub 1, jeśli nie zostanie naciśnięty żaden prostokąt.
+ */
 int Engine::getRectNameWhenMouseIsPressedIn() {
     IntRect rect1(100, 60, 200, 50);
     IntRect rect2(100, 140, 200, 50);
@@ -241,6 +399,15 @@ int Engine::getRectNameWhenMouseIsPressedIn() {
     return -1;
 }
 
+/**
+ * @brief Funkcja ustawiająca pozycję bramki w oknie gry.
+ *
+ * Ta funkcja oblicza i zwraca pozycję bramki na podstawie podanej nazwy bramki
+ * i dla aktualnego rozmiaru okna.
+ *
+ * @param gateName Nazwa bramki („lewa” lub „prawa”).
+ * @return Vector2f reprezentujący położenie bramki.
+ */
 Vector2f Engine::getGatePosition(string gateName) {
     Vector2u windowSize = window->getSize();
     Vector2u firstRes = Vector2u(1280, 720);
@@ -260,6 +427,15 @@ Vector2f Engine::getGatePosition(string gateName) {
             (windowSize == secondRes) ? (Vector2f(secondResXPos, secondResYPos)) : Vector2f(thirdResXPos, thirdResYPos));
 }
 
+/**
+ * @brief Funkcja pobiera pozycję gracza na podstawie jego nazwy i bieżącego rozmiaru okna.
+ *
+ * Ta funkcja oblicza i zwraca pozycję gracza w oknie gry
+ * na podstawie nazwy gracza i aktualnego rozmiaru okna.
+ *
+ * @param playerName Nazwa gracza.
+ * @return Vector2f reprezentujący pozycję gracza.
+ */
 Vector2f Engine::getPlayerPosition(string playerName) {
     Vector2u windowSize = window->getSize();
     Vector2u firstRes = Vector2u(1280, 720);
@@ -279,6 +455,13 @@ Vector2f Engine::getPlayerPosition(string playerName) {
             (windowSize == secondRes) ? (Vector2f(secondResXPos, secondResYPos)) : Vector2f(thirdResXPos, thirdResYPos));
 }
 
+/**
+ * @brief Funkcja określa czy muzyka została wyciszona czy włączona na podstawie interakcji myszy.
+ *
+ * Obraz głośnika w menu zmienia się w zależności od pozycji myszy i kliknięć przycisków.
+ *
+ * @return Nazwa pliku obrazu głośnika włączonego/wycziszonego.
+ */
 string Engine::getLoudSpeakerFileName() {
     Vector2i mouseBounds = Mouse::getPosition(*window);
     float mouseX = mouseBounds.x;
@@ -305,6 +488,12 @@ string Engine::getLoudSpeakerFileName() {
         return "elements/glosnikMute.png";
 }
 
+/**
+ * @brief Funkcja ustawia tło ekranu menu.
+ *
+ * Ta funkcja ustawia tło ekranu menu poprzez tworzenie i pozycjonowanie
+ * różnych przycisków, bitmap i innych elementów graficznych.
+ */
 void Engine::setMenuBackground() {
     checkMenuRectsActions();
     BitmapHandler startTextBitmap(getText(startTextColor, 52, "S T A R T"), Vector2i(220, 60), Color::Transparent);
@@ -325,6 +514,12 @@ void Engine::setMenuBackground() {
     gameBackground.draw();
 }
 
+/**
+ * @brief Funkcja sprawdza i obsługuje interakcje myszy w menu.
+ *
+ * Ta funkcja sprawdza pozycję myszy i aktualizuje kolory tekstu
+ * na podstawie położenia względem prostokątów menu. Obsługuje również interakcje przycisków.
+ */
 void Engine::checkMenuRectsActions() {
     Vector2i mouseBounds = Mouse::getPosition(*window);
     float mouseX = mouseBounds.x;
@@ -391,6 +586,15 @@ void Engine::checkMenuRectsActions() {
     }
 }
 
+/**
+ * @brief Funkcja ustawia tło gry i wszystkie elementy gry.
+ *
+ * Ta funkcja konfiguruje tło gry poprzez tworzenie ikonek dla różnych
+ * elementy takie jak bramki, teksty i gracze. Zajmuje się także pozycjonowaniem
+ * i skalowanie tych elementów na ekranie.
+ *
+ * @param currentTime Bieżący czas.
+ */
 void Engine::setGameBackground(string currentTime) {
     checkRectsActions();
     BitmapHandler leftGateBitmap("elements/BramkaL.png");
@@ -416,6 +620,12 @@ void Engine::setGameBackground(string currentTime) {
     gameBackground.draw();
 }
 
+/**
+ * @brief Funkcja sprawdza i obsługuje akcje w oparciu o pozycję myszy i kliknięcia przycisków w grze.
+ *
+ * Ta funkcja sprawdza pozycję myszy i wykonuje odpowiednie działania,
+ * takie jak zmiana kolorów tekstu i obsługa kliknięć przycisków.
+ */
 void Engine::checkRectsActions() {
     Vector2i mouseBounds = Mouse::getPosition(*window);
     float mouseX = mouseBounds.x;
@@ -461,6 +671,15 @@ void Engine::checkRectsActions() {
     }
 }
 
+/**
+ * @brief Funkcja sprawdza działania graczy i aktualizuje ich pozycje oraz animacje.
+ *
+ * Ta funkcja sprawdza wprowadzane dane z klawiatury w celu kontrolowania ruchu i animacji
+ * dwóch graczy. Pobiera dwa parametry SpriteObject reprezentujące graczy.
+ *
+ * @param player1 Obiekt SpriteObject dla pierwszego gracza.
+ * @param player2 Obiekt SpriteObject dla drugiego gracza.
+ */
 void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2) {
     Sprite player1Sprite = player1.getSprite();
     Sprite player2Sprite = player2.getSprite();
@@ -504,6 +723,13 @@ void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2) {
     }
 }
 
+/**
+ * @brief Funkcja sprawdza kolizje w silniku gry.
+ *
+ * Ta funkcja sprawdza kolizje w różnych obszarach okna gry.
+ * Prostokąty kolizyjne obejmują dolną, górną, lewą i prawą granicę,
+ * jak również określone obszary bramek dla lewej i prawej bramki.
+ */
 void Engine::checkCollisions() {
     FloatRect bottomCollisionRect(0.0f, (window->getSize().y) / 1.275f, window->getSize().x, (window->getSize().y)/2.0f);
     FloatRect topCollisionRect(0.0f, 0.0f, window->getSize().x, (window->getSize().y) / 5.0f);
@@ -513,6 +739,12 @@ void Engine::checkCollisions() {
     FloatRect rightGateGoalRect((window->getSize().x) / 1.2f, (window->getSize().y) / 3.25f, (window->getSize().x) / 6.0f, (window->getSize().y) / 2.3f);
 }
 
+/**
+ * @brief Funkcja obsługuje zdarzenie zamknięcia okna, sprawdzając i odpowiadając na różne typy zdarzeń.
+ *
+ * Ta funkcja sprawdza różne typy zdarzeń za pomocą pętli i podejmuje odpowiednie działania w zależności od typu zdarzenia.
+ *
+ */
 void Engine::serveWindowCloseEvent() {
     Event event;
     while (window->pollEvent(event)) {
@@ -527,6 +759,12 @@ void Engine::serveWindowCloseEvent() {
     }
 }
 
+/**
+ * @brief Funkcja rysuje przyciski na ekranie ustawień, w tym przyciski wyboru rozdzielczości i przycisk graj.
+ *
+ * Ta funkcja rysuje przyciski na ekranie w oparciu o bieżący stan, np. wybraną rozdzielczość
+ * przyciski i przycisk odtwarzania. Obsługuje również interakcje przycisków i odpowiednio aktualizuje kolory przycisków.
+ */
 void Engine::drawButtons() {
     Rectangle playButton = getButton(260, Color::Red, Vector2f(200, 50));
     int rectName = getRectNameWhenMouseIsPressedIn();
@@ -556,6 +794,12 @@ void Engine::drawButtons() {
     playButton.draw();
 }
 
+/**
+ * @brief Funkcja rysuje teksty w oknie ustawień.
+ *
+ * Ta funkcja tworzy obiekty tekstowe o określonej treści (tytuły rozdzielczości) i kolorze, ustala ich położenie,
+ * a następnie rysuje je na oknie ustawień.
+ */
 void Engine::drawTexts() {
     Text resolution1 = getText(Color::White, "1280 x 720");
     Text resolution2 = getText(Color::White, "1366 x 768");
@@ -571,6 +815,19 @@ void Engine::drawTexts() {
     window->draw(startGame);
 }
 
+/**
+ * @brief Funkcja obsługuje wymianę i aktualizację podwójnych buforów do renderowania.
+ *
+ * Ta funkcja ustawia limit liczby klatek na sekundę i przełącza pomiędzy dwoma buforami (głównym i drugim)
+ * dla płynniejszego renderowania. Czyści nieaktywny bufor, ustawia zawartość aktywnego bufora
+ * na nieaktywny, a następnie wyświetla zaktualizowaną zawartość w oknie.
+ *
+ * Jeśli aktywny bufor jest „główny”, czyści drugi bufor i rysuje teksturę głównego bufora
+ * i wyświetla drugi bufor w oknie. Aktywny bufor jest wówczas ustawiany na „drugi”.
+ *
+ * Jeśli aktywny bufor jest „drugi”, czyści bufor główny, rysuje teksturę drugiego bufora
+ * główny bufor i wyświetla główny bufor w oknie. Aktywny bufor jest wówczas ustawiany na „główny”.
+ */
 void Engine::handleBuffers() {
     setFrameRateLimit();
     if (activeBuffer == "main") {
@@ -593,14 +850,37 @@ void Engine::handleBuffers() {
     }
 }
 
+/**
+ * @brief Funkcja czyści okno do określonego koloru.
+ *
+ * Ta funkcja czyści powiązane okno do określonego koloru.
+ *
+ * @param color Kolor, do którego okno zostanie wyczyszczone.
+ */
 void Engine::clearWindowToColor(Color color) {
     window->clear(color);
 }
 
+/**
+ * @brief Funkcja czyści danego Sprita poprzez ustawienie jego koloru.
+ *
+ * Ta funkcja ustawia kolor dostarczonego Sprite, skutecznie go usuwając
+ * na podany kolor.
+ *
+ * @param sprite Sprite, który ma zostać wyczyszczony.
+ * @param color Kolor, jaki należy ustawić dla Sprite.
+ */
 void Engine::clearSpriteToColor(Sprite& sprite, Color color) {
     sprite.setColor(color);
 }
 
+/**
+ * @brief Funkcja sprawdza format zawartości dziennika.
+ *
+ * Ta funkcja sprawdza, czy zawartość dziennika zawiera prawidłowe znaczniki dziennika, takie jak „[ERROR]”, „[INFO]” lub „[DEBUG]”.
+ *
+ * @return true, jeśli zawartość dziennika jest prawidłowa, w przeciwnym razie false.
+ */
 bool Engine::validateLogContentFormat() {
     size_t isValidErrorStart = this->logContent.find("[ERROR]");
     size_t isValidInfoStart = this->logContent.find("[INFO]");
@@ -611,6 +891,15 @@ bool Engine::validateLogContentFormat() {
         return false;
 }
 
+/**
+ * @brief Funkcja zapisuje bieżącą zawartość dziennika do pliku i drukuje ją na konsoli.
+ *
+ * Ta funkcja otwiera plik o nazwie „logs.log” w trybie dopisywania, zapisuje bieżący
+ * log do niego zawartość, a następnie zamyka plik. Dodatkowo drukuje logi i ich
+ * zawartość do konsoli.
+ *
+ * @note Plik „logs.log” zostanie utworzony, jeśli nie istnieje.
+ */
 void Engine::saveLog() {
     fstream fileStream;
     fileStream.open("logs.log", ios::app);
@@ -619,6 +908,13 @@ void Engine::saveLog() {
     cout << logContent << endl;
 }
 
+/**
+ * @brief Funkcja testuje funkcje renderujące kształty przy użyciu PrimitiveRenderer.
+ *
+ * Tworzy instancję PrimitiveRenderer, a następnie rysuje różne kształty i figury
+ * za pomocą jej metod. Niektóre fragmenty kodu są zakomentowane, aby uniknąć
+ * niepotrzebnego renderowania w czasie testowania.
+ */
 void Engine::testPrimitiveRenderer() {
     PrimitiveRenderer primitiveRenderer;
     //primitiveRenderer.drawTriangle(Vector2f(200.0f, 200.0f), Vector2f(100.0f, 100.0f), Color::White);
@@ -652,11 +948,27 @@ void Engine::testPrimitiveRenderer() {
     //primitiveRenderer.drawEllipse(50, 30, startPoint, Color::Red);
 }
 
+/**
+ * @brief Metoda do testowania klasy Engine dla punktów 2D.
+ *
+ * Ta metoda tworzy obiekt klasy Point2D o współrzędnych (75.0f, 100.0f) i wywołuje
+ * na nim metodę draw() w celu przetestowania funkcjonalności rysowania punktu.
+ *
+ * @note Przed użyciem tej metody upewnij się, że obiekt klasy Engine został poprawnie zainicjalizowany.
+ *
+ * @see Engine, Point2D
+ */
 void Engine::testPoint2D() {
     Point2D point2D(75.0f, 100.0f);
     point2D.draw();
 }
 
+/**
+ * @brief Funkcja testuje funkcjonalność klasy Engine związanej z odcinkiem linii.
+ *
+ * Tworzy punkty początkowy i końcowy, a następnie tworzy odcinek linii
+ * i rysuje go na ekranie w kolorze czarnym.
+ */
 void Engine::testLineSegment() {
     Point2D startPoint(0.0f, 0.0f);
     Point2D endPoint(100.0f, 100.0f);
@@ -664,6 +976,10 @@ void Engine::testLineSegment() {
     lineSegment.draw(Color::Black);
 }
 
+/**
+ * @file main.cpp
+ * @brief Główna funkcja aplikacji.
+ */
 int main() {
     Engine::getInstance().activeWindowName = STARTUP_SETTINGS;
     Engine::getInstance().mainWindowSetup();
