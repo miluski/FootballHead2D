@@ -30,6 +30,10 @@ void Engine::SpriteObject::createSpriteFrom(Texture* bitmap[], int bitmapArraySi
 	}
 }
 
+void Engine::SpriteObject::setCollisionRect(IntRect collisionRect) {
+	this->spriteObject.setTextureRect(collisionRect);
+}
+
 void Engine::SpriteObject::animate(BitmapHandler bitmap, Player* player) {
 	player->setPlayerBitmap(bitmap);
 }
