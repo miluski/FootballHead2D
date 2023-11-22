@@ -17,7 +17,14 @@
 using namespace std;
 using namespace sf;
 
+/**
+ * @brief Wyliczenie reprezentuj¹ce nazwy okien.
+ */
 enum windowNames {STARTUP_SETTINGS, MENU, GAME, GAME_HELPER};
+
+/**
+ * @brief Wyliczenie reprezentuj¹ce nazwy prostok¹tów.
+ */
 enum rectNames {RESOLUTION_1, RESOLUTION_2, RESOLUTION_3, PLAY};
 
 namespace Game {
