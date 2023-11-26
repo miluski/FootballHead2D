@@ -2,6 +2,7 @@
 #define _USE_MATH_DEFINES
 #include <ctime>
 #include <cmath>
+#include <cstdlib>
 #include <chrono>
 #include <string>
 #include <fstream>
@@ -9,6 +10,7 @@
 #include <sstream>
 #include <vector>
 #include <queue>
+#include <random>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
@@ -26,6 +28,11 @@ enum windowNames {STARTUP_SETTINGS, MENU, GAME, GAME_HELPER};
  * @brief Wyliczenie reprezentuj¹ce nazwy prostok¹tów.
  */
 enum rectNames {RESOLUTION_1, RESOLUTION_2, RESOLUTION_3, PLAY};
+
+/**
+* @brief Wyliczenie reprezentuj¹ce kierunek poruszania siê pi³ki.
+*/
+enum directionNames {NORTH, SOUTH, WEST, SOUTH_WEST, NORTH_WEST, EAST, SOUTH_EAST, NORTH_EAST};
 
 namespace Game {
 
@@ -140,9 +147,14 @@ namespace Game {
 
         class Player : public virtual GameObject {
         public:
+            bool isShooting = false;
+            FloatRect topRect;
+            FloatRect leftRect;
+            FloatRect rightRect;
+            FloatRect shoeRect;
             void setActualSpeed(float speed);
             void setPlayerBitmap(BitmapHandler bitmap);
-            void setActualPosition(Vector2f position);
+            void setActualPosition(Vector2f position, string positionSite);
             float getActualSpeed();
             Vector2f getActualPosition();
             BitmapHandler getPlayerBitmap();
@@ -190,6 +202,12 @@ namespace Game {
         bool centered = false;
         bool pause = false;
         bool mute = false;
+        int ballMoveDirection;
+        int leftPlayerPoints;
+        int rightPlayerPoints;
+        int goalCountRequiredToWin = 5;
+        int secondsRequiredToEndTheGame = 300;
+        float totalElapsedTime = 0.0f;
         Vector2u* windowSize = new Vector2u(400, 400);
         RenderWindow* window = new RenderWindow(VideoMode(windowSize->x, windowSize->y), "", Style::Titlebar | Style::Close);
         RenderTexture* backgroundRenderTexture = new RenderTexture();
@@ -211,6 +229,8 @@ namespace Game {
         Color authorTextColor = Color::White;
         Color exitTextColor = Color::White;
         Music music;
+        Music goalMusic;
+        Music whistleMusic;
         Vector2i windowPosition;
         RenderTexture mainBuffer;
         RenderTexture secondBuffer;
@@ -219,6 +239,8 @@ namespace Game {
         string logContent;
         Clock breakClock;
         Clock fpsClock;
+        Clock goalTimer;
+        Clock gameTimer;
         void menuWindowSetup();
         void settingsWindowSetup();
         void gameWindowSetup(string currentTime);
@@ -240,6 +262,10 @@ namespace Game {
         void setMenuBackground();
         void setGameBackground(string currentTime);
         void checkRectsActions();
+        bool checkIsGoalAtLeftGate();
+        bool checkIsGoalAtRightGate();
+        bool checkIsCollisionWithPlayer();
+        void moveBall();
         void checkMenuRectsActions();
         void checkPlayerActions(SpriteObject player1, SpriteObject player2);
         void checkCollisions();

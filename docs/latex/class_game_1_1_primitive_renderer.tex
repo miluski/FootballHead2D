@@ -1,0 +1,272 @@
+\doxysection{Dokumentacja klasy Game\+::Primitive\+Renderer}
+\hypertarget{class_game_1_1_primitive_renderer}{}\label{class_game_1_1_primitive_renderer}\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_a54df568c619e42b07599653571177ca7}{draw\+Rectangle}} (Vector2f size, Vector2f position, Color color)
+\begin{DoxyCompactList}\small\item\em Rysuje prostok¹t na ekranie o podanych wymiarach, pozycji i kolorze. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_a4113ac2709d662cfbe8a260b2e533eda}{draw\+Circle}} (float radius, Vector2f position, Color color)
+\begin{DoxyCompactList}\small\item\em Rysuje ko³o na ekranie o podanym promieniu, pozycji i kolorze. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_a9da3bc9313aa224ae7b25b150ae4147a}{draw\+Symetric\+Circle}} (float radius, \mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}} start\+Point, Color color)
+\begin{DoxyCompactList}\small\item\em Rysuje symetryczne ko³o na ekranie o podanym promieniu, punkcie pocz¹tkowym i kolorze. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_a3d929f30f2629be5233a00292d1ae68b}{draw\+Triangle}} (float radius, Vector2f position, Color color)
+\begin{DoxyCompactList}\small\item\em Rysuje trójk¹t na ekranie o podanym rozmiarze, pozycji i kolorze. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_a1bb9dd27f5a97220453082c3b151e480}{draw\+Increased\+Line}} (Vector2f start\+Coords, Vector2f end\+Coords, Color color)
+\begin{DoxyCompactList}\small\item\em Rysuje zwiêkszon¹ liniê miêdzy dwoma punktami na ekranie o podanym kolorze. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_a67bb5d68ed2107d1aebf7ec1a71893ab}{draw\+Line}} (Vector2f start\+Coords, Vector2f end\+Coords, Color color)
+\begin{DoxyCompactList}\small\item\em Rysuje liniê miêdzy dwoma punktami na ekranie o podanym kolorze. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_ac8dcb97ea57de0201a506ded7b20fee9}{draw\+Broken\+Line}} (vector$<$ \mbox{\hyperlink{class_game_1_1_line_segment}{Line\+Segment}} $>$ lines, Color color)
+\begin{DoxyCompactList}\small\item\em Rysowanie linii ³amanej na ekranie, sk³adaj¹cej siê z podanych odcinków i koloru. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_a0c14d89bcf2d56288ed4c9598be3d356}{draw\+Ellipse}} (float radiusX, float radiusY, \mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}} start\+Point, Color color)
+\begin{DoxyCompactList}\small\item\em Rysuje elipsê na ekranie o podanych promieniach, punkcie pocz¹tkowym i kolorze. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_game_1_1_primitive_renderer_acd0095b21ccfa8947e864cbc085b6b3e}{is\+Lines\+Crossing}} (\mbox{\hyperlink{class_game_1_1_line_segment}{Line\+Segment}} line1, \mbox{\hyperlink{class_game_1_1_line_segment}{Line\+Segment}} line2)
+\begin{DoxyCompactList}\small\item\em Sprawdza, czy dwie linie przecinaj¹ siê. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_ac3d510948436507c06a9b3f00f999bed}{draw\+Polygon}} (vector$<$ \mbox{\hyperlink{class_game_1_1_line_segment}{Line\+Segment}} $>$ lines, Color color)
+\begin{DoxyCompactList}\small\item\em Rysuje wielok¹t na ekranie o podanych odcinkach i kolorze. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_aa4097eae13d52a5a1c2621d27311716d}{border\+Rect\+Fill}} (\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}} point, Color fill\+Color, Color border\+Color)
+\begin{DoxyCompactList}\small\item\em Rysuje wype³niony obszar prostok¹tny, zaczynaj¹c od punktu o podanym kolorze wype³nienia i obramowaniem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_primitive_renderer_a9141a4f3c73dd4d6caa93e3141c4b8e8}{flood\+Rect\+Fill}} (\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}} point, Color fill\+Color, Color background\+Color)
+\begin{DoxyCompactList}\small\item\em Algorytm wype³niania obszaru prostok¹tnego. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja funkcji skÅ‚adowych}
+\Hypertarget{class_game_1_1_primitive_renderer_aa4097eae13d52a5a1c2621d27311716d}\label{class_game_1_1_primitive_renderer_aa4097eae13d52a5a1c2621d27311716d} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!borderRectFill@{borderRectFill}}
+\index{borderRectFill@{borderRectFill}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{borderRectFill()}{borderRectFill()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::border\+Rect\+Fill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}}]{point,  }\item[{Color}]{fill\+Color,  }\item[{Color}]{border\+Color }\end{DoxyParamCaption})}
+
+
+
+Rysuje wype³niony obszar prostok¹tny, zaczynaj¹c od punktu o podanym kolorze wype³nienia i obramowaniem. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em point} & Punkt startowy rysowania. \\
+\hline
+{\em fill\+Color} & Kolor wype³nienia obszaru. \\
+\hline
+{\em border\+Color} & Kolor obramowania obszaru. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_primitive_renderer_ac8dcb97ea57de0201a506ded7b20fee9}\label{class_game_1_1_primitive_renderer_ac8dcb97ea57de0201a506ded7b20fee9} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!drawBrokenLine@{drawBrokenLine}}
+\index{drawBrokenLine@{drawBrokenLine}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{drawBrokenLine()}{drawBrokenLine()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::draw\+Broken\+Line (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_game_1_1_line_segment}{Line\+Segment}} $>$}]{lines,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Rysowanie linii ³amanej na ekranie, sk³adaj¹cej siê z podanych odcinków i koloru. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em lines} & Wektor zawieraj¹cy odcinki linii ³amanej. \\
+\hline
+{\em color} & Kolor linii ³amanej. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_primitive_renderer_a4113ac2709d662cfbe8a260b2e533eda}\label{class_game_1_1_primitive_renderer_a4113ac2709d662cfbe8a260b2e533eda} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!drawCircle@{drawCircle}}
+\index{drawCircle@{drawCircle}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{drawCircle()}{drawCircle()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::draw\+Circle (\begin{DoxyParamCaption}\item[{float}]{radius,  }\item[{Vector2f}]{position,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Rysuje ko³o na ekranie o podanym promieniu, pozycji i kolorze. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em radius} & Promieñ ko³a. \\
+\hline
+{\em position} & Pozycja ko³a. \\
+\hline
+{\em color} & Kolor ko³a. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_primitive_renderer_a0c14d89bcf2d56288ed4c9598be3d356}\label{class_game_1_1_primitive_renderer_a0c14d89bcf2d56288ed4c9598be3d356} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!drawEllipse@{drawEllipse}}
+\index{drawEllipse@{drawEllipse}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{drawEllipse()}{drawEllipse()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::draw\+Ellipse (\begin{DoxyParamCaption}\item[{float}]{radiusX,  }\item[{float}]{radiusY,  }\item[{\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}}]{start\+Point,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Rysuje elipsê na ekranie o podanych promieniach, punkcie pocz¹tkowym i kolorze. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em radiusX} & Promieñ X elipsy. \\
+\hline
+{\em radiusY} & Promieñ Y elipsy. \\
+\hline
+{\em start\+Point} & Punkt pocz¹tkowy elipsy. \\
+\hline
+{\em color} & Kolor elipsy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_primitive_renderer_a1bb9dd27f5a97220453082c3b151e480}\label{class_game_1_1_primitive_renderer_a1bb9dd27f5a97220453082c3b151e480} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!drawIncreasedLine@{drawIncreasedLine}}
+\index{drawIncreasedLine@{drawIncreasedLine}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{drawIncreasedLine()}{drawIncreasedLine()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::draw\+Increased\+Line (\begin{DoxyParamCaption}\item[{Vector2f}]{start\+Coords,  }\item[{Vector2f}]{end\+Coords,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Rysuje zwiêkszon¹ liniê miêdzy dwoma punktami na ekranie o podanym kolorze. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em start\+Coords} & Wspó³rzêdne pocz¹tkowe linii. \\
+\hline
+{\em end\+Coords} & Wspó³rzêdne koñcowe linii. \\
+\hline
+{\em color} & Kolor linii. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_primitive_renderer_a67bb5d68ed2107d1aebf7ec1a71893ab}\label{class_game_1_1_primitive_renderer_a67bb5d68ed2107d1aebf7ec1a71893ab} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::draw\+Line (\begin{DoxyParamCaption}\item[{Vector2f}]{start\+Coords,  }\item[{Vector2f}]{end\+Coords,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Rysuje liniê miêdzy dwoma punktami na ekranie o podanym kolorze. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em start\+Coords} & Wspó³rzêdne pocz¹tkowe linii. \\
+\hline
+{\em end\+Coords} & Wspó³rzêdne koñcowe linii. \\
+\hline
+{\em color} & Kolor linii. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_primitive_renderer_ac3d510948436507c06a9b3f00f999bed}\label{class_game_1_1_primitive_renderer_ac3d510948436507c06a9b3f00f999bed} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!drawPolygon@{drawPolygon}}
+\index{drawPolygon@{drawPolygon}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{drawPolygon()}{drawPolygon()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::draw\+Polygon (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_game_1_1_line_segment}{Line\+Segment}} $>$}]{lines,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Rysuje wielok¹t na ekranie o podanych odcinkach i kolorze. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em lines} & Wektor zawieraj¹cy odcinki wielok¹ta. \\
+\hline
+{\em color} & Kolor wielok¹ta. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_primitive_renderer_a54df568c619e42b07599653571177ca7}\label{class_game_1_1_primitive_renderer_a54df568c619e42b07599653571177ca7} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!drawRectangle@{drawRectangle}}
+\index{drawRectangle@{drawRectangle}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{drawRectangle()}{drawRectangle()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::draw\+Rectangle (\begin{DoxyParamCaption}\item[{Vector2f}]{size,  }\item[{Vector2f}]{position,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Rysuje prostok¹t na ekranie o podanych wymiarach, pozycji i kolorze. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em size} & Wymiary prostok¹ta. \\
+\hline
+{\em position} & Pozycja prostok¹ta. \\
+\hline
+{\em color} & Kolor prostok¹ta. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_primitive_renderer_a9da3bc9313aa224ae7b25b150ae4147a}\label{class_game_1_1_primitive_renderer_a9da3bc9313aa224ae7b25b150ae4147a} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!drawSymetricCircle@{drawSymetricCircle}}
+\index{drawSymetricCircle@{drawSymetricCircle}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{drawSymetricCircle()}{drawSymetricCircle()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::draw\+Symetric\+Circle (\begin{DoxyParamCaption}\item[{float}]{radius,  }\item[{\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}}]{start\+Point,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Rysuje symetryczne ko³o na ekranie o podanym promieniu, punkcie pocz¹tkowym i kolorze. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em radius} & Promieñ ko³a. \\
+\hline
+{\em start\+Point} & Punkt pocz¹tkowy ko³a. \\
+\hline
+{\em color} & Kolor ko³a. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_primitive_renderer_a3d929f30f2629be5233a00292d1ae68b}\label{class_game_1_1_primitive_renderer_a3d929f30f2629be5233a00292d1ae68b} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!drawTriangle@{drawTriangle}}
+\index{drawTriangle@{drawTriangle}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{drawTriangle()}{drawTriangle()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::draw\+Triangle (\begin{DoxyParamCaption}\item[{float}]{radius,  }\item[{Vector2f}]{position,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Rysuje trójk¹t na ekranie o podanym rozmiarze, pozycji i kolorze. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em radius} & Promieñ trójk¹ta. \\
+\hline
+{\em position} & Pozycja trójk¹ta. \\
+\hline
+{\em color} & Kolor trójk¹ta. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_primitive_renderer_a9141a4f3c73dd4d6caa93e3141c4b8e8}\label{class_game_1_1_primitive_renderer_a9141a4f3c73dd4d6caa93e3141c4b8e8} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!floodRectFill@{floodRectFill}}
+\index{floodRectFill@{floodRectFill}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{floodRectFill()}{floodRectFill()}}
+{\footnotesize\ttfamily void Primitive\+Renderer\+::flood\+Rect\+Fill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}}]{point,  }\item[{Color}]{fill\+Color,  }\item[{Color}]{background\+Color }\end{DoxyParamCaption})}
+
+
+
+Algorytm wype³niania obszaru prostok¹tnego. 
+
+Funkcja wype³nia obszar prostok¹tny, zaczynaj¹c od danego punktu, okreœlonym kolorem wype³nienia. Zachowuje granice obszaru oraz omija obszary o tle równym kolorowi t³a lub przezroczystemu.
+
+Algorytm wykorzystuje podejœcie oparte na kolejce do efektywnego przeszukiwania i wype³niania obszaru.
+
+
+\begin{DoxyParams}{Parametry}
+{\em point} & Pocz¹tkowy punkt dla operacji wype³niania obszaru. \\
+\hline
+{\em fill\+Color} & Kolor u¿ywany do wype³nienia obszaru. \\
+\hline
+{\em background\+Color} & Kolor traktowany jako t³o, które nie jest wype³niane.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{Zobacz rÃ³wnieÅ¼}
+\doxylink{class_game_1_1_point2_d}{Point2D}, Color 
+\end{DoxySeeAlso}
+\Hypertarget{class_game_1_1_primitive_renderer_acd0095b21ccfa8947e864cbc085b6b3e}\label{class_game_1_1_primitive_renderer_acd0095b21ccfa8947e864cbc085b6b3e} 
+\index{Game::PrimitiveRenderer@{Game::PrimitiveRenderer}!isLinesCrossing@{isLinesCrossing}}
+\index{isLinesCrossing@{isLinesCrossing}!Game::PrimitiveRenderer@{Game::PrimitiveRenderer}}
+\doxysubsubsection{\texorpdfstring{isLinesCrossing()}{isLinesCrossing()}}
+{\footnotesize\ttfamily bool Primitive\+Renderer\+::is\+Lines\+Crossing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_1_1_line_segment}{Line\+Segment}}}]{line1,  }\item[{\mbox{\hyperlink{class_game_1_1_line_segment}{Line\+Segment}}}]{line2 }\end{DoxyParamCaption})}
+
+
+
+Sprawdza, czy dwie linie przecinaj¹ siê. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em line1} & Pierwszy odcinek. \\
+\hline
+{\em line2} & Drugi odcinek. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartoœæ logiczna informuj¹ca o przeciêciu siê linii. 
+\end{DoxyReturn}
+
+
+Dokumentacja dla tej klasy zostaÅ‚a wygenerowana z plikÃ³w\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Krzysiek/source/repos/miluski/\+Football\+Head2\+D/Engine.\+hpp\item 
+C\+:/\+Users/\+Krzysiek/source/repos/miluski/\+Football\+Head2\+D/Primitive\+Renderer.\+cpp\end{DoxyCompactItemize}

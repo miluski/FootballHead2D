@@ -25,8 +25,34 @@ void Engine::Player::setPlayerBitmap(BitmapHandler bitmap) {
  *
  * @param position Nowa pozycja gracza.
  */
-void Engine::Player::setActualPosition(Vector2f position) {
+void Engine::Player::setActualPosition(Vector2f position, string positionSite) {
+	Vector2f topPosition(position.x, position.y);
+	Vector2f leftPosition(position.x, position.y);
+	Vector2f rightPosition(position.x, position.y);
+	Vector2f shoePosition(position.x, position.y);
+	if (positionSite == "left") {
+		topPosition.x += 20.0f;
+		leftPosition.x += 150.0f;
+		rightPosition.x += 20.0f;
+		shoePosition.x += 150.0f;
+		shoePosition.y += 130.0f;
+	}
+	else {
+		topPosition.x += 40.0f;
+		leftPosition.x += 40.0f;
+		rightPosition.x += 150.0f;
+		shoePosition.x += 20.0f;
+		shoePosition.y += 130.0f;
+	}
+	FloatRect topRect(topPosition, Vector2f(125.0f, 25.0f));
+	FloatRect leftRect(leftPosition, Vector2f(10.0f, 140.0f));
+	FloatRect rightRect(rightPosition, Vector2f(10.0f, 140.0f));
+	FloatRect shoeRect(shoePosition, Vector2f(10.0f, 10.0f));
 	this->position = position;
+	this->topRect = topRect;
+	this->leftRect = leftRect;
+	this->rightRect = rightRect;
+	this->shoeRect = shoeRect;
 }
 
 /**

@@ -1,0 +1,160 @@
+\doxysection{Dokumentacja klasy Game\+::Engine}
+\hypertarget{class_game_1_1_engine}{}\label{class_game_1_1_engine}\index{Game::Engine@{Game::Engine}}
+\doxysubsubsection*{Komponenty}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_animated_object}{Animated\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_ball}{Ball}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_object}{Bitmap\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_circle}{Circle}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object}{Drawable\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{Game\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_player}{Player}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Rectangle}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object}{Shape\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object}{Sprite\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_transformable_object}{Transformable\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle}{Triangle}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_aeed6ad2bbe1f0c21c8e8abf74e54893d}{main\+Window\+Setup}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja ustawia główne okno silnika gry. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_aac52e4251bbd785c7dbb277eb3a02175}{set\+Main\+Buffer\+Texture}} (Sprite texture\+Sprite)
+\begin{DoxyCompactList}\small\item\em Funkcja ustawia teksturę głównego bufora. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_a94b4050191d978fbad4914c8c9cfd098}{set\+Second\+Buffer\+Texture}} (Sprite texture\+Sprite)
+\begin{DoxyCompactList}\small\item\em Funkcja ustawia teksturę w drugim buforze. \end{DoxyCompactList}\item 
+Render\+Window \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_game_1_1_engine_aa3e5849dd439915c2ce5c47f839d5c74}{get\+Main\+Window}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja pobiera wskaźnik do głównego okna aplikacji. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_a71ab55b57910731ca7bcd66417b5c268}{clear\+Window\+To\+Color}} (Color color)
+\begin{DoxyCompactList}\small\item\em Funkcja czyści okno do określonego koloru. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_a6102b2d68ea13e0f990d656e63e3d2bc}{clear\+Sprite\+To\+Color}} (Sprite \&, Color color)
+\begin{DoxyCompactList}\small\item\em Funkcja czyści danego Sprita poprzez ustawienie jego koloru. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Statyczne metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_1_1_engine_ae4e76bf2cc9186b89e5eaf91cc110259}\label{class_game_1_1_engine_ae4e76bf2cc9186b89e5eaf91cc110259} 
+static \mbox{\hyperlink{class_game_1_1_engine}{Engine}} \& {\bfseries get\+Instance} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atrybuty publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_1_1_engine_a42e2e91abaa8b79855cd034ad037c718}\label{class_game_1_1_engine_a42e2e91abaa8b79855cd034ad037c718} 
+int {\bfseries active\+Window\+Name}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja funkcji składowych}
+\Hypertarget{class_game_1_1_engine_a6102b2d68ea13e0f990d656e63e3d2bc}\label{class_game_1_1_engine_a6102b2d68ea13e0f990d656e63e3d2bc} 
+\index{Game::Engine@{Game::Engine}!clearSpriteToColor@{clearSpriteToColor}}
+\index{clearSpriteToColor@{clearSpriteToColor}!Game::Engine@{Game::Engine}}
+\doxysubsubsection{\texorpdfstring{clearSpriteToColor()}{clearSpriteToColor()}}
+{\footnotesize\ttfamily void Engine\+::clear\+Sprite\+To\+Color (\begin{DoxyParamCaption}\item[{Sprite \&}]{sprite,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Funkcja czyści danego Sprita poprzez ustawienie jego koloru. 
+
+Ta funkcja ustawia kolor dostarczonego Sprite, skutecznie go usuwając na podany kolor.
+
+
+\begin{DoxyParams}{Parametry}
+{\em sprite} & Sprite, który ma zostać wyczyszczony. \\
+\hline
+{\em color} & Kolor, jaki należy ustawić dla Sprite. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_engine_a71ab55b57910731ca7bcd66417b5c268}\label{class_game_1_1_engine_a71ab55b57910731ca7bcd66417b5c268} 
+\index{Game::Engine@{Game::Engine}!clearWindowToColor@{clearWindowToColor}}
+\index{clearWindowToColor@{clearWindowToColor}!Game::Engine@{Game::Engine}}
+\doxysubsubsection{\texorpdfstring{clearWindowToColor()}{clearWindowToColor()}}
+{\footnotesize\ttfamily void Engine\+::clear\+Window\+To\+Color (\begin{DoxyParamCaption}\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Funkcja czyści okno do określonego koloru. 
+
+Ta funkcja czyści powiązane okno do określonego koloru.
+
+
+\begin{DoxyParams}{Parametry}
+{\em color} & Kolor, do którego okno zostanie wyczyszczone. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_engine_aa3e5849dd439915c2ce5c47f839d5c74}\label{class_game_1_1_engine_aa3e5849dd439915c2ce5c47f839d5c74} 
+\index{Game::Engine@{Game::Engine}!getMainWindow@{getMainWindow}}
+\index{getMainWindow@{getMainWindow}!Game::Engine@{Game::Engine}}
+\doxysubsubsection{\texorpdfstring{getMainWindow()}{getMainWindow()}}
+{\footnotesize\ttfamily Render\+Window \texorpdfstring{$\ast$}{*} Engine\+::get\+Main\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Funkcja pobiera wskaźnik do głównego okna aplikacji. 
+
+\begin{DoxyReturn}{Zwraca}
+Wskaźnik do obiektu klasy Render\+Window reprezentującego główne okno. 
+\end{DoxyReturn}
+\Hypertarget{class_game_1_1_engine_aeed6ad2bbe1f0c21c8e8abf74e54893d}\label{class_game_1_1_engine_aeed6ad2bbe1f0c21c8e8abf74e54893d} 
+\index{Game::Engine@{Game::Engine}!mainWindowSetup@{mainWindowSetup}}
+\index{mainWindowSetup@{mainWindowSetup}!Game::Engine@{Game::Engine}}
+\doxysubsubsection{\texorpdfstring{mainWindowSetup()}{mainWindowSetup()}}
+{\footnotesize\ttfamily void Engine\+::main\+Window\+Setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Funkcja ustawia główne okno silnika gry. 
+
+Ta funkcja inicjuje okno główne gry, konfiguruje różne elementy gry i wchodzi w pętlę zarządzającą różnymi oknami w oparciu o bieżący stan. \Hypertarget{class_game_1_1_engine_aac52e4251bbd785c7dbb277eb3a02175}\label{class_game_1_1_engine_aac52e4251bbd785c7dbb277eb3a02175} 
+\index{Game::Engine@{Game::Engine}!setMainBufferTexture@{setMainBufferTexture}}
+\index{setMainBufferTexture@{setMainBufferTexture}!Game::Engine@{Game::Engine}}
+\doxysubsubsection{\texorpdfstring{setMainBufferTexture()}{setMainBufferTexture()}}
+{\footnotesize\ttfamily void Engine\+::set\+Main\+Buffer\+Texture (\begin{DoxyParamCaption}\item[{Sprite}]{texture\+Sprite }\end{DoxyParamCaption})}
+
+
+
+Funkcja ustawia teksturę głównego bufora. 
+
+Ta funkcja czyści główny bufor, rysuje na nim określoną teksturę, , a następnie wyświetla bufor.
+
+
+\begin{DoxyParams}{Parametry}
+{\em tekstur\+Sprite} & Duszek reprezentujący teksturę do narysowania w głównym buforze. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_1_1_engine_a94b4050191d978fbad4914c8c9cfd098}\label{class_game_1_1_engine_a94b4050191d978fbad4914c8c9cfd098} 
+\index{Game::Engine@{Game::Engine}!setSecondBufferTexture@{setSecondBufferTexture}}
+\index{setSecondBufferTexture@{setSecondBufferTexture}!Game::Engine@{Game::Engine}}
+\doxysubsubsection{\texorpdfstring{setSecondBufferTexture()}{setSecondBufferTexture()}}
+{\footnotesize\ttfamily void Engine\+::set\+Second\+Buffer\+Texture (\begin{DoxyParamCaption}\item[{Sprite}]{texture\+Sprite }\end{DoxyParamCaption})}
+
+
+
+Funkcja ustawia teksturę w drugim buforze. 
+
+Metoda ta przyjmuje obiekt Sprite reprezentujący teksturę i ustawia go w drugim buforze.
+
+
+\begin{DoxyParams}{Parametry}
+{\em tekstury\+Sprite} & Obiekt Sprite charakterystyczny teksturę, która może być ustawiona w drugim buforze. \\
+\hline
+\end{DoxyParams}
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Krzysiek/source/repos/miluski/\+Football\+Head2\+D/Engine.\+hpp\item 
+C\+:/\+Users/\+Krzysiek/source/repos/miluski/\+Football\+Head2\+D/Engine.\+cpp\end{DoxyCompactItemize}

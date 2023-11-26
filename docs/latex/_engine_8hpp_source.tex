@@ -1,0 +1,304 @@
+\doxysection{Engine.\+hpp}
+\hypertarget{_engine_8hpp_source}{}\label{_engine_8hpp_source}\index{C:/Users/Krzysiek/source/repos/miluski/FootballHead2D/Engine.hpp@{C:/Users/Krzysiek/source/repos/miluski/FootballHead2D/Engine.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_USE\_MATH\_DEFINES}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <SFML/System.hpp>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <SFML/Audio.hpp>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00018\ \textcolor{keyword}{using\ namespace\ }sf;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{enum}\ windowNames\ \{STARTUP\_SETTINGS,\ MENU,\ GAME,\ GAME\_HELPER\};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{enum}\ rectNames\ \{RESOLUTION\_1,\ RESOLUTION\_2,\ RESOLUTION\_3,\ PLAY\};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{namespace\ }Game\ \{}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine}{Engine}}\ \{}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ activeWindowName;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_game_1_1_engine}{Engine}}\&\ getInstance()\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_game_1_1_engine}{Engine}}\ engine;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ engine;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_aeed6ad2bbe1f0c21c8e8abf74e54893d}{mainWindowSetup}}();}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_aac52e4251bbd785c7dbb277eb3a02175}{setMainBufferTexture}}(Sprite\ textureSprite);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_a94b4050191d978fbad4914c8c9cfd098}{setSecondBufferTexture}}(Sprite\ textureSprite);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ RenderWindow*\ \mbox{\hyperlink{class_game_1_1_engine_aa3e5849dd439915c2ce5c47f839d5c74}{getMainWindow}}();}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_a71ab55b57910731ca7bcd66417b5c268}{clearWindowToColor}}(Color\ color);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_a6102b2d68ea13e0f990d656e63e3d2bc}{clearSpriteToColor}}(Sprite\&,\ Color\ color);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{GameObject}}\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a1ca26733e7e3ec45942e1a8726bd5e3e}{setX}}(\textcolor{keywordtype}{float}\ x);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_ad2497dfcb90ada8a121c32fef605530e}{setY}}(\textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a70e0e2e2dcfdd339e7b5f07b38dc7064}{getX}}();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a233eb91c677b0bf36e397de46ebc166d}{getY}}();}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ actualPosition;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object}{DrawableObject}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{GameObject}}\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ draw(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_transformable_object}{TransformableObject}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{GameObject}}\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ translate(Vector2f\ position);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ rotate(\textcolor{keywordtype}{float}\ angle);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ scale(Vector2f\ scale);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object}{ShapeObject}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object}{DrawableObject}},\ \mbox{\hyperlink{class_game_1_1_engine_1_1_transformable_object}{TransformableObject}}\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ draw()\ \{\};}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ translate(Vector2f\ position)\ \{\};}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ rotate(\textcolor{keywordtype}{float}\ angle)\ \{\};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ scale(Vector2f\ scale)\ \{\};}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setColor(Color\ color)\ \{\};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ Color\ getColor()\ \{\};}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Rectangle}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object}{ShapeObject}}\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a16c60d7ff664abd6c176a7f2a561ee37}{Rectangle}}();}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a16c60d7ff664abd6c176a7f2a561ee37}{Rectangle}}(Vector2f\ size);}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a2c046f82b013668719083d1764215eff}{draw}}();}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a86f3aca2726936cb1da39338172fb015}{translate}}(Vector2f\ position);}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_ac441c9a8396b8ee354d5af68295b0f2e}{rotate}}(\textcolor{keywordtype}{float}\ angle);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_ab548415908710ecf0759c36709e6159b}{scale}}(Vector2f\ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_ab548415908710ecf0759c36709e6159b}{scale}});}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a34cb6a1c40605a7f8deeda21ff7e0ae6}{setColor}}(Color\ color);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ Color\ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a2cd2a46be7a6c98c395ebd1e23ef2864}{getColor}}();}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ RectangleShape\ rectangle;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_circle}{Circle}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object}{ShapeObject}}\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_circle}{Circle}}(\textcolor{keywordtype}{float}\ radius);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_a459a9aef03638662fc8b3e9020590998}{draw}}();}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_a1e176096de8594f10405d6459f24764b}{translate}}(Vector2f\ position);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_aa6d61d135af33e770d4d9f1dbdf89401}{rotate}}(\textcolor{keywordtype}{float}\ angle);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_afe72e6fe77cf6b8799de590dc57d7c04}{scale}}(Vector2f\ \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_afe72e6fe77cf6b8799de590dc57d7c04}{scale}});}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_adf86ad7a48d520ce465d023f5bb31dac}{setColor}}(Color\ color);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ Color\ \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_a12b4f4456a82dae333c2766163554fe6}{getColor}}();}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ CircleShape\ circle;}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_triangle}{Triangle}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object}{ShapeObject}}\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle}{Triangle}}(\textcolor{keywordtype}{float}\ radius);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_a1323188324ed17688a89135f14168b78}{draw}}();}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_aecdf434a0c63d25740e2fc3ef2f51a48}{translate}}(Vector2f\ position);}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_af6de94a73eea889878a39c133ef55406}{rotate}}(\textcolor{keywordtype}{float}\ angle);}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_ae5d1e3e0d06546a92a2d3e85eae4102d}{scale}}(Vector2f\ \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_ae5d1e3e0d06546a92a2d3e85eae4102d}{scale}});}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_a85dd542394da6885fa1f23f16b133a4e}{setColor}}(Color\ color);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ Color\ \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_acc5f96dfc2c9155e235b41e871a6eeb0}{getColor}}();}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ CircleShape\ triangle;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler_a2b50d45d3f691a18810590ce68a3bc6d}{BitmapHandler}}();}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler_a2b50d45d3f691a18810590ce68a3bc6d}{BitmapHandler}}(\textcolor{keywordtype}{string}\ fileName);}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler_a2b50d45d3f691a18810590ce68a3bc6d}{BitmapHandler}}(Text\ text,\ Vector2i\ size,\ Color\ textureColor);}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler_a7160da189c9f6f39cfd928be87a0ce86}{createBitmap}}(Vector2f\ size);}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler_a42146b5339adef1f6548ac00981b931e}{loadBitmapFrom}}(\textcolor{keywordtype}{string}\ fileName);}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler_ac917643e80e0ec2c301adf8645b94aff}{createBitmapFrom}}(Text\ text,\ Vector2i\ size,\ Color\ textureColor);}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler_a443eab82b5a9008213179067ebbf77c9}{copy}}();}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler_a797072ef9580889c67da014ebd2ef05b}{saveBitmapTo}}(\textcolor{keywordtype}{string}\ fileName);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler_a30692951a1f87f1363730ec1d81f48bd}{deleteBitmap}}();}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ Texture\ bitmap;}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setBitmap(Texture\ bitmap);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_animated_object}{AnimatedObject}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{GameObject}}\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ animate();}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_player}{Player}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{GameObject}}\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a8b4635a8e7c6880bb6af3e49e07b471b}{setActualSpeed}}(\textcolor{keywordtype}{float}\ speed);}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a5cfb009947a5f4f2a30867ba9c0d7901}{setPlayerBitmap}}(\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ bitmap);}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_player_afd02ce88f80b3d6a2db3c96e579d5e1e}{setActualPosition}}(Vector2f\ position);}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a11e47c2f53baee32cac93308705531f5}{getActualSpeed}}();}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ \mbox{\hyperlink{class_game_1_1_engine_1_1_player_acd47ba220f33f85c37af3bde0f75f982}{getActualPosition}}();}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a94ba66a900eb7d8982aaaa554251a1a2}{getPlayerBitmap}}();}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ goals\ =\ 0;}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ actualSpeed\ =\ 0.0f;}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ position;}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ playerBitmap;}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_ball}{Ball}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{GameObject}}\ \{}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_ball_a99804a8aee7e3466abbcc975e74ec1c3}{setActualSpeed}}(\textcolor{keywordtype}{float}\ speed);}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_ball_a121f78cb49f3e2214d194cd85e4e3bc2}{setBallBitmap}}(\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ bitmap);}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_ball_ac1e5a52d5abd11c90f6291b0def6a6ef}{setActualPosition}}(Vector2f\ position);}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_ball_a3a61bdacb3112d8786ca7cf581012b5f}{getActualSpeed}}();}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ \mbox{\hyperlink{class_game_1_1_engine_1_1_ball_a81f1d9942c2060512888ad575545a41a}{getActualPosition}}();}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_ball_abae01fac308d2a5442e957afb13aee48}{getBallBitmap}}();}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ actualSpeed\ =\ 0.0f;}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ position;}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ ballBitmap;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_object}{BitmapObject}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object}{DrawableObject}}\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_object_ab9abc311b570eb04b8534e076d0fb522}{draw}}();}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ Sprite\ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_object_a57f9427d4571188a22120dbaeabcb344}{getSprite}}();}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ Sprite\ spriteObject;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object}{SpriteObject}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_object}{BitmapObject}},\ \mbox{\hyperlink{class_game_1_1_engine_1_1_animated_object}{AnimatedObject}}\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a9242b7026bc16fe2427a048c644b848b}{SpriteObject}}();}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a9242b7026bc16fe2427a048c644b848b}{SpriteObject}}(Texture*\ bitmap,\ Vector2f\ position,\ Vector2f\ scale);}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_ae76c98db66acd98dcfd881ad1fefa685}{createSpriteFrom}}(Texture*\ bitmap,\ Vector2f\ position,\ Vector2f\ scale);}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_ae76c98db66acd98dcfd881ad1fefa685}{createSpriteFrom}}(Texture*\ bitmap[],\ \textcolor{keywordtype}{int}\ bitmapArraySize,\ Vector2f\ positions[],\ Vector2f\ scales[]);}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a58e508efc34662896e90da10744f212d}{setCollisionRect}}(IntRect\ collisionRect);}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a503ea24094039f67d79eb1e24592467e}{animate}}(\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ bitmap,\ \mbox{\hyperlink{class_game_1_1_engine_1_1_player}{Player}}*\ player);}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ activeBuffer\ =\ \textcolor{stringliteral}{"{}second"{}};}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ centered\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ pause\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ mute\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ Vector2u*\ windowSize\ =\ \textcolor{keyword}{new}\ Vector2u(400,\ 400);}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ RenderWindow*\ window\ =\ \textcolor{keyword}{new}\ RenderWindow(VideoMode(windowSize-\/>x,\ windowSize-\/>y),\ \textcolor{stringliteral}{"{}"{}},\ Style::Titlebar\ |\ Style::Close);}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ RenderTexture*\ backgroundRenderTexture\ =\ \textcolor{keyword}{new}\ RenderTexture();}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Rectangle}}\ resolution1Button\ =\ getButton(20,\ Color::Green,\ Vector2f(200,\ 50));}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Rectangle}}\ resolution2Button\ =\ getButton(100,\ Color::Green,\ Vector2f(200,\ 50));}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Rectangle}}\ resolution3Button\ =\ getButton(180,\ Color::Green,\ Vector2f(200,\ 50));}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_player}{Player}}\ leftPlayer;}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_player}{Player}}\ rightPlayer;}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_ball}{Ball}}\ ball;}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ backgroundTexture;}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ leftPlayerBitmap;}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ rightPlayerBitmap;}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ leftPlayerShot;}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ rightPlayerShot;}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ Color\ menuTextColor\ =\ Color::White;}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ Color\ pauseTextColor\ =\ Color::White;}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ Color\ startTextColor\ =\ Color::White;}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ Color\ optionsTextColor\ =\ Color::White;}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ Color\ authorTextColor\ =\ Color::White;}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ Color\ exitTextColor\ =\ Color::White;}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ Music\ music;}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ Vector2i\ windowPosition;}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ RenderTexture\ mainBuffer;}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ RenderTexture\ secondBuffer;}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ Clock\ clock;}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ Font\ font;}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ logContent;}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ Clock\ breakClock;}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ Clock\ fpsClock;}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ menuWindowSetup();}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ settingsWindowSetup();}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ gameWindowSetup(\textcolor{keywordtype}{string}\ currentTime);}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ gameHelperWindowSetup();}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setWidthAndHeight(\mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Rectangle}}\ resolution1Button,\ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Rectangle}}\ resolution2Button,\ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Rectangle}}\ resolution3Button);}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setFrameRateLimit();}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setLogContent(\textcolor{keywordtype}{string}\ logContent);}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ Text\ getText(Color\ color,\ \textcolor{keywordtype}{string}\ content);}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ Text\ getText(Color\ color,\ \textcolor{keywordtype}{int}\ fontSize,\ \textcolor{keywordtype}{string}\ content);}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Rectangle}}\ getButton(\textcolor{keywordtype}{float}\ yShift,\ Color\ color,\ Vector2f\ size);}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Rectangle}}\ getButton(Color\ color,\ Vector2f\ size,\ Vector2f\ position);}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ Font*\ getFont(\textcolor{keywordtype}{string}\ fontName);}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ getFramePerSecondText(\textcolor{keywordtype}{float}\ currentTime);}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ getCurrentTime();}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ Vector2f\ getGatePosition(\textcolor{keywordtype}{string}\ gateName);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ Vector2f\ getPlayerPosition(\textcolor{keywordtype}{string}\ playerName);}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getRectNameWhenMouseIsPressedIn();}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ getLoudSpeakerFileName();}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setMenuBackground();}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setGameBackground(\textcolor{keywordtype}{string}\ currentTime);}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ checkRectsActions();}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ checkMenuRectsActions();}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ checkPlayerActions(\mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object}{SpriteObject}}\ player1,\ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object}{SpriteObject}}\ player2);}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ checkCollisions();}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ serveWindowCloseEvent();}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ drawButtons();}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ drawTexts();}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleBuffers();}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ validateLogContentFormat();}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ saveLog();}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ testPrimitiveRenderer();}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ testPoint2D();}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ testLineSegment();}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ testRectFill();}
+\DoxyCodeLine{00256\ \ \ \ \ \};}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_point2_d_a2415006d697f1c222c17254bdd302098}{Point2D}}();}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_point2_d_a2415006d697f1c222c17254bdd302098}{Point2D}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_point2_d_a2415006d697f1c222c17254bdd302098}{Point2D}}(Color\ pixelColor,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_1_1_point2_d_a1d99db0ab55004e689f6df96fe159fb8}{getX}}();}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_1_1_point2_d_ae4a95e28df1efd23b68a377b35624cfd}{getY}}();}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ Color\ \mbox{\hyperlink{class_game_1_1_point2_d_a9d9917b975e3337afc974e6437ceb9e1}{getPixelColor}}();}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_point2_d_a78c84cfda1c48f400b01cc4e020d688e}{setPixelColor}}(Color\ pixelColor);}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_point2_d_ac876b70ff7778bba781805dfe7e2602d}{setCoords}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_point2_d_a56a0272b0188470a72bf3cdaa8af73aa}{draw}}();}
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ Color\ pixelColor\ =\ Color::White;}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x;}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y;}
+\DoxyCodeLine{00273\ \ \ \ \ \};}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_line_segment}{LineSegment}}\ \{}
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_line_segment}{LineSegment}}(\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ startPoint,\ \mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ endPoint);}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ \mbox{\hyperlink{class_game_1_1_line_segment_aeb83232245ae09e6559108f6eb34d445}{getStartPoint}}();}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ \mbox{\hyperlink{class_game_1_1_line_segment_a40acf1c2c2b15ea4da32054f2fb6fbf3}{getEndPoint}}();}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_line_segment_a5fd3e5850cca0ac606745937570a9273}{setStartPoint}}(\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ startPoint);}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_line_segment_a964de34f5fad2c47d762e137a455d655}{setEndPoint}}(\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ endPoint);}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_line_segment_a99be1084e532ceb21a240f8bbfd9daef}{draw}}(Color\ color);}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_line_segment_a721839f7c349b22adeb2c9d6450ba1b4}{drawIncreased}}(Color\ color);}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ startPoint;}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ endPoint;}
+\DoxyCodeLine{00287\ \ \ \ \ \};}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_1_1_primitive_renderer}{PrimitiveRenderer}}\ \{}
+\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_a54df568c619e42b07599653571177ca7}{drawRectangle}}(Vector2f\ size,\ Vector2f\ position,\ Color\ color);}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_a4113ac2709d662cfbe8a260b2e533eda}{drawCircle}}(\textcolor{keywordtype}{float}\ radius,\ Vector2f\ position,\ Color\ color);}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_a9da3bc9313aa224ae7b25b150ae4147a}{drawSymetricCircle}}(\textcolor{keywordtype}{float}\ radius,\ \mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ startPoint,\ Color\ color);}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_a3d929f30f2629be5233a00292d1ae68b}{drawTriangle}}(\textcolor{keywordtype}{float}\ radius,\ Vector2f\ position,\ Color\ color);}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_a1bb9dd27f5a97220453082c3b151e480}{drawIncreasedLine}}(Vector2f\ startCoords,\ Vector2f\ endCoords,\ Color\ color);}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_a67bb5d68ed2107d1aebf7ec1a71893ab}{drawLine}}(Vector2f\ startCoords,\ Vector2f\ endCoords,\ Color\ color);}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_ac8dcb97ea57de0201a506ded7b20fee9}{drawBrokenLine}}(vector<LineSegment>\ lines,\ Color\ color);}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_a0c14d89bcf2d56288ed4c9598be3d356}{drawEllipse}}(\textcolor{keywordtype}{float}\ radiusX,\ \textcolor{keywordtype}{float}\ radiusY,\ \mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ startPoint,\ Color\ color);}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_acd0095b21ccfa8947e864cbc085b6b3e}{isLinesCrossing}}(\mbox{\hyperlink{class_game_1_1_line_segment}{LineSegment}}\ line1,\ \mbox{\hyperlink{class_game_1_1_line_segment}{LineSegment}}\ line2);}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_ac3d510948436507c06a9b3f00f999bed}{drawPolygon}}(vector<LineSegment>\ lines,\ Color\ color);}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_aa4097eae13d52a5a1c2621d27311716d}{borderRectFill}}(\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ point,\ Color\ fillColor,\ Color\ borderColor);}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_primitive_renderer_a9141a4f3c73dd4d6caa93e3141c4b8e8}{floodRectFill}}(\mbox{\hyperlink{class_game_1_1_point2_d}{Point2D}}\ point,\ Color\ fillColor,\ Color\ backgroundColor);}
+\DoxyCodeLine{00303\ \ \ \ \ \};}
+\DoxyCodeLine{00304\ \}}
+
+\end{DoxyCode}
