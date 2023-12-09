@@ -12,7 +12,7 @@ void Engine::mainWindowSetup() {
     font = *getFont("arial");
     setFrameRateLimit();
     Image iconImage;
-    iconImage.loadFromFile("elements/Pilka.png");
+    iconImage.loadFromFile("elements/game/Pilka.png");
     window->setIcon(iconImage.getSize().x, iconImage.getSize().y, iconImage.getPixelsPtr());
     window->setVerticalSyncEnabled(true);
     string fps = "";
@@ -32,10 +32,20 @@ void Engine::mainWindowSetup() {
                 menuWindowSetup();
             break;
             case GAME:
+                isPreviousFromThisWindow = false;
                 gameWindowSetup(fps);
             break;
-            case GAME_HELPER:
-                gameHelperWindowSetup();
+            case AUTHORS:
+                isPreviousFromThisWindow = true;
+                authorsWindowSetup();
+            break;
+            case GAME_OPTIONS:
+                isPreviousFromThisWindow = true;
+                gameOptionsWindowSetup();
+            break;
+            case WINNER_SCREEN:
+                isPreviousFromThisWindow = false;
+                winnerWindowSetup();
             break;
         }
     }
@@ -71,11 +81,13 @@ void Engine::menuWindowSetup() {
         mainBuffer.create(windowSize->x, windowSize->y);
         secondBuffer.create(windowSize->x, windowSize->y);
         backgroundRenderTexture->create(window->getSize().x, window->getSize().y);
-        music.openFromFile("sounds/menu_music.wav");
-        if (!mute)
+        if (!mute && !isPreviousFromThisWindow) {
+            music.openFromFile("sounds/menu_music.wav");
             music.play();
+        }
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
-        string fileName = "backgrounds/main/SG" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
+        string fileName = "backgrounds/main/SG" + to_string(window->getSize().x) 
+            + "x" + to_string(window->getSize().y) + ".png";
         backgroundTexture.loadBitmapFrom(fileName);
         centered = true;
     }
@@ -96,12 +108,24 @@ void Engine::menuWindowSetup() {
 void Engine::gameWindowSetup(string currentTime) {
     VideoMode desktop = VideoMode::getDesktopMode();
     if (!centered) {
-        string fileName = "backgrounds/stadium/stadion" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
-        BitmapHandler ballBitmap("elements/Pilka.png");
-        leftPlayerBitmap.loadBitmapFrom("elements/Haaland.png");
-        rightPlayerBitmap.loadBitmapFrom("elements/Ymbape.png");
-        leftPlayerShot.loadBitmapFrom("elements/Haaland2.png");
-        rightPlayerShot.loadBitmapFrom("elements/Ymbape2.png");
+        if (endedGame) {
+            gameTimer.restart();
+            endedGame = false;
+        }
+        string fileName = "backgrounds/stadium/" + stadiumSkin + "/stadion" + to_string(window->getSize().x) 
+            + "x" + to_string(window->getSize().y) + ".png";
+        BitmapHandler ballBitmap("elements/game/Pilka.png");
+        leftPlayerBitmap.loadBitmapFrom("elements/game/leftPlayer/" + leftPlayerSkin + "/Haaland.png");
+        rightPlayerBitmap.loadBitmapFrom("elements/game/rightPlayer/" + rightPlayerSkin + "/Ymbape.png");
+        leftPlayerShot.loadBitmapFrom("elements/game/leftPlayer/" + leftPlayerSkin + "/Haaland_strzal.png");
+        rightPlayerShot.loadBitmapFrom("elements/game/rightPlayer/" + rightPlayerSkin + "/Ymbape_strzal.png");
+        leftPlayerFreezed.loadBitmapFrom("elements/game/leftPlayer/" + leftPlayerSkin + "/Haaland_zamrozony.png");
+        rightPlayerFreezed.loadBitmapFrom("elements/game/rightPlayer/" + rightPlayerSkin + "/Ymbape_zamrozony.png");
+        leftPlayerDisabled.loadBitmapFrom("elements/game/leftPlayer/" + leftPlayerSkin + "/Haaland_zlamany.png");
+        rightPlayerDisabled.loadBitmapFrom("elements/game/rightPlayer/" + rightPlayerSkin + "/Ymbape_zlamany.png");
+        iceCube.loadBitmapFrom("elements/game/lod.png");
+        leftLegBroken.loadBitmapFrom("elements/game/NogaBandazL.png");
+        rightLegBroken.loadBitmapFrom("elements/game/NogaBandazP.png");
         backgroundTexture.loadBitmapFrom(fileName);
         font = *getFont("Pixellari");
         music.stop();
@@ -129,27 +153,102 @@ void Engine::gameWindowSetup(string currentTime) {
     }
     else 
         setGameBackground(currentTime);
-    if (music.getStatus() != Music::Status::Playing && !pause && !mute)
+    if (music.getStatus() != Music::Status::Playing && !pause && !mute && !endedGame)
         music.play();
 }
 
 /**
- * @brief Funkcja ustawia okno pomocy gry.
+ * @brief Funkcja ustawia okno autorów gry.
  *
- * Ta funkcja konfiguruje okno pomocy gry, ustawiając jego limit liczby klatek na sekundę,
+ * Ta funkcja konfiguruje okno autorów gry, ustawiając jego limit liczby klatek na sekundę,
  * umieszczenie go na środku pulpitu (jeśli jeszcze okno nie jest wyśrodkowane) i ustawienie
- * tytuł okna na „Game Helper”. Dodatkowo dostosowuje rozmiar okna w oparciu o
+ * tytuł okna na „Authors”. Dodatkowo dostosowuje rozmiar okna w oparciu o
  * podaną rozdzielczość.
  */
-void Engine::gameHelperWindowSetup() {
+void Engine::authorsWindowSetup() {
     VideoMode desktop = VideoMode::getDesktopMode();
-    setFrameRateLimit();
     if (!centered) {
+        string fileName = "backgrounds/authors/autorzy" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
+        setFrameRateLimit();
+        window->setTitle("Autorzy");
+        window->setSize(*windowSize);
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
+        backgroundTexture.loadBitmapFrom(fileName);
         centered = true;
     }
-    window->setTitle("Game Helper");
-    window->setSize(*windowSize);
+    checkArrowRectActions();
+    BitmapHandler arrowBitmap(getArrowFileName());
+    Texture* bitmapArray[2] = { &backgroundTexture.bitmap, &arrowBitmap.bitmap };
+    Vector2f positions[2] = { Vector2f(0.0f, 0.0f), Vector2f((window->getSize().x) / 1.075f, 20.0f) };
+    Vector2f scales[2] = { Vector2f(1.0f, 1.0f), Vector2f(0.5f, 0.5f) };
+    SpriteObject background;
+    background.createSpriteFrom(bitmapArray, 2, positions, scales);
+    background.draw();
+}
+
+void Engine::gameOptionsWindowSetup() {
+    VideoMode desktop = VideoMode::getDesktopMode();
+    if (!centered) {
+        string fileName = "backgrounds/settings/ustawieniatlo" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
+        setFrameRateLimit();
+        window->setTitle("Ustawienia gry");
+        window->setSize(*windowSize);
+        window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
+        backgroundTexture.loadBitmapFrom(fileName);
+        centered = true;
+    }
+    checkArrowRectActions();
+    BitmapHandler arrowBitmap(getArrowFileName());
+    Texture* bitmapArray[2] = { &backgroundTexture.bitmap, &arrowBitmap.bitmap };
+    Vector2f positions[2] = { Vector2f(0.0f, 0.0f), Vector2f((window->getSize().x) / 1.075f, 20.0f) };
+    Vector2f scales[2] = { Vector2f(1.0f, 1.0f), Vector2f(0.5f, 0.5f) };
+    SpriteObject background;
+    background.createSpriteFrom(bitmapArray, 2, positions, scales);
+    background.draw();
+}
+
+void Engine::winnerWindowSetup() {
+    VideoMode desktop = VideoMode::getDesktopMode();
+    if (!centered) {
+        winnerScreenMusic.openFromFile("sounds/winner.wav");
+        font = *getFont("Pixellari");
+        endText = "R E M I S!";
+        window->setTitle("Remis!");
+        endTextX = (window->getSize().x) / 2.60f;
+        switch (winnerNumber) {
+            case 1:
+                if(!mute)
+                    winnerScreenMusic.play();
+                window->setTitle("Zwyciestwo!");
+                endText = "G R A C Z  1  W Y G R A L";
+                endTextX = (window->getSize().x) / 4.55f;
+            break;
+            case 2:
+                if (!mute)
+                    winnerScreenMusic.play();
+                window->setTitle("Zwyciestwo!");
+                endText = "G R A C Z  2  W Y G R A L";
+                endTextX = (window->getSize().x) / 4.55f;
+            break;
+        }
+        string fileName = "backgrounds/winner/winektlo" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
+        setFrameRateLimit();
+        window->setSize(*windowSize);
+        window->setPosition(Vector2i((desktop.width - windowSize->x) / 2.0f, (desktop.height - windowSize->y) / 2.0f));
+        backgroundRenderTexture->clear();
+        backgroundTexture.loadBitmapFrom(fileName);
+        centered = true;
+    }
+    checkArrowRectActions();
+    BitmapHandler arrowBitmap(getArrowFileName());
+    BitmapHandler endTextBitmap(getText(exitTextColor, 72, endText), Vector2i(1000, 100), Color::Transparent);
+    Texture* bitmapArray[3] = { &backgroundTexture.bitmap, &arrowBitmap.bitmap, &endTextBitmap.bitmap };
+    Vector2f positions[3] = { Vector2f(0.0f, 0.0f), Vector2f((window->getSize().x) / 1.075f, 20.0f),
+                                Vector2f(endTextX, (window->getSize().y) / 2.2f)};
+    Vector2f scales[3] = { Vector2f(1.0f, 1.0f), Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f) };
+    SpriteObject background;
+    background.createSpriteFrom(bitmapArray, 3, positions, scales);
+    background.draw();
 }
 
 /**
@@ -476,20 +575,32 @@ string Engine::getLoudSpeakerFileName() {
             music.pause();
             mute = true;
             sleep(seconds(0.25f));
-            return "elements/glosnikMute.png";
+            return "elements/menu/glosnikMute.png";
         }
         if (Mouse::isButtonPressed(Mouse::Left) && mute) {
             music.play();
             mute = false;
             sleep(seconds(0.25f));
-            return "elements/glosnik.png";
+            return "elements/menu/glosnik.png";
         }
-        return "elements/glosnikMute.png";
+        return "elements/menu/glosnikMute.png";
     }
     else if (!mute)
-        return "elements/glosnik.png";
+        return "elements/menu/glosnik.png";
     else if (mute)
-        return "elements/glosnikMute.png";
+        return "elements/menu/glosnikMute.png";
+    return "elements/menu/glosnik.png";
+}
+
+string Engine::getArrowFileName() {
+    Vector2i mouseBounds = Mouse::getPosition(*window);
+    float mouseX = mouseBounds.x;
+    float mouseY = mouseBounds.y;
+    FloatRect arrowRect(Vector2f((window->getSize().x) / 1.075f, 20.0f), Vector2f(60.0f, 55.0f));
+    if (arrowRect.contains(mouseX, mouseY)) 
+        return "elements/menu/strzalkaHover.png";
+    else
+        return "elements/menu/strzalka.png";
 }
 
 /**
@@ -516,6 +627,19 @@ void Engine::setMenuBackground() {
     SpriteObject gameBackground;
     gameBackground.createSpriteFrom(bitmapArray, 6, positions, scales);
     gameBackground.draw();
+}
+
+void Engine::checkArrowRectActions() {
+    Vector2i mouseBounds = Mouse::getPosition(*window);
+    float mouseX = mouseBounds.x;
+    float mouseY = mouseBounds.y;
+    FloatRect arrowRect(Vector2f((window->getSize().x) / 1.075f, 20.0f), Vector2f(60.0f, 55.0f));
+    if (arrowRect.contains(mouseX, mouseY) && Mouse::isButtonPressed(Mouse::Left)) {
+        winnerScreenMusic.stop();
+        getInstance().activeWindowName = MENU;
+        centered = false;
+        return;
+    }
 }
 
 /**
@@ -552,10 +676,9 @@ void Engine::checkMenuRectsActions() {
     }
     else if (optionsRect.contains(mouseX, mouseY)) {
         if (Mouse::isButtonPressed(Mouse::Left)) {
-            //;
-            //centered = false;
-            //Obsluga przycisku OPCJE tutaj
-            //return;
+            getInstance().activeWindowName = GAME_OPTIONS;
+            centered = false;
+            return;
         }
         else {
             startTextColor = Color::White;
@@ -565,11 +688,10 @@ void Engine::checkMenuRectsActions() {
         }
     }
     else if (authorRect.contains(mouseX, mouseY)) {
-        if (Mouse::isButtonPressed(Mouse::Left)) { 
-            //;
-            //centered = false;
-            //Obsluga przycisku AUTORZY tutaj
-            //return;
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            getInstance().activeWindowName = AUTHORS;
+            centered = false;
+            return;
         }
         else {
             startTextColor = Color::White; 
@@ -600,21 +722,14 @@ bool Engine::checkIsGoalAtLeftGate() {
             goalMusic.openFromFile("sounds/goalYmbape.wav");
             goalMusic.play();
         }
-        rightPlayerPoints++;
-        if (goalTimer.getElapsedTime().asSeconds() < 2)
-            sleep(seconds(5));
-        if (goalTimer.getElapsedTime().asSeconds() >= 2) {
-            centered = false;
-            pause = false;
-            goalTimer.restart();
-        }
         return true;
     }
     return false;
 }
 
 bool Engine::checkIsGoalAtRightGate() {
-    FloatRect rightGateGoalRect((window->getSize().x) / 1.1f, (window->getSize().y) / 3.2f, (window->getSize().x) / 6.0f, (window->getSize().y) / 2.5f);
+    FloatRect rightGateGoalRect((window->getSize().x) / 1.175f, (window->getSize().y) / 3.2f, 
+        (window->getSize().x) / 10.0f, (window->getSize().y) / 2.5f);
     Vector2f ballPosition(ball.getActualPosition().x, ball.getActualPosition().y);
     if (rightGateGoalRect.contains(ballPosition)) {
         pause = true;
@@ -622,14 +737,6 @@ bool Engine::checkIsGoalAtRightGate() {
         if (!mute) {
             goalMusic.openFromFile("sounds/goalHaaland.wav");
             goalMusic.play();
-        }
-        leftPlayerPoints++;
-        if (goalTimer.getElapsedTime().asSeconds() < 2)
-            sleep(seconds(5));
-        if (goalTimer.getElapsedTime().asSeconds() >= 2) {
-            centered = false;
-            pause = false;
-            goalTimer.restart();
         }
         return true;
     }
@@ -649,26 +756,18 @@ void Engine::setGameBackground(string currentTime) {
     float elapsedSeconds = totalElapsedTime;
     if (!pause) 
         elapsedSeconds = gameTimer.getElapsedTime().asSeconds() + totalElapsedTime;
-    if (leftPlayerPoints >= goalCountRequiredToWin || rightPlayerPoints >= goalCountRequiredToWin ||
-        elapsedSeconds >= secondsRequiredToEndTheGame) {
-        gameTimer.restart();
-        leftPlayerPoints = 0;
-        rightPlayerPoints = 0;
-        whistleMusic.stop();
-        goalMusic.stop();
-        music.stop();
-        centered = false;
-        getInstance().activeWindowName = MENU; // TODO: Change MENU -> WINNER_SCREEN, ADD WINNER_SCREEN
-        return;
-    }
     checkRectsActions();
     moveBall();
     int differenceInSeconds = static_cast<int>(secondsRequiredToEndTheGame - elapsedSeconds);
     int minutes = differenceInSeconds / 60;
     int seconds = differenceInSeconds % 60;
-    string timeString = to_string(minutes) + ":" + to_string(seconds);
-    BitmapHandler leftGateBitmap("elements/BramkaL.png");
-    BitmapHandler rightGateBitmap("elements/BramkaP.png");
+    string timeString = to_string(minutes) + ":";
+    if (seconds >= 10)
+        timeString += to_string(seconds);
+    else if (seconds < 10)
+        timeString += "0" + to_string(seconds);
+    BitmapHandler leftGateBitmap("elements/game/BramkaL.png");
+    BitmapHandler rightGateBitmap("elements/game/BramkaP.png");
     BitmapHandler fpsTextBitmap(getText(Color::White, currentTime), Vector2i(100, 100), Color::Transparent);
     BitmapHandler pauseTextBitmap(getText(pauseTextColor, 42, "PAUZA"), Vector2i(200, 200), Color::Transparent);
     BitmapHandler menuTextBitmap(getText(menuTextColor, 42, "MENU"), Vector2i(150, 150), Color::Transparent);
@@ -680,23 +779,47 @@ void Engine::setGameBackground(string currentTime) {
     BitmapHandler leftPlayerBitmap = leftPlayer.getPlayerBitmap();
     BitmapHandler rightPlayerBitmap = rightPlayer.getPlayerBitmap();
     BitmapHandler ballBitmap = ball.getBallBitmap();
-    Texture* bitmapArray[9] = { &backgroundTexture.bitmap, &leftGateBitmap.bitmap, &rightGateBitmap.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap, 
+    Texture* bitmapArray[7] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap, 
         &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
         &timeLeftBitmap.bitmap };
-    Vector2f positions[9] = { Vector2f(0.0f, 0.0f), getGatePosition("left"), getGatePosition("right"), Vector2f(0.0f, 0.0f), 
-        Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f), Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f), 
-        Vector2f((window->getSize().x) / 2.5f , (window->getSize().y) / 12.0f), Vector2f((window->getSize().x) / 1.715f , (window->getSize().y) / 12.0f), 
+    Vector2f positions[7] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.0f), 
+        Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f), 
+        Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f), 
+        Vector2f((window->getSize().x) / 2.5f , (window->getSize().y) / 12.0f), 
+        Vector2f((window->getSize().x) / 1.715f , (window->getSize().y) / 12.0f), 
         Vector2f((window->getSize().x) / 2.1f, (window->getSize().y) / 12.0f) };
-    Vector2f scales[9] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
+    Vector2f scales[7] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
                             Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f) };
     SpriteObject gameBackground;
-    gameBackground.createSpriteFrom(bitmapArray, 9, positions, scales);
+    gameBackground.createSpriteFrom(bitmapArray, 7, positions, scales);
     SpriteObject leftPlayerSprite(&(leftPlayerBitmap.bitmap), leftPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
     SpriteObject rightPlayerSprite(&(rightPlayerBitmap.bitmap), rightPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
+    SpriteObject ballSprite(&(ballBitmap.bitmap), ball.getActualPosition(), Vector2f(0.05f, 0.05f));
+    SpriteObject leftGateSprite(&(leftGateBitmap.bitmap), getGatePosition("left"), Vector2f(1.0f, 1.0f));
+    SpriteObject rightGateSprite(&(rightGateBitmap.bitmap), getGatePosition("right"), Vector2f(1.0f, 1.0f));
     checkCollisions();
-    SpriteObject ballSprite(&(ballBitmap.bitmap), ball.getActualPosition(), Vector2f(0.07f, 0.07f));
     checkPlayerActions(leftPlayerSprite, rightPlayerSprite);
     gameBackground.draw();
+    if (leftPlayerPoints > goalCountRequiredToWin || rightPlayerPoints > goalCountRequiredToWin ||
+        elapsedSeconds >= secondsRequiredToEndTheGame) {
+        endedGame = true;
+        centered = false;
+        finalWhistleMusic.openFromFile("sounds/final_whistle.wav");
+        finalWhistleMusic.play();
+        gameTimer.restart();
+        if (leftPlayerPoints > rightPlayerPoints)
+            winnerNumber = 1;
+        else if (leftPlayerPoints < rightPlayerPoints)
+            winnerNumber = 2;
+        leftPlayerPoints = 0;
+        rightPlayerPoints = 0;
+        whistleMusic.stop();
+        goalMusic.stop();
+        music.stop();
+        sleep(sf::seconds(2));
+        getInstance().activeWindowName = WINNER_SCREEN;
+        return;
+    }
 }
 
 /**
@@ -742,6 +865,7 @@ void Engine::checkRectsActions() {
     }
     else if (menuRect.contains(mouseX, mouseY) && !pause) {
         if (Mouse::isButtonPressed(Mouse::Left)) {
+            gameTimer.restart();
             leftPlayerPoints = 0;
             rightPlayerPoints = 0;
             getInstance().activeWindowName = MENU;
@@ -757,40 +881,44 @@ void Engine::checkRectsActions() {
 }
 
 void Engine::moveBall() {
-    Vector2f ballPosition = ball.getActualPosition();
-    random_device rd;
-    default_random_engine engine(rd());
-    uniform_real_distribution<float> distribution(0.5f, 1.0f);
-    float randomFloat = distribution(engine);
-    switch (ballMoveDirection) {
+    if (!pause) {
+        Vector2f ballPosition = ball.getActualPosition();
+        random_device rd;
+        default_random_engine engine(rd());
+        uniform_real_distribution<float> distribution(0.5f, 1.0f);
+        float randomFloat = distribution(engine);
+        switch (ballMoveDirection) {
         case NORTH:
-            ball.setActualPosition(Vector2f(ballPosition.x, ballPosition.y - ball.getActualSpeed() * randomFloat));
-        break;
+            ball.setActualPosition(Vector2f(ballPosition.x, ballPosition.y - ball.getActualSpeed()));
+            break;
         case SOUTH:
-            ball.setActualPosition(Vector2f(ballPosition.x, ballPosition.y + ball.getActualSpeed() * randomFloat));
-        break;
+            ball.setActualPosition(Vector2f(ballPosition.x, ballPosition.y + ball.getActualSpeed()));
+            break;
         case WEST:
-            ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat, ballPosition.y));
-        break;
+            ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat,
+                ballPosition.y));
+            break;
         case EAST:
-            ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat, ballPosition.y));
-        break;
+            ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
+                ballPosition.y));
+            break;
         case NORTH_EAST:
-            ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat, 
-                                            ballPosition.y - ball.getActualSpeed()));
-        break;
+            ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
+                ballPosition.y - ball.getActualSpeed() * randomFloat));
+            break;
         case SOUTH_EAST:
-            ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat, 
-                                            ballPosition.y + ball.getActualSpeed()));
-        break;
+            ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
+                ballPosition.y + ball.getActualSpeed() * randomFloat));
+            break;
         case NORTH_WEST:
-            ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat, 
-                                            ballPosition.y - ball.getActualSpeed()));
-        break;
+            ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat,
+                ballPosition.y - ball.getActualSpeed() * randomFloat));
+            break;
         case SOUTH_WEST:
-            ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat, 
-                                            ballPosition.y + ball.getActualSpeed()));
-        break;
+            ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat,
+                ballPosition.y + ball.getActualSpeed() * randomFloat));
+            break;
+        }
     }
 }
 
@@ -812,7 +940,8 @@ void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2) {
     FloatRect rightCollisionRect((window->getSize().x) / 1.3f, 0.0f, (window->getSize().x) / 1.3f, window->getSize().y);
     if (!pause) {
         if (Keyboard::isKeyPressed(Keyboard::W)) 
-            leftPlayer.setActualPosition(Vector2f(leftPlayer.getActualPosition().x, getPlayerPosition("Haaland").y - leftPlayer.getActualSpeed() * 15.0f), "left");
+            leftPlayer.setActualPosition(Vector2f(leftPlayer.getActualPosition().x, 
+                getPlayerPosition("Haaland").y - leftPlayer.getActualSpeed() * 15.0f), "left");
         else if (!Keyboard::isKeyPressed(Keyboard::W) && leftPlayer.getActualPosition().y!= getPlayerPosition("Haaland").y)
             leftPlayer.setActualPosition(Vector2f(leftPlayer.getActualPosition().x, getPlayerPosition("Haaland").y), "left");
         else if (Keyboard::isKeyPressed(Keyboard::A) && !leftCollisionRect.contains(leftPlayerPosition)) {
@@ -827,7 +956,8 @@ void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2) {
                 leftPlayer.setActualPosition(player1Sprite.getPosition(), "left");
         }
         if (Keyboard::isKeyPressed(Keyboard::Up))
-            rightPlayer.setActualPosition(Vector2f(rightPlayer.getActualPosition().x, getPlayerPosition("Ymbape").y - rightPlayer.getActualSpeed() * 15.0f), "right");
+            rightPlayer.setActualPosition(Vector2f(rightPlayer.getActualPosition().x, 
+                getPlayerPosition("Ymbape").y - rightPlayer.getActualSpeed() * 15.0f), "right");
         else if (!Keyboard::isKeyPressed(Keyboard::Up) && rightPlayer.getActualPosition().y != getPlayerPosition("Ymbape").y)
             rightPlayer.setActualPosition(Vector2f(rightPlayer.getActualPosition().x, getPlayerPosition("Ymbape").y), "right");
         else if (Keyboard::isKeyPressed(Keyboard::Left) && (leftPlayerPosition.x < rightPlayerPosition.x - 100.0f) &&
@@ -868,44 +998,60 @@ void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2) {
  * jak również określone obszary bramek dla lewej i prawej bramki.
  */
 void Engine::checkCollisions() {
-    srand(time(NULL));
-    FloatRect bottomCollisionRect(0.0f, (window->getSize().y) / 1.45f, window->getSize().x, (window->getSize().y)/2.0f);
-    FloatRect topCollisionRect(0.0f, 0.0f, window->getSize().x, (window->getSize().y) / 5.0f);
-    FloatRect leftCollisionRect(0.0f, 0.0f, (window->getSize().x) / 10.0f, window->getSize().y);
-    FloatRect rightCollisionRect((window->getSize().x) / 1.1f, 0.0f, (window->getSize().x) / 1.3f, window->getSize().y);
-    FloatRect leftGateGoalRect(0.0f, (window->getSize().y) / 3.25f, (window->getSize().x) / 10.0f, (window->getSize().y) / 2.3f);
-    FloatRect rightGateGoalRect((window->getSize().x) / 1.1f, (window->getSize().y) / 3.2f, (window->getSize().x) / 6.0f, (window->getSize().y) / 2.5f);
-    Vector2f ballPosition(ball.getActualPosition().x, ball.getActualPosition().y);
-    Vector2f leftPlayerPosition(leftPlayer.getActualPosition().x, leftPlayer.getActualPosition().y);
-    Vector2f rightPlayerPosition(rightPlayer.getActualPosition().x, rightPlayer.getActualPosition().y);
-    if (!checkIsGoalAtLeftGate() && !checkIsGoalAtRightGate() && !checkIsCollisionWithPlayer()) {
-        if (leftCollisionRect.contains(ballPosition) && !leftGateGoalRect.contains(ballPosition)
-            && !topCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition)
-            && ballMoveDirection != EAST)
-            ballMoveDirection = 5+rand()%2;
-        else if (rightCollisionRect.contains(ballPosition) && !rightGateGoalRect.contains(ballPosition)
-            && !topCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition)
-            && ballMoveDirection != WEST)
-            ballMoveDirection = 2+rand()%2;
-        else if (topCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
-            && !leftCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition)
-            && ballMoveDirection != SOUTH)
-            ballMoveDirection = SOUTH;
-        else if (bottomCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
-            && !leftCollisionRect.contains(ballPosition) && !topCollisionRect.contains(ballPosition) &&
-            ballMoveDirection != NORTH_WEST)
-            ballMoveDirection = NORTH_WEST;
-        else if (bottomCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
-            && !leftCollisionRect.contains(ballPosition) && !topCollisionRect.contains(ballPosition) &&
-            ballMoveDirection != NORTH_EAST)
-            ballMoveDirection = NORTH_EAST;
-        else if (leftCollisionRect.contains(ballPosition) && (ballMoveDirection == WEST
-            || ballMoveDirection == NORTH_WEST || ballMoveDirection == SOUTH_WEST))
-            ballMoveDirection = EAST;
-        else if (rightCollisionRect.contains(ballPosition) && !rightGateGoalRect.contains(ballPosition)
-            && !topCollisionRect.contains(ballPosition)
-            && ballMoveDirection != WEST)
-            ballMoveDirection = WEST;
+    if (!pause) {
+        srand(time(NULL));
+        FloatRect bottomCollisionRect(0.0f, (window->getSize().y) / 1.45f, window->getSize().x, (window->getSize().y) / 2.0f);
+        FloatRect topCollisionRect(0.0f, 0.0f, window->getSize().x, (window->getSize().y) / 5.0f);
+        FloatRect leftCollisionRect(0.0f, 0.0f, (window->getSize().x) / 10.0f, window->getSize().y);
+        FloatRect rightCollisionRect((window->getSize().x) / 1.1f, 0.0f, (window->getSize().x) / 1.3f, window->getSize().y);
+        FloatRect leftGateGoalRect(0.0f, (window->getSize().y) / 3.25f, (window->getSize().x) / 10.0f, (window->getSize().y) / 2.3f);
+        FloatRect rightGateGoalRect((window->getSize().x) / 1.175f, (window->getSize().y) / 3.2f, 
+            (window->getSize().x) / 6.0f, (window->getSize().y) / 2.5f);
+        Vector2f ballPosition(ball.getActualPosition().x, ball.getActualPosition().y);
+        Vector2f leftPlayerPosition(leftPlayer.getActualPosition().x, leftPlayer.getActualPosition().y);
+        Vector2f rightPlayerPosition(rightPlayer.getActualPosition().x, rightPlayer.getActualPosition().y);
+        if (!checkIsGoalAtLeftGate() && !checkIsGoalAtRightGate() && !checkIsCollisionWithPlayer()) {
+            if (leftCollisionRect.contains(ballPosition) && !leftGateGoalRect.contains(ballPosition)
+                && !topCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition)
+                && ballMoveDirection != EAST)
+                ballMoveDirection = NORTH_EAST;
+            else if (rightCollisionRect.contains(ballPosition) && !rightGateGoalRect.contains(ballPosition)
+                && !topCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition)
+                && ballMoveDirection != WEST)
+                ballMoveDirection = NORTH_WEST;
+            else if (topCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
+                && !leftCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition)
+                && ballMoveDirection != SOUTH)
+                ballMoveDirection = SOUTH;
+            else if (bottomCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
+                && !leftCollisionRect.contains(ballPosition) && !topCollisionRect.contains(ballPosition)) {
+                ballMoveDirection = 2 + rand() % 2;
+                ball.setActualSpeed(ball.getActualSpeed() / 1.025f);
+            }
+            else if (bottomCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
+                && !leftCollisionRect.contains(ballPosition) && !topCollisionRect.contains(ballPosition) &&
+                ballMoveDirection != NORTH_EAST)
+                ballMoveDirection = NORTH_EAST;
+            else if (leftCollisionRect.contains(ballPosition) && (ballMoveDirection == WEST
+                || ballMoveDirection == NORTH_WEST || ballMoveDirection == SOUTH_WEST))
+                ballMoveDirection = EAST;
+            else if (rightCollisionRect.contains(ballPosition) && !rightGateGoalRect.contains(ballPosition)
+                && !topCollisionRect.contains(ballPosition)
+                && ballMoveDirection != WEST)
+                ballMoveDirection = WEST;
+        }
+        bool goalLeft = checkIsGoalAtLeftGate();
+        bool goalRight = checkIsGoalAtRightGate();
+        if (goalLeft || goalRight) {
+            if (goalLeft)
+                rightPlayerPoints++;
+            else
+                leftPlayerPoints++;
+            while (goalTimer.getElapsedTime().asSeconds() < 3);
+            centered = false;
+            pause = false;
+            goalTimer.restart();
+        }
     }
 }
 
@@ -932,8 +1078,21 @@ void Engine::serveWindowCloseEvent() {
 bool Engine::checkIsCollisionWithPlayer() {
     Vector2f ballPosition = ball.getActualPosition();
     bool isCollision = false;
-    if (leftPlayer.topRect.contains(ballPosition) || rightPlayer.topRect.contains(ballPosition)) {
-        ballMoveDirection = NORTH;
+    cout << leftPlayer.isShooting << endl;
+    if (leftPlayer.shoeRect.contains(ballPosition) && leftPlayer.isShooting) {
+        ballMoveDirection = NORTH_EAST;
+        isCollision = true;
+    }
+    if (rightPlayer.shoeRect.contains(ballPosition) && rightPlayer.isShooting) {
+        ballMoveDirection = NORTH_WEST;
+        isCollision = true;
+    }
+    else if (leftPlayer.topRect.contains(ballPosition)) {
+        ballMoveDirection = NORTH_EAST;
+        isCollision = true;
+    }
+    else if (rightPlayer.topRect.contains(ballPosition)) {
+        ballMoveDirection = NORTH_WEST;
         isCollision = true;
     }
     else if (leftPlayer.leftRect.contains(ballPosition) || rightPlayer.rightRect.contains(ballPosition)) {
@@ -942,14 +1101,6 @@ bool Engine::checkIsCollisionWithPlayer() {
     }
     else if (leftPlayer.rightRect.contains(ballPosition) || rightPlayer.leftRect.contains(ballPosition)) {
         ballMoveDirection = WEST;
-        isCollision = true;
-    }
-    else if (leftPlayer.isShooting && leftPlayer.shoeRect.contains(ballPosition)) {
-        ballMoveDirection = NORTH_EAST;
-        isCollision = true;
-    }
-    else if (rightPlayer.isShooting && rightPlayer.shoeRect.contains(ballPosition)) {
-        ballMoveDirection = NORTH_WEST;
         isCollision = true;
     }
     return isCollision;
@@ -1102,74 +1253,6 @@ void Engine::saveLog() {
     fileStream << logContent << endl;
     fileStream.close();
     cout << logContent << endl;
-}
-
-/**
- * @brief Funkcja testuje funkcje renderujące kształty przy użyciu PrimitiveRenderer.
- *
- * Tworzy instancję PrimitiveRenderer, a następnie rysuje różne kształty i figury
- * za pomocą jej metod. Niektóre fragmenty kodu są zakomentowane, aby uniknąć
- * niepotrzebnego renderowania w czasie testowania.
- */
-void Engine::testPrimitiveRenderer() {
-    PrimitiveRenderer primitiveRenderer;
-    //primitiveRenderer.drawTriangle(Vector2f(200.0f, 200.0f), Vector2f(100.0f, 100.0f), Color::White);
-    //primitiveRenderer.drawCircle(50.0f, Vector2f(100.0f, 100.0f), Color::White);
-    //primitiveRenderer.drawTriangle(25.0f, Vector2f(100.0f, 100.0f), Color::White);
-    //primitiveRenderer.drawIncreasedLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 100.0f), Color::Blue); // m <=1
-    //primitiveRenderer.drawIncreasedLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 200.0f), Color::Blue); // m przekracza 1
-    //primitiveRenderer.drawLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 100.0f), Color::Blue); // zgadza się z m <=1 (linia renderowana przez mechanizm SFML)
-    //primitiveRenderer.drawLine(Vector2f(0.0f, 0.0f), Vector2f(100.0f, 200.0f), Color::Blue); // zgadza się z m przekracza 1 (linia renderowana przez mechanizm SFML)
-    vector<LineSegment> lines;
-    Point2D startPoint(5.0f, 5.0f);
-    Point2D endPoint(100.0f, 5.0f);
-    LineSegment line1(startPoint, endPoint);
-    startPoint.setCoords(5.0f, 105.0f);
-    endPoint.setCoords(100.0f, 105.0f);
-    LineSegment line2(startPoint, endPoint);
-    startPoint.setCoords(5.0f, 5.0f);
-    endPoint.setCoords(5.0f, 105.0f);
-    LineSegment line3(startPoint, endPoint);
-    startPoint.setCoords(100.0f, 5.0f);
-    endPoint.setCoords(100.0f, 105.0f);
-    LineSegment line4(startPoint, endPoint);
-    lines.push_back(line1);
-    lines.push_back(line2);
-    lines.push_back(line3);
-    lines.push_back(line4);
-    primitiveRenderer.drawPolygon(lines, Color::Black);
-    //primitiveRenderer.borderRectFill(Point2D(17.0f, 8.0f), Color::Cyan, Color(0,0,0));
-    //primitiveRenderer.drawBrokenLine(lines, Color::Blue);
-    //primitiveRenderer.drawSymetricCircle(50, startPoint, Color::Blue);
-    //primitiveRenderer.drawEllipse(50, 30, startPoint, Color::Red);
-}
-
-/**
- * @brief Metoda do testowania klasy Engine dla punktów 2D.
- *
- * Ta metoda tworzy obiekt klasy Point2D o współrzędnych (75.0f, 100.0f) i wywołuje
- * na nim metodę draw() w celu przetestowania funkcjonalności rysowania punktu.
- *
- * @note Przed użyciem tej metody upewnij się, że obiekt klasy Engine został poprawnie zainicjalizowany.
- *
- * @see Engine, Point2D
- */
-void Engine::testPoint2D() {
-    Point2D point2D(75.0f, 100.0f);
-    point2D.draw();
-}
-
-/**
- * @brief Funkcja testuje funkcjonalność klasy Engine związanej z odcinkiem linii.
- *
- * Tworzy punkty początkowy i końcowy, a następnie tworzy odcinek linii
- * i rysuje go na ekranie w kolorze czarnym.
- */
-void Engine::testLineSegment() {
-    Point2D startPoint(0.0f, 0.0f);
-    Point2D endPoint(100.0f, 100.0f);
-    LineSegment lineSegment(startPoint, endPoint);
-    lineSegment.draw(Color::Black);
 }
 
 /**
