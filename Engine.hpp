@@ -22,7 +22,7 @@ using namespace sf;
 /**
  * @brief Wyliczenie reprezentuj¹ce nazwy okien.
  */
-enum windowNames {STARTUP_SETTINGS, MENU, GAME, GAME_HELPER};
+enum windowNames {STARTUP_SETTINGS, MENU, GAME, AUTHORS, GAME_OPTIONS, WINNER_SCREEN};
 
 /**
  * @brief Wyliczenie reprezentuj¹ce nazwy prostok¹tów.
@@ -32,7 +32,7 @@ enum rectNames {RESOLUTION_1, RESOLUTION_2, RESOLUTION_3, PLAY};
 /**
 * @brief Wyliczenie reprezentuj¹ce kierunek poruszania siê pi³ki.
 */
-enum directionNames {NORTH, SOUTH, WEST, SOUTH_WEST, NORTH_WEST, EAST, SOUTH_EAST, NORTH_EAST};
+enum directionNames {NORTH, SOUTH, WEST, EAST, SOUTH_WEST, NORTH_WEST, SOUTH_EAST, NORTH_EAST};
 
 namespace Game {
 
@@ -148,6 +148,8 @@ namespace Game {
         class Player : public virtual GameObject {
         public:
             bool isShooting = false;
+            bool isFreezed = false;
+            bool isDisabled = false;
             FloatRect topRect;
             FloatRect leftRect;
             FloatRect rightRect;
@@ -199,15 +201,24 @@ namespace Game {
     private:
 
         string activeBuffer = "second";
+        string lastTouchBallPlayerName;
+        string leftPlayerSkin = "skin1";
+        string rightPlayerSkin = "skin1";
+        string stadiumSkin = "stadium1";
+        string endText;
         bool centered = false;
         bool pause = false;
         bool mute = false;
+        bool isPreviousFromThisWindow = false;
+        bool endedGame = false;
         int ballMoveDirection;
         int leftPlayerPoints;
         int rightPlayerPoints;
         int goalCountRequiredToWin = 5;
         int secondsRequiredToEndTheGame = 300;
+        int winnerNumber = 0;
         float totalElapsedTime = 0.0f;
+        float endTextX;
         Vector2u* windowSize = new Vector2u(400, 400);
         RenderWindow* window = new RenderWindow(VideoMode(windowSize->x, windowSize->y), "", Style::Titlebar | Style::Close);
         RenderTexture* backgroundRenderTexture = new RenderTexture();
@@ -222,6 +233,13 @@ namespace Game {
         BitmapHandler rightPlayerBitmap;
         BitmapHandler leftPlayerShot;
         BitmapHandler rightPlayerShot;
+        BitmapHandler leftPlayerDisabled;
+        BitmapHandler rightPlayerDisabled;
+        BitmapHandler leftPlayerFreezed;
+        BitmapHandler rightPlayerFreezed;
+        BitmapHandler iceCube;
+        BitmapHandler leftLegBroken;
+        BitmapHandler rightLegBroken;
         Color menuTextColor = Color::White;
         Color pauseTextColor = Color::White;
         Color startTextColor = Color::White;
@@ -231,6 +249,8 @@ namespace Game {
         Music music;
         Music goalMusic;
         Music whistleMusic;
+        Music finalWhistleMusic;
+        Music winnerScreenMusic;
         Vector2i windowPosition;
         RenderTexture mainBuffer;
         RenderTexture secondBuffer;
@@ -244,7 +264,9 @@ namespace Game {
         void menuWindowSetup();
         void settingsWindowSetup();
         void gameWindowSetup(string currentTime);
-        void gameHelperWindowSetup();
+        void authorsWindowSetup();
+        void gameOptionsWindowSetup();
+        void winnerWindowSetup();
         void setWidthAndHeight(Rectangle resolution1Button, Rectangle resolution2Button, Rectangle resolution3Button);
         void setFrameRateLimit();
         void setLogContent(string logContent);
@@ -259,6 +281,7 @@ namespace Game {
         Vector2f getPlayerPosition(string playerName);
         int getRectNameWhenMouseIsPressedIn();
         string getLoudSpeakerFileName();
+        string getArrowFileName();
         void setMenuBackground();
         void setGameBackground(string currentTime);
         void checkRectsActions();
@@ -266,6 +289,7 @@ namespace Game {
         bool checkIsGoalAtRightGate();
         bool checkIsCollisionWithPlayer();
         void moveBall();
+        void checkArrowRectActions();
         void checkMenuRectsActions();
         void checkPlayerActions(SpriteObject player1, SpriteObject player2);
         void checkCollisions();
