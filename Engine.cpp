@@ -142,7 +142,7 @@ void Engine::gameWindowSetup(string currentTime) {
         ball.setBallBitmap(ballBitmap);
         leftPlayer.setActualSpeed(10.0f);
         rightPlayer.setActualSpeed(10.0f);
-        ball.setActualSpeed(7.5f);
+        ball.setActualSpeed(10.5f);
         leftPlayer.setActualPosition(getPlayerPosition("Haaland"), "left");
         rightPlayer.setActualPosition(getPlayerPosition("Ymbape"), "right");
         ball.setActualPosition(Vector2f((window->getSize().x) / 2.12f, (window->getSize().y) / 5.0f));
@@ -797,8 +797,8 @@ void Engine::setGameBackground(string currentTime) {
     SpriteObject ballSprite(&(ballBitmap.bitmap), ball.getActualPosition(), Vector2f(0.05f, 0.05f));
     SpriteObject leftGateSprite(&(leftGateBitmap.bitmap), getGatePosition("left"), Vector2f(1.0f, 1.0f));
     SpriteObject rightGateSprite(&(rightGateBitmap.bitmap), getGatePosition("right"), Vector2f(1.0f, 1.0f));
-    checkCollisions();
     checkPlayerActions(leftPlayerSprite, rightPlayerSprite);
+    checkCollisions();
     gameBackground.draw();
     if (leftPlayerPoints > goalCountRequiredToWin || rightPlayerPoints > goalCountRequiredToWin ||
         elapsedSeconds >= secondsRequiredToEndTheGame) {
@@ -871,6 +871,9 @@ void Engine::checkRectsActions() {
             getInstance().activeWindowName = MENU;
             centered = false;
             music.stop();
+            goalMusic.stop();
+            whistleMusic.stop();
+            finalWhistleMusic.stop();
             return;
         }
         else {
@@ -887,36 +890,45 @@ void Engine::moveBall() {
         default_random_engine engine(rd());
         uniform_real_distribution<float> distribution(0.5f, 1.0f);
         float randomFloat = distribution(engine);
+        FloatRect bottomCollisionRect(0.0f, (window->getSize().y) / 1.45f, window->getSize().x, (window->getSize().y) / 2.0f);
         switch (ballMoveDirection) {
-        case NORTH:
-            ball.setActualPosition(Vector2f(ballPosition.x, ballPosition.y - ball.getActualSpeed()));
+            case NORTH:
+                ball.setActualPosition(Vector2f(ballPosition.x, ballPosition.y - ball.getActualSpeed()));
             break;
-        case SOUTH:
-            ball.setActualPosition(Vector2f(ballPosition.x, ballPosition.y + ball.getActualSpeed()));
+            case SOUTH:
+                ball.setActualPosition(Vector2f(ballPosition.x, ballPosition.y + ball.getActualSpeed()));
             break;
-        case WEST:
-            ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat,
-                ballPosition.y));
+            case WEST:
+                ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat,
+                    ballPosition.y));
             break;
-        case EAST:
-            ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
-                ballPosition.y));
+            case EAST:
+                ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
+                    ballPosition.y));
             break;
-        case NORTH_EAST:
-            ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
-                ballPosition.y - ball.getActualSpeed() * randomFloat));
+            case NORTH_EAST:
+                ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
+                    ballPosition.y - ball.getActualSpeed() / 1.05f));
             break;
-        case SOUTH_EAST:
-            ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
-                ballPosition.y + ball.getActualSpeed() * randomFloat));
+            case SOUTH_EAST:
+                if (!bottomCollisionRect.contains(ballPosition))
+                    ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
+                        ballPosition.y + ball.getActualSpeed()));
+                else
+                    ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
+                        ballPosition.y));
             break;
-        case NORTH_WEST:
-            ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat,
-                ballPosition.y - ball.getActualSpeed() * randomFloat));
+            case NORTH_WEST:
+                ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat,
+                    ballPosition.y - ball.getActualSpeed() / 1.05f));
             break;
-        case SOUTH_WEST:
-            ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat,
-                ballPosition.y + ball.getActualSpeed() * randomFloat));
+            case SOUTH_WEST:
+                if (!bottomCollisionRect.contains(ballPosition))
+                    ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat,
+                        ballPosition.y + ball.getActualSpeed()));
+                else
+                    ball.setActualPosition(Vector2f(ballPosition.x - ball.getActualSpeed() * randomFloat,
+                        ballPosition.y));
             break;
         }
     }
@@ -1012,12 +1024,10 @@ void Engine::checkCollisions() {
         Vector2f rightPlayerPosition(rightPlayer.getActualPosition().x, rightPlayer.getActualPosition().y);
         if (!checkIsGoalAtLeftGate() && !checkIsGoalAtRightGate() && !checkIsCollisionWithPlayer()) {
             if (leftCollisionRect.contains(ballPosition) && !leftGateGoalRect.contains(ballPosition)
-                && !topCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition)
-                && ballMoveDirection != EAST)
+                && !topCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition))
                 ballMoveDirection = NORTH_EAST;
             else if (rightCollisionRect.contains(ballPosition) && !rightGateGoalRect.contains(ballPosition)
-                && !topCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition)
-                && ballMoveDirection != WEST)
+                && !topCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition))
                 ballMoveDirection = NORTH_WEST;
             else if (topCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
                 && !leftCollisionRect.contains(ballPosition) && !bottomCollisionRect.contains(ballPosition)
@@ -1028,10 +1038,6 @@ void Engine::checkCollisions() {
                 ballMoveDirection = 2 + rand() % 2;
                 ball.setActualSpeed(ball.getActualSpeed() / 1.025f);
             }
-            else if (bottomCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
-                && !leftCollisionRect.contains(ballPosition) && !topCollisionRect.contains(ballPosition) &&
-                ballMoveDirection != NORTH_EAST)
-                ballMoveDirection = NORTH_EAST;
             else if (leftCollisionRect.contains(ballPosition) && (ballMoveDirection == WEST
                 || ballMoveDirection == NORTH_WEST || ballMoveDirection == SOUTH_WEST))
                 ballMoveDirection = EAST;
@@ -1076,32 +1082,48 @@ void Engine::serveWindowCloseEvent() {
 }
 
 bool Engine::checkIsCollisionWithPlayer() {
-    Vector2f ballPosition = ball.getActualPosition();
     bool isCollision = false;
-    cout << leftPlayer.isShooting << endl;
-    if (leftPlayer.shoeRect.contains(ballPosition) && leftPlayer.isShooting) {
-        ballMoveDirection = NORTH_EAST;
-        isCollision = true;
-    }
-    if (rightPlayer.shoeRect.contains(ballPosition) && rightPlayer.isShooting) {
-        ballMoveDirection = NORTH_WEST;
-        isCollision = true;
-    }
-    else if (leftPlayer.topRect.contains(ballPosition)) {
-        ballMoveDirection = NORTH_EAST;
-        isCollision = true;
-    }
-    else if (rightPlayer.topRect.contains(ballPosition)) {
-        ballMoveDirection = NORTH_WEST;
-        isCollision = true;
-    }
-    else if (leftPlayer.leftRect.contains(ballPosition) || rightPlayer.rightRect.contains(ballPosition)) {
-        ballMoveDirection = EAST;
-        isCollision = true;
-    }
-    else if (leftPlayer.rightRect.contains(ballPosition) || rightPlayer.leftRect.contains(ballPosition)) {
-        ballMoveDirection = WEST;
-        isCollision = true;
+    if (!pause) {
+        Vector2f ballPosition = ball.getActualPosition();
+        FloatRect bottomCollisionRect(0.0f, (window->getSize().y) / 1.45f, window->getSize().x, (window->getSize().y) / 2.0f);
+        if (leftPlayer.shoeRect.contains(ballPosition) && leftPlayer.isShooting) {
+            ballMoveDirection = NORTH_EAST;
+            ball.setActualSpeed(10.5f);
+            isCollision = true;
+        }
+        if (rightPlayer.shoeRect.contains(ballPosition) && rightPlayer.isShooting) {
+            ballMoveDirection = NORTH_WEST;
+            ball.setActualSpeed(10.5f);
+            isCollision = true;
+        }
+        else if (leftPlayer.topRect.contains(ballPosition)) {
+            ballMoveDirection = NORTH_EAST;
+            isCollision = true;
+        }
+        else if (rightPlayer.topRect.contains(ballPosition)) {
+            ballMoveDirection = NORTH_WEST;
+            isCollision = true;
+        }
+        else if (leftPlayer.leftRect.contains(ballPosition) || rightPlayer.rightRect.contains(ballPosition)
+            && !bottomCollisionRect.contains(ballPosition)) {
+            ballMoveDirection = SOUTH_EAST;
+            isCollision = true;
+        }
+        else if (leftPlayer.rightRect.contains(ballPosition) || rightPlayer.leftRect.contains(ballPosition)
+            && !bottomCollisionRect.contains(ballPosition)) {
+            ballMoveDirection = SOUTH_WEST;
+            isCollision = true;
+        }
+        else if (leftPlayer.leftRect.contains(ballPosition) || rightPlayer.rightRect.contains(ballPosition)
+            && bottomCollisionRect.contains(ballPosition)) {
+            ballMoveDirection = NORTH_EAST;
+            isCollision = true;
+        }
+        else if (leftPlayer.rightRect.contains(ballPosition) || rightPlayer.leftRect.contains(ballPosition)
+            && bottomCollisionRect.contains(ballPosition)) {
+            ballMoveDirection = NORTH_WEST;
+            isCollision = true;
+        }
     }
     return isCollision;
 }
