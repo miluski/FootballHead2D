@@ -32,7 +32,7 @@ enum rectNames {RESOLUTION_1, RESOLUTION_2, RESOLUTION_3, PLAY};
 /**
 * @brief Wyliczenie reprezentuj¹ce kierunek poruszania siê pi³ki.
 */
-enum directionNames {NORTH, SOUTH, WEST, EAST, SOUTH_WEST, NORTH_WEST, SOUTH_EAST, NORTH_EAST};
+enum directionNames {NORTH, SOUTH, WEST, EAST, SOUTH_WEST, NORTH_WEST, NORTH_EAST, SOUTH_EAST};
 
 namespace Game {
 
