@@ -123,9 +123,9 @@ void Engine::gameWindowSetup(string currentTime) {
         rightPlayerFreezed.loadBitmapFrom("elements/game/rightPlayer/" + rightPlayerSkin + "/Ymbape_zamrozony.png");
         leftPlayerDisabled.loadBitmapFrom("elements/game/leftPlayer/" + leftPlayerSkin + "/Haaland_zlamany.png");
         rightPlayerDisabled.loadBitmapFrom("elements/game/rightPlayer/" + rightPlayerSkin + "/Ymbape_zlamany.png");
-        iceCube.loadBitmapFrom("elements/game/lod.png");
-        leftLegBroken.loadBitmapFrom("elements/game/NogaBandazL.png");
-        rightLegBroken.loadBitmapFrom("elements/game/NogaBandazP.png");
+        iceCubeBitmap.loadBitmapFrom("elements/game/lod.png");
+        leftBrokenLegBitmap.loadBitmapFrom("elements/game/NogaBandazL.png");
+        rightBrokenLegBitmap.loadBitmapFrom("elements/game/NogaBandazP.png");
         backgroundTexture.loadBitmapFrom(fileName);
         font = *getFont("Pixellari");
         music.stop();
@@ -753,7 +753,11 @@ bool Engine::checkIsGoalAtRightGate() {
  * @param currentTime Bieżący czas.
  */
 void Engine::setGameBackground(string currentTime) {
+    float elapsedIceEffectTime = iceEffectRespawnTimer.getElapsedTime().asSeconds();
+    float elapsedBrokenLegEffectTime = brokenLegEffectRespawnTimer.getElapsedTime().asSeconds();
+    float elapsedExistingEffectTime = effectExistingTimer.getElapsedTime().asSeconds();
     float elapsedSeconds = totalElapsedTime;
+    cout << elapsedExistingEffectTime << endl;
     if (!pause) 
         elapsedSeconds = gameTimer.getElapsedTime().asSeconds() + totalElapsedTime;
     checkRectsActions();
@@ -779,19 +783,56 @@ void Engine::setGameBackground(string currentTime) {
     BitmapHandler leftPlayerBitmap = leftPlayer.getPlayerBitmap();
     BitmapHandler rightPlayerBitmap = rightPlayer.getPlayerBitmap();
     BitmapHandler ballBitmap = ball.getBallBitmap();
-    Texture* bitmapArray[7] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap, 
+    SpriteObject gameBackground;
+    if (elapsedIceEffectTime >= 60) {
+       Texture* bitmapArray[8] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
+       &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
+       &timeLeftBitmap.bitmap, &iceCubeBitmap.bitmap };
+        Vector2f positions[8] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.0f),
+            Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f),
+            Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f),
+            Vector2f((window->getSize().x) / 2.5f , (window->getSize().y) / 12.0f),
+            Vector2f((window->getSize().x) / 1.715f , (window->getSize().y) / 12.0f),
+            Vector2f((window->getSize().x) / 2.1f, (window->getSize().y) / 12.0f),
+            Vector2f(0.0f, 0.0f)};
+        Vector2f scales[8] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
+                                Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(0.05f, 0.05f) };
+        gameBackground.createSpriteFrom(bitmapArray, 8, positions, scales);
+    }
+    else if (elapsedBrokenLegEffectTime >= 60) {
+        Texture* bitmapArray[8] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
+        &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
+        &timeLeftBitmap.bitmap, &leftBrokenLegBitmap.bitmap };
+        Vector2f positions[8] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.0f),
+            Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f),
+            Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f),
+            Vector2f((window->getSize().x) / 2.5f , (window->getSize().y) / 12.0f),
+            Vector2f((window->getSize().x) / 1.715f , (window->getSize().y) / 12.0f),
+            Vector2f((window->getSize().x) / 2.1f, (window->getSize().y) / 12.0f),
+            Vector2f(0.0f, 0.0f) };
+        Vector2f scales[8] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
+                                Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(0.5f, 0.5f)};
+        gameBackground.createSpriteFrom(bitmapArray, 8, positions, scales);
+    }
+    else if(elapsedExistingEffectTime >= 90 || elapsedIceEffectTime <= 60 || elapsedBrokenLegEffectTime <= 60 ){
+        Texture* bitmapArray[7] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
         &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
         &timeLeftBitmap.bitmap };
-    Vector2f positions[7] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.0f), 
-        Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f), 
-        Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f), 
-        Vector2f((window->getSize().x) / 2.5f , (window->getSize().y) / 12.0f), 
-        Vector2f((window->getSize().x) / 1.715f , (window->getSize().y) / 12.0f), 
-        Vector2f((window->getSize().x) / 2.1f, (window->getSize().y) / 12.0f) };
-    Vector2f scales[7] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
-                            Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f) };
-    SpriteObject gameBackground;
-    gameBackground.createSpriteFrom(bitmapArray, 7, positions, scales);
+        Vector2f positions[7] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.0f),
+            Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f),
+            Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f),
+            Vector2f((window->getSize().x) / 2.5f , (window->getSize().y) / 12.0f),
+            Vector2f((window->getSize().x) / 1.715f , (window->getSize().y) / 12.0f),
+            Vector2f((window->getSize().x) / 2.1f, (window->getSize().y) / 12.0f) };
+        Vector2f scales[7] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
+                                Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f) };
+        gameBackground.createSpriteFrom(bitmapArray, 7, positions, scales);
+        if (elapsedExistingEffectTime >= 90) {
+            brokenLegEffectRespawnTimer.restart();
+            iceEffectRespawnTimer.restart();
+            effectExistingTimer.restart();
+        }
+    }
     SpriteObject leftPlayerSprite(&(leftPlayerBitmap.bitmap), leftPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
     SpriteObject rightPlayerSprite(&(rightPlayerBitmap.bitmap), rightPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
     SpriteObject ballSprite(&(ballBitmap.bitmap), ball.getActualPosition(), Vector2f(0.05f, 0.05f));
@@ -802,17 +843,17 @@ void Engine::setGameBackground(string currentTime) {
     gameBackground.draw();
     if (leftPlayerPoints > goalCountRequiredToWin || rightPlayerPoints > goalCountRequiredToWin ||
         elapsedSeconds >= secondsRequiredToEndTheGame) {
-        endedGame = true;
-        centered = false;
-        finalWhistleMusic.openFromFile("sounds/final_whistle.wav");
-        finalWhistleMusic.play();
-        gameTimer.restart();
         if (leftPlayerPoints > rightPlayerPoints)
             winnerNumber = 1;
         else if (leftPlayerPoints < rightPlayerPoints)
             winnerNumber = 2;
         leftPlayerPoints = 0;
         rightPlayerPoints = 0;
+        endedGame = true;
+        centered = false;
+        finalWhistleMusic.openFromFile("sounds/final_whistle.wav");
+        finalWhistleMusic.play();
+        gameTimer.restart();
         whistleMusic.stop();
         goalMusic.stop();
         music.stop();
