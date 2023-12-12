@@ -204,7 +204,7 @@ namespace Game {
         string lastTouchBallPlayerName;
         string leftPlayerSkin = "skin1";
         string rightPlayerSkin = "skin1";
-        string stadiumSkin = "stadium1";
+        string stadiumSkin = "stadium2";
         string endText;
         bool centered = false;
         bool pause = false;
@@ -237,9 +237,9 @@ namespace Game {
         BitmapHandler rightPlayerDisabled;
         BitmapHandler leftPlayerFreezed;
         BitmapHandler rightPlayerFreezed;
-        BitmapHandler iceCube;
-        BitmapHandler leftLegBroken;
-        BitmapHandler rightLegBroken;
+        BitmapHandler iceCubeBitmap;
+        BitmapHandler leftBrokenLegBitmap;
+        BitmapHandler rightBrokenLegBitmap;
         Color menuTextColor = Color::White;
         Color pauseTextColor = Color::White;
         Color startTextColor = Color::White;
@@ -261,6 +261,9 @@ namespace Game {
         Clock fpsClock;
         Clock goalTimer;
         Clock gameTimer;
+        Clock iceEffectRespawnTimer;
+        Clock brokenLegEffectRespawnTimer;
+        Clock effectExistingTimer;
         void menuWindowSetup();
         void settingsWindowSetup();
         void gameWindowSetup(string currentTime);
