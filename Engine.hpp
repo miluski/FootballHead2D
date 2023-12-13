@@ -264,7 +264,6 @@ namespace Game {
         Color limit3GoalTextColor = Color::White;
         Color limit5GoalTextColor = Color::White;
         Color limit10GoalTextColor = Color::White;
-
         Music music;
         Music goalMusic;
         Music whistleMusic;
@@ -280,8 +279,6 @@ namespace Game {
         Clock fpsClock;
         Clock goalTimer;
         Clock gameTimer;
-        Clock iceEffectRespawnTimer;
-        Clock brokenLegEffectRespawnTimer;
         Clock effectExistingTimer;
         void menuWindowSetup();
         void settingsWindowSetup();
@@ -302,6 +299,7 @@ namespace Game {
         Vector2f getGatePosition(string gateName);
         Vector2f getPlayerPosition(string playerName);
         int getRectNameWhenMouseIsPressedIn();
+        int getEffectNumber();
         string getLoudSpeakerFileName();
         string getArrowFileName();
         void setMenuBackground();
