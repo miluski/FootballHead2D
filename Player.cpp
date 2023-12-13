@@ -32,8 +32,8 @@ void Engine::Player::setActualPosition(Vector2f position, string positionSite) {
 	Vector2f shoePosition(position.x, position.y);
 	RectangleShape testRect;
 	if (positionSite == "left") {
-		topPosition.x += 45.0f;
-		leftPosition.x += 50.0f;
+		topPosition.x += 65.0f;
+		leftPosition.x += 45.0f;
 		rightPosition.x += 20.0f;
 		shoePosition.x += 85.0f;
 		shoePosition.y += 120.0f;
@@ -49,8 +49,9 @@ void Engine::Player::setActualPosition(Vector2f position, string positionSite) {
 	FloatRect leftRect(leftPosition, Vector2f((getInstance().window->getSize().x) / 8.5f, 
 		(getInstance().window->getSize().y) / 4.0f));
 	testRect.setFillColor(Color::Red);
-	testRect.setSize(Vector2f(100.0f, 100.0f));
-	testRect.setPosition(shoePosition);
+	testRect.setSize(Vector2f((getInstance().window->getSize().x) / 8.5f,
+		(getInstance().window->getSize().y) / 4.0f));
+	testRect.setPosition(leftPosition);
 	getInstance().backgroundRenderTexture->draw(testRect);
 	FloatRect rightRect(rightPosition, Vector2f(30.0f, 140.0f));
 	FloatRect shoeRect(shoePosition, Vector2f(100.0f, 100.0f));
