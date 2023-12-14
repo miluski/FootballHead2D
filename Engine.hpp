@@ -278,11 +278,13 @@ namespace Game {
         Clock clock;
         Font font;
         string logContent;
+        string effectName;
         Clock breakClock;
         Clock fpsClock;
         Clock goalTimer;
         Clock gameTimer;
         Clock effectExistingTimer;
+        FloatRect effectCollisionRect;
         void menuWindowSetup();
         void settingsWindowSetup();
         void gameWindowSetup(string currentTime);
@@ -304,6 +306,7 @@ namespace Game {
         Vector2f getEffectPosition();
         int getRectNameWhenMouseIsPressedIn();
         int getEffectNumber();
+        int getRandomPlayerNumber();
         string getLoudSpeakerFileName();
         string getArrowFileName();
         void setMenuBackground();
@@ -312,11 +315,12 @@ namespace Game {
         bool checkIsGoalAtLeftGate();
         bool checkIsGoalAtRightGate();
         bool checkIsCollisionWithPlayer();
+        string checkIsCollisionWithEffect();
         void moveBall();
         void checkArrowRectActions();
         void checkMenuRectsActions();
         void checkGameOptionsRectsActions();
-        void checkPlayerActions(SpriteObject player1, SpriteObject player2);
+        void checkPlayerActions(SpriteObject player1, SpriteObject player2, string effectName);
         void checkCollisions();
         void serveWindowCloseEvent();
         void drawButtons();
