@@ -50,11 +50,6 @@ void Engine::Player::setActualPosition(Vector2f position, string positionSite) {
 	FloatRect topRect(topPosition, Vector2f(75.0f, 25.0f));
 	FloatRect leftRect(leftPosition, Vector2f((getInstance().window->getSize().x) / 12.5f, 
 		(getInstance().window->getSize().y) / 7.0f));
-	testRect.setFillColor(Color::Red);
-	testRect.setSize(Vector2f((getInstance().window->getSize().x) / 8.5f,
-		(getInstance().window->getSize().y) / 4.0f));
-	testRect.setPosition(leftPosition);
-	//getInstance().backgroundRenderTexture->draw(testRect);
 	FloatRect rightRect(rightPosition, Vector2f(30.0f, 140.0f));
 	FloatRect shoeRect(shoePosition, Vector2f(100.0f, 100.0f));
 	this->position = position;

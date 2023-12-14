@@ -634,6 +634,15 @@ Vector2f Engine::getPlayerPosition(string playerName) {
             (windowSize == secondRes) ? (Vector2f(secondResXPos, secondResYPos)) : Vector2f(thirdResXPos, thirdResYPos));
 }
 
+Vector2f Engine::getEffectPosition() {
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_real_distribution<float> distX(0.0f, window->getSize().y/1.3f);
+    std::uniform_real_distribution<float> distY(0.0f, window->getSize().x-20.0f);
+    Vector2f effectPosition(distX(mt), distY(mt));
+    return effectPosition;
+}
+
 /**
  * @brief Funkcja określa czy muzyka została wyciszona czy włączona na podstawie interakcji myszy.
  *
@@ -1051,12 +1060,20 @@ void Engine::setGameBackground(string currentTime) {
     BitmapHandler rightPlayerBitmap = rightPlayer.getPlayerBitmap();
     BitmapHandler ballBitmap = ball.getBallBitmap();
     SpriteObject gameBackground;
-    if (elapsedExistingEffectTime >= 60) {
-        Vector2f scale(0.025f, 0.025f);
+    if (elapsedExistingEffectTime >= 10) {
+        Vector2f scale(0.015f, 0.015f);
         Texture* bitmapArray[8] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
                                    &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
-                                   &timeLeftBitmap.bitmap, &iceCubeBitmap.bitmap }; 
-        switch (getEffectNumber()) {
+                                   &timeLeftBitmap.bitmap };
+        if (!isEffectActive) {
+            isEffectActive = true;
+            effectNumber = getEffectNumber();
+            effectPosition = getEffectPosition();
+        }
+        switch (effectNumber) {
+            case 1:
+                bitmapArray[7] = &iceCubeBitmap.bitmap;
+            break;
             case 2:
                 scale.x = 0.2f;
                 scale.y = 0.2f;
@@ -1067,19 +1084,20 @@ void Engine::setGameBackground(string currentTime) {
                 scale.y = 0.2f;
                 bitmapArray[7] = &rightBrokenLegBitmap.bitmap;
             break;
-       }
+        }
         Vector2f positions[8] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.0f),
             Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f),
             Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f),
             Vector2f((window->getSize().x) / 2.5f , (window->getSize().y) / 12.0f),
             Vector2f((window->getSize().x) / 1.715f , (window->getSize().y) / 12.0f),
             Vector2f((window->getSize().x) / 2.1f, (window->getSize().y) / 12.0f),
-            Vector2f(0.0f, 0.0f)};
+            effectPosition };
         Vector2f scales[8] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
                                 Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(0.05f, 0.05f) };
         gameBackground.createSpriteFrom(bitmapArray, 8, positions, scales);
     }
-    if(elapsedExistingEffectTime >= 90 || elapsedExistingEffectTime < 10 ){
+    if(elapsedExistingEffectTime >= 90 || elapsedExistingEffectTime < 10 ) {
+        isEffectActive = false;
         Texture* bitmapArray[7] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
         &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
         &timeLeftBitmap.bitmap };
@@ -1109,8 +1127,8 @@ void Engine::setGameBackground(string currentTime) {
             winnerNumber = 1;
         else if (leftPlayerPoints < rightPlayerPoints)
             winnerNumber = 2;
-        setLogContent("Player " + to_string(winnerNumber) + " wins, left player points: " + to_string(leftPlayerPoints)
-            + ", right player point: " + to_string(rightPlayerPoints));
+        savePoints("Player " + to_string(winnerNumber) + " wins, left player points: " + to_string(leftPlayerPoints)
+            + ", right player points: " + to_string(rightPlayerPoints));
         leftPlayerPoints = 0;
         rightPlayerPoints = 0;
         endedGame = true;
@@ -1122,7 +1140,6 @@ void Engine::setGameBackground(string currentTime) {
         goalMusic.stop();
         music.stop();
         getInstance().activeWindowName = WINNER_SCREEN;
-        saveLog();
     }
 }
 
@@ -1338,8 +1355,10 @@ void Engine::checkCollisions() {
                 && ballMoveDirection != SOUTH)
                 ballMoveDirection = SOUTH;
             else if (bottomCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
-                && !leftCollisionRect.contains(ballPosition) && !topCollisionRect.contains(ballPosition)) 
-                ballMoveDirection = 2 + rand()%1;
+                && !leftCollisionRect.contains(ballPosition) && !topCollisionRect.contains(ballPosition)) {
+                ballMoveDirection = 2 + rand() % 1;
+                ball.setActualSpeed(ball.getActualSpeed() / 1.025f);
+            }
         }
         bool goalLeft = checkIsGoalAtLeftGate();
         bool goalRight = checkIsGoalAtRightGate();
@@ -1573,6 +1592,13 @@ void Engine::saveLog() {
     fileStream << logContent << endl;
     fileStream.close();
     cout << logContent << endl;
+}
+
+void Engine::savePoints(string pointsMessage) {
+    fstream fileStream;
+    fileStream.open("points.dat", ios::app);
+    fileStream << pointsMessage << endl;
+    fileStream.close();
 }
 
 /**

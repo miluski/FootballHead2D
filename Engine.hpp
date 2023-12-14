@@ -211,12 +211,14 @@ namespace Game {
         bool mute = false;
         bool isPreviousFromThisWindow = false;
         bool endedGame = false;
+        bool isEffectActive = false;
         int ballMoveDirection;
         int leftPlayerPoints;
         int rightPlayerPoints;
         int goalCountRequiredToWin = 1;
         int secondsRequiredToEndTheGame = 60;
         int winnerNumber = 0;
+        int effectNumber = 1;
         float totalElapsedTime = 0.0f;
         float endTextX;
         Vector2u* windowSize = new Vector2u(400, 400);
@@ -270,6 +272,7 @@ namespace Game {
         Music finalWhistleMusic;
         Music winnerScreenMusic;
         Vector2i windowPosition;
+        Vector2f effectPosition;
         RenderTexture mainBuffer;
         RenderTexture secondBuffer;
         Clock clock;
@@ -298,6 +301,7 @@ namespace Game {
         string getCurrentTime();
         Vector2f getGatePosition(string gateName);
         Vector2f getPlayerPosition(string playerName);
+        Vector2f getEffectPosition();
         int getRectNameWhenMouseIsPressedIn();
         int getEffectNumber();
         string getLoudSpeakerFileName();
@@ -321,6 +325,7 @@ namespace Game {
         void handleBuffers();
         bool validateLogContentFormat();
         void saveLog();
+        void savePoints(string pointsMessage);
         void testPrimitiveRenderer();
         void testPoint2D();
         void testLineSegment();
