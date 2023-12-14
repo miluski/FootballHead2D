@@ -74,6 +74,8 @@ void Engine::settingsWindowSetup() {
  */
 void Engine::menuWindowSetup() {
     VideoMode desktop = VideoMode::getDesktopMode();
+    effectExistingTimer.restart();
+    gameTimer.restart();
     if (!centered) {
         window->setTitle("Menu");
         font = *getFont("Pixellari");
@@ -186,26 +188,93 @@ void Engine::authorsWindowSetup() {
     background.draw();
 }
 
-void Engine::gameOptionsWindowSetup() {
+void Engine::gameOptionsWindowSetup() { 
     VideoMode desktop = VideoMode::getDesktopMode();
     if (!centered) {
         string fileName = "backgrounds/settings/ustawieniatlo" + to_string(window->getSize().x) + "x" + to_string(window->getSize().y) + ".png";
         setFrameRateLimit();
         window->setTitle("Ustawienia gry");
+        font = *getFont("Pixellari");
         window->setSize(*windowSize);
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
         backgroundTexture.loadBitmapFrom(fileName);
         centered = true;
     }
     checkArrowRectActions();
+    checkGameOptionsRectsActions();
     BitmapHandler arrowBitmap(getArrowFileName());
-    Texture* bitmapArray[2] = { &backgroundTexture.bitmap, &arrowBitmap.bitmap };
-    Vector2f positions[2] = { Vector2f(0.0f, 0.0f), Vector2f((window->getSize().x) / 1.075f, 20.0f) };
-    Vector2f scales[2] = { Vector2f(1.0f, 1.0f), Vector2f(0.5f, 0.5f) };
+    BitmapHandler chosePlayer1Bitmap(getText(startTextColor, 52, "Wybor skina gracza 1"), Vector2i(500, 60), Color::Transparent);
+    BitmapHandler player1Halland(getText(player1HallandTextColor, 52, "Haaland"), Vector2i(200, 60), Color::Transparent);
+    BitmapHandler player1Mbappe(getText(player1MbappeTextColor, 52, "Mbappe"), Vector2i(200, 60), Color::Transparent);
+    BitmapHandler player1Messi(getText(player1MessiTextColor, 52, "Messi"), Vector2i(200, 60), Color::Transparent);
+    BitmapHandler player1Ronaldo(getText(player1RonaldoTextColor, 52, "Ronaldo"), Vector2i(200, 60), Color::Transparent);
+    BitmapHandler chosePlayer2Bitmap(getText(startTextColor, 52, "Wybor skina gracza 2"), Vector2i(500, 60), Color::Transparent);
+    BitmapHandler player2Halland(getText(player2HallandTextColor, 52, "Haaland"), Vector2i(200, 60), Color::Transparent);
+    BitmapHandler player2Mbappe(getText(player2MbappeTextColor, 52, "Mbappe"), Vector2i(200, 60), Color::Transparent);
+    BitmapHandler player2Messi(getText(player2MessiTextColor, 52, "Messi"), Vector2i(200, 60), Color::Transparent);
+    BitmapHandler player2Ronaldo(getText(player2RonaldoTextColor, 52, "Ronaldo"), Vector2i(200, 60), Color::Transparent);
+    BitmapHandler choseStadionBitmap(getText(startTextColor, 52, "Wybor stadionu"), Vector2i(500, 60), Color::Transparent);
+    BitmapHandler stadion1(getText(stadion1TextColor, 52, "Stadion 1"), Vector2i(300, 60), Color::Transparent);
+    BitmapHandler stadion2(getText(stadion2TextColor, 52, "Stadion 2"), Vector2i(300, 60), Color::Transparent);
+    BitmapHandler choseGameTimeBitmap(getText(startTextColor, 52, "Wybor dlugosci meczu"), Vector2i(520, 60), Color::Transparent);
+    BitmapHandler timer1Min(getText(timer1TextColor, 52, "1 Min"), Vector2i(170, 60), Color::Transparent);
+    BitmapHandler timer3Min(getText(timer3TextColor, 52, "3 Min"), Vector2i(170, 60), Color::Transparent);
+    BitmapHandler timer5Min(getText(timer5TextColor, 52, "5 Min"), Vector2i(170, 60), Color::Transparent);
+    BitmapHandler timer10Min(getText(timer10TextColor, 52, "10 Min"), Vector2i(170, 60), Color::Transparent);
+    BitmapHandler choseGameGoalLimitBitmap(getText(startTextColor, 52, "Wybor limitu goli"), Vector2i(500, 60), Color::Transparent);
+    BitmapHandler limit1Goal(getText(limit1GoalTextColor, 52, "1 Goli"), Vector2i(170, 60), Color::Transparent);
+    BitmapHandler limit3Goal(getText(limit3GoalTextColor, 52, "3 Goli"), Vector2i(170, 60), Color::Transparent);
+    BitmapHandler limit5Goal(getText(limit5GoalTextColor, 52, "5 Goli"), Vector2i(170, 60), Color::Transparent);
+    BitmapHandler limit10Goal(getText(limit10GoalTextColor, 52, "10 Goli"), Vector2i(170, 60), Color::Transparent);
+    Texture* bitmapArray[25] = { &backgroundTexture.bitmap, &arrowBitmap.bitmap, &chosePlayer1Bitmap.bitmap, &player1Halland.bitmap,
+        &player1Mbappe.bitmap, &player1Messi.bitmap, &player1Ronaldo.bitmap,
+        &chosePlayer2Bitmap.bitmap, &player2Halland.bitmap,
+        &player2Mbappe.bitmap, &player2Messi.bitmap, &player2Ronaldo.bitmap,
+        &choseStadionBitmap.bitmap, &stadion1.bitmap,&stadion2.bitmap,
+        &choseGameTimeBitmap.bitmap,&timer1Min.bitmap,&timer3Min.bitmap,
+        &timer5Min.bitmap,&timer10Min.bitmap,
+        &choseGameGoalLimitBitmap.bitmap,&limit1Goal.bitmap,&limit3Goal.bitmap,
+        &limit5Goal.bitmap,&limit10Goal.bitmap
+    };
+    Vector2f positions[25] = { Vector2f(0.0f, 0.0f), Vector2f((window->getSize().x) / 1.075f, 20.0f), 
+        Vector2f((window->getSize().x) / 3.25f, 20.0f), 
+        Vector2f((window->getSize().x) / 6.0f, 90.0f),
+        Vector2f((window->getSize().x) / 2.9f, 90.0f), 
+        Vector2f((window->getSize().x) / 1.9f, 90.0f),
+        Vector2f((window->getSize().x) / 1.5f, 90.0f),
+
+        Vector2f((window->getSize().x) / 3.25f, 170.0f),
+        Vector2f((window->getSize().x) / 6.0f, 230.0f),
+        Vector2f((window->getSize().x) / 2.9f, 230.0f),
+        Vector2f((window->getSize().x) / 1.9f, 230.0f),
+        Vector2f((window->getSize().x) / 1.5f, 230.0f),
+
+        Vector2f((window->getSize().x) / 2.7f, 310.0f),
+        Vector2f((window->getSize().x) / 5.9f, 370.0f),
+        Vector2f((window->getSize().x) / 2.4f, 370.0f),
+
+        Vector2f((window->getSize().x) / 3.2f, 450.0f),
+        Vector2f((window->getSize().x) / 5.5f, 510.0f),
+        Vector2f((window->getSize().x) / 2.85f, 510.0f),
+        Vector2f((window->getSize().x) / 1.9f, 510.0f),
+        Vector2f((window->getSize().x) / 1.45f, 510.0f),
+
+        Vector2f((window->getSize().x) / 3.0f, 580.0f),
+        Vector2f((window->getSize().x) / 5.5f, 640.0f),
+        Vector2f((window->getSize().x) / 2.85f, 640.0f),
+        Vector2f((window->getSize().x) / 1.9f, 640.0f),
+        Vector2f((window->getSize().x) / 1.45f, 640.0f),
+    };
+    Vector2f scales[25] = { Vector2f(1.0f, 1.0f), Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
+        Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
+        Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),  Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),  Vector2f(1.0f, 1.0f),
+        Vector2f(1.0f, 1.0f),Vector2f(1.0f, 1.0f),Vector2f(1.0f, 1.0f),Vector2f(1.0f, 1.0f),Vector2f(1.0f, 1.0f)
+    };
     SpriteObject background;
-    background.createSpriteFrom(bitmapArray, 2, positions, scales);
+    background.createSpriteFrom(bitmapArray, 25, positions, scales);
     background.draw();
 }
+
 
 void Engine::winnerWindowSetup() {
     VideoMode desktop = VideoMode::getDesktopMode();
@@ -502,6 +571,13 @@ int Engine::getRectNameWhenMouseIsPressedIn() {
     return -1;
 }
 
+int Engine::getEffectNumber() {
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_int_distribution<int> dist(1,3);
+    return dist(mt);
+}
+
 /**
  * @brief Funkcja ustawiająca pozycję bramki w oknie gry.
  *
@@ -556,6 +632,15 @@ Vector2f Engine::getPlayerPosition(string playerName) {
     else
         return (windowSize == firstRes) ? (Vector2f(firstResXPos, firstResYPos)) : (
             (windowSize == secondRes) ? (Vector2f(secondResXPos, secondResYPos)) : Vector2f(thirdResXPos, thirdResYPos));
+}
+
+Vector2f Engine::getEffectPosition() {
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_real_distribution<float> distX(0.0f, window->getSize().y/1.3f);
+    std::uniform_real_distribution<float> distY(0.0f, window->getSize().x-20.0f);
+    Vector2f effectPosition(distX(mt), distY(mt));
+    return effectPosition;
 }
 
 /**
@@ -629,6 +714,7 @@ void Engine::setMenuBackground() {
     gameBackground.draw();
 }
 
+
 void Engine::checkArrowRectActions() {
     Vector2i mouseBounds = Mouse::getPosition(*window);
     float mouseX = mouseBounds.x;
@@ -656,6 +742,7 @@ void Engine::checkMenuRectsActions() {
     FloatRect optionsRect(Vector2f((window->getSize().x) / 2.40f, (window->getSize().y) / 2.5f), Vector2f(220.0f, 60.0f));
     FloatRect authorRect(Vector2f((window->getSize().x) / 2.65f, (window->getSize().y) / 2.05f), Vector2f(350.0f, 60.0f));
     FloatRect exitRect(Vector2f((window->getSize().x) / 2.6f, (window->getSize().y) / 1.75f), Vector2f(350.0f, 60.0f));
+
     if (!startRect.contains(mouseX, mouseY) && !optionsRect.contains(mouseX, mouseY) && !authorRect.contains(mouseX,mouseY) 
         && !exitRect.contains(mouseX,mouseY)){
         startTextColor = Color::White;
@@ -712,6 +799,198 @@ void Engine::checkMenuRectsActions() {
     }
 }
 
+void Engine::checkGameOptionsRectsActions() {
+    Vector2i mouseBounds = Mouse::getPosition(*window);
+    float mouseX = mouseBounds.x;
+    float mouseY = mouseBounds.y;
+    FloatRect player1HallandRect(Vector2f((window->getSize().x) / 6.0f, 90.0f), Vector2f(200.0f, 60.0f));
+    FloatRect player1MbappeRect(Vector2f((window->getSize().x) / 2.9f, 90.0f), Vector2f(200.0f, 60.0f));
+    FloatRect player1MessiRect(Vector2f((window->getSize().x) / 1.9f, 90.0f), Vector2f(120.0f, 60.0f));
+    FloatRect player1RonaldoRect(Vector2f((window->getSize().x) / 1.5f, 90.0f), Vector2f(200.0f, 60.0f));
+
+    FloatRect player2HallandRect(Vector2f((window->getSize().x) / 6.0f, 230.0f), Vector2f(200.0f, 60.0f));
+    FloatRect player2MbappeRect(Vector2f((window->getSize().x) / 2.9f, 230.0f), Vector2f(200.0f, 60.0f));
+    FloatRect player2MessiRect(Vector2f((window->getSize().x) / 1.9f, 230.0f), Vector2f(120.0f, 60.0f));
+    FloatRect player2RonaldoRect(Vector2f((window->getSize().x) / 1.5f, 230.0f), Vector2f(200.0f, 60.0f));
+    
+    FloatRect stadion1Rect(Vector2f((window->getSize().x) / 5.9f, 370.0f), Vector2f(250.0f, 60.0f));
+    FloatRect stadion2Rect(Vector2f((window->getSize().x) / 2.4f, 370.0f), Vector2f(250.0f, 60.0f));
+    FloatRect stadion3Rect(Vector2f((window->getSize().x) / 1.5f, 370.0f), Vector2f(250.0f, 60.0f));
+
+    FloatRect timer1MinRect(Vector2f((window->getSize().x) / 5.5f, 510.0f), Vector2f(170.0f, 60.0f));
+    FloatRect timer3MinRect(Vector2f((window->getSize().x) / 2.85f, 510.0f), Vector2f(170.0f, 60.0f));
+    FloatRect timer5MinRect(Vector2f((window->getSize().x) / 1.9f, 510.0f), Vector2f(170.0f, 60.0f));
+    FloatRect timer10MinRect(Vector2f((window->getSize().x) / 1.45f, 510.0f), Vector2f(170.0f, 60.0f));
+
+    FloatRect limit1GoalRect(Vector2f((window->getSize().x) / 5.5f, 640.0f), Vector2f(170.0f, 60.0f));
+    FloatRect limit3GoalRect(Vector2f((window->getSize().x) / 2.85f, 640.0f), Vector2f(170.0f, 60.0f));
+    FloatRect limit5GoalRect(Vector2f((window->getSize().x) / 1.9f, 640.0f), Vector2f(170.0f, 60.0f));
+    FloatRect limit10GoalRect(Vector2f((window->getSize().x) / 1.45f, 640.0f), Vector2f(170.0f, 60.0f));
+
+    if (player1HallandRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            player1HallandTextColor = Color::Red;
+            player1MbappeTextColor = Color::White;
+            player1MessiTextColor = Color::White;
+            player1RonaldoTextColor = Color::White;
+            leftPlayerSkin = "skin1";
+        }
+    }
+    else if (player1MbappeRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            player1HallandTextColor = Color::White;
+            player1MbappeTextColor = Color::Red;
+            player1MessiTextColor = Color::White;
+            player1RonaldoTextColor = Color::White;
+            leftPlayerSkin = "skin2";
+        }
+    }
+    else if (player1MessiRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            player1HallandTextColor = Color::White;
+            player1MbappeTextColor = Color::White;
+            player1MessiTextColor = Color::Red;
+            player1RonaldoTextColor = Color::White;
+            leftPlayerSkin = "skin3";
+        }
+    }
+    else if (player1RonaldoRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            player1HallandTextColor = Color::White;
+            player1MbappeTextColor = Color::White;
+            player1MessiTextColor = Color::White;
+            player1RonaldoTextColor = Color::Red;
+            leftPlayerSkin = "skin4";
+        }
+    }
+
+    if (player2HallandRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            player2HallandTextColor = Color::Red;
+            player2MbappeTextColor = Color::White;
+            player2MessiTextColor = Color::White;
+            player2RonaldoTextColor = Color::White;
+            rightPlayerSkin = "skin1";
+        }
+    }
+    else if (player2MbappeRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) { 
+            player2HallandTextColor = Color::White;
+            player2MbappeTextColor = Color::Red;
+            player2MessiTextColor = Color::White;
+            player2RonaldoTextColor = Color::White;
+            rightPlayerSkin = "skin2";
+        }
+    }
+    else if (player2MessiRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            player2HallandTextColor = Color::White;
+            player2MbappeTextColor = Color::White;
+            player2MessiTextColor = Color::Red;
+            player2RonaldoTextColor = Color::White;
+            rightPlayerSkin = "skin3";
+        }
+    }
+    else if (player2RonaldoRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            player2HallandTextColor = Color::White;
+            player2MbappeTextColor = Color::White;
+            player2MessiTextColor = Color::White;
+            player2RonaldoTextColor = Color::Red;
+            rightPlayerSkin = "skin4";
+        }
+    }
+
+    if (stadion1Rect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            stadion1TextColor = Color::Red;
+            stadion2TextColor = Color::White;
+            stadiumSkin = "stadium1";
+        }
+    }
+    else if (stadion2Rect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            stadion1TextColor = Color::White;
+            stadion2TextColor = Color::Red;
+            stadiumSkin = "stadium2";
+        }
+    }
+
+    if (timer1MinRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            timer1TextColor = Color::Red;
+            timer3TextColor = Color::White;
+            timer5TextColor = Color::White;
+            timer10TextColor = Color::White;
+            secondsRequiredToEndTheGame = 60;
+        }
+    }
+    else if (timer3MinRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) { 
+            timer1TextColor = Color::White;
+            timer3TextColor = Color::Red;
+            timer5TextColor = Color::White;
+            timer10TextColor = Color::White;
+            secondsRequiredToEndTheGame = 180;
+        }
+    }
+    else if (timer5MinRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            timer1TextColor = Color::White;
+            timer3TextColor = Color::White;
+            timer5TextColor = Color::Red;
+            timer10TextColor = Color::White;
+            secondsRequiredToEndTheGame = 300;
+        }
+    }
+    else if (timer10MinRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            timer1TextColor = Color::White;
+            timer3TextColor = Color::White;
+            timer5TextColor = Color::White;
+            timer10TextColor = Color::Red;
+            secondsRequiredToEndTheGame = 600;
+        }
+    }
+
+    if (limit1GoalRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            limit1GoalTextColor = Color::Red;
+            limit3GoalTextColor = Color::White;
+            limit5GoalTextColor = Color::White;
+            limit10GoalTextColor = Color::White;
+            goalCountRequiredToWin = 1;
+        }
+    }
+    else if (limit3GoalRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            limit1GoalTextColor = Color::White;
+            limit3GoalTextColor = Color::Red;
+            limit5GoalTextColor = Color::White;
+            limit10GoalTextColor = Color::White;
+            goalCountRequiredToWin = 3;
+        }
+    }
+    else if (limit5GoalRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            limit1GoalTextColor = Color::White;
+            limit3GoalTextColor = Color::White;
+            limit5GoalTextColor = Color::Red;
+            limit10GoalTextColor = Color::White;
+            goalCountRequiredToWin = 5;
+        }
+    }
+    else if (limit10GoalRect.contains(mouseX, mouseY)) {
+        if (Mouse::isButtonPressed(Mouse::Left)) { 
+            limit1GoalTextColor = Color::White;
+            limit3GoalTextColor = Color::White;
+            limit5GoalTextColor = Color::White;
+            limit10GoalTextColor = Color::Red;
+            goalCountRequiredToWin = 10;
+        }
+    }
+}
+
 bool Engine::checkIsGoalAtLeftGate() {
     FloatRect leftGateGoalRect(0.0f, (window->getSize().y) / 3.25f, (window->getSize().x) / 10.0f, (window->getSize().y) / 2.3f);
     Vector2f ballPosition(ball.getActualPosition().x, ball.getActualPosition().y);
@@ -753,11 +1032,8 @@ bool Engine::checkIsGoalAtRightGate() {
  * @param currentTime Bieżący czas.
  */
 void Engine::setGameBackground(string currentTime) {
-    float elapsedIceEffectTime = iceEffectRespawnTimer.getElapsedTime().asSeconds();
-    float elapsedBrokenLegEffectTime = brokenLegEffectRespawnTimer.getElapsedTime().asSeconds();
     float elapsedExistingEffectTime = effectExistingTimer.getElapsedTime().asSeconds();
     float elapsedSeconds = totalElapsedTime;
-    cout << elapsedExistingEffectTime << endl;
     if (!pause) 
         elapsedSeconds = gameTimer.getElapsedTime().asSeconds() + totalElapsedTime;
     checkRectsActions();
@@ -784,37 +1060,44 @@ void Engine::setGameBackground(string currentTime) {
     BitmapHandler rightPlayerBitmap = rightPlayer.getPlayerBitmap();
     BitmapHandler ballBitmap = ball.getBallBitmap();
     SpriteObject gameBackground;
-    if (elapsedIceEffectTime >= 60) {
-       Texture* bitmapArray[8] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
-       &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
-       &timeLeftBitmap.bitmap, &iceCubeBitmap.bitmap };
+    if (elapsedExistingEffectTime >= 10) {
+        Vector2f scale(0.015f, 0.015f);
+        Texture* bitmapArray[8] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
+                                   &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
+                                   &timeLeftBitmap.bitmap };
+        if (!isEffectActive) {
+            isEffectActive = true;
+            effectNumber = getEffectNumber();
+            effectPosition = getEffectPosition();
+        }
+        switch (effectNumber) {
+            case 1:
+                bitmapArray[7] = &iceCubeBitmap.bitmap;
+            break;
+            case 2:
+                scale.x = 0.2f;
+                scale.y = 0.2f;
+                bitmapArray[7] = &leftBrokenLegBitmap.bitmap;
+            break;
+            case 3:
+                scale.x = 0.2f;
+                scale.y = 0.2f;
+                bitmapArray[7] = &rightBrokenLegBitmap.bitmap;
+            break;
+        }
         Vector2f positions[8] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.0f),
             Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f),
             Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f),
             Vector2f((window->getSize().x) / 2.5f , (window->getSize().y) / 12.0f),
             Vector2f((window->getSize().x) / 1.715f , (window->getSize().y) / 12.0f),
             Vector2f((window->getSize().x) / 2.1f, (window->getSize().y) / 12.0f),
-            Vector2f(0.0f, 0.0f)};
+            effectPosition };
         Vector2f scales[8] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
                                 Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(0.05f, 0.05f) };
         gameBackground.createSpriteFrom(bitmapArray, 8, positions, scales);
     }
-    else if (elapsedBrokenLegEffectTime >= 60) {
-        Texture* bitmapArray[8] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
-        &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
-        &timeLeftBitmap.bitmap, &leftBrokenLegBitmap.bitmap };
-        Vector2f positions[8] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.0f),
-            Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f),
-            Vector2f((window->getSize().x) / 2.17f, (window->getSize().y) / 1.13f),
-            Vector2f((window->getSize().x) / 2.5f , (window->getSize().y) / 12.0f),
-            Vector2f((window->getSize().x) / 1.715f , (window->getSize().y) / 12.0f),
-            Vector2f((window->getSize().x) / 2.1f, (window->getSize().y) / 12.0f),
-            Vector2f(0.0f, 0.0f) };
-        Vector2f scales[8] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
-                                Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(0.5f, 0.5f)};
-        gameBackground.createSpriteFrom(bitmapArray, 8, positions, scales);
-    }
-    else if(elapsedExistingEffectTime >= 90 || elapsedIceEffectTime <= 60 || elapsedBrokenLegEffectTime <= 60 ){
+    if(elapsedExistingEffectTime >= 90 || elapsedExistingEffectTime < 10 ) {
+        isEffectActive = false;
         Texture* bitmapArray[7] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
         &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
         &timeLeftBitmap.bitmap };
@@ -827,11 +1110,8 @@ void Engine::setGameBackground(string currentTime) {
         Vector2f scales[7] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
                                 Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f) };
         gameBackground.createSpriteFrom(bitmapArray, 7, positions, scales);
-        if (elapsedExistingEffectTime >= 90) {
-            brokenLegEffectRespawnTimer.restart();
-            iceEffectRespawnTimer.restart();
+        if (elapsedExistingEffectTime >= 90) 
             effectExistingTimer.restart();
-        }
     }
     SpriteObject leftPlayerSprite(&(leftPlayerBitmap.bitmap), leftPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
     SpriteObject rightPlayerSprite(&(rightPlayerBitmap.bitmap), rightPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
@@ -841,12 +1121,14 @@ void Engine::setGameBackground(string currentTime) {
     checkPlayerActions(leftPlayerSprite, rightPlayerSprite);
     checkCollisions();
     gameBackground.draw();
-    if (leftPlayerPoints > goalCountRequiredToWin || rightPlayerPoints > goalCountRequiredToWin ||
+    if (leftPlayerPoints >= goalCountRequiredToWin || rightPlayerPoints >= goalCountRequiredToWin ||
         elapsedSeconds >= secondsRequiredToEndTheGame) {
         if (leftPlayerPoints > rightPlayerPoints)
             winnerNumber = 1;
         else if (leftPlayerPoints < rightPlayerPoints)
             winnerNumber = 2;
+        savePoints("Player " + to_string(winnerNumber) + " wins, left player points: " + to_string(leftPlayerPoints)
+            + ", right player points: " + to_string(rightPlayerPoints));
         leftPlayerPoints = 0;
         rightPlayerPoints = 0;
         endedGame = true;
@@ -857,9 +1139,7 @@ void Engine::setGameBackground(string currentTime) {
         whistleMusic.stop();
         goalMusic.stop();
         music.stop();
-        sleep(sf::seconds(2));
         getInstance().activeWindowName = WINNER_SCREEN;
-        return;
     }
 }
 
@@ -949,7 +1229,7 @@ void Engine::moveBall() {
             break;
             case NORTH_EAST:
                 ball.setActualPosition(Vector2f(ballPosition.x + ball.getActualSpeed() * randomFloat,
-                    ballPosition.y - ball.getActualSpeed() / 1.05f));
+                    ballPosition.y - ball.getActualSpeed() * 1.05f));
             break;
             case SOUTH_EAST:
                 if (!bottomCollisionRect.contains(ballPosition))
@@ -1076,25 +1356,17 @@ void Engine::checkCollisions() {
                 ballMoveDirection = SOUTH;
             else if (bottomCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
                 && !leftCollisionRect.contains(ballPosition) && !topCollisionRect.contains(ballPosition)) {
-                ballMoveDirection = 2 + rand() % 2;
+                ballMoveDirection = 2 + rand() % 1;
                 ball.setActualSpeed(ball.getActualSpeed() / 1.025f);
             }
-            else if (leftCollisionRect.contains(ballPosition) && (ballMoveDirection == WEST
-                || ballMoveDirection == NORTH_WEST || ballMoveDirection == SOUTH_WEST))
-                ballMoveDirection = EAST;
-            else if (rightCollisionRect.contains(ballPosition) && !rightGateGoalRect.contains(ballPosition)
-                && !topCollisionRect.contains(ballPosition)
-                && ballMoveDirection != WEST)
-                ballMoveDirection = WEST;
         }
         bool goalLeft = checkIsGoalAtLeftGate();
         bool goalRight = checkIsGoalAtRightGate();
         if (goalLeft || goalRight) {
             if (goalLeft)
-                rightPlayerPoints++;
+                ++rightPlayerPoints;
             else
-                leftPlayerPoints++;
-            while (goalTimer.getElapsedTime().asSeconds() < 3);
+                ++leftPlayerPoints;
             centered = false;
             pause = false;
             goalTimer.restart();
@@ -1132,11 +1404,15 @@ bool Engine::checkIsCollisionWithPlayer() {
             ball.setActualSpeed(10.5f);
             isCollision = true;
         }
+        else if (leftPlayer.shoeRect.contains(ballPosition) && !leftPlayer.isShooting)
+            ball.setActualSpeed(0.0f);
         if (rightPlayer.shoeRect.contains(ballPosition) && rightPlayer.isShooting) {
             ballMoveDirection = NORTH_WEST;
             ball.setActualSpeed(10.5f);
             isCollision = true;
         }
+        else if (rightPlayer.shoeRect.contains(ballPosition) && !rightPlayer.isShooting)
+            ball.setActualSpeed(0.0f);
         else if (leftPlayer.topRect.contains(ballPosition)) {
             ballMoveDirection = NORTH_EAST;
             isCollision = true;
@@ -1316,6 +1592,13 @@ void Engine::saveLog() {
     fileStream << logContent << endl;
     fileStream.close();
     cout << logContent << endl;
+}
+
+void Engine::savePoints(string pointsMessage) {
+    fstream fileStream;
+    fileStream.open("points.dat", ios::app);
+    fileStream << pointsMessage << endl;
+    fileStream.close();
 }
 
 /**
