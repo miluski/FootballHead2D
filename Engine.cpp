@@ -578,6 +578,13 @@ int Engine::getEffectNumber() {
     return dist(mt);
 }
 
+int Engine::getRandomPlayerNumber() {
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_int_distribution<int> dist(1, 2);
+    return dist(mt);
+}
+
 /**
  * @brief Funkcja ustawiająca pozycję bramki w oknie gry.
  *
@@ -1072,14 +1079,17 @@ void Engine::setGameBackground(string currentTime) {
         }
         switch (effectNumber) {
             case 1:
+                effectName = "iceCube";
                 bitmapArray[7] = &iceCubeBitmap.bitmap;
             break;
             case 2:
+                effectName = "leftBrokenLeg";
                 scale.x = 0.2f;
                 scale.y = 0.2f;
                 bitmapArray[7] = &leftBrokenLegBitmap.bitmap;
             break;
             case 3:
+                effectName = "rightBrokenLeg";
                 scale.x = 0.2f;
                 scale.y = 0.2f;
                 bitmapArray[7] = &rightBrokenLegBitmap.bitmap;
@@ -1118,6 +1128,7 @@ void Engine::setGameBackground(string currentTime) {
     SpriteObject ballSprite(&(ballBitmap.bitmap), ball.getActualPosition(), Vector2f(0.05f, 0.05f));
     SpriteObject leftGateSprite(&(leftGateBitmap.bitmap), getGatePosition("left"), Vector2f(1.0f, 1.0f));
     SpriteObject rightGateSprite(&(rightGateBitmap.bitmap), getGatePosition("right"), Vector2f(1.0f, 1.0f));
+    string effectName = checkIsCollisionWithEffect();
     checkPlayerActions(leftPlayerSprite, rightPlayerSprite);
     checkCollisions();
     gameBackground.draw();
@@ -1264,7 +1275,7 @@ void Engine::moveBall() {
  * @param player1 Obiekt SpriteObject dla pierwszego gracza.
  * @param player2 Obiekt SpriteObject dla drugiego gracza.
  */
-void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2) {
+void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2, string effectName) {
     Sprite player1Sprite = player1.getSprite();
     Sprite player2Sprite = player2.getSprite();
     Vector2f leftPlayerPosition(leftPlayer.getActualPosition().x, leftPlayer.getActualPosition().y);
@@ -1443,6 +1454,21 @@ bool Engine::checkIsCollisionWithPlayer() {
         }
     }
     return isCollision;
+}
+
+string Engine::checkIsCollisionWithEffect() {
+    if (!pause) {
+        Vector2f ballPosition = ball.getActualPosition();
+        if (effectCollisionRect.contains(ballPosition)) {
+            if (effectName == "iceCube")
+                return "player" + to_string(getRandomPlayerNumber()) + "freeze";
+            else if (effectName == "leftBrokenLeg")
+                return "left player brokenleg";
+            else if (effectName == "rightBrokenLeg")
+                return "right player brokenleg";
+        }
+    }
+    return "";
 }
 
 /**
