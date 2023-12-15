@@ -283,7 +283,6 @@ namespace Game {
         Clock clock;
         Font font;
         string logContent;
-        string effectName;
         Clock breakClock;
         Clock fpsClock;
         Clock goalTimer;
@@ -322,12 +321,11 @@ namespace Game {
         bool checkIsGoalAtLeftGate();
         bool checkIsGoalAtRightGate();
         bool checkIsCollisionWithPlayer();
-        string checkIsCollisionWithEffect();
         void moveBall();
         void checkArrowRectActions();
         void checkMenuRectsActions();
         void checkGameOptionsRectsActions();
-        void checkPlayerActions(SpriteObject player1, SpriteObject player2, string effectName);
+        void checkPlayerActions(SpriteObject player1, SpriteObject player2);
         void checkCollisions();
         void serveWindowCloseEvent();
         void drawButtons();
