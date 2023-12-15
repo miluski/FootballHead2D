@@ -112,6 +112,12 @@ void Engine::gameWindowSetup(string currentTime) {
     if (!centered) {
         if (endedGame) {
             gameTimer.restart();
+            effectExistingTimer.restart();
+            effectDurationAtPlayerTimer.restart();
+            leftPlayer.isDisabled = false;
+            leftPlayer.isFreezed = false;
+            rightPlayer.isDisabled = false;
+            rightPlayer.isFreezed = false;
             endedGame = false;
         }
         string fileName = "backgrounds/stadium/" + stadiumSkin + "/stadion" + to_string(window->getSize().x) 
@@ -141,6 +147,10 @@ void Engine::gameWindowSetup(string currentTime) {
         window->setPosition(Vector2i((desktop.width - windowSize->x) / 2, (desktop.height - windowSize->y) / 2));
         leftPlayer.setPlayerBitmap(leftPlayerBitmap);
         rightPlayer.setPlayerBitmap(rightPlayerBitmap);
+        leftPlayer.setPlayerDisabledBitmap(leftPlayerDisabled);
+        rightPlayer.setPlayerDisabledBitmap(rightPlayerDisabled);
+        leftPlayer.setPlayerFreezedBitmap(leftPlayerFreezed);
+        rightPlayer.setPlayerFreezedBitmap(rightPlayerFreezed);
         ball.setBallBitmap(ballBitmap);
         leftPlayer.setActualSpeed(10.0f);
         rightPlayer.setActualSpeed(10.0f);
@@ -578,6 +588,13 @@ int Engine::getEffectNumber() {
     return dist(mt);
 }
 
+int Engine::getRandomPlayerNumber() {
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_int_distribution<int> dist(1, 2);
+    return dist(mt);
+}
+
 /**
  * @brief Funkcja ustawiająca pozycję bramki w oknie gry.
  *
@@ -637,10 +654,34 @@ Vector2f Engine::getPlayerPosition(string playerName) {
 Vector2f Engine::getEffectPosition() {
     std::random_device rd;
     std::mt19937 mt(rd());
-    std::uniform_real_distribution<float> distX(0.0f, window->getSize().y/1.3f);
-    std::uniform_real_distribution<float> distY(0.0f, window->getSize().x-20.0f);
+    std::uniform_real_distribution<float> distX(0.0f, window->getSize().x/1.3f);
+    std::uniform_real_distribution<float> distY(0.0f, window->getSize().y/2.0f);
     Vector2f effectPosition(distX(mt), distY(mt));
+    do {
+        effectPosition.x = distX(mt);
+        effectPosition.y = distY(mt);
+    } while (isPositionInCollisionRects(effectPosition));
     return effectPosition;
+}
+
+bool Engine::isPositionInCollisionRects(Vector2f position) {
+    FloatRect rects[] = {
+        FloatRect(0.0f, (window->getSize().y) / 1.45f, window->getSize().x, (window->getSize().y) / 2.0f),
+        FloatRect(0.0f, 0.0f, window->getSize().x, (window->getSize().y) / 5.0f),
+        FloatRect(0.0f, (window->getSize().y) / 1.45f, window->getSize().x, (window->getSize().y) / 2.0f),
+        FloatRect(0.0f, 0.0f, window->getSize().x, (window->getSize().y) / 5.0f),
+        FloatRect(0.0f, 0.0f, (window->getSize().x) / 10.0f, window->getSize().y),
+        FloatRect((window->getSize().x) / 1.1f, 0.0f, (window->getSize().x) / 1.3f, window->getSize().y),
+        FloatRect(0.0f, (window->getSize().y) / 3.25f, (window->getSize().x) / 10.0f, (window->getSize().y) / 2.3f),
+        FloatRect((window->getSize().x) / 1.175f, (window->getSize().y) / 3.2f,
+            (window->getSize().x) / 6.0f, (window->getSize().y) / 2.5f)
+    };
+    for (const auto& rect : rects) {
+        if (rect.contains(position)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /**
@@ -995,6 +1036,12 @@ bool Engine::checkIsGoalAtLeftGate() {
     FloatRect leftGateGoalRect(0.0f, (window->getSize().y) / 3.25f, (window->getSize().x) / 10.0f, (window->getSize().y) / 2.3f);
     Vector2f ballPosition(ball.getActualPosition().x, ball.getActualPosition().y);
     if (leftGateGoalRect.contains(ballPosition)) {
+        leftPlayer.isFreezed = false;
+        leftPlayer.isDisabled = false;
+        rightPlayer.isFreezed = false;
+        rightPlayer.isDisabled = false;
+        effectExistingTimer.restart();
+        effectDurationAtPlayerTimer.restart();
         pause = true;
         music.stop();
         if (!mute) {
@@ -1011,6 +1058,12 @@ bool Engine::checkIsGoalAtRightGate() {
         (window->getSize().x) / 10.0f, (window->getSize().y) / 2.5f);
     Vector2f ballPosition(ball.getActualPosition().x, ball.getActualPosition().y);
     if (rightGateGoalRect.contains(ballPosition)) {
+        leftPlayer.isFreezed = false;
+        leftPlayer.isDisabled = false;
+        rightPlayer.isFreezed = false;
+        rightPlayer.isDisabled = false;
+        effectExistingTimer.restart();
+        effectDurationAtPlayerTimer.restart();
         pause = true;
         music.stop();
         if (!mute) {
@@ -1060,30 +1113,45 @@ void Engine::setGameBackground(string currentTime) {
     BitmapHandler rightPlayerBitmap = rightPlayer.getPlayerBitmap();
     BitmapHandler ballBitmap = ball.getBallBitmap();
     SpriteObject gameBackground;
-    if (elapsedExistingEffectTime >= 10) {
-        Vector2f scale(0.015f, 0.015f);
+    if (elapsedExistingEffectTime >= 10 && elapsedExistingEffectTime < 90) {
+        Vector2f scale(0.010f, 0.010f);
         Texture* bitmapArray[8] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
                                    &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
                                    &timeLeftBitmap.bitmap };
+        BitmapHandler emptyBitmap;
         if (!isEffectActive) {
             isEffectActive = true;
             effectNumber = getEffectNumber();
             effectPosition = getEffectPosition();
         }
-        switch (effectNumber) {
+        if (!leftPlayer.isDisabled && !rightPlayer.isDisabled && !leftPlayer.isFreezed && !rightPlayer.isFreezed) {
+            switch (effectNumber) {
             case 1:
                 bitmapArray[7] = &iceCubeBitmap.bitmap;
-            break;
+                effectSize.x = 95.0f;
+                effectSize.y = 95.0f;
+                break;
             case 2:
                 scale.x = 0.2f;
                 scale.y = 0.2f;
                 bitmapArray[7] = &leftBrokenLegBitmap.bitmap;
-            break;
+                effectSize.x = 75.0f;
+                effectSize.y = 75.0f;
+                break;
             case 3:
                 scale.x = 0.2f;
                 scale.y = 0.2f;
                 bitmapArray[7] = &rightBrokenLegBitmap.bitmap;
-            break;
+                effectSize.x = 75.0f;
+                effectSize.y = 75.0f;
+                break;
+            }
+            checkIsCollisionWithEffect();
+        }
+        else {
+            scale.x = 0.0f;
+            scale.y = 0.0f;
+            bitmapArray[7] = &emptyBitmap.bitmap;
         }
         Vector2f positions[8] = { Vector2f(0.0f, 0.0f), Vector2f(0.0f, 0.0f),
             Vector2f((window->getSize().x) / 2.22f, (window->getSize().y) / 1.22f),
@@ -1096,7 +1164,15 @@ void Engine::setGameBackground(string currentTime) {
                                 Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(0.05f, 0.05f) };
         gameBackground.createSpriteFrom(bitmapArray, 8, positions, scales);
     }
-    if(elapsedExistingEffectTime >= 90 || elapsedExistingEffectTime < 10 ) {
+    if (effectDurationAtPlayerTimer.getElapsedTime().asSeconds() >= 10 && (leftPlayer.isDisabled || leftPlayer.isFreezed) ||
+        (rightPlayer.isDisabled || rightPlayer.isFreezed)) {
+        leftPlayer.isDisabled = false;
+        leftPlayer.isFreezed = false;
+        rightPlayer.isDisabled = false;
+        rightPlayer.isDisabled = false;
+        isEffectActive = false;
+    }
+    if((elapsedExistingEffectTime >= 90 && isEffectActive) || elapsedExistingEffectTime < 10) {
         isEffectActive = false;
         Texture* bitmapArray[7] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
         &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
@@ -1110,8 +1186,9 @@ void Engine::setGameBackground(string currentTime) {
         Vector2f scales[7] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
                                 Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f) };
         gameBackground.createSpriteFrom(bitmapArray, 7, positions, scales);
-        if (elapsedExistingEffectTime >= 90) 
+        if (elapsedExistingEffectTime >= 90) {
             effectExistingTimer.restart();
+        }
     }
     SpriteObject leftPlayerSprite(&(leftPlayerBitmap.bitmap), leftPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
     SpriteObject rightPlayerSprite(&(rightPlayerBitmap.bitmap), rightPlayer.getActualPosition(), Vector2f(0.1f, 0.1f));
@@ -1204,6 +1281,31 @@ void Engine::checkRectsActions() {
     }
 }
 
+void Engine::checkIsCollisionWithEffect() {
+    Vector2f ballPosition = ball.getActualPosition();
+    FloatRect effectPos(effectPosition, effectSize);
+    int playerNumber = getRandomPlayerNumber();
+    if (effectPos.contains(ballPosition)) {
+        switch (effectNumber) {
+            case 1:
+                if (playerNumber == 1)
+                    leftPlayer.isFreezed = true;
+                else
+                    rightPlayer.isFreezed = true;
+                effectDurationAtPlayerTimer.restart();
+            break;
+            case 2:
+                leftPlayer.isDisabled = true;
+                effectDurationAtPlayerTimer.restart();
+            break;
+            case 3:
+                rightPlayer.isDisabled = true;
+                effectDurationAtPlayerTimer.restart();
+            break;
+        }
+    }
+}
+
 void Engine::moveBall() {
     if (!pause) {
         Vector2f ballPosition = ball.getActualPosition();
@@ -1272,53 +1374,61 @@ void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2) {
     FloatRect leftCollisionRect(0.0f, 0.0f, (window->getSize().x) / 10.0f, window->getSize().y);
     FloatRect rightCollisionRect((window->getSize().x) / 1.3f, 0.0f, (window->getSize().x) / 1.3f, window->getSize().y);
     if (!pause) {
-        if (Keyboard::isKeyPressed(Keyboard::W)) 
-            leftPlayer.setActualPosition(Vector2f(leftPlayer.getActualPosition().x, 
-                getPlayerPosition("Haaland").y - leftPlayer.getActualSpeed() * 15.0f), "left");
-        else if (!Keyboard::isKeyPressed(Keyboard::W) && leftPlayer.getActualPosition().y!= getPlayerPosition("Haaland").y)
-            leftPlayer.setActualPosition(Vector2f(leftPlayer.getActualPosition().x, getPlayerPosition("Haaland").y), "left");
-        else if (Keyboard::isKeyPressed(Keyboard::A) && !leftCollisionRect.contains(leftPlayerPosition)) {
-            player1Sprite.move(Vector2f(-leftPlayer.getActualSpeed(), 0.0f));
-            if (!Keyboard::isKeyPressed(Keyboard::W))
-                leftPlayer.setActualPosition(player1Sprite.getPosition(), "left");
+        if (!leftPlayer.isFreezed) {
+            if (Keyboard::isKeyPressed(Keyboard::W))
+                leftPlayer.setActualPosition(Vector2f(leftPlayer.getActualPosition().x,
+                    getPlayerPosition("Haaland").y - leftPlayer.getActualSpeed() * 15.0f), "left");
+            else if (!Keyboard::isKeyPressed(Keyboard::W) && leftPlayer.getActualPosition().y != getPlayerPosition("Haaland").y)
+                leftPlayer.setActualPosition(Vector2f(leftPlayer.getActualPosition().x, getPlayerPosition("Haaland").y), "left");
+            else if (Keyboard::isKeyPressed(Keyboard::A) && !leftCollisionRect.contains(leftPlayerPosition)) {
+                player1Sprite.move(Vector2f(-leftPlayer.getActualSpeed(), 0.0f));
+                if (!Keyboard::isKeyPressed(Keyboard::W))
+                    leftPlayer.setActualPosition(player1Sprite.getPosition(), "left");
+            }
+            else if (Keyboard::isKeyPressed(Keyboard::D) && (leftPlayerPosition.x + 100.0f < rightPlayerPosition.x)
+                && !rightCollisionRect.contains(leftPlayerPosition)) {
+                player1Sprite.move(Vector2f(leftPlayer.getActualSpeed(), 0.0f));
+                if (!Keyboard::isKeyPressed(Keyboard::W))
+                    leftPlayer.setActualPosition(player1Sprite.getPosition(), "left");
+            }
         }
-        else if (Keyboard::isKeyPressed(Keyboard::D) && (leftPlayerPosition.x + 100.0f < rightPlayerPosition.x)
-            && !rightCollisionRect.contains(leftPlayerPosition)) {
-            player1Sprite.move(Vector2f(leftPlayer.getActualSpeed(), 0.0f));
-            if (!Keyboard::isKeyPressed(Keyboard::W))
-                leftPlayer.setActualPosition(player1Sprite.getPosition(), "left");
+        if (!rightPlayer.isFreezed) {
+            if (Keyboard::isKeyPressed(Keyboard::Up))
+                rightPlayer.setActualPosition(Vector2f(rightPlayer.getActualPosition().x,
+                    getPlayerPosition("Ymbape").y - rightPlayer.getActualSpeed() * 15.0f), "right");
+            else if (!Keyboard::isKeyPressed(Keyboard::Up) && rightPlayer.getActualPosition().y != getPlayerPosition("Ymbape").y)
+                rightPlayer.setActualPosition(Vector2f(rightPlayer.getActualPosition().x, getPlayerPosition("Ymbape").y), "right");
+            else if (Keyboard::isKeyPressed(Keyboard::Left) && (leftPlayerPosition.x < rightPlayerPosition.x - 100.0f) &&
+                !leftCollisionRect.contains(rightPlayerPosition)) {
+                player2Sprite.move(Vector2f(-rightPlayer.getActualSpeed(), 0.0f));
+                if (!Keyboard::isKeyPressed(Keyboard::Up))
+                    rightPlayer.setActualPosition(player2Sprite.getPosition(), "right");
+            }
+            else if (Keyboard::isKeyPressed(Keyboard::Right) && !rightCollisionRect.contains(rightPlayerPosition)) {
+                player2Sprite.move(Vector2f(rightPlayer.getActualSpeed(), 0.0f));
+                if (!Keyboard::isKeyPressed(Keyboard::Up))
+                    rightPlayer.setActualPosition(player2Sprite.getPosition(), "right");
+            }
         }
-        if (Keyboard::isKeyPressed(Keyboard::Up))
-            rightPlayer.setActualPosition(Vector2f(rightPlayer.getActualPosition().x, 
-                getPlayerPosition("Ymbape").y - rightPlayer.getActualSpeed() * 15.0f), "right");
-        else if (!Keyboard::isKeyPressed(Keyboard::Up) && rightPlayer.getActualPosition().y != getPlayerPosition("Ymbape").y)
-            rightPlayer.setActualPosition(Vector2f(rightPlayer.getActualPosition().x, getPlayerPosition("Ymbape").y), "right");
-        else if (Keyboard::isKeyPressed(Keyboard::Left) && (leftPlayerPosition.x < rightPlayerPosition.x - 100.0f) &&
-            !leftCollisionRect.contains(rightPlayerPosition)) {
-            player2Sprite.move(Vector2f(-rightPlayer.getActualSpeed(), 0.0f));
-            if (!Keyboard::isKeyPressed(Keyboard::Up))
-                rightPlayer.setActualPosition(player2Sprite.getPosition(), "right");
+        if (!leftPlayer.isDisabled && !leftPlayer.isFreezed) {
+            if (Keyboard::isKeyPressed(Keyboard::X)) {
+                player1.animate(leftPlayerShot, &leftPlayer);
+                leftPlayer.isShooting = true;
+            }
+            else {
+                player1.animate(leftPlayerBitmap, &leftPlayer);
+                leftPlayer.isShooting = false;
+            }
         }
-        else if (Keyboard::isKeyPressed(Keyboard::Right) && !rightCollisionRect.contains(rightPlayerPosition)) {
-            player2Sprite.move(Vector2f(rightPlayer.getActualSpeed(), 0.0f));
-            if (!Keyboard::isKeyPressed(Keyboard::Up))
-                rightPlayer.setActualPosition(player2Sprite.getPosition(), "right");
-        }
-        if (Keyboard::isKeyPressed(Keyboard::X)) {
-            player1.animate(leftPlayerShot, &leftPlayer);
-            leftPlayer.isShooting = true;
-        }
-        else {
-            player1.animate(leftPlayerBitmap, &leftPlayer);
-            leftPlayer.isShooting = false;
-        }
-        if(Keyboard::isKeyPressed(Keyboard::M)) {
-            player2.animate(rightPlayerShot, &rightPlayer);
-            rightPlayer.isShooting = true;
-        }
-        else {
-            player2.animate(rightPlayerBitmap, &rightPlayer);
-            rightPlayer.isShooting = false;
+        if (!rightPlayer.isDisabled && !rightPlayer.isFreezed) {
+            if (Keyboard::isKeyPressed(Keyboard::M)) {
+                player2.animate(rightPlayerShot, &rightPlayer);
+                rightPlayer.isShooting = true;
+            }
+            else {
+                player2.animate(rightPlayerBitmap, &rightPlayer);
+                rightPlayer.isShooting = false;
+            }
         }
     }
 }
@@ -1357,7 +1467,7 @@ void Engine::checkCollisions() {
             else if (bottomCollisionRect.contains(ballPosition) && !rightCollisionRect.contains(ballPosition)
                 && !leftCollisionRect.contains(ballPosition) && !topCollisionRect.contains(ballPosition)) {
                 ballMoveDirection = 2 + rand() % 1;
-                ball.setActualSpeed(ball.getActualSpeed() / 1.025f);
+                ball.setActualSpeed(ball.getActualSpeed() / 1.020f);
             }
         }
         bool goalLeft = checkIsGoalAtLeftGate();

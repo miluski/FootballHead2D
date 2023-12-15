@@ -156,6 +156,8 @@ namespace Game {
             FloatRect shoeRect;
             void setActualSpeed(float speed);
             void setPlayerBitmap(BitmapHandler bitmap);
+            void setPlayerDisabledBitmap(BitmapHandler bitmap);
+            void setPlayerFreezedBitmap(BitmapHandler bitmap);
             void setActualPosition(Vector2f position, string positionSite);
             float getActualSpeed();
             Vector2f getActualPosition();
@@ -165,6 +167,8 @@ namespace Game {
             float actualSpeed = 0.0f;
             Vector2f position;
             BitmapHandler playerBitmap;
+            BitmapHandler playerFreezedBitmap;
+            BitmapHandler playerDisabledBitmap;
         };
 
         class Ball : public virtual GameObject {
@@ -235,10 +239,10 @@ namespace Game {
         BitmapHandler rightPlayerBitmap;
         BitmapHandler leftPlayerShot;
         BitmapHandler rightPlayerShot;
-        BitmapHandler leftPlayerDisabled;
-        BitmapHandler rightPlayerDisabled;
         BitmapHandler leftPlayerFreezed;
+        BitmapHandler leftPlayerDisabled;
         BitmapHandler rightPlayerFreezed;
+        BitmapHandler rightPlayerDisabled;
         BitmapHandler iceCubeBitmap;
         BitmapHandler leftBrokenLegBitmap;
         BitmapHandler rightBrokenLegBitmap;
@@ -273,6 +277,7 @@ namespace Game {
         Music winnerScreenMusic;
         Vector2i windowPosition;
         Vector2f effectPosition;
+        Vector2f effectSize;
         RenderTexture mainBuffer;
         RenderTexture secondBuffer;
         Clock clock;
@@ -283,6 +288,7 @@ namespace Game {
         Clock goalTimer;
         Clock gameTimer;
         Clock effectExistingTimer;
+        Clock effectDurationAtPlayerTimer;
         void menuWindowSetup();
         void settingsWindowSetup();
         void gameWindowSetup(string currentTime);
@@ -301,14 +307,17 @@ namespace Game {
         string getCurrentTime();
         Vector2f getGatePosition(string gateName);
         Vector2f getPlayerPosition(string playerName);
+        bool isPositionInCollisionRects(Vector2f position);
         Vector2f getEffectPosition();
         int getRectNameWhenMouseIsPressedIn();
         int getEffectNumber();
+        int getRandomPlayerNumber();
         string getLoudSpeakerFileName();
         string getArrowFileName();
         void setMenuBackground();
         void setGameBackground(string currentTime);
         void checkRectsActions();
+        void checkIsCollisionWithEffect();
         bool checkIsGoalAtLeftGate();
         bool checkIsGoalAtRightGate();
         bool checkIsCollisionWithPlayer();

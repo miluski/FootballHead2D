@@ -20,6 +20,14 @@ void Engine::Player::setPlayerBitmap(BitmapHandler bitmap) {
 	this->playerBitmap = bitmap;
 }
 
+void Engine::Player::setPlayerDisabledBitmap(BitmapHandler bitmap) {
+	this->playerDisabledBitmap = bitmap;
+}
+
+void Engine::Player::setPlayerFreezedBitmap(BitmapHandler bitmap) {
+	this->playerFreezedBitmap = bitmap;
+}
+
 /**
  * @brief Ustawia aktualn¹ pozycjê gracza.
  *
@@ -30,7 +38,6 @@ void Engine::Player::setActualPosition(Vector2f position, string positionSite) {
 	Vector2f leftPosition(position.x, position.y);
 	Vector2f rightPosition(position.x, position.y);
 	Vector2f shoePosition(position.x, position.y);
-	RectangleShape testRect;
 	if (positionSite == "left") {
 		topPosition.x += 65.0f;
 		leftPosition.x += 35.0f;
@@ -83,5 +90,10 @@ Vector2f Engine::Player::getActualPosition() {
  * @return Obiekt BitmapHandler reprezentuj¹cy bitmapê gracza.
  */
 Engine::BitmapHandler Engine::Player::getPlayerBitmap() {
-	return this->playerBitmap;
+	if (!this->isDisabled && !this->isFreezed)
+		return this->playerBitmap;
+	else if (this->isDisabled)
+		return this->playerDisabledBitmap;
+	else
+		return this->playerFreezedBitmap;
 }
