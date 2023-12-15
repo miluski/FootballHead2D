@@ -43,3 +43,6 @@ Attention! After click "Menu" button during the match, the statistics of this ma
 ![Alt Text](./img/Zrzut%20ekranu%202023-12-15%20154812.png)
 ![Alt Text](./img/Zrzut%20ekranu%202023-12-15%20154827.png)
 ![Alt Text](./img/Zrzut%20ekranu%202023-12-15%20154840.png)
+![Alt Text](./img/Zrzut%20ekranu%202023-12-15%20155755.png)
+![Alt Text](./img/Zrzut%20ekranu%202023-12-15%20155823.png)
+![Alt Text](./img/Zrzut%20ekranu%202023-12-15%20160125.png)
