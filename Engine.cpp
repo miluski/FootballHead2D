@@ -1127,13 +1127,11 @@ void Engine::setGameBackground(string currentTime) {
         if (!leftPlayer.isDisabled && !rightPlayer.isDisabled && !leftPlayer.isFreezed && !rightPlayer.isFreezed) {
             switch (effectNumber) {
             case 1:
-                effectName = "iceCube";
                 bitmapArray[7] = &iceCubeBitmap.bitmap;
                 effectSize.x = 95.0f;
                 effectSize.y = 95.0f;
                 break;
             case 2:
-                effectName = "leftBrokenLeg";
                 scale.x = 0.2f;
                 scale.y = 0.2f;
                 bitmapArray[7] = &leftBrokenLegBitmap.bitmap;
@@ -1141,7 +1139,6 @@ void Engine::setGameBackground(string currentTime) {
                 effectSize.y = 75.0f;
                 break;
             case 3:
-                effectName = "rightBrokenLeg";
                 scale.x = 0.2f;
                 scale.y = 0.2f;
                 bitmapArray[7] = &rightBrokenLegBitmap.bitmap;
@@ -1198,7 +1195,6 @@ void Engine::setGameBackground(string currentTime) {
     SpriteObject ballSprite(&(ballBitmap.bitmap), ball.getActualPosition(), Vector2f(0.05f, 0.05f));
     SpriteObject leftGateSprite(&(leftGateBitmap.bitmap), getGatePosition("left"), Vector2f(1.0f, 1.0f));
     SpriteObject rightGateSprite(&(rightGateBitmap.bitmap), getGatePosition("right"), Vector2f(1.0f, 1.0f));
-    string effectName = checkIsCollisionWithEffect();
     checkPlayerActions(leftPlayerSprite, rightPlayerSprite);
     checkCollisions();
     gameBackground.draw();
@@ -1370,7 +1366,7 @@ void Engine::moveBall() {
  * @param player1 Obiekt SpriteObject dla pierwszego gracza.
  * @param player2 Obiekt SpriteObject dla drugiego gracza.
  */
-void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2, string effectName) {
+void Engine::checkPlayerActions(SpriteObject player1, SpriteObject player2) {
     Sprite player1Sprite = player1.getSprite();
     Sprite player2Sprite = player2.getSprite();
     Vector2f leftPlayerPosition(leftPlayer.getActualPosition().x, leftPlayer.getActualPosition().y);
@@ -1557,21 +1553,6 @@ bool Engine::checkIsCollisionWithPlayer() {
         }
     }
     return isCollision;
-}
-
-string Engine::checkIsCollisionWithEffect() {
-    if (!pause) {
-        Vector2f ballPosition = ball.getActualPosition();
-        if (effectCollisionRect.contains(ballPosition)) {
-            if (effectName == "iceCube")
-                return "player" + to_string(getRandomPlayerNumber()) + "freeze";
-            else if (effectName == "leftBrokenLeg")
-                return "left player brokenleg";
-            else if (effectName == "rightBrokenLeg")
-                return "right player brokenleg";
-        }
-    }
-    return "";
 }
 
 /**
