@@ -10,6 +10,8 @@ Clone this repository to your computer using this command:
 git clone https://github.com/miluski/FootballHead2D.git
 ```
 
+You will need also a SFML in version 2.6.0 installed into your C:/ disc location.
+
 ## How to play
 
 In game can play as left player using 'a' key to move to the left side, 'd' key to move to the right side, 'w' key to jump, as right player using left arrow key to move to the left side, right arrow key to move to the right side and upper arrow to jump. 
