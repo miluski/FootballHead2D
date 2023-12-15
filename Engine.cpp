@@ -1114,7 +1114,7 @@ void Engine::setGameBackground(string currentTime) {
     BitmapHandler ballBitmap = ball.getBallBitmap();
     SpriteObject gameBackground;
     if (elapsedExistingEffectTime >= 10 && elapsedExistingEffectTime < 90) {
-        Vector2f scale(0.010f, 0.010f);
+        Vector2f scale(0.05f, 0.05f);
         Texture* bitmapArray[8] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
                                    &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
                                    &timeLeftBitmap.bitmap };
@@ -1126,24 +1126,24 @@ void Engine::setGameBackground(string currentTime) {
         }
         if (!leftPlayer.isDisabled && !rightPlayer.isDisabled && !leftPlayer.isFreezed && !rightPlayer.isFreezed) {
             switch (effectNumber) {
-            case 1:
-                bitmapArray[7] = &iceCubeBitmap.bitmap;
-                effectSize.x = 95.0f;
-                effectSize.y = 95.0f;
+                case 1:
+                    bitmapArray[7] = &iceCubeBitmap.bitmap;
+                    effectSize.x = 95.0f;
+                    effectSize.y = 95.0f;
                 break;
-            case 2:
-                scale.x = 0.2f;
-                scale.y = 0.2f;
-                bitmapArray[7] = &leftBrokenLegBitmap.bitmap;
-                effectSize.x = 75.0f;
-                effectSize.y = 75.0f;
+                case 2:
+                    scale.x = 0.1f;
+                    scale.y = 0.1f;
+                    bitmapArray[7] = &leftBrokenLegBitmap.bitmap;
+                    effectSize.x = 75.0f;
+                    effectSize.y = 75.0f;
                 break;
-            case 3:
-                scale.x = 0.2f;
-                scale.y = 0.2f;
-                bitmapArray[7] = &rightBrokenLegBitmap.bitmap;
-                effectSize.x = 75.0f;
-                effectSize.y = 75.0f;
+                case 3:
+                    scale.x = 0.1f;
+                    scale.y = 0.1f;
+                    bitmapArray[7] = &rightBrokenLegBitmap.bitmap;
+                    effectSize.x = 75.0f;
+                    effectSize.y = 75.0f;
                 break;
             }
             checkIsCollisionWithEffect();
@@ -1161,19 +1161,18 @@ void Engine::setGameBackground(string currentTime) {
             Vector2f((window->getSize().x) / 2.1f, (window->getSize().y) / 12.0f),
             effectPosition };
         Vector2f scales[8] = { Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f),
-                                Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(0.05f, 0.05f) };
+                                Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), Vector2f(1.0f, 1.0f), scale };
         gameBackground.createSpriteFrom(bitmapArray, 8, positions, scales);
     }
-    if (effectDurationAtPlayerTimer.getElapsedTime().asSeconds() >= 10 && (leftPlayer.isDisabled || leftPlayer.isFreezed) ||
-        (rightPlayer.isDisabled || rightPlayer.isFreezed)) {
+    if (effectDurationAtPlayerTimer.getElapsedTime().asSeconds() >= 10) {
         leftPlayer.isDisabled = false;
         leftPlayer.isFreezed = false;
         rightPlayer.isDisabled = false;
         rightPlayer.isDisabled = false;
         isEffectActive = false;
+        effectDurationAtPlayerTimer.restart();
     }
-    if((elapsedExistingEffectTime >= 90 && isEffectActive) || elapsedExistingEffectTime < 10) {
-        isEffectActive = false;
+    if((elapsedExistingEffectTime >= 90 || elapsedExistingEffectTime < 10) || !isEffectActive) {
         Texture* bitmapArray[7] = { &backgroundTexture.bitmap, &fpsTextBitmap.bitmap, &pauseTextBitmap.bitmap,
         &menuTextBitmap.bitmap, &leftPlayerPointsTextBitmap.bitmap, &rightPlayerPointsTextBitmap.bitmap,
         &timeLeftBitmap.bitmap };
@@ -1285,7 +1284,8 @@ void Engine::checkIsCollisionWithEffect() {
     Vector2f ballPosition = ball.getActualPosition();
     FloatRect effectPos(effectPosition, effectSize);
     int playerNumber = getRandomPlayerNumber();
-    if (effectPos.contains(ballPosition)) {
+    if (effectPos.contains(ballPosition) && !leftPlayer.isFreezed && !rightPlayer.isFreezed && 
+        !leftPlayer.isDisabled && !rightPlayer.isDisabled) {
         switch (effectNumber) {
             case 1:
                 if (playerNumber == 1)
