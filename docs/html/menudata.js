@@ -24,6 +24,8 @@
 */
 var menudata={children:[
 {text:"Strona główna",url:"index.html"},
+{text:"Przestrzenie nazw",url:"namespaces.html",children:[
+{text:"Lista przestrzeni nazw",url:"namespaces.html"}]},
 {text:"Klasy",url:"annotated.html",children:[
 {text:"Lista klas",url:"annotated.html"},
 {text:"Indeks klas",url:"classes.html"},
@@ -56,6 +58,13 @@ var menudata={children:[
 {text:"p",url:"functions_func.html#index_p"},
 {text:"r",url:"functions_func.html#index_r"},
 {text:"s",url:"functions_func.html#index_s"},
-{text:"t",url:"functions_func.html#index_t"}]}]}]},
+{text:"t",url:"functions_func.html#index_t"}]},
+{text:"Zmienne",url:"functions_vars.html"}]}]},
 {text:"Pliki",url:"files.html",children:[
-{text:"Lista plików",url:"files.html"}]}]}
+{text:"Lista plików",url:"files.html"},
+{text:"Składowe plików",url:"globals.html",children:[
+{text:"Wszystko",url:"globals.html"},
+{text:"Funkcje",url:"globals_func.html"},
+{text:"Wyliczenia",url:"globals_enum.html"},
+{text:"Wartości wyliczeń",url:"globals_eval.html"},
+{text:"Definicje",url:"globals_defs.html"}]}]}]}

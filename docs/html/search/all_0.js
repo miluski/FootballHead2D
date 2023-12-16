@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['animate_0',['animate',['../class_game_1_1_engine_1_1_sprite_object.html#a503ea24094039f67d79eb1e24592467e',1,'Game::Engine::SpriteObject']]],
-  ['animatedobject_1',['AnimatedObject',['../class_game_1_1_engine_1_1_animated_object.html',1,'Game::Engine']]]
+  ['_5fuse_5fmath_5fdefines_0',['_USE_MATH_DEFINES',['../_engine_8hpp.html#a525335710b53cb064ca56b936120431e',1,'Engine.hpp']]]
 ];
