@@ -2,6 +2,7 @@
 
 using namespace Game;
 
+
 /**
  * @brief Funkcja ustawia główne okno silnika gry.
  *
