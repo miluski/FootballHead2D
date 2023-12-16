@@ -58,3 +58,10 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 *.wav filter=lfs diff=lfs merge=lfs -text
+*.html linguist-detectable=false
+*.tex linguist-detectable=false
+*.JavaScript linguist-detectable=false
+*.PostScript linguist-detectable=false
+*.css linguist-detectable=false
+*.other linguist-detectable=false
+*.c++ linguist-detectable=true
