@@ -1,0 +1,231 @@
+\doxysection{Dokumentacja pliku Engine.\+hpp}
+\hypertarget{_engine_8hpp}{}\label{_engine_8hpp}\index{Engine.hpp@{Engine.hpp}}
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include $<$SFML/\+Window.\+hpp$>$}\newline
+{\ttfamily \#include $<$SFML/\+System.\+hpp$>$}\newline
+{\ttfamily \#include $<$SFML/\+Audio.\+hpp$>$}\newline
+{\ttfamily \#include $<$SFML/\+Graphics.\+hpp$>$}\newline
+\doxysubsubsection*{Komponenty}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine}{Game\+::\+Engine}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{Game\+::\+Engine\+::\+Game\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object}{Game\+::\+Engine\+::\+Drawable\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_transformable_object}{Game\+::\+Engine\+::\+Transformable\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object}{Game\+::\+Engine\+::\+Shape\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle}{Game\+::\+Engine\+::\+Rectangle}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_circle}{Game\+::\+Engine\+::\+Circle}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle}{Game\+::\+Engine\+::\+Triangle}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{Game\+::\+Engine\+::\+Bitmap\+Handler}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_animated_object}{Game\+::\+Engine\+::\+Animated\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_player}{Game\+::\+Engine\+::\+Player}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_ball}{Game\+::\+Engine\+::\+Ball}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_object}{Game\+::\+Engine\+::\+Bitmap\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object}{Game\+::\+Engine\+::\+Sprite\+Object}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_point2_d}{Game\+::\+Point2D}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_line_segment}{Game\+::\+Line\+Segment}}
+\item 
+class \mbox{\hyperlink{class_game_1_1_primitive_renderer}{Game\+::\+Primitive\+Renderer}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Przestrzenie nazw}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_game}{Game}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Definicje}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_engine_8hpp_a525335710b53cb064ca56b936120431e}{\+\_\+\+USE\+\_\+\+MATH\+\_\+\+DEFINES}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Wyliczenia}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909ab}{window\+Names}} \{ \newline
+\mbox{\hyperlink{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba1886c9f9dc8da1fe13696fa24792def1}{STARTUP\+\_\+\+SETTINGS}}
+, \mbox{\hyperlink{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba4c40e60bc71a32b924ce1f08d57f9721}{MENU}}
+, \mbox{\hyperlink{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909abad50cf309d7568040619ed26ee6835a84}{GAME}}
+, \mbox{\hyperlink{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba78fe7d6da4ba1bd28dd58429d7ac470a}{AUTHORS}}
+, \newline
+\mbox{\hyperlink{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909abac0668a4a8767ba5a119845a49cbe919c}{GAME\+\_\+\+OPTIONS}}
+, \mbox{\hyperlink{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba0c2f4b3213c472af5d75cf0152bce9c7}{WINNER\+\_\+\+SCREEN}}
+ \}
+\begin{DoxyCompactList}\small\item\em Wyliczenie reprezentujπce nazwy okien. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81c}{rect\+Names}} \{ \mbox{\hyperlink{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81ca3d73ff85197b50b0224417f0a9b4390d}{RESOLUTION\+\_\+1}}
+, \mbox{\hyperlink{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81caaf886051cb1f4f10bb2fcf82b4c54906}{RESOLUTION\+\_\+2}}
+, \mbox{\hyperlink{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81ca5de08e3b368e7c38a2ffedb06b25583e}{RESOLUTION\+\_\+3}}
+, \mbox{\hyperlink{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81ca0352906d1ea1dfcd663c918f3a86755b}{PLAY}}
+ \}
+\begin{DoxyCompactList}\small\item\em Wyliczenie reprezentujπce nazwy prostokπtÛw. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5}{direction\+Names}} \{ \newline
+\mbox{\hyperlink{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ad0611de6f28d4a9c9eac959f5344698e}{NORTH}}
+, \mbox{\hyperlink{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5a8ef5c0bce69283a9986011a63eea8a6b}{SOUTH}}
+, \mbox{\hyperlink{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ae9449e8683a8199dad36b07a63b2f523}{WEST}}
+, \mbox{\hyperlink{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ab5b3793b961949c817c7c0d99c05dad7}{EAST}}
+, \newline
+\mbox{\hyperlink{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5a90b239afc7fa8d4642b326cc0fce0ddc}{SOUTH\+\_\+\+WEST}}
+, \mbox{\hyperlink{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ab75c2136aaf25d9ed387c66e251582c5}{NORTH\+\_\+\+WEST}}
+, \mbox{\hyperlink{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ad6a6889fa230e3d0f72495725f8d0308}{NORTH\+\_\+\+EAST}}
+, \mbox{\hyperlink{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ad9ab50fab1cc6f797e75ef86ee46a926}{SOUTH\+\_\+\+EAST}}
+ \}
+\begin{DoxyCompactList}\small\item\em Wyliczenie reprezentujπce kierunek poruszania siÍ pi≥ki. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja definicji}
+\Hypertarget{_engine_8hpp_a525335710b53cb064ca56b936120431e}\label{_engine_8hpp_a525335710b53cb064ca56b936120431e} 
+\index{Engine.hpp@{Engine.hpp}!\_USE\_MATH\_DEFINES@{\_USE\_MATH\_DEFINES}}
+\index{\_USE\_MATH\_DEFINES@{\_USE\_MATH\_DEFINES}!Engine.hpp@{Engine.hpp}}
+\doxysubsubsection{\texorpdfstring{\_USE\_MATH\_DEFINES}{\_USE\_MATH\_DEFINES}}
+{\footnotesize\ttfamily \#define \+\_\+\+USE\+\_\+\+MATH\+\_\+\+DEFINES}
+
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00002}{2}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+
+
+\doxysubsection{Dokumentacja typ√≥w wyliczanych}
+\Hypertarget{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5}\label{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5} 
+\index{Engine.hpp@{Engine.hpp}!directionNames@{directionNames}}
+\index{directionNames@{directionNames}!Engine.hpp@{Engine.hpp}}
+\doxysubsubsection{\texorpdfstring{directionNames}{directionNames}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5}{direction\+Names}}}
+
+
+
+Wyliczenie reprezentujπce kierunek poruszania siÍ pi≥ki. 
+
+\begin{DoxyEnumFields}{Warto≈õci wylicze≈Ñ}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NORTH@{NORTH}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!NORTH@{NORTH}}}\Hypertarget{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ad0611de6f28d4a9c9eac959f5344698e}\label{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ad0611de6f28d4a9c9eac959f5344698e} 
+NORTH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SOUTH@{SOUTH}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!SOUTH@{SOUTH}}}\Hypertarget{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5a8ef5c0bce69283a9986011a63eea8a6b}\label{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5a8ef5c0bce69283a9986011a63eea8a6b} 
+SOUTH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WEST@{WEST}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!WEST@{WEST}}}\Hypertarget{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ae9449e8683a8199dad36b07a63b2f523}\label{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ae9449e8683a8199dad36b07a63b2f523} 
+WEST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EAST@{EAST}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!EAST@{EAST}}}\Hypertarget{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ab5b3793b961949c817c7c0d99c05dad7}\label{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ab5b3793b961949c817c7c0d99c05dad7} 
+EAST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SOUTH\_WEST@{SOUTH\_WEST}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!SOUTH\_WEST@{SOUTH\_WEST}}}\Hypertarget{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5a90b239afc7fa8d4642b326cc0fce0ddc}\label{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5a90b239afc7fa8d4642b326cc0fce0ddc} 
+SOUTH\+\_\+\+WEST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NORTH\_WEST@{NORTH\_WEST}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!NORTH\_WEST@{NORTH\_WEST}}}\Hypertarget{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ab75c2136aaf25d9ed387c66e251582c5}\label{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ab75c2136aaf25d9ed387c66e251582c5} 
+NORTH\+\_\+\+WEST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NORTH\_EAST@{NORTH\_EAST}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!NORTH\_EAST@{NORTH\_EAST}}}\Hypertarget{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ad6a6889fa230e3d0f72495725f8d0308}\label{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ad6a6889fa230e3d0f72495725f8d0308} 
+NORTH\+\_\+\+EAST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SOUTH\_EAST@{SOUTH\_EAST}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!SOUTH\_EAST@{SOUTH\_EAST}}}\Hypertarget{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ad9ab50fab1cc6f797e75ef86ee46a926}\label{_engine_8hpp_ac5393eb0e6bfd695910634285733f0c5ad9ab50fab1cc6f797e75ef86ee46a926} 
+SOUTH\+\_\+\+EAST&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00035}{35}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+\Hypertarget{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81c}\label{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81c} 
+\index{Engine.hpp@{Engine.hpp}!rectNames@{rectNames}}
+\index{rectNames@{rectNames}!Engine.hpp@{Engine.hpp}}
+\doxysubsubsection{\texorpdfstring{rectNames}{rectNames}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81c}{rect\+Names}}}
+
+
+
+Wyliczenie reprezentujπce nazwy prostokπtÛw. 
+
+\begin{DoxyEnumFields}{Warto≈õci wylicze≈Ñ}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RESOLUTION\_1@{RESOLUTION\_1}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!RESOLUTION\_1@{RESOLUTION\_1}}}\Hypertarget{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81ca3d73ff85197b50b0224417f0a9b4390d}\label{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81ca3d73ff85197b50b0224417f0a9b4390d} 
+RESOLUTION\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RESOLUTION\_2@{RESOLUTION\_2}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!RESOLUTION\_2@{RESOLUTION\_2}}}\Hypertarget{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81caaf886051cb1f4f10bb2fcf82b4c54906}\label{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81caaf886051cb1f4f10bb2fcf82b4c54906} 
+RESOLUTION\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RESOLUTION\_3@{RESOLUTION\_3}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!RESOLUTION\_3@{RESOLUTION\_3}}}\Hypertarget{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81ca5de08e3b368e7c38a2ffedb06b25583e}\label{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81ca5de08e3b368e7c38a2ffedb06b25583e} 
+RESOLUTION\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PLAY@{PLAY}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!PLAY@{PLAY}}}\Hypertarget{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81ca0352906d1ea1dfcd663c918f3a86755b}\label{_engine_8hpp_a19a94e1644872f96a78ce27737f7a81ca0352906d1ea1dfcd663c918f3a86755b} 
+PLAY&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00030}{30}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+\Hypertarget{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909ab}\label{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909ab} 
+\index{Engine.hpp@{Engine.hpp}!windowNames@{windowNames}}
+\index{windowNames@{windowNames}!Engine.hpp@{Engine.hpp}}
+\doxysubsubsection{\texorpdfstring{windowNames}{windowNames}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909ab}{window\+Names}}}
+
+
+
+Wyliczenie reprezentujπce nazwy okien. 
+
+\begin{DoxyEnumFields}{Warto≈õci wylicze≈Ñ}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STARTUP\_SETTINGS@{STARTUP\_SETTINGS}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!STARTUP\_SETTINGS@{STARTUP\_SETTINGS}}}\Hypertarget{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba1886c9f9dc8da1fe13696fa24792def1}\label{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba1886c9f9dc8da1fe13696fa24792def1} 
+STARTUP\+\_\+\+SETTINGS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MENU@{MENU}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!MENU@{MENU}}}\Hypertarget{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba4c40e60bc71a32b924ce1f08d57f9721}\label{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba4c40e60bc71a32b924ce1f08d57f9721} 
+MENU&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GAME@{GAME}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!GAME@{GAME}}}\Hypertarget{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909abad50cf309d7568040619ed26ee6835a84}\label{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909abad50cf309d7568040619ed26ee6835a84} 
+GAME&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AUTHORS@{AUTHORS}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!AUTHORS@{AUTHORS}}}\Hypertarget{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba78fe7d6da4ba1bd28dd58429d7ac470a}\label{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba78fe7d6da4ba1bd28dd58429d7ac470a} 
+AUTHORS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GAME\_OPTIONS@{GAME\_OPTIONS}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!GAME\_OPTIONS@{GAME\_OPTIONS}}}\Hypertarget{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909abac0668a4a8767ba5a119845a49cbe919c}\label{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909abac0668a4a8767ba5a119845a49cbe919c} 
+GAME\+\_\+\+OPTIONS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WINNER\_SCREEN@{WINNER\_SCREEN}!Engine.hpp@{Engine.hpp}}\index{Engine.hpp@{Engine.hpp}!WINNER\_SCREEN@{WINNER\_SCREEN}}}\Hypertarget{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba0c2f4b3213c472af5d75cf0152bce9c7}\label{_engine_8hpp_ac27687d08a7a1eaddaa24aa584f909aba0c2f4b3213c472af5d75cf0152bce9c7} 
+WINNER\+\_\+\+SCREEN&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00025}{25}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+

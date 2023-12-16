@@ -1,0 +1,298 @@
+\doxysection{Dokumentacja klasy Game\+::Engine\+::Player}
+\hypertarget{class_game_1_1_engine_1_1_player}{}\label{class_game_1_1_engine_1_1_player}\index{Game::Engine::Player@{Game::Engine::Player}}
+
+
+{\ttfamily \#include $<$Engine.\+hpp$>$}
+
+Diagram dziedziczenia dla Game\+::Engine\+::Player\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_1_1_engine_1_1_player}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a8b4635a8e7c6880bb6af3e49e07b471b}{set\+Actual\+Speed}} (float speed)
+\begin{DoxyCompactList}\small\item\em Ustawia aktualn¹ prêdkoœæ gracza. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a5cfb009947a5f4f2a30867ba9c0d7901}{set\+Player\+Bitmap}} (\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler}} bitmap)
+\begin{DoxyCompactList}\small\item\em Ustawia bitmapê gracza. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_player_ab3dc95a4efed93e624629ede540bfcce}{set\+Player\+Disabled\+Bitmap}} (\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler}} bitmap)
+\begin{DoxyCompactList}\small\item\em Ustawia bitmapê dla wy³¹czonego gracza. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_player_ab8d1eb16b0c9ae32a12c785374c74e75}{set\+Player\+Freezed\+Bitmap}} (\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler}} bitmap)
+\begin{DoxyCompactList}\small\item\em Ustawia bitmapê dla zamro¿onego gracza. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_player_aa0f47f3033e144ad71c56921227b06b2}{set\+Actual\+Position}} (Vector2f position, string position\+Site)
+\begin{DoxyCompactList}\small\item\em Ustawia aktualn¹ pozycjê gracza. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a11e47c2f53baee32cac93308705531f5}{get\+Actual\+Speed}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera aktualn¹ prêdkoœæ gracza. \end{DoxyCompactList}\item 
+Vector2f \mbox{\hyperlink{class_game_1_1_engine_1_1_player_acd47ba220f33f85c37af3bde0f75f982}{get\+Actual\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera aktualn¹ pozycjê gracza. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler}} \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a94ba66a900eb7d8982aaaa554251a1a2}{get\+Player\+Bitmap}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera bitmapê gracza. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{Game\+::\+Engine\+::\+Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a1ca26733e7e3ec45942e1a8726bd5e3e}{setX}} (float x)
+\begin{DoxyCompactList}\small\item\em Ustawia wspó³rzêdn¹ X obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_ad2497dfcb90ada8a121c32fef605530e}{setY}} (float y)
+\begin{DoxyCompactList}\small\item\em Ustawia wspó³rzêdn¹ Y obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a70e0e2e2dcfdd339e7b5f07b38dc7064}{getX}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera wspó³rzêdn¹ X obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a233eb91c677b0bf36e397de46ebc166d}{getY}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera wspó³rzêdn¹ Y obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Atrybuty publiczne}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a2200a9a2588854e2fc9e56834eb742a6}{is\+Shooting}} = false
+\item 
+bool \mbox{\hyperlink{class_game_1_1_engine_1_1_player_ad8648ef6c430c79489bf81391a164ce0}{is\+Freezed}} = false
+\item 
+bool \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a238d89670fc8a5e0aa427129c29fb1e3}{is\+Disabled}} = false
+\item 
+Float\+Rect \mbox{\hyperlink{class_game_1_1_engine_1_1_player_abaed3e792fdbc3c80c38da3b355df751}{top\+Rect}}
+\item 
+Float\+Rect \mbox{\hyperlink{class_game_1_1_engine_1_1_player_aa802ab5118ad53ac6bb1a0f9b36650db}{left\+Rect}}
+\item 
+Float\+Rect \mbox{\hyperlink{class_game_1_1_engine_1_1_player_add89da33e7fa19944f2f82ccf9300dd3}{right\+Rect}}
+\item 
+Float\+Rect \mbox{\hyperlink{class_game_1_1_engine_1_1_player_a6c82168ca628c03643d986bcefdf4a5d}{shoe\+Rect}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegÃ³Å‚owy}
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00148}{148}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+
+
+\doxysubsection{Dokumentacja funkcji skÅ‚adowych}
+\Hypertarget{class_game_1_1_engine_1_1_player_acd47ba220f33f85c37af3bde0f75f982}\label{class_game_1_1_engine_1_1_player_acd47ba220f33f85c37af3bde0f75f982} 
+\index{Game::Engine::Player@{Game::Engine::Player}!getActualPosition@{getActualPosition}}
+\index{getActualPosition@{getActualPosition}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{getActualPosition()}{getActualPosition()}}
+{\footnotesize\ttfamily Vector2f Engine\+::\+Player\+::get\+Actual\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pobiera aktualn¹ pozycjê gracza. 
+
+\begin{DoxyReturn}{Zwraca}
+Obiekt Vector2f reprezentuj¹cy aktualn¹ pozycjê gracza. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_player_8cpp_source_l00097}{97}} pliku \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_a11e47c2f53baee32cac93308705531f5}\label{class_game_1_1_engine_1_1_player_a11e47c2f53baee32cac93308705531f5} 
+\index{Game::Engine::Player@{Game::Engine::Player}!getActualSpeed@{getActualSpeed}}
+\index{getActualSpeed@{getActualSpeed}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{getActualSpeed()}{getActualSpeed()}}
+{\footnotesize\ttfamily float Engine\+::\+Player\+::get\+Actual\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pobiera aktualn¹ prêdkoœæ gracza. 
+
+\begin{DoxyReturn}{Zwraca}
+Aktualna prêdkoœæ gracza. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_player_8cpp_source_l00088}{88}} pliku \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_a94ba66a900eb7d8982aaaa554251a1a2}\label{class_game_1_1_engine_1_1_player_a94ba66a900eb7d8982aaaa554251a1a2} 
+\index{Game::Engine::Player@{Game::Engine::Player}!getPlayerBitmap@{getPlayerBitmap}}
+\index{getPlayerBitmap@{getPlayerBitmap}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{getPlayerBitmap()}{getPlayerBitmap()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{Engine\+::\+Bitmap\+Handler}} Engine\+::\+Player\+::get\+Player\+Bitmap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pobiera bitmapê gracza. 
+
+\begin{DoxyReturn}{Zwraca}
+Obiekt \doxylink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler} reprezentuj¹cy bitmapê gracza. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_player_8cpp_source_l00106}{106}} pliku \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_aa0f47f3033e144ad71c56921227b06b2}\label{class_game_1_1_engine_1_1_player_aa0f47f3033e144ad71c56921227b06b2} 
+\index{Game::Engine::Player@{Game::Engine::Player}!setActualPosition@{setActualPosition}}
+\index{setActualPosition@{setActualPosition}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{setActualPosition()}{setActualPosition()}}
+{\footnotesize\ttfamily void Engine\+::\+Player\+::set\+Actual\+Position (\begin{DoxyParamCaption}\item[{Vector2f}]{position,  }\item[{string}]{position\+Site }\end{DoxyParamCaption})}
+
+
+
+Ustawia aktualn¹ pozycjê gracza. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em position} & Nowa pozycja gracza. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_player_8cpp_source_l00050}{50}} pliku \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_a8b4635a8e7c6880bb6af3e49e07b471b}\label{class_game_1_1_engine_1_1_player_a8b4635a8e7c6880bb6af3e49e07b471b} 
+\index{Game::Engine::Player@{Game::Engine::Player}!setActualSpeed@{setActualSpeed}}
+\index{setActualSpeed@{setActualSpeed}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{setActualSpeed()}{setActualSpeed()}}
+{\footnotesize\ttfamily void Engine\+::\+Player\+::set\+Actual\+Speed (\begin{DoxyParamCaption}\item[{float}]{speed }\end{DoxyParamCaption})}
+
+
+
+Ustawia aktualn¹ prêdkoœæ gracza. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em speed} & Nowa prêdkoœæ gracza. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_player_8cpp_source_l00010}{10}} pliku \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_a5cfb009947a5f4f2a30867ba9c0d7901}\label{class_game_1_1_engine_1_1_player_a5cfb009947a5f4f2a30867ba9c0d7901} 
+\index{Game::Engine::Player@{Game::Engine::Player}!setPlayerBitmap@{setPlayerBitmap}}
+\index{setPlayerBitmap@{setPlayerBitmap}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{setPlayerBitmap()}{setPlayerBitmap()}}
+{\footnotesize\ttfamily void Engine\+::\+Player\+::set\+Player\+Bitmap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler}}}]{bitmap }\end{DoxyParamCaption})}
+
+
+
+Ustawia bitmapê gracza. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em bitmap} & Obiekt \doxylink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler} reprezentuj¹cy bitmapê gracza. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_player_8cpp_source_l00019}{19}} pliku \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_ab3dc95a4efed93e624629ede540bfcce}\label{class_game_1_1_engine_1_1_player_ab3dc95a4efed93e624629ede540bfcce} 
+\index{Game::Engine::Player@{Game::Engine::Player}!setPlayerDisabledBitmap@{setPlayerDisabledBitmap}}
+\index{setPlayerDisabledBitmap@{setPlayerDisabledBitmap}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{setPlayerDisabledBitmap()}{setPlayerDisabledBitmap()}}
+{\footnotesize\ttfamily void Engine\+::\+Player\+::set\+Player\+Disabled\+Bitmap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler}}}]{bitmap }\end{DoxyParamCaption})}
+
+
+
+Ustawia bitmapê dla wy³¹czonego gracza. 
+
+Funkcja ustawia bitmapê dla przypadku, gdy gracz jest wy³¹czony.
+
+
+\begin{DoxyParams}{Parametry}
+{\em bitmap} & Obiekt \doxylink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler} reprezentuj¹cy bitmapê dla wy³¹czonego gracza. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_player_8cpp_source_l00030}{30}} pliku \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_ab8d1eb16b0c9ae32a12c785374c74e75}\label{class_game_1_1_engine_1_1_player_ab8d1eb16b0c9ae32a12c785374c74e75} 
+\index{Game::Engine::Player@{Game::Engine::Player}!setPlayerFreezedBitmap@{setPlayerFreezedBitmap}}
+\index{setPlayerFreezedBitmap@{setPlayerFreezedBitmap}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{setPlayerFreezedBitmap()}{setPlayerFreezedBitmap()}}
+{\footnotesize\ttfamily void Engine\+::\+Player\+::set\+Player\+Freezed\+Bitmap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler}}}]{bitmap }\end{DoxyParamCaption})}
+
+
+
+Ustawia bitmapê dla zamro¿onego gracza. 
+
+Funkcja ustawia bitmapê dla przypadku, gdy gracz jest zamro¿ony.
+
+
+\begin{DoxyParams}{Parametry}
+{\em bitmap} & Obiekt \doxylink{class_game_1_1_engine_1_1_bitmap_handler}{Bitmap\+Handler} reprezentuj¹cy bitmapê dla zamro¿onego gracza. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_player_8cpp_source_l00041}{41}} pliku \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+
+
+\doxysubsection{Dokumentacja atrybutÃ³w skÅ‚adowych}
+\Hypertarget{class_game_1_1_engine_1_1_player_a238d89670fc8a5e0aa427129c29fb1e3}\label{class_game_1_1_engine_1_1_player_a238d89670fc8a5e0aa427129c29fb1e3} 
+\index{Game::Engine::Player@{Game::Engine::Player}!isDisabled@{isDisabled}}
+\index{isDisabled@{isDisabled}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{isDisabled}{isDisabled}}
+{\footnotesize\ttfamily bool Game\+::\+Engine\+::\+Player\+::is\+Disabled = false}
+
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00152}{152}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_ad8648ef6c430c79489bf81391a164ce0}\label{class_game_1_1_engine_1_1_player_ad8648ef6c430c79489bf81391a164ce0} 
+\index{Game::Engine::Player@{Game::Engine::Player}!isFreezed@{isFreezed}}
+\index{isFreezed@{isFreezed}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{isFreezed}{isFreezed}}
+{\footnotesize\ttfamily bool Game\+::\+Engine\+::\+Player\+::is\+Freezed = false}
+
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00151}{151}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_a2200a9a2588854e2fc9e56834eb742a6}\label{class_game_1_1_engine_1_1_player_a2200a9a2588854e2fc9e56834eb742a6} 
+\index{Game::Engine::Player@{Game::Engine::Player}!isShooting@{isShooting}}
+\index{isShooting@{isShooting}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{isShooting}{isShooting}}
+{\footnotesize\ttfamily bool Game\+::\+Engine\+::\+Player\+::is\+Shooting = false}
+
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00150}{150}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_aa802ab5118ad53ac6bb1a0f9b36650db}\label{class_game_1_1_engine_1_1_player_aa802ab5118ad53ac6bb1a0f9b36650db} 
+\index{Game::Engine::Player@{Game::Engine::Player}!leftRect@{leftRect}}
+\index{leftRect@{leftRect}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{leftRect}{leftRect}}
+{\footnotesize\ttfamily Float\+Rect Game\+::\+Engine\+::\+Player\+::left\+Rect}
+
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00154}{154}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_add89da33e7fa19944f2f82ccf9300dd3}\label{class_game_1_1_engine_1_1_player_add89da33e7fa19944f2f82ccf9300dd3} 
+\index{Game::Engine::Player@{Game::Engine::Player}!rightRect@{rightRect}}
+\index{rightRect@{rightRect}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{rightRect}{rightRect}}
+{\footnotesize\ttfamily Float\+Rect Game\+::\+Engine\+::\+Player\+::right\+Rect}
+
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00155}{155}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_a6c82168ca628c03643d986bcefdf4a5d}\label{class_game_1_1_engine_1_1_player_a6c82168ca628c03643d986bcefdf4a5d} 
+\index{Game::Engine::Player@{Game::Engine::Player}!shoeRect@{shoeRect}}
+\index{shoeRect@{shoeRect}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{shoeRect}{shoeRect}}
+{\footnotesize\ttfamily Float\+Rect Game\+::\+Engine\+::\+Player\+::shoe\+Rect}
+
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00156}{156}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_player_abaed3e792fdbc3c80c38da3b355df751}\label{class_game_1_1_engine_1_1_player_abaed3e792fdbc3c80c38da3b355df751} 
+\index{Game::Engine::Player@{Game::Engine::Player}!topRect@{topRect}}
+\index{topRect@{topRect}!Game::Engine::Player@{Game::Engine::Player}}
+\doxysubsubsection{\texorpdfstring{topRect}{topRect}}
+{\footnotesize\ttfamily Float\+Rect Game\+::\+Engine\+::\+Player\+::top\+Rect}
+
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00153}{153}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+
+
+Dokumentacja dla tej klasy zostaÅ‚a wygenerowana z plikÃ³w\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_engine_8hpp}{Engine.\+hpp}}\item 
+\mbox{\hyperlink{_player_8cpp}{Player.\+cpp}}\end{DoxyCompactItemize}

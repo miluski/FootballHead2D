@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>FootballHead2D: Dokumentacja pliku Engine.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="haalandlogo.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">FootballHead2D
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowa≈Ñ</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Komponenty</a> &#124;
+<a href="#namespaces">Przestrzenie nazw</a> &#124;
+<a href="#define-members">Definicje</a> &#124;
+<a href="#enum-members">Wyliczenia</a>  </div>
+  <div class="headertitle"><div class="title">Dokumentacja pliku Engine.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;ctime&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;chrono&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;queue&gt;</code><br />
+<code>#include &lt;random&gt;</code><br />
+<code>#include &lt;SFML/Window.hpp&gt;</code><br />
+<code>#include &lt;SFML/System.hpp&gt;</code><br />
+<code>#include &lt;SFML/Audio.hpp&gt;</code><br />
+<code>#include &lt;SFML/Graphics.hpp&gt;</code><br />
+</div>
+<p><a href="_engine_8hpp_source.html">Id≈∫ do kodu ≈∫r√≥d≈Çowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Komponenty</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine.html">Game::Engine</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_game_object.html">Game::Engine::GameObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_drawable_object.html">Game::Engine::DrawableObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_transformable_object.html">Game::Engine::TransformableObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_shape_object.html">Game::Engine::ShapeObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_rectangle.html">Game::Engine::Rectangle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_circle.html">Game::Engine::Circle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_triangle.html">Game::Engine::Triangle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_bitmap_handler.html">Game::Engine::BitmapHandler</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_animated_object.html">Game::Engine::AnimatedObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_player.html">Game::Engine::Player</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_ball.html">Game::Engine::Ball</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_bitmap_object.html">Game::Engine::BitmapObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_engine_1_1_sprite_object.html">Game::Engine::SpriteObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_point2_d.html">Game::Point2D</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_line_segment.html">Game::LineSegment</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_1_1_primitive_renderer.html">Game::PrimitiveRenderer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Przestrzenie nazw</h2></td></tr>
+<tr class="memitem:namespace_game" id="r_namespace_game"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_game.html">Game</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Definicje</h2></td></tr>
+<tr class="memitem:a525335710b53cb064ca56b936120431e" id="r_a525335710b53cb064ca56b936120431e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_engine_8hpp.html#a525335710b53cb064ca56b936120431e">_USE_MATH_DEFINES</a></td></tr>
+<tr class="separator:a525335710b53cb064ca56b936120431e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Wyliczenia</h2></td></tr>
+<tr class="memitem:ac27687d08a7a1eaddaa24aa584f909ab" id="r_ac27687d08a7a1eaddaa24aa584f909ab"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_engine_8hpp.html#ac27687d08a7a1eaddaa24aa584f909ab">windowNames</a> { <br />
+&#160;&#160;<a class="el" href="_engine_8hpp.html#ac27687d08a7a1eaddaa24aa584f909aba1886c9f9dc8da1fe13696fa24792def1">STARTUP_SETTINGS</a>
+, <a class="el" href="_engine_8hpp.html#ac27687d08a7a1eaddaa24aa584f909aba4c40e60bc71a32b924ce1f08d57f9721">MENU</a>
+, <a class="el" href="_engine_8hpp.html#ac27687d08a7a1eaddaa24aa584f909abad50cf309d7568040619ed26ee6835a84">GAME</a>
+, <a class="el" href="_engine_8hpp.html#ac27687d08a7a1eaddaa24aa584f909aba78fe7d6da4ba1bd28dd58429d7ac470a">AUTHORS</a>
+, <br />
+&#160;&#160;<a class="el" href="_engine_8hpp.html#ac27687d08a7a1eaddaa24aa584f909abac0668a4a8767ba5a119845a49cbe919c">GAME_OPTIONS</a>
+, <a class="el" href="_engine_8hpp.html#ac27687d08a7a1eaddaa24aa584f909aba0c2f4b3213c472af5d75cf0152bce9c7">WINNER_SCREEN</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ac27687d08a7a1eaddaa24aa584f909ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wyliczenie reprezentujπce nazwy okien.  <a href="_engine_8hpp.html#ac27687d08a7a1eaddaa24aa584f909ab">Wiƒôcej...</a><br /></td></tr>
+<tr class="separator:ac27687d08a7a1eaddaa24aa584f909ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19a94e1644872f96a78ce27737f7a81c" id="r_a19a94e1644872f96a78ce27737f7a81c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_engine_8hpp.html#a19a94e1644872f96a78ce27737f7a81c">rectNames</a> { <a class="el" href="_engine_8hpp.html#a19a94e1644872f96a78ce27737f7a81ca3d73ff85197b50b0224417f0a9b4390d">RESOLUTION_1</a>
+, <a class="el" href="_engine_8hpp.html#a19a94e1644872f96a78ce27737f7a81caaf886051cb1f4f10bb2fcf82b4c54906">RESOLUTION_2</a>
+, <a class="el" href="_engine_8hpp.html#a19a94e1644872f96a78ce27737f7a81ca5de08e3b368e7c38a2ffedb06b25583e">RESOLUTION_3</a>
+, <a class="el" href="_engine_8hpp.html#a19a94e1644872f96a78ce27737f7a81ca0352906d1ea1dfcd663c918f3a86755b">PLAY</a>
+ }</td></tr>
+<tr class="memdesc:a19a94e1644872f96a78ce27737f7a81c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wyliczenie reprezentujπce nazwy prostokπtÛw.  <a href="_engine_8hpp.html#a19a94e1644872f96a78ce27737f7a81c">Wiƒôcej...</a><br /></td></tr>
+<tr class="separator:a19a94e1644872f96a78ce27737f7a81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5393eb0e6bfd695910634285733f0c5" id="r_ac5393eb0e6bfd695910634285733f0c5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5">directionNames</a> { <br />
+&#160;&#160;<a class="el" href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5ad0611de6f28d4a9c9eac959f5344698e">NORTH</a>
+, <a class="el" href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5a8ef5c0bce69283a9986011a63eea8a6b">SOUTH</a>
+, <a class="el" href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5ae9449e8683a8199dad36b07a63b2f523">WEST</a>
+, <a class="el" href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5ab5b3793b961949c817c7c0d99c05dad7">EAST</a>
+, <br />
+&#160;&#160;<a class="el" href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5a90b239afc7fa8d4642b326cc0fce0ddc">SOUTH_WEST</a>
+, <a class="el" href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5ab75c2136aaf25d9ed387c66e251582c5">NORTH_WEST</a>
+, <a class="el" href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5ad6a6889fa230e3d0f72495725f8d0308">NORTH_EAST</a>
+, <a class="el" href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5ad9ab50fab1cc6f797e75ef86ee46a926">SOUTH_EAST</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ac5393eb0e6bfd695910634285733f0c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wyliczenie reprezentujπce kierunek poruszania siÍ pi≥ki.  <a href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5">Wiƒôcej...</a><br /></td></tr>
+<tr class="separator:ac5393eb0e6bfd695910634285733f0c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Dokumentacja definicji</h2>
+<a id="a525335710b53cb064ca56b936120431e" name="a525335710b53cb064ca56b936120431e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a525335710b53cb064ca56b936120431e">&#9670;&#160;</a></span>_USE_MATH_DEFINES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _USE_MATH_DEFINES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="_engine_8hpp_source.html#l00002">2</a> pliku <a class="el" href="_engine_8hpp_source.html">Engine.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentacja typ√≥w wyliczanych</h2>
+<a id="ac5393eb0e6bfd695910634285733f0c5" name="ac5393eb0e6bfd695910634285733f0c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5393eb0e6bfd695910634285733f0c5">&#9670;&#160;</a></span>directionNames</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_engine_8hpp.html#ac5393eb0e6bfd695910634285733f0c5">directionNames</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wyliczenie reprezentujπce kierunek poruszania siÍ pi≥ki. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Warto≈õci wylicze≈Ñ</th></tr><tr><td class="fieldname"><a id="ac5393eb0e6bfd695910634285733f0c5ad0611de6f28d4a9c9eac959f5344698e" name="ac5393eb0e6bfd695910634285733f0c5ad0611de6f28d4a9c9eac959f5344698e"></a>NORTH&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac5393eb0e6bfd695910634285733f0c5a8ef5c0bce69283a9986011a63eea8a6b" name="ac5393eb0e6bfd695910634285733f0c5a8ef5c0bce69283a9986011a63eea8a6b"></a>SOUTH&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac5393eb0e6bfd695910634285733f0c5ae9449e8683a8199dad36b07a63b2f523" name="ac5393eb0e6bfd695910634285733f0c5ae9449e8683a8199dad36b07a63b2f523"></a>WEST&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac5393eb0e6bfd695910634285733f0c5ab5b3793b961949c817c7c0d99c05dad7" name="ac5393eb0e6bfd695910634285733f0c5ab5b3793b961949c817c7c0d99c05dad7"></a>EAST&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac5393eb0e6bfd695910634285733f0c5a90b239afc7fa8d4642b326cc0fce0ddc" name="ac5393eb0e6bfd695910634285733f0c5a90b239afc7fa8d4642b326cc0fce0ddc"></a>SOUTH_WEST&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac5393eb0e6bfd695910634285733f0c5ab75c2136aaf25d9ed387c66e251582c5" name="ac5393eb0e6bfd695910634285733f0c5ab75c2136aaf25d9ed387c66e251582c5"></a>NORTH_WEST&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac5393eb0e6bfd695910634285733f0c5ad6a6889fa230e3d0f72495725f8d0308" name="ac5393eb0e6bfd695910634285733f0c5ad6a6889fa230e3d0f72495725f8d0308"></a>NORTH_EAST&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac5393eb0e6bfd695910634285733f0c5ad9ab50fab1cc6f797e75ef86ee46a926" name="ac5393eb0e6bfd695910634285733f0c5ad9ab50fab1cc6f797e75ef86ee46a926"></a>SOUTH_EAST&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definicja w linii <a class="el" href="_engine_8hpp_source.html#l00035">35</a> pliku <a class="el" href="_engine_8hpp_source.html">Engine.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a19a94e1644872f96a78ce27737f7a81c" name="a19a94e1644872f96a78ce27737f7a81c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19a94e1644872f96a78ce27737f7a81c">&#9670;&#160;</a></span>rectNames</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_engine_8hpp.html#a19a94e1644872f96a78ce27737f7a81c">rectNames</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wyliczenie reprezentujπce nazwy prostokπtÛw. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Warto≈õci wylicze≈Ñ</th></tr><tr><td class="fieldname"><a id="a19a94e1644872f96a78ce27737f7a81ca3d73ff85197b50b0224417f0a9b4390d" name="a19a94e1644872f96a78ce27737f7a81ca3d73ff85197b50b0224417f0a9b4390d"></a>RESOLUTION_1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a19a94e1644872f96a78ce27737f7a81caaf886051cb1f4f10bb2fcf82b4c54906" name="a19a94e1644872f96a78ce27737f7a81caaf886051cb1f4f10bb2fcf82b4c54906"></a>RESOLUTION_2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a19a94e1644872f96a78ce27737f7a81ca5de08e3b368e7c38a2ffedb06b25583e" name="a19a94e1644872f96a78ce27737f7a81ca5de08e3b368e7c38a2ffedb06b25583e"></a>RESOLUTION_3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a19a94e1644872f96a78ce27737f7a81ca0352906d1ea1dfcd663c918f3a86755b" name="a19a94e1644872f96a78ce27737f7a81ca0352906d1ea1dfcd663c918f3a86755b"></a>PLAY&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definicja w linii <a class="el" href="_engine_8hpp_source.html#l00030">30</a> pliku <a class="el" href="_engine_8hpp_source.html">Engine.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac27687d08a7a1eaddaa24aa584f909ab" name="ac27687d08a7a1eaddaa24aa584f909ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac27687d08a7a1eaddaa24aa584f909ab">&#9670;&#160;</a></span>windowNames</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_engine_8hpp.html#ac27687d08a7a1eaddaa24aa584f909ab">windowNames</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wyliczenie reprezentujπce nazwy okien. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Warto≈õci wylicze≈Ñ</th></tr><tr><td class="fieldname"><a id="ac27687d08a7a1eaddaa24aa584f909aba1886c9f9dc8da1fe13696fa24792def1" name="ac27687d08a7a1eaddaa24aa584f909aba1886c9f9dc8da1fe13696fa24792def1"></a>STARTUP_SETTINGS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac27687d08a7a1eaddaa24aa584f909aba4c40e60bc71a32b924ce1f08d57f9721" name="ac27687d08a7a1eaddaa24aa584f909aba4c40e60bc71a32b924ce1f08d57f9721"></a>MENU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac27687d08a7a1eaddaa24aa584f909abad50cf309d7568040619ed26ee6835a84" name="ac27687d08a7a1eaddaa24aa584f909abad50cf309d7568040619ed26ee6835a84"></a>GAME&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac27687d08a7a1eaddaa24aa584f909aba78fe7d6da4ba1bd28dd58429d7ac470a" name="ac27687d08a7a1eaddaa24aa584f909aba78fe7d6da4ba1bd28dd58429d7ac470a"></a>AUTHORS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac27687d08a7a1eaddaa24aa584f909abac0668a4a8767ba5a119845a49cbe919c" name="ac27687d08a7a1eaddaa24aa584f909abac0668a4a8767ba5a119845a49cbe919c"></a>GAME_OPTIONS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac27687d08a7a1eaddaa24aa584f909aba0c2f4b3213c472af5d75cf0152bce9c7" name="ac27687d08a7a1eaddaa24aa584f909aba0c2f4b3213c472af5d75cf0152bce9c7"></a>WINNER_SCREEN&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definicja w linii <a class="el" href="_engine_8hpp_source.html#l00025">25</a> pliku <a class="el" href="_engine_8hpp_source.html">Engine.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

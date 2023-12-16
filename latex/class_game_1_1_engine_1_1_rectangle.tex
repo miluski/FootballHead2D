@@ -1,0 +1,229 @@
+\doxysection{Dokumentacja klasy Game\+::Engine\+::Rectangle}
+\hypertarget{class_game_1_1_engine_1_1_rectangle}{}\label{class_game_1_1_engine_1_1_rectangle}\index{Game::Engine::Rectangle@{Game::Engine::Rectangle}}
+
+
+{\ttfamily \#include $<$Engine.\+hpp$>$}
+
+Diagram dziedziczenia dla Game\+::Engine\+::Rectangle\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_game_1_1_engine_1_1_rectangle}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a16c60d7ff664abd6c176a7f2a561ee37}{Rectangle}} ()
+\begin{DoxyCompactList}\small\item\em Konstruktor domyœlny klasy \doxylink{class_game_1_1_engine_1_1_rectangle}{Rectangle}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a191c0ebb97b025abef2c28e905392718}{Rectangle}} (Vector2f size)
+\begin{DoxyCompactList}\small\item\em Konstruktor klasy \doxylink{class_game_1_1_engine_1_1_rectangle}{Rectangle} z okreœlonym rozmiarem. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a2c046f82b013668719083d1764215eff}{draw}} ()
+\begin{DoxyCompactList}\small\item\em Metoda rysuj¹ca prostok¹t na g³ównym oknie. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a86f3aca2726936cb1da39338172fb015}{translate}} (Vector2f position)
+\begin{DoxyCompactList}\small\item\em Metoda przesuwaj¹ca prostok¹t do okreœlonej pozycji. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_ac441c9a8396b8ee354d5af68295b0f2e}{rotate}} (float angle)
+\begin{DoxyCompactList}\small\item\em Metoda obracaj¹ca prostok¹t o okreœlony k¹t. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_ab548415908710ecf0759c36709e6159b}{scale}} (Vector2f scale)
+\begin{DoxyCompactList}\small\item\em Metoda skaluj¹ca prostok¹t o okreœlony wspó³czynnik. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a34cb6a1c40605a7f8deeda21ff7e0ae6}{set\+Color}} (Color color)
+\begin{DoxyCompactList}\small\item\em Metoda ustawiaj¹ca kolor wype³nienia prostok¹ta. \end{DoxyCompactList}\item 
+virtual Color \mbox{\hyperlink{class_game_1_1_engine_1_1_rectangle_a2cd2a46be7a6c98c395ebd1e23ef2864}{get\+Color}} ()
+\begin{DoxyCompactList}\small\item\em Metoda zwracaj¹ca aktualny kolor wype³nienia prostok¹ta. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object}{Game\+::\+Engine\+::\+Shape\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a358eee1f5c945c5caf25d32d0fe63bb2}{set\+Color}} (Color color)
+\item 
+Color \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a5fa9efa859389460468d7d276b52fae8}{get\+Color}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object}{Game\+::\+Engine\+::\+Drawable\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object_a4aeba3cd5887b26d067eb74ea8da302e}{draw}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{Game\+::\+Engine\+::\+Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a1ca26733e7e3ec45942e1a8726bd5e3e}{setX}} (float x)
+\begin{DoxyCompactList}\small\item\em Ustawia wspó³rzêdn¹ X obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_ad2497dfcb90ada8a121c32fef605530e}{setY}} (float y)
+\begin{DoxyCompactList}\small\item\em Ustawia wspó³rzêdn¹ Y obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a70e0e2e2dcfdd339e7b5f07b38dc7064}{getX}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera wspó³rzêdn¹ X obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a233eb91c677b0bf36e397de46ebc166d}{getY}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera wspó³rzêdn¹ Y obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegÃ³Å‚owy}
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00087}{87}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\Hypertarget{class_game_1_1_engine_1_1_rectangle_a16c60d7ff664abd6c176a7f2a561ee37}\label{class_game_1_1_engine_1_1_rectangle_a16c60d7ff664abd6c176a7f2a561ee37} 
+\index{Game::Engine::Rectangle@{Game::Engine::Rectangle}!Rectangle@{Rectangle}}
+\index{Rectangle@{Rectangle}!Game::Engine::Rectangle@{Game::Engine::Rectangle}}
+\doxysubsubsection{\texorpdfstring{Rectangle()}{Rectangle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Engine\+::\+Rectangle\+::\+Rectangle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Konstruktor domyœlny klasy \doxylink{class_game_1_1_engine_1_1_rectangle}{Rectangle}. 
+
+
+
+Definicja w linii \mbox{\hyperlink{_rectangle_8cpp_source_l00008}{8}} pliku \mbox{\hyperlink{_rectangle_8cpp_source}{Rectangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_rectangle_a191c0ebb97b025abef2c28e905392718}\label{class_game_1_1_engine_1_1_rectangle_a191c0ebb97b025abef2c28e905392718} 
+\index{Game::Engine::Rectangle@{Game::Engine::Rectangle}!Rectangle@{Rectangle}}
+\index{Rectangle@{Rectangle}!Game::Engine::Rectangle@{Game::Engine::Rectangle}}
+\doxysubsubsection{\texorpdfstring{Rectangle()}{Rectangle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Engine\+::\+Rectangle\+::\+Rectangle (\begin{DoxyParamCaption}\item[{Vector2f}]{size }\end{DoxyParamCaption})}
+
+
+
+Konstruktor klasy \doxylink{class_game_1_1_engine_1_1_rectangle}{Rectangle} z okreœlonym rozmiarem. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em size} & Rozmiar prostok¹ta. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_rectangle_8cpp_source_l00015}{15}} pliku \mbox{\hyperlink{_rectangle_8cpp_source}{Rectangle.\+cpp}}.
+
+
+
+\doxysubsection{Dokumentacja funkcji skÅ‚adowych}
+\Hypertarget{class_game_1_1_engine_1_1_rectangle_a2c046f82b013668719083d1764215eff}\label{class_game_1_1_engine_1_1_rectangle_a2c046f82b013668719083d1764215eff} 
+\index{Game::Engine::Rectangle@{Game::Engine::Rectangle}!draw@{draw}}
+\index{draw@{draw}!Game::Engine::Rectangle@{Game::Engine::Rectangle}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Engine\+::\+Rectangle\+::draw (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda rysuj¹ca prostok¹t na g³ównym oknie. 
+
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a2ab4accab8f12127c3bafc3851246b7e}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_rectangle_8cpp_source_l00022}{22}} pliku \mbox{\hyperlink{_rectangle_8cpp_source}{Rectangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_rectangle_a2cd2a46be7a6c98c395ebd1e23ef2864}\label{class_game_1_1_engine_1_1_rectangle_a2cd2a46be7a6c98c395ebd1e23ef2864} 
+\index{Game::Engine::Rectangle@{Game::Engine::Rectangle}!getColor@{getColor}}
+\index{getColor@{getColor}!Game::Engine::Rectangle@{Game::Engine::Rectangle}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily Color Engine\+::\+Rectangle\+::get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda zwracaj¹ca aktualny kolor wype³nienia prostok¹ta. 
+
+\begin{DoxyReturn}{Zwraca}
+Kolor wype³nienia prostok¹ta. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_rectangle_8cpp_source_l00062}{62}} pliku \mbox{\hyperlink{_rectangle_8cpp_source}{Rectangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_rectangle_ac441c9a8396b8ee354d5af68295b0f2e}\label{class_game_1_1_engine_1_1_rectangle_ac441c9a8396b8ee354d5af68295b0f2e} 
+\index{Game::Engine::Rectangle@{Game::Engine::Rectangle}!rotate@{rotate}}
+\index{rotate@{rotate}!Game::Engine::Rectangle@{Game::Engine::Rectangle}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily void Engine\+::\+Rectangle\+::rotate (\begin{DoxyParamCaption}\item[{float}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda obracaj¹ca prostok¹t o okreœlony k¹t. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em angle} & K¹t obrotu w stopniach. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_af6ceb8edc22e9e3b6773842c8c2441e7}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_rectangle_8cpp_source_l00038}{38}} pliku \mbox{\hyperlink{_rectangle_8cpp_source}{Rectangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_rectangle_ab548415908710ecf0759c36709e6159b}\label{class_game_1_1_engine_1_1_rectangle_ab548415908710ecf0759c36709e6159b} 
+\index{Game::Engine::Rectangle@{Game::Engine::Rectangle}!scale@{scale}}
+\index{scale@{scale}!Game::Engine::Rectangle@{Game::Engine::Rectangle}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily void Engine\+::\+Rectangle\+::scale (\begin{DoxyParamCaption}\item[{Vector2f}]{scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda skaluj¹ca prostok¹t o okreœlony wspó³czynnik. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em scale} & Wspó³czynniki skalowania wzd³u¿ osi X i Y. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_ae1301753503a171cb70537d73cc1dfd3}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_rectangle_8cpp_source_l00046}{46}} pliku \mbox{\hyperlink{_rectangle_8cpp_source}{Rectangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_rectangle_a34cb6a1c40605a7f8deeda21ff7e0ae6}\label{class_game_1_1_engine_1_1_rectangle_a34cb6a1c40605a7f8deeda21ff7e0ae6} 
+\index{Game::Engine::Rectangle@{Game::Engine::Rectangle}!setColor@{setColor}}
+\index{setColor@{setColor}!Game::Engine::Rectangle@{Game::Engine::Rectangle}}
+\doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
+{\footnotesize\ttfamily void Engine\+::\+Rectangle\+::set\+Color (\begin{DoxyParamCaption}\item[{Color}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda ustawiaj¹ca kolor wype³nienia prostok¹ta. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em color} & Kolor wype³nienia prostok¹ta. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_rectangle_8cpp_source_l00054}{54}} pliku \mbox{\hyperlink{_rectangle_8cpp_source}{Rectangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_rectangle_a86f3aca2726936cb1da39338172fb015}\label{class_game_1_1_engine_1_1_rectangle_a86f3aca2726936cb1da39338172fb015} 
+\index{Game::Engine::Rectangle@{Game::Engine::Rectangle}!translate@{translate}}
+\index{translate@{translate}!Game::Engine::Rectangle@{Game::Engine::Rectangle}}
+\doxysubsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily void Engine\+::\+Rectangle\+::translate (\begin{DoxyParamCaption}\item[{Vector2f}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda przesuwaj¹ca prostok¹t do okreœlonej pozycji. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em position} & Nowa pozycja prostok¹ta. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a2d9777285d1943131e35a2e054ba1604}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_rectangle_8cpp_source_l00030}{30}} pliku \mbox{\hyperlink{_rectangle_8cpp_source}{Rectangle.\+cpp}}.
+
+
+
+Dokumentacja dla tej klasy zostaÅ‚a wygenerowana z plikÃ³w\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_engine_8hpp}{Engine.\+hpp}}\item 
+\mbox{\hyperlink{_rectangle_8cpp}{Rectangle.\+cpp}}\end{DoxyCompactItemize}

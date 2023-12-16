@@ -198,6 +198,11 @@ void Engine::authorsWindowSetup() {
     background.draw();
 }
 
+/**
+ * @brief Konfiguruje okno opcji gry.
+ *
+ * Funkcja ta inicjalizuje okno opcji gry, ustawiając tło, tekst i przyciski dla różnych opcji.
+ */
 void Engine::gameOptionsWindowSetup() { 
     VideoMode desktop = VideoMode::getDesktopMode();
     if (!centered) {
@@ -285,7 +290,11 @@ void Engine::gameOptionsWindowSetup() {
     background.draw();
 }
 
-
+/**
+ * @brief Konfiguruje okno zwycięzcy.
+ *
+ * Ta funkcja konfiguruje okno zwycięzcy, wyświetlając zwycięzcę lub remis oraz odtwarzając odpowiednią muzykę.
+ */
 void Engine::winnerWindowSetup() {
     VideoMode desktop = VideoMode::getDesktopMode();
     if (!centered) {
@@ -581,6 +590,12 @@ int Engine::getRectNameWhenMouseIsPressedIn() {
     return -1;
 }
 
+/**
+ * @brief Generuje losowy numer efektu.
+ *
+ * Funkcja używa generatora liczb losowych, aby zwrócić losowy numer efektu z zakresu 1-3.
+ * @return Losowy numer efektu.
+ */
 int Engine::getEffectNumber() {
     std::random_device rd;
     std::mt19937 mt(rd());
@@ -588,6 +603,12 @@ int Engine::getEffectNumber() {
     return dist(mt);
 }
 
+/**
+ * @brief Generuje losowy numer gracza.
+ *
+ * Funkcja używa generatora liczb losowych, aby zwrócić losowy numer gracza z zakresu 1-2.
+ * @return Losowy numer gracza.
+ */
 int Engine::getRandomPlayerNumber() {
     std::random_device rd;
     std::mt19937 mt(rd());
@@ -651,6 +672,12 @@ Vector2f Engine::getPlayerPosition(string playerName) {
             (windowSize == secondRes) ? (Vector2f(secondResXPos, secondResYPos)) : Vector2f(thirdResXPos, thirdResYPos));
 }
 
+/**
+ * @brief Zwraca losową pozycję efektu.
+ *
+ * Funkcja generuje losową pozycję efektu w oknie gry, unikając kolizji z wcześniej zdefiniowanymi obszarami kolizji.
+ * @return Wektor2D reprezentujący losową pozycję efektu.
+ */
 Vector2f Engine::getEffectPosition() {
     std::random_device rd;
     std::mt19937 mt(rd());
@@ -664,6 +691,13 @@ Vector2f Engine::getEffectPosition() {
     return effectPosition;
 }
 
+/**
+ * @brief Sprawdza, czy podana pozycja znajduje się w obszarze kolizji.
+ *
+ * Funkcja sprawdza, czy podana pozycja znajduje się w którymkolwiek z wcześniej zdefiniowanych obszarów kolizji.
+ * @param position Pozycja do sprawdzenia.
+ * @return Wartość logiczna informująca, czy podana pozycja koliduje z którymkolwiek obszarem kolizji.
+ */
 bool Engine::isPositionInCollisionRects(Vector2f position) {
     FloatRect rects[] = {
         FloatRect(0.0f, (window->getSize().y) / 1.45f, window->getSize().x, (window->getSize().y) / 2.0f),
@@ -718,6 +752,13 @@ string Engine::getLoudSpeakerFileName() {
     return "elements/menu/glosnik.png";
 }
 
+/**
+ * @brief Zwraca nazwę pliku obrazu strzałki zależnie od położenia kursora myszy.
+ *
+ * Funkcja określa, czy kursor myszy znajduje się nad obszarem strzałki w oknie gry i
+ * zwraca odpowiednią nazwę pliku obrazu w zależności od tego warunku.
+ * @return Nazwa pliku obrazu strzałki (zwykłej lub zaznaczonej).
+ */
 string Engine::getArrowFileName() {
     Vector2i mouseBounds = Mouse::getPosition(*window);
     float mouseX = mouseBounds.x;
@@ -755,7 +796,14 @@ void Engine::setMenuBackground() {
     gameBackground.draw();
 }
 
-
+/**
+ * @brief Sprawdza akcje związane z obszarem prostokąta strzałki.
+ *
+ * Funkcja sprawdza, czy kursor myszy znajduje się nad obszarem strzałki
+ * i jednocześnie czy lewy przycisk myszy został naciśnięty. W takim przypadku
+ * zatrzymuje odtwarzanie muzyki ekranu zwycięzcy, ustawia aktywne okno na MENU,
+ * i resetuje flagę centered.
+ */
 void Engine::checkArrowRectActions() {
     Vector2i mouseBounds = Mouse::getPosition(*window);
     float mouseX = mouseBounds.x;
@@ -840,6 +888,13 @@ void Engine::checkMenuRectsActions() {
     }
 }
 
+/**
+ * @brief Sprawdza akcje związane z obszarem prostokątów opcji gry.
+ *
+ * Funkcja sprawdza, czy kursor myszy znajduje się nad jednym z obszarów prostokątów opcji gry
+ * i jednocześnie czy lewy przycisk myszy został naciśnięty. W zależności od obszaru,
+ * aktualizuje kolory, wybiera skiny i ustawienia gry.
+ */
 void Engine::checkGameOptionsRectsActions() {
     Vector2i mouseBounds = Mouse::getPosition(*window);
     float mouseX = mouseBounds.x;
@@ -1032,6 +1087,14 @@ void Engine::checkGameOptionsRectsActions() {
     }
 }
 
+/**
+ * @brief Sprawdza, czy doszło do gola w lewej bramce.
+ *
+ * Funkcja sprawdza, czy aktualna pozycja piłki znajduje się w obszarze lewej bramki.
+ * Jeśli tak, wykonuje odpowiednie akcje, takie jak zatrzymanie graczy, odtworzenie dźwięku gola,
+ * uruchomienie efektu specjalnego, zresetowanie gry, etc.
+ * @return true, jeśli doszło do gola w lewej bramce, w przeciwnym razie false.
+ */
 bool Engine::checkIsGoalAtLeftGate() {
     FloatRect leftGateGoalRect(0.0f, (window->getSize().y) / 3.25f, (window->getSize().x) / 10.0f, (window->getSize().y) / 2.3f);
     Vector2f ballPosition(ball.getActualPosition().x, ball.getActualPosition().y);
@@ -1053,6 +1116,14 @@ bool Engine::checkIsGoalAtLeftGate() {
     return false;
 }
 
+/**
+ * @brief Sprawdza, czy doszło do gola w prawej bramce.
+ *
+ * Funkcja sprawdza, czy aktualna pozycja piłki znajduje się w obszarze prawej bramki.
+ * Jeśli tak, wykonuje odpowiednie akcje, takie jak zatrzymanie graczy, odtworzenie dźwięku gola,
+ * uruchomienie efektu specjalnego, zresetowanie gry, etc.
+ * @return true, jeśli doszło do gola w prawej bramce, w przeciwnym razie false.
+ */
 bool Engine::checkIsGoalAtRightGate() {
     FloatRect rightGateGoalRect((window->getSize().x) / 1.175f, (window->getSize().y) / 3.2f, 
         (window->getSize().x) / 10.0f, (window->getSize().y) / 2.5f);
@@ -1280,6 +1351,13 @@ void Engine::checkRectsActions() {
     }
 }
 
+/**
+ * @brief Sprawdza kolizję piłki z efektem specjalnym.
+ *
+ * Funkcja sprawdza, czy aktualna pozycja piłki zawiera się w obszarze efektu specjalnego.
+ * Jeśli tak, a jednocześnie żaden z graczy nie jest zamrożony lub nieaktywny,
+ * uruchamia odpowiedni efekt w zależności od numeru efektu.
+ */
 void Engine::checkIsCollisionWithEffect() {
     Vector2f ballPosition = ball.getActualPosition();
     FloatRect effectPos(effectPosition, effectSize);
@@ -1306,6 +1384,17 @@ void Engine::checkIsCollisionWithEffect() {
     }
 }
 
+/**
+ * @brief Przesuwa piłkę w zależności od aktualnego kierunku ruchu.
+ *
+ * Funkcja przemieszcza piłkę zgodnie z aktualnym kierunkiem ruchu.
+ * Kierunek ruchu i prędkość piłki są zdefiniowane wcześniej w obiekcie piłki.
+ * Piłka odbija się od górnej i dolnej krawędzi ekranu oraz wykonuje ruch pochylony
+ * w kierunku północno-wschodnim, południowo-wschodnim, północno-zachodnim lub południowo-zachodnim,
+ * w zależności od aktualnego kierunku.
+ *
+ * Funkcja nie wykonuje ruchu, jeśli gra jest w stanie pauzy.
+ */
 void Engine::moveBall() {
     if (!pause) {
         Vector2f ballPosition = ball.getActualPosition();
@@ -1503,6 +1592,22 @@ void Engine::serveWindowCloseEvent() {
         }
     }
 }
+
+/**
+ * @brief Sprawdza kolizję piłki z graczami.
+ *
+ * Funkcja sprawdza, czy aktualna pozycja piłki koliduje z którąś z części ciała graczy.
+ * Jeśli piłka trafi na obszar buta gracza podczas strzału, zmienia kierunek piłki
+ * i ustawia jej prędkość na określoną wartość. Jeśli piłka trafi na obszar buta gracza
+ * podczas braku strzału, zatrzymuje piłkę. Jeśli piłka trafi na obszar głowy gracza,
+ * zmienia kierunek piłki. Jeśli piłka trafi na bok gracza, zmienia kierunek piłki w zależności
+ * od tego, czy piłka znajduje się powyżej czy poniżej obszaru kolizji, przy czym uwzględniane
+ * są także górna i dolna krawędź ekranu.
+ *
+ * Funkcja nie wykonuje żadnych działań, jeśli gra jest w stanie pauzy.
+ *
+ * @return true, jeśli wystąpiła kolizja z graczem, w przeciwnym razie false.
+ */
 
 bool Engine::checkIsCollisionWithPlayer() {
     bool isCollision = false;
@@ -1704,6 +1809,15 @@ void Engine::saveLog() {
     cout << logContent << endl;
 }
 
+/**
+ * @brief Zapisuje punkty do pliku.
+ *
+ * Funkcja otwiera plik "points.dat" w trybie dołączania (ios::app),
+ * a następnie zapisuje wiadomość z punktami do pliku, dodając znak nowej linii.
+ * Na koniec plik jest zamykany.
+ *
+ * @param pointsMessage Wiadomość zawierająca informacje o zdobytych punktach.
+ */
 void Engine::savePoints(string pointsMessage) {
     fstream fileStream;
     fileStream.open("points.dat", ios::app);

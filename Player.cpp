@@ -20,10 +20,24 @@ void Engine::Player::setPlayerBitmap(BitmapHandler bitmap) {
 	this->playerBitmap = bitmap;
 }
 
+/**
+ * @brief Ustawia bitmapê dla wy³¹czonego gracza.
+ *
+ * Funkcja ustawia bitmapê dla przypadku, gdy gracz jest wy³¹czony.
+ *
+ * @param bitmap Obiekt BitmapHandler reprezentuj¹cy bitmapê dla wy³¹czonego gracza.
+ */
 void Engine::Player::setPlayerDisabledBitmap(BitmapHandler bitmap) {
 	this->playerDisabledBitmap = bitmap;
 }
 
+/**
+ * @brief Ustawia bitmapê dla zamro¿onego gracza.
+ *
+ * Funkcja ustawia bitmapê dla przypadku, gdy gracz jest zamro¿ony.
+ *
+ * @param bitmap Obiekt BitmapHandler reprezentuj¹cy bitmapê dla zamro¿onego gracza.
+ */
 void Engine::Player::setPlayerFreezedBitmap(BitmapHandler bitmap) {
 	this->playerFreezedBitmap = bitmap;
 }

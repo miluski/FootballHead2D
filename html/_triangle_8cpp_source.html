@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>FootballHead2D: Plik ÅºrÃ³dÅ‚owy Triangle.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="haalandlogo.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">FootballHead2D
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowaÅ„</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Triangle.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_triangle_8cpp.html">IdÅº do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="_engine_8hpp.html">Engine.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_game.html">Game</a>;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_triangle.html#a7daf678712a0a0a9f160ee1c2361a800">    9</a></span><a class="code hl_function" href="class_game_1_1_engine_1_1_triangle.html#a7daf678712a0a0a9f160ee1c2361a800">Engine::Triangle::Triangle</a>(<span class="keywordtype">float</span> radius) {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    this-&gt;triangle.setRadius(radius);</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    this-&gt;triangle.setPointCount(3);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    this-&gt;triangle.setPosition(<a class="code hl_function" href="class_game_1_1_engine_1_1_game_object.html#a70e0e2e2dcfdd339e7b5f07b38dc7064">getX</a>(), <a class="code hl_function" href="class_game_1_1_engine_1_1_game_object.html#a233eb91c677b0bf36e397de46ebc166d">getY</a>());</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>}</div>
+</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_triangle.html#a1323188324ed17688a89135f14168b78">   18</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_engine_1_1_triangle.html#a1323188324ed17688a89135f14168b78">Engine::Triangle::draw</a>() {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(triangle);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
+</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_triangle.html#aecdf434a0c63d25740e2fc3ef2f51a48">   26</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_engine_1_1_triangle.html#aecdf434a0c63d25740e2fc3ef2f51a48">Engine::Triangle::translate</a>(Vector2f position) {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    this-&gt;triangle.setPosition(position);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
+</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_triangle.html#af6de94a73eea889878a39c133ef55406">   34</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_engine_1_1_triangle.html#af6de94a73eea889878a39c133ef55406">Engine::Triangle::rotate</a>(<span class="keywordtype">float</span> angle) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    this-&gt;triangle.rotate(angle);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}</div>
+</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_triangle.html#ae5d1e3e0d06546a92a2d3e85eae4102d">   42</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_engine_1_1_triangle.html#ae5d1e3e0d06546a92a2d3e85eae4102d">Engine::Triangle::scale</a>(Vector2f scale) {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    this-&gt;triangle.setScale(scale);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
+</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_triangle.html#a85dd542394da6885fa1f23f16b133a4e">   50</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_engine_1_1_triangle.html#a85dd542394da6885fa1f23f16b133a4e">Engine::Triangle::setColor</a>(Color color) {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    this-&gt;triangle.setFillColor(color);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_triangle.html#acc5f96dfc2c9155e235b41e871a6eeb0">   58</a></span>Color <a class="code hl_function" href="class_game_1_1_engine_1_1_triangle.html#acc5f96dfc2c9155e235b41e871a6eeb0">Engine::Triangle::getColor</a>() {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">return</span> this-&gt;triangle.getFillColor();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+</div>
+<div class="ttc" id="a_engine_8hpp_html"><div class="ttname"><a href="_engine_8hpp.html">Engine.hpp</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_game_object_html_a233eb91c677b0bf36e397de46ebc166d"><div class="ttname"><a href="class_game_1_1_engine_1_1_game_object.html#a233eb91c677b0bf36e397de46ebc166d">Game::Engine::GameObject::getY</a></div><div class="ttdeci">float getY()</div><div class="ttdoc">Pobiera wspó³rzêdn¹ Y obiektu GameObject.</div><div class="ttdef"><b>Definition</b> <a href="_game_object_8cpp_source.html#l00038">GameObject.cpp:38</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_game_object_html_a70e0e2e2dcfdd339e7b5f07b38dc7064"><div class="ttname"><a href="class_game_1_1_engine_1_1_game_object.html#a70e0e2e2dcfdd339e7b5f07b38dc7064">Game::Engine::GameObject::getX</a></div><div class="ttdeci">float getX()</div><div class="ttdoc">Pobiera wspó³rzêdn¹ X obiektu GameObject.</div><div class="ttdef"><b>Definition</b> <a href="_game_object_8cpp_source.html#l00029">GameObject.cpp:29</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html_a1323188324ed17688a89135f14168b78"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html#a1323188324ed17688a89135f14168b78">Game::Engine::Triangle::draw</a></div><div class="ttdeci">virtual void draw()</div><div class="ttdoc">Metoda rysuj¹ca trójk¹t na g³ównym oknie.</div><div class="ttdef"><b>Definition</b> <a href="_triangle_8cpp_source.html#l00018">Triangle.cpp:18</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html_a7daf678712a0a0a9f160ee1c2361a800"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html#a7daf678712a0a0a9f160ee1c2361a800">Game::Engine::Triangle::Triangle</a></div><div class="ttdeci">Triangle(float radius)</div><div class="ttdoc">Konstruktor klasy Triangle inicjalizuj¹cy trójk¹t o okreœlonym promieniu.</div><div class="ttdef"><b>Definition</b> <a href="_triangle_8cpp_source.html#l00009">Triangle.cpp:9</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html_a85dd542394da6885fa1f23f16b133a4e"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html#a85dd542394da6885fa1f23f16b133a4e">Game::Engine::Triangle::setColor</a></div><div class="ttdeci">virtual void setColor(Color color)</div><div class="ttdoc">Metoda ustawiaj¹ca kolor wype³nienia trójk¹ta.</div><div class="ttdef"><b>Definition</b> <a href="_triangle_8cpp_source.html#l00050">Triangle.cpp:50</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html_acc5f96dfc2c9155e235b41e871a6eeb0"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html#acc5f96dfc2c9155e235b41e871a6eeb0">Game::Engine::Triangle::getColor</a></div><div class="ttdeci">virtual Color getColor()</div><div class="ttdoc">Metoda zwracaj¹ca aktualny kolor wype³nienia trójk¹ta.</div><div class="ttdef"><b>Definition</b> <a href="_triangle_8cpp_source.html#l00058">Triangle.cpp:58</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html_ae5d1e3e0d06546a92a2d3e85eae4102d"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html#ae5d1e3e0d06546a92a2d3e85eae4102d">Game::Engine::Triangle::scale</a></div><div class="ttdeci">virtual void scale(Vector2f scale)</div><div class="ttdoc">Metoda skaluj¹ca trójk¹t o okreœlony wspó³czynnik.</div><div class="ttdef"><b>Definition</b> <a href="_triangle_8cpp_source.html#l00042">Triangle.cpp:42</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html_aecdf434a0c63d25740e2fc3ef2f51a48"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html#aecdf434a0c63d25740e2fc3ef2f51a48">Game::Engine::Triangle::translate</a></div><div class="ttdeci">virtual void translate(Vector2f position)</div><div class="ttdoc">Metoda przesuwaj¹ca trójk¹t do okreœlonej pozycji.</div><div class="ttdef"><b>Definition</b> <a href="_triangle_8cpp_source.html#l00026">Triangle.cpp:26</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html_af6de94a73eea889878a39c133ef55406"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html#af6de94a73eea889878a39c133ef55406">Game::Engine::Triangle::rotate</a></div><div class="ttdeci">virtual void rotate(float angle)</div><div class="ttdoc">Metoda obracaj¹ca trójk¹t o okreœlony k¹t.</div><div class="ttdef"><b>Definition</b> <a href="_triangle_8cpp_source.html#l00034">Triangle.cpp:34</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_html_aa3e5849dd439915c2ce5c47f839d5c74"><div class="ttname"><a href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">Game::Engine::getMainWindow</a></div><div class="ttdeci">RenderWindow * getMainWindow()</div><div class="ttdoc">Funkcja pobiera wskaÅºnik do gÅ‚Ã³wnego okna aplikacji.</div><div class="ttdef"><b>Definition</b> <a href="_engine_8cpp_source.html#l00432">Engine.cpp:432</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_html_ae4e76bf2cc9186b89e5eaf91cc110259"><div class="ttname"><a href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Game::Engine::getInstance</a></div><div class="ttdeci">static Engine &amp; getInstance()</div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00044">Engine.hpp:44</a></div></div>
+<div class="ttc" id="anamespace_game_html"><div class="ttname"><a href="namespace_game.html">Game</a></div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00037">Engine.hpp:37</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

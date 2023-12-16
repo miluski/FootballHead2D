@@ -1,0 +1,213 @@
+\doxysection{Dokumentacja klasy Game\+::Engine\+::Triangle}
+\hypertarget{class_game_1_1_engine_1_1_triangle}{}\label{class_game_1_1_engine_1_1_triangle}\index{Game::Engine::Triangle@{Game::Engine::Triangle}}
+
+
+{\ttfamily \#include $<$Engine.\+hpp$>$}
+
+Diagram dziedziczenia dla Game\+::Engine\+::Triangle\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_game_1_1_engine_1_1_triangle}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_a7daf678712a0a0a9f160ee1c2361a800}{Triangle}} (float radius)
+\begin{DoxyCompactList}\small\item\em Konstruktor klasy \doxylink{class_game_1_1_engine_1_1_triangle}{Triangle} inicjalizuj¹cy trójk¹t o okreœlonym promieniu. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_a1323188324ed17688a89135f14168b78}{draw}} ()
+\begin{DoxyCompactList}\small\item\em Metoda rysuj¹ca trójk¹t na g³ównym oknie. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_aecdf434a0c63d25740e2fc3ef2f51a48}{translate}} (Vector2f position)
+\begin{DoxyCompactList}\small\item\em Metoda przesuwaj¹ca trójk¹t do okreœlonej pozycji. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_af6de94a73eea889878a39c133ef55406}{rotate}} (float angle)
+\begin{DoxyCompactList}\small\item\em Metoda obracaj¹ca trójk¹t o okreœlony k¹t. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_ae5d1e3e0d06546a92a2d3e85eae4102d}{scale}} (Vector2f scale)
+\begin{DoxyCompactList}\small\item\em Metoda skaluj¹ca trójk¹t o okreœlony wspó³czynnik. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_a85dd542394da6885fa1f23f16b133a4e}{set\+Color}} (Color color)
+\begin{DoxyCompactList}\small\item\em Metoda ustawiaj¹ca kolor wype³nienia trójk¹ta. \end{DoxyCompactList}\item 
+virtual Color \mbox{\hyperlink{class_game_1_1_engine_1_1_triangle_acc5f96dfc2c9155e235b41e871a6eeb0}{get\+Color}} ()
+\begin{DoxyCompactList}\small\item\em Metoda zwracaj¹ca aktualny kolor wype³nienia trójk¹ta. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object}{Game\+::\+Engine\+::\+Shape\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a358eee1f5c945c5caf25d32d0fe63bb2}{set\+Color}} (Color color)
+\item 
+Color \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a5fa9efa859389460468d7d276b52fae8}{get\+Color}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object}{Game\+::\+Engine\+::\+Drawable\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object_a4aeba3cd5887b26d067eb74ea8da302e}{draw}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{Game\+::\+Engine\+::\+Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a1ca26733e7e3ec45942e1a8726bd5e3e}{setX}} (float x)
+\begin{DoxyCompactList}\small\item\em Ustawia wspó³rzêdn¹ X obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_ad2497dfcb90ada8a121c32fef605530e}{setY}} (float y)
+\begin{DoxyCompactList}\small\item\em Ustawia wspó³rzêdn¹ Y obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a70e0e2e2dcfdd339e7b5f07b38dc7064}{getX}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera wspó³rzêdn¹ X obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a233eb91c677b0bf36e397de46ebc166d}{getY}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera wspó³rzêdn¹ Y obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegÃ³Å‚owy}
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00114}{114}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\Hypertarget{class_game_1_1_engine_1_1_triangle_a7daf678712a0a0a9f160ee1c2361a800}\label{class_game_1_1_engine_1_1_triangle_a7daf678712a0a0a9f160ee1c2361a800} 
+\index{Game::Engine::Triangle@{Game::Engine::Triangle}!Triangle@{Triangle}}
+\index{Triangle@{Triangle}!Game::Engine::Triangle@{Game::Engine::Triangle}}
+\doxysubsubsection{\texorpdfstring{Triangle()}{Triangle()}}
+{\footnotesize\ttfamily Engine\+::\+Triangle\+::\+Triangle (\begin{DoxyParamCaption}\item[{float}]{radius }\end{DoxyParamCaption})}
+
+
+
+Konstruktor klasy \doxylink{class_game_1_1_engine_1_1_triangle}{Triangle} inicjalizuj¹cy trójk¹t o okreœlonym promieniu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em radius} & Promieñ trójk¹ta. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_triangle_8cpp_source_l00009}{9}} pliku \mbox{\hyperlink{_triangle_8cpp_source}{Triangle.\+cpp}}.
+
+
+
+\doxysubsection{Dokumentacja funkcji skÅ‚adowych}
+\Hypertarget{class_game_1_1_engine_1_1_triangle_a1323188324ed17688a89135f14168b78}\label{class_game_1_1_engine_1_1_triangle_a1323188324ed17688a89135f14168b78} 
+\index{Game::Engine::Triangle@{Game::Engine::Triangle}!draw@{draw}}
+\index{draw@{draw}!Game::Engine::Triangle@{Game::Engine::Triangle}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Engine\+::\+Triangle\+::draw (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda rysuj¹ca trójk¹t na g³ównym oknie. 
+
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a2ab4accab8f12127c3bafc3851246b7e}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_triangle_8cpp_source_l00018}{18}} pliku \mbox{\hyperlink{_triangle_8cpp_source}{Triangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_triangle_acc5f96dfc2c9155e235b41e871a6eeb0}\label{class_game_1_1_engine_1_1_triangle_acc5f96dfc2c9155e235b41e871a6eeb0} 
+\index{Game::Engine::Triangle@{Game::Engine::Triangle}!getColor@{getColor}}
+\index{getColor@{getColor}!Game::Engine::Triangle@{Game::Engine::Triangle}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily Color Engine\+::\+Triangle\+::get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda zwracaj¹ca aktualny kolor wype³nienia trójk¹ta. 
+
+\begin{DoxyReturn}{Zwraca}
+Kolor wype³nienia trójk¹ta. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_triangle_8cpp_source_l00058}{58}} pliku \mbox{\hyperlink{_triangle_8cpp_source}{Triangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_triangle_af6de94a73eea889878a39c133ef55406}\label{class_game_1_1_engine_1_1_triangle_af6de94a73eea889878a39c133ef55406} 
+\index{Game::Engine::Triangle@{Game::Engine::Triangle}!rotate@{rotate}}
+\index{rotate@{rotate}!Game::Engine::Triangle@{Game::Engine::Triangle}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily void Engine\+::\+Triangle\+::rotate (\begin{DoxyParamCaption}\item[{float}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda obracaj¹ca trójk¹t o okreœlony k¹t. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em angle} & K¹t obrotu w stopniach. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_af6ceb8edc22e9e3b6773842c8c2441e7}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_triangle_8cpp_source_l00034}{34}} pliku \mbox{\hyperlink{_triangle_8cpp_source}{Triangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_triangle_ae5d1e3e0d06546a92a2d3e85eae4102d}\label{class_game_1_1_engine_1_1_triangle_ae5d1e3e0d06546a92a2d3e85eae4102d} 
+\index{Game::Engine::Triangle@{Game::Engine::Triangle}!scale@{scale}}
+\index{scale@{scale}!Game::Engine::Triangle@{Game::Engine::Triangle}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily void Engine\+::\+Triangle\+::scale (\begin{DoxyParamCaption}\item[{Vector2f}]{scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda skaluj¹ca trójk¹t o okreœlony wspó³czynnik. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em scale} & Wspó³czynniki skalowania wzd³u¿ osi X i Y. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_ae1301753503a171cb70537d73cc1dfd3}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_triangle_8cpp_source_l00042}{42}} pliku \mbox{\hyperlink{_triangle_8cpp_source}{Triangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_triangle_a85dd542394da6885fa1f23f16b133a4e}\label{class_game_1_1_engine_1_1_triangle_a85dd542394da6885fa1f23f16b133a4e} 
+\index{Game::Engine::Triangle@{Game::Engine::Triangle}!setColor@{setColor}}
+\index{setColor@{setColor}!Game::Engine::Triangle@{Game::Engine::Triangle}}
+\doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
+{\footnotesize\ttfamily void Engine\+::\+Triangle\+::set\+Color (\begin{DoxyParamCaption}\item[{Color}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda ustawiaj¹ca kolor wype³nienia trójk¹ta. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em color} & Kolor wype³nienia trójk¹ta. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_triangle_8cpp_source_l00050}{50}} pliku \mbox{\hyperlink{_triangle_8cpp_source}{Triangle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_triangle_aecdf434a0c63d25740e2fc3ef2f51a48}\label{class_game_1_1_engine_1_1_triangle_aecdf434a0c63d25740e2fc3ef2f51a48} 
+\index{Game::Engine::Triangle@{Game::Engine::Triangle}!translate@{translate}}
+\index{translate@{translate}!Game::Engine::Triangle@{Game::Engine::Triangle}}
+\doxysubsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily void Engine\+::\+Triangle\+::translate (\begin{DoxyParamCaption}\item[{Vector2f}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Metoda przesuwaj¹ca trójk¹t do okreœlonej pozycji. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em position} & Nowa pozycja trójk¹ta. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a2d9777285d1943131e35a2e054ba1604}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_triangle_8cpp_source_l00026}{26}} pliku \mbox{\hyperlink{_triangle_8cpp_source}{Triangle.\+cpp}}.
+
+
+
+Dokumentacja dla tej klasy zostaÅ‚a wygenerowana z plikÃ³w\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_engine_8hpp}{Engine.\+hpp}}\item 
+\mbox{\hyperlink{_triangle_8cpp}{Triangle.\+cpp}}\end{DoxyCompactItemize}
