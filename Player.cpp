@@ -108,6 +108,6 @@ Engine::BitmapHandler Engine::Player::getPlayerBitmap() {
 		return this->playerBitmap;
 	else if (this->isDisabled)
 		return this->playerDisabledBitmap;
-	else
+	else if(this->isFreezed)
 		return this->playerFreezedBitmap;
 }
