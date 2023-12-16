@@ -1,5 +1,9 @@
 \doxysection{Dokumentacja klasy Game\+::Engine\+::Sprite\+Object}
 \hypertarget{class_game_1_1_engine_1_1_sprite_object}{}\label{class_game_1_1_engine_1_1_sprite_object}\index{Game::Engine::SpriteObject@{Game::Engine::SpriteObject}}
+
+
+{\ttfamily \#include $<$Engine.\+hpp$>$}
+
 Diagram dziedziczenia dla Game\+::Engine\+::Sprite\+Object\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,8 +13,7 @@ Diagram dziedziczenia dla Game\+::Engine\+::Sprite\+Object\begin{figure}[H]
 \doxysubsubsection*{Metody publiczne}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_game_1_1_engine_1_1_sprite_object_a9242b7026bc16fe2427a048c644b848b}\label{class_game_1_1_engine_1_1_sprite_object_a9242b7026bc16fe2427a048c644b848b} 
-{\bfseries Sprite\+Object} ()
+\mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a9242b7026bc16fe2427a048c644b848b}{Sprite\+Object}} ()
 \begin{DoxyCompactList}\small\item\em Konstruktor domyúlny klasy \doxylink{class_game_1_1_engine_1_1_sprite_object}{Sprite\+Object}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_aac809898e4e3c4a44bf528a7f9966414}{Sprite\+Object}} (Texture \texorpdfstring{$\ast$}{*}bitmap, Vector2f position, Vector2f scale)
 \begin{DoxyCompactList}\small\item\em Konstruktor klasy \doxylink{class_game_1_1_engine_1_1_sprite_object}{Sprite\+Object} inicjalizujπcy obiekt sprite za pomocπ tekstury, pozycji i skali. \end{DoxyCompactList}\item 
@@ -32,7 +35,7 @@ Sprite \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_object_a57f9427d4571188
 \doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object}{Game\+::\+Engine\+::\+Drawable\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries draw} (void)
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object_a4aeba3cd5887b26d067eb74ea8da302e}{draw}} (void)
 \end{DoxyCompactItemize}
 \doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{Game\+::\+Engine\+::\+Game\+Object}}}
 \begin{DoxyCompactItemize}
@@ -49,15 +52,36 @@ float \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a233eb91c677b0bf36e
 \doxysubsection*{Atrybuty publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_object}{Game\+::\+Engine\+::\+Bitmap\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-Sprite {\bfseries sprite\+Object}
+Sprite \mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_object_a27f2c00b98196890bc214fdc8dff5381}{sprite\+Object}}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Opis szczeg√≥≈Çowy}
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00195}{195}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+
+
 \doxysubsection{Dokumentacja konstruktora i destruktora}
+\Hypertarget{class_game_1_1_engine_1_1_sprite_object_a9242b7026bc16fe2427a048c644b848b}\label{class_game_1_1_engine_1_1_sprite_object_a9242b7026bc16fe2427a048c644b848b} 
+\index{Game::Engine::SpriteObject@{Game::Engine::SpriteObject}!SpriteObject@{SpriteObject}}
+\index{SpriteObject@{SpriteObject}!Game::Engine::SpriteObject@{Game::Engine::SpriteObject}}
+\doxysubsubsection{\texorpdfstring{SpriteObject()}{SpriteObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Engine\+::\+Sprite\+Object\+::\+Sprite\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Konstruktor domyúlny klasy \doxylink{class_game_1_1_engine_1_1_sprite_object}{Sprite\+Object}. 
+
+
+
+Definicja w linii \mbox{\hyperlink{_sprite_object_8cpp_source_l00008}{8}} pliku \mbox{\hyperlink{_sprite_object_8cpp_source}{Sprite\+Object.\+cpp}}.
+
 \Hypertarget{class_game_1_1_engine_1_1_sprite_object_aac809898e4e3c4a44bf528a7f9966414}\label{class_game_1_1_engine_1_1_sprite_object_aac809898e4e3c4a44bf528a7f9966414} 
 \index{Game::Engine::SpriteObject@{Game::Engine::SpriteObject}!SpriteObject@{SpriteObject}}
 \index{SpriteObject@{SpriteObject}!Game::Engine::SpriteObject@{Game::Engine::SpriteObject}}
-\doxysubsubsection{\texorpdfstring{SpriteObject()}{SpriteObject()}}
+\doxysubsubsection{\texorpdfstring{SpriteObject()}{SpriteObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily Engine\+::\+Sprite\+Object\+::\+Sprite\+Object (\begin{DoxyParamCaption}\item[{Texture \texorpdfstring{$\ast$}{*}}]{bitmap,  }\item[{Vector2f}]{position,  }\item[{Vector2f}]{scale }\end{DoxyParamCaption})}
 
 
@@ -73,6 +97,10 @@ Konstruktor klasy \doxylink{class_game_1_1_engine_1_1_sprite_object}{Sprite\+Obj
 {\em scale} & Skala obiektu sprite. \\
 \hline
 \end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_sprite_object_8cpp_source_l00017}{17}} pliku \mbox{\hyperlink{_sprite_object_8cpp_source}{Sprite\+Object.\+cpp}}.
+
 
 
 \doxysubsection{Dokumentacja funkcji sk≈Çadowych}
@@ -93,6 +121,10 @@ Metoda wykonujπca animacjÍ obiektu sprite na podstawie handlera bitmapy i obiekt
 {\em player} & Wskaünik do obiektu gracza, ktÛrego animacja ma byÊ zmieniona. \\
 \hline
 \end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_sprite_object_8cpp_source_l00068}{68}} pliku \mbox{\hyperlink{_sprite_object_8cpp_source}{Sprite\+Object.\+cpp}}.
+
 \Hypertarget{class_game_1_1_engine_1_1_sprite_object_ae76c98db66acd98dcfd881ad1fefa685}\label{class_game_1_1_engine_1_1_sprite_object_ae76c98db66acd98dcfd881ad1fefa685} 
 \index{Game::Engine::SpriteObject@{Game::Engine::SpriteObject}!createSpriteFrom@{createSpriteFrom}}
 \index{createSpriteFrom@{createSpriteFrom}!Game::Engine::SpriteObject@{Game::Engine::SpriteObject}}
@@ -112,6 +144,10 @@ Metoda tworzπca obiekt sprite na podstawie tekstury, pozycji i skali.
 {\em scale} & Skala obiektu sprite. \\
 \hline
 \end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_sprite_object_8cpp_source_l00030}{30}} pliku \mbox{\hyperlink{_sprite_object_8cpp_source}{Sprite\+Object.\+cpp}}.
+
 \Hypertarget{class_game_1_1_engine_1_1_sprite_object_ab3058a000ed2a053c1732a5bcbaf396f}\label{class_game_1_1_engine_1_1_sprite_object_ab3058a000ed2a053c1732a5bcbaf396f} 
 \index{Game::Engine::SpriteObject@{Game::Engine::SpriteObject}!createSpriteFrom@{createSpriteFrom}}
 \index{createSpriteFrom@{createSpriteFrom}!Game::Engine::SpriteObject@{Game::Engine::SpriteObject}}
@@ -133,6 +169,10 @@ Metoda tworzπca obiekty sprite z tablicy tekstur, pozycji i skali.
 {\em scales} & Skale obiektÛw sprite. \\
 \hline
 \end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_sprite_object_8cpp_source_l00044}{44}} pliku \mbox{\hyperlink{_sprite_object_8cpp_source}{Sprite\+Object.\+cpp}}.
+
 \Hypertarget{class_game_1_1_engine_1_1_sprite_object_a58e508efc34662896e90da10744f212d}\label{class_game_1_1_engine_1_1_sprite_object_a58e508efc34662896e90da10744f212d} 
 \index{Game::Engine::SpriteObject@{Game::Engine::SpriteObject}!setCollisionRect@{setCollisionRect}}
 \index{setCollisionRect@{setCollisionRect}!Game::Engine::SpriteObject@{Game::Engine::SpriteObject}}
@@ -150,7 +190,11 @@ Metoda ustawiajπca prostokπt kolizji dla obiektu sprite.
 \end{DoxyParams}
 
 
+Definicja w linii \mbox{\hyperlink{_sprite_object_8cpp_source_l00059}{59}} pliku \mbox{\hyperlink{_sprite_object_8cpp_source}{Sprite\+Object.\+cpp}}.
+
+
+
 Dokumentacja dla tej klasy zosta≈Ça wygenerowana z plik√≥w\+:\begin{DoxyCompactItemize}
 \item 
-C\+:/\+Users/\+Krzysiek/source/repos/miluski/\+Football\+Head2\+D/Engine.\+hpp\item 
-C\+:/\+Users/\+Krzysiek/source/repos/miluski/\+Football\+Head2\+D/Sprite\+Object.\+cpp\end{DoxyCompactItemize}
+\mbox{\hyperlink{_engine_8hpp}{Engine.\+hpp}}\item 
+\mbox{\hyperlink{_sprite_object_8cpp}{Sprite\+Object.\+cpp}}\end{DoxyCompactItemize}

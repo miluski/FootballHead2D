@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['ball_0',['Ball',['../class_game_1_1_engine_1_1_ball.html',1,'Game::Engine']]],
-  ['bitmaphandler_1',['bitmaphandler',['../class_game_1_1_engine_1_1_bitmap_handler.html',1,'Game::Engine::BitmapHandler'],['../class_game_1_1_engine_1_1_bitmap_handler.html#a2b50d45d3f691a18810590ce68a3bc6d',1,'Game::Engine::BitmapHandler::BitmapHandler()'],['../class_game_1_1_engine_1_1_bitmap_handler.html#a63edde1ece8ad31c1b18dee91d9d29cb',1,'Game::Engine::BitmapHandler::BitmapHandler(string fileName)'],['../class_game_1_1_engine_1_1_bitmap_handler.html#a9011ed66ac4396580304973ee7338bde',1,'Game::Engine::BitmapHandler::BitmapHandler(Text text, Vector2i size, Color textureColor)']]],
-  ['bitmapobject_2',['BitmapObject',['../class_game_1_1_engine_1_1_bitmap_object.html',1,'Game::Engine']]],
-  ['borderrectfill_3',['borderRectFill',['../class_game_1_1_primitive_renderer.html#aa4097eae13d52a5a1c2621d27311716d',1,'Game::PrimitiveRenderer']]]
+  ['activewindowname_0',['activeWindowName',['../class_game_1_1_engine.html#a42e2e91abaa8b79855cd034ad037c718',1,'Game::Engine']]],
+  ['animate_1',['animate',['../class_game_1_1_engine_1_1_animated_object.html#aee1575c9c783c6db45d993c140d16327',1,'Game::Engine::AnimatedObject::animate()'],['../class_game_1_1_engine_1_1_sprite_object.html#a503ea24094039f67d79eb1e24592467e',1,'Game::Engine::SpriteObject::animate()']]],
+  ['animatedobject_2',['AnimatedObject',['../class_game_1_1_engine_1_1_animated_object.html',1,'Game::Engine']]],
+  ['authors_3',['AUTHORS',['../_engine_8hpp.html#ac27687d08a7a1eaddaa24aa584f909aba78fe7d6da4ba1bd28dd58429d7ac470a',1,'Engine.hpp']]]
 ];
