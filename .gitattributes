@@ -60,8 +60,8 @@
 *.wav filter=lfs diff=lfs merge=lfs -text
 *.html linguist-detectable=true
 *.tex linguist-detectable=true
-*.JavaScript linguist-detectable=true
-*.PostScript linguist-detectable=true
+*.js linguist-detectable=true
+*.ps linguist-detectable=true
 *.css linguist-detectable=true
 *.other linguist-detectable=true
 *.c++ linguist-detectable=false
