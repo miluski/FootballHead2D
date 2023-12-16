@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>FootballHead2D: Plik ÅºrÃ³dÅ‚owy PrimitiveRenderer.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="haalandlogo.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">FootballHead2D
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowaÅ„</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">PrimitiveRenderer.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_primitive_renderer_8cpp.html">IdÅº do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="_engine_8hpp.html">Engine.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_game.html">Game</a>;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#a54df568c619e42b07599653571177ca7">   12</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#a54df568c619e42b07599653571177ca7">PrimitiveRenderer::drawRectangle</a>(Vector2f size, Vector2f position, Color color) {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="class_game_1_1_engine_1_1_rectangle.html">Engine::Rectangle</a> rectangle(size);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    rectangle.<a class="code hl_function" href="class_game_1_1_engine_1_1_rectangle.html#a34cb6a1c40605a7f8deeda21ff7e0ae6">setColor</a>(color);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    rectangle.<a class="code hl_function" href="class_game_1_1_engine_1_1_rectangle.html#a86f3aca2726936cb1da39338172fb015">translate</a>(position);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    rectangle.<a class="code hl_function" href="class_game_1_1_engine_1_1_rectangle.html#a2c046f82b013668719083d1764215eff">draw</a>();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>}</div>
+</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#a4113ac2709d662cfbe8a260b2e533eda">   26</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#a4113ac2709d662cfbe8a260b2e533eda">PrimitiveRenderer::drawCircle</a>(<span class="keywordtype">float</span> radius, Vector2f position, Color color) {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_class" href="class_game_1_1_engine_1_1_circle.html">Engine::Circle</a> circle(radius);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    circle.<a class="code hl_function" href="class_game_1_1_engine_1_1_circle.html#adf86ad7a48d520ce465d023f5bb31dac">setColor</a>(color);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    circle.<a class="code hl_function" href="class_game_1_1_engine_1_1_circle.html#a1e176096de8594f10405d6459f24764b">translate</a>(position);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    circle.<a class="code hl_function" href="class_game_1_1_engine_1_1_circle.html#a459a9aef03638662fc8b3e9020590998">draw</a>();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
+</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#a9da3bc9313aa224ae7b25b150ae4147a">   40</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#a9da3bc9313aa224ae7b25b150ae4147a">PrimitiveRenderer::drawSymetricCircle</a>(<span class="keywordtype">float</span> radius, <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> startPoint, Color color) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">for</span> (<span class="keywordtype">float</span> i = 0.0f; i &lt; 180.0f; i += 1.0f) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">float</span> x = radius * cos(i);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordtype">float</span> y = radius * sin(i);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        Vertex point(Vector2f(startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() + x, startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() + y), color);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(&amp;point, 1, Points);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        Vertex point2(Vector2f(startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() + x, startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() - y), color);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(&amp;point2, 1, Points);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        Vertex point3(Vector2f(startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() - x, startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() + y), color);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(&amp;point3, 1, Points);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        Vertex point4(Vector2f(startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() - x, startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() - y), color);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(&amp;point4, 1, Points);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#a3d929f30f2629be5233a00292d1ae68b">   62</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#a3d929f30f2629be5233a00292d1ae68b">PrimitiveRenderer::drawTriangle</a>(<span class="keywordtype">float</span> radius, Vector2f position, Color color) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_class" href="class_game_1_1_engine_1_1_triangle.html">Engine::Triangle</a> triangle(radius);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    triangle.<a class="code hl_function" href="class_game_1_1_engine_1_1_triangle.html#a85dd542394da6885fa1f23f16b133a4e">setColor</a>(color);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    triangle.<a class="code hl_function" href="class_game_1_1_engine_1_1_triangle.html#aecdf434a0c63d25740e2fc3ef2f51a48">translate</a>(position);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    triangle.<a class="code hl_function" href="class_game_1_1_engine_1_1_triangle.html#a1323188324ed17688a89135f14168b78">draw</a>();</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#a1bb9dd27f5a97220453082c3b151e480">   76</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#a1bb9dd27f5a97220453082c3b151e480">PrimitiveRenderer::drawIncreasedLine</a>(Vector2f startCoords, Vector2f endCoords, Color color) {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    VertexArray pointsArray(Points);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">float</span> dy = endCoords.y - startCoords.y;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">float</span> dx = endCoords.x - startCoords.x;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">float</span> m = dy / dx;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">if</span> (abs(m) &lt;= 1) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">float</span> y = startCoords.y;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">for</span> (<span class="keywordtype">float</span> x = startCoords.x; x &lt;= endCoords.x; x++) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            Vector2f linePointCoords(x, y);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            Vertex linePointVertex(linePointCoords, color, Vector2f(5.0f, 0.0f));</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            pointsArray.append(linePointVertex);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            y += m;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        m = dx / dy;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordtype">float</span> x = startCoords.x;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordflow">for</span> (<span class="keywordtype">float</span> y = startCoords.y; y &lt;= endCoords.y; y++) {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            Vector2f linePointCoords(x, y);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            Vertex linePointVertex(linePointCoords, color, Vector2f(5.0f, 0.0f));</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            pointsArray.append(linePointVertex);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            x += m;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(pointsArray);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
+</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#a67bb5d68ed2107d1aebf7ec1a71893ab">  110</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#a67bb5d68ed2107d1aebf7ec1a71893ab">PrimitiveRenderer::drawLine</a>(Vector2f startCoords, Vector2f endCoords, Color color) {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    Vertex line[] =</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        Vertex(Vector2f(startCoords.x, startCoords.y), color),</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        Vertex(Vector2f(endCoords.x, endCoords.y), color)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    };</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(line, 2, Lines);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="foldopen" id="foldopen00125" data-start="{" data-end="}">
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#ac8dcb97ea57de0201a506ded7b20fee9">  125</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#ac8dcb97ea57de0201a506ded7b20fee9">PrimitiveRenderer::drawBrokenLine</a>(vector&lt;LineSegment&gt; lines, Color color) {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="class_game_1_1_line_segment.html">LineSegment</a> line : lines) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        Vertex lineVertex[] = {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            Vertex(Vector2f(line.getStartPoint().getX(), line.getStartPoint().getY()), color, Vector2f(5.0f, 0.0f)),</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            Vertex(Vector2f(line.getEndPoint().getX(), line.getEndPoint().getY()), color, Vector2f(5.0f, 0.0f))</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        };</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(lineVertex, 2, Lines);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
+</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="foldopen" id="foldopen00143" data-start="{" data-end="}">
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#a0c14d89bcf2d56288ed4c9598be3d356">  143</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#a0c14d89bcf2d56288ed4c9598be3d356">PrimitiveRenderer::drawEllipse</a>(<span class="keywordtype">float</span> radiusX, <span class="keywordtype">float</span> radiusY, <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> startPoint, Color color) {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">for</span> (<span class="keywordtype">float</span> i = 0.0f; i &lt; 180.0f; i += 1.0f) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordtype">float</span> x = radiusX * cos(i);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordtype">float</span> y = radiusY * sin(i);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        Vertex point(Vector2f(startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() + x, startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() + y), color);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(&amp;point, 1, Points);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        Vertex point2(Vector2f(startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() + x, startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() - y), color);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(&amp;point2, 1, Points);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        Vertex point3(Vector2f(startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() - x, startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() + y), color);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(&amp;point3, 1, Points);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        Vertex point4(Vector2f(startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() - x, startPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() - y), color);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(&amp;point4, 1, Points);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>}</div>
+</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="foldopen" id="foldopen00165" data-start="{" data-end="}">
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#acd0095b21ccfa8947e864cbc085b6b3e">  165</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#acd0095b21ccfa8947e864cbc085b6b3e">PrimitiveRenderer::isLinesCrossing</a>(<a class="code hl_class" href="class_game_1_1_line_segment.html">LineSegment</a> line1, <a class="code hl_class" href="class_game_1_1_line_segment.html">LineSegment</a> line2) {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> line1StartPoint = line1.<a class="code hl_function" href="class_game_1_1_line_segment.html#aeb83232245ae09e6559108f6eb34d445">getStartPoint</a>();</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> line2StartPoint = line2.<a class="code hl_function" href="class_game_1_1_line_segment.html#aeb83232245ae09e6559108f6eb34d445">getStartPoint</a>();</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> line1EndPoint = line1.<a class="code hl_function" href="class_game_1_1_line_segment.html#a40acf1c2c2b15ea4da32054f2fb6fbf3">getEndPoint</a>();</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> line2EndPoint = line2.<a class="code hl_function" href="class_game_1_1_line_segment.html#a40acf1c2c2b15ea4da32054f2fb6fbf3">getEndPoint</a>();</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordtype">float</span> dx1 = line1EndPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() - line1StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>();</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordtype">float</span> dx2 = line2EndPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() - line2StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>();</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordtype">float</span> dy1 = line1EndPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() - line1StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">float</span> dy2 = line2EndPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() - line2StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>();</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordtype">float</span> cross = dx1 * dy2 - dx2 * dy1;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordflow">if</span> (cross == 0)</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordtype">float</span> crossX = (((line2StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() - line1StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>()) * dy2 -</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            (line2StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() - line1StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>()) * dx2) / cross);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <span class="keywordtype">float</span> crossY = (((line2StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>() - line1StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>()) * dy1 -</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            (line2StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>() - line1StartPoint.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>()) * dx1) / cross);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keywordflow">if</span> (crossX &gt; 0 &amp;&amp; crossX &lt; 1 &amp;&amp; crossY &gt; 0 &amp;&amp; crossY &lt; 1)</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>}</div>
+</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="foldopen" id="foldopen00194" data-start="{" data-end="}">
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#ac3d510948436507c06a9b3f00f999bed">  194</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#ac3d510948436507c06a9b3f00f999bed">PrimitiveRenderer::drawPolygon</a>(vector&lt;LineSegment&gt; lines, Color color) {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; lines.size(); i++) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i + 1; j &lt; lines.size(); j++) {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="class_game_1_1_primitive_renderer.html#acd0095b21ccfa8947e864cbc085b6b3e">isLinesCrossing</a>(lines[i], lines[j]) || j &gt; lines.size())</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">for</span> (<a class="code hl_class" href="class_game_1_1_line_segment.html">LineSegment</a> line : lines) {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        Vertex lineVertex[] = {</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            Vertex(Vector2f(line.getStartPoint().getX(), line.getStartPoint().getY()), color),</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            Vertex(Vector2f(line.getEndPoint().getX(), line.getEndPoint().getY()), color)</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        };</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Engine::getInstance</a>().<a class="code hl_function" href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">getMainWindow</a>()-&gt;draw(lineVertex, 2, Lines);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>}</div>
+</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="foldopen" id="foldopen00218" data-start="{" data-end="}">
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#aa4097eae13d52a5a1c2621d27311716d">  218</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#aa4097eae13d52a5a1c2621d27311716d">PrimitiveRenderer::borderRectFill</a>(<a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> point, Color fillColor, Color borderColor) {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    queue&lt;Point2D&gt; pixelQueue;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    pixelQueue.push(point);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordflow">while</span> (!pixelQueue.empty()) {</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        point = pixelQueue.front();</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        pixelQueue.pop();</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        Color pixelColor = point.<a class="code hl_function" href="class_game_1_1_point2_d.html#a9d9917b975e3337afc974e6437ceb9e1">getPixelColor</a>();</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <span class="keywordflow">if</span> (pixelColor == fillColor || pixelColor == borderColor)</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#a4113ac2709d662cfbe8a260b2e533eda">drawCircle</a>(1.0f, Vector2f(point.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>(), point.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>()), fillColor);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="keywordtype">float</span> pointX = point.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>();</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <span class="keywordtype">float</span> pointY = point.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>();</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> pointN(pointX, pointY + 1.0f);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> pointS(pointX, pointY - 1.0f);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> pointW(pointX - 1.0f, pointY);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> pointE(pointX + 1.0f, pointY);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        pixelQueue.push(pointN);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        pixelQueue.push(pointS);</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        pixelQueue.push(pointW);</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        pixelQueue.push(pointE);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    }</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>}</div>
+</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="foldopen" id="foldopen00255" data-start="{" data-end="}">
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="class_game_1_1_primitive_renderer.html#a9141a4f3c73dd4d6caa93e3141c4b8e8">  255</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_primitive_renderer.html#a9141a4f3c73dd4d6caa93e3141c4b8e8">PrimitiveRenderer::floodRectFill</a>(<a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> point, Color fillColor, Color backgroundColor) {</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    queue&lt;Point2D&gt; pixelQueue;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    pixelQueue.push(point);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">while</span> (!pixelQueue.empty()) {</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        point = pixelQueue.front();</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        pixelQueue.pop();</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        <span class="keywordflow">if</span> (point.<a class="code hl_function" href="class_game_1_1_point2_d.html#a9d9917b975e3337afc974e6437ceb9e1">getPixelColor</a>() == fillColor || point.<a class="code hl_function" href="class_game_1_1_point2_d.html#a9d9917b975e3337afc974e6437ceb9e1">getPixelColor</a>() != backgroundColor || point.<a class="code hl_function" href="class_game_1_1_point2_d.html#a9d9917b975e3337afc974e6437ceb9e1">getPixelColor</a>() == Color::Transparent)</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        point.<a class="code hl_function" href="class_game_1_1_point2_d.html#a78c84cfda1c48f400b01cc4e020d688e">setPixelColor</a>(fillColor);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        point.<a class="code hl_function" href="class_game_1_1_point2_d.html#a56a0272b0188470a72bf3cdaa8af73aa">draw</a>();</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <span class="keywordtype">float</span> pointX = point.<a class="code hl_function" href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">getX</a>();</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        <span class="keywordtype">float</span> pointY = point.<a class="code hl_function" href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">getY</a>();</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> pointN(pointX, pointY + 1.0f);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> pointS(pointX, pointY - 1.0f);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> pointW(pointX - 1.0f, pointY);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <a class="code hl_class" href="class_game_1_1_point2_d.html">Point2D</a> pointE(pointX + 1.0f, pointY);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        pixelQueue.push(pointN);</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        pixelQueue.push(pointS);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        pixelQueue.push(pointW);</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        pixelQueue.push(pointE);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    }</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>}</div>
+</div>
+<div class="ttc" id="a_engine_8hpp_html"><div class="ttname"><a href="_engine_8hpp.html">Engine.hpp</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_circle_html"><div class="ttname"><a href="class_game_1_1_engine_1_1_circle.html">Game::Engine::Circle</a></div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00101">Engine.hpp:101</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_circle_html_a1e176096de8594f10405d6459f24764b"><div class="ttname"><a href="class_game_1_1_engine_1_1_circle.html#a1e176096de8594f10405d6459f24764b">Game::Engine::Circle::translate</a></div><div class="ttdeci">virtual void translate(Vector2f position)</div><div class="ttdoc">Przesuwa ko³o do podanej pozycji.</div><div class="ttdef"><b>Definition</b> <a href="_circle_8cpp_source.html#l00029">Circle.cpp:29</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_circle_html_a459a9aef03638662fc8b3e9020590998"><div class="ttname"><a href="class_game_1_1_engine_1_1_circle.html#a459a9aef03638662fc8b3e9020590998">Game::Engine::Circle::draw</a></div><div class="ttdeci">virtual void draw()</div><div class="ttdoc">Rysuje obiekt Circle na ekranie.</div><div class="ttdef"><b>Definition</b> <a href="_circle_8cpp_source.html#l00020">Circle.cpp:20</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_circle_html_adf86ad7a48d520ce465d023f5bb31dac"><div class="ttname"><a href="class_game_1_1_engine_1_1_circle.html#adf86ad7a48d520ce465d023f5bb31dac">Game::Engine::Circle::setColor</a></div><div class="ttdeci">virtual void setColor(Color color)</div><div class="ttdoc">Ustawia kolor wype³nienia ko³a.</div><div class="ttdef"><b>Definition</b> <a href="_circle_8cpp_source.html#l00056">Circle.cpp:56</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_rectangle_html"><div class="ttname"><a href="class_game_1_1_engine_1_1_rectangle.html">Game::Engine::Rectangle</a></div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00087">Engine.hpp:87</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_rectangle_html_a2c046f82b013668719083d1764215eff"><div class="ttname"><a href="class_game_1_1_engine_1_1_rectangle.html#a2c046f82b013668719083d1764215eff">Game::Engine::Rectangle::draw</a></div><div class="ttdeci">virtual void draw()</div><div class="ttdoc">Metoda rysuj¹ca prostok¹t na g³ównym oknie.</div><div class="ttdef"><b>Definition</b> <a href="_rectangle_8cpp_source.html#l00022">Rectangle.cpp:22</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_rectangle_html_a34cb6a1c40605a7f8deeda21ff7e0ae6"><div class="ttname"><a href="class_game_1_1_engine_1_1_rectangle.html#a34cb6a1c40605a7f8deeda21ff7e0ae6">Game::Engine::Rectangle::setColor</a></div><div class="ttdeci">virtual void setColor(Color color)</div><div class="ttdoc">Metoda ustawiaj¹ca kolor wype³nienia prostok¹ta.</div><div class="ttdef"><b>Definition</b> <a href="_rectangle_8cpp_source.html#l00054">Rectangle.cpp:54</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_rectangle_html_a86f3aca2726936cb1da39338172fb015"><div class="ttname"><a href="class_game_1_1_engine_1_1_rectangle.html#a86f3aca2726936cb1da39338172fb015">Game::Engine::Rectangle::translate</a></div><div class="ttdeci">virtual void translate(Vector2f position)</div><div class="ttdoc">Metoda przesuwaj¹ca prostok¹t do okreœlonej pozycji.</div><div class="ttdef"><b>Definition</b> <a href="_rectangle_8cpp_source.html#l00030">Rectangle.cpp:30</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html">Game::Engine::Triangle</a></div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00114">Engine.hpp:114</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html_a1323188324ed17688a89135f14168b78"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html#a1323188324ed17688a89135f14168b78">Game::Engine::Triangle::draw</a></div><div class="ttdeci">virtual void draw()</div><div class="ttdoc">Metoda rysuj¹ca trójk¹t na g³ównym oknie.</div><div class="ttdef"><b>Definition</b> <a href="_triangle_8cpp_source.html#l00018">Triangle.cpp:18</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html_a85dd542394da6885fa1f23f16b133a4e"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html#a85dd542394da6885fa1f23f16b133a4e">Game::Engine::Triangle::setColor</a></div><div class="ttdeci">virtual void setColor(Color color)</div><div class="ttdoc">Metoda ustawiaj¹ca kolor wype³nienia trójk¹ta.</div><div class="ttdef"><b>Definition</b> <a href="_triangle_8cpp_source.html#l00050">Triangle.cpp:50</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_triangle_html_aecdf434a0c63d25740e2fc3ef2f51a48"><div class="ttname"><a href="class_game_1_1_engine_1_1_triangle.html#aecdf434a0c63d25740e2fc3ef2f51a48">Game::Engine::Triangle::translate</a></div><div class="ttdeci">virtual void translate(Vector2f position)</div><div class="ttdoc">Metoda przesuwaj¹ca trójk¹t do okreœlonej pozycji.</div><div class="ttdef"><b>Definition</b> <a href="_triangle_8cpp_source.html#l00026">Triangle.cpp:26</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_html_aa3e5849dd439915c2ce5c47f839d5c74"><div class="ttname"><a href="class_game_1_1_engine.html#aa3e5849dd439915c2ce5c47f839d5c74">Game::Engine::getMainWindow</a></div><div class="ttdeci">RenderWindow * getMainWindow()</div><div class="ttdoc">Funkcja pobiera wskaÅºnik do gÅ‚Ã³wnego okna aplikacji.</div><div class="ttdef"><b>Definition</b> <a href="_engine_8cpp_source.html#l00432">Engine.cpp:432</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_html_ae4e76bf2cc9186b89e5eaf91cc110259"><div class="ttname"><a href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Game::Engine::getInstance</a></div><div class="ttdeci">static Engine &amp; getInstance()</div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00044">Engine.hpp:44</a></div></div>
+<div class="ttc" id="aclass_game_1_1_line_segment_html"><div class="ttname"><a href="class_game_1_1_line_segment.html">Game::LineSegment</a></div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00361">Engine.hpp:361</a></div></div>
+<div class="ttc" id="aclass_game_1_1_line_segment_html_a40acf1c2c2b15ea4da32054f2fb6fbf3"><div class="ttname"><a href="class_game_1_1_line_segment.html#a40acf1c2c2b15ea4da32054f2fb6fbf3">Game::LineSegment::getEndPoint</a></div><div class="ttdeci">Point2D getEndPoint()</div><div class="ttdoc">Pobiera punkt koñcowy odcinka LineSegment.</div><div class="ttdef"><b>Definition</b> <a href="_line_segment_8cpp_source.html#l00030">LineSegment.cpp:30</a></div></div>
+<div class="ttc" id="aclass_game_1_1_line_segment_html_aeb83232245ae09e6559108f6eb34d445"><div class="ttname"><a href="class_game_1_1_line_segment.html#aeb83232245ae09e6559108f6eb34d445">Game::LineSegment::getStartPoint</a></div><div class="ttdeci">Point2D getStartPoint()</div><div class="ttdoc">Pobiera punkt pocz¹tkowy odcinka LineSegment.</div><div class="ttdef"><b>Definition</b> <a href="_line_segment_8cpp_source.html#l00021">LineSegment.cpp:21</a></div></div>
+<div class="ttc" id="aclass_game_1_1_point2_d_html"><div class="ttname"><a href="class_game_1_1_point2_d.html">Game::Point2D</a></div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00344">Engine.hpp:344</a></div></div>
+<div class="ttc" id="aclass_game_1_1_point2_d_html_a1d99db0ab55004e689f6df96fe159fb8"><div class="ttname"><a href="class_game_1_1_point2_d.html#a1d99db0ab55004e689f6df96fe159fb8">Game::Point2D::getX</a></div><div class="ttdeci">float getX()</div><div class="ttdoc">Pobiera wspó³rzêdn¹ X punktu.</div><div class="ttdef"><b>Definition</b> <a href="_point2_d_8cpp_source.html#l00042">Point2D.cpp:42</a></div></div>
+<div class="ttc" id="aclass_game_1_1_point2_d_html_a56a0272b0188470a72bf3cdaa8af73aa"><div class="ttname"><a href="class_game_1_1_point2_d.html#a56a0272b0188470a72bf3cdaa8af73aa">Game::Point2D::draw</a></div><div class="ttdeci">void draw()</div><div class="ttdoc">Rysuje punkt na ekranie za pomoc¹ PrimitiveRenderer.</div><div class="ttdef"><b>Definition</b> <a href="_point2_d_8cpp_source.html#l00087">Point2D.cpp:87</a></div></div>
+<div class="ttc" id="aclass_game_1_1_point2_d_html_a78c84cfda1c48f400b01cc4e020d688e"><div class="ttname"><a href="class_game_1_1_point2_d.html#a78c84cfda1c48f400b01cc4e020d688e">Game::Point2D::setPixelColor</a></div><div class="ttdeci">void setPixelColor(Color pixelColor)</div><div class="ttdoc">Ustawia kolor piksela punktu.</div><div class="ttdef"><b>Definition</b> <a href="_point2_d_8cpp_source.html#l00069">Point2D.cpp:69</a></div></div>
+<div class="ttc" id="aclass_game_1_1_point2_d_html_a9d9917b975e3337afc974e6437ceb9e1"><div class="ttname"><a href="class_game_1_1_point2_d.html#a9d9917b975e3337afc974e6437ceb9e1">Game::Point2D::getPixelColor</a></div><div class="ttdeci">Color getPixelColor()</div><div class="ttdoc">Pobiera kolor piksela punktu.</div><div class="ttdef"><b>Definition</b> <a href="_point2_d_8cpp_source.html#l00060">Point2D.cpp:60</a></div></div>
+<div class="ttc" id="aclass_game_1_1_point2_d_html_ae4a95e28df1efd23b68a377b35624cfd"><div class="ttname"><a href="class_game_1_1_point2_d.html#ae4a95e28df1efd23b68a377b35624cfd">Game::Point2D::getY</a></div><div class="ttdeci">float getY()</div><div class="ttdoc">Pobiera wspó³rzêdn¹ Y punktu.</div><div class="ttdef"><b>Definition</b> <a href="_point2_d_8cpp_source.html#l00051">Point2D.cpp:51</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_a0c14d89bcf2d56288ed4c9598be3d356"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#a0c14d89bcf2d56288ed4c9598be3d356">Game::PrimitiveRenderer::drawEllipse</a></div><div class="ttdeci">void drawEllipse(float radiusX, float radiusY, Point2D startPoint, Color color)</div><div class="ttdoc">Rysuje elipsê na ekranie o podanych promieniach, punkcie pocz¹tkowym i kolorze.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00143">PrimitiveRenderer.cpp:143</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_a1bb9dd27f5a97220453082c3b151e480"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#a1bb9dd27f5a97220453082c3b151e480">Game::PrimitiveRenderer::drawIncreasedLine</a></div><div class="ttdeci">void drawIncreasedLine(Vector2f startCoords, Vector2f endCoords, Color color)</div><div class="ttdoc">Rysuje zwiêkszon¹ liniê miêdzy dwoma punktami na ekranie o podanym kolorze.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00076">PrimitiveRenderer.cpp:76</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_a3d929f30f2629be5233a00292d1ae68b"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#a3d929f30f2629be5233a00292d1ae68b">Game::PrimitiveRenderer::drawTriangle</a></div><div class="ttdeci">void drawTriangle(float radius, Vector2f position, Color color)</div><div class="ttdoc">Rysuje trójk¹t na ekranie o podanym rozmiarze, pozycji i kolorze.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00062">PrimitiveRenderer.cpp:62</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_a4113ac2709d662cfbe8a260b2e533eda"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#a4113ac2709d662cfbe8a260b2e533eda">Game::PrimitiveRenderer::drawCircle</a></div><div class="ttdeci">void drawCircle(float radius, Vector2f position, Color color)</div><div class="ttdoc">Rysuje ko³o na ekranie o podanym promieniu, pozycji i kolorze.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00026">PrimitiveRenderer.cpp:26</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_a54df568c619e42b07599653571177ca7"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#a54df568c619e42b07599653571177ca7">Game::PrimitiveRenderer::drawRectangle</a></div><div class="ttdeci">void drawRectangle(Vector2f size, Vector2f position, Color color)</div><div class="ttdoc">Rysuje prostok¹t na ekranie o podanych wymiarach, pozycji i kolorze.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00012">PrimitiveRenderer.cpp:12</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_a67bb5d68ed2107d1aebf7ec1a71893ab"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#a67bb5d68ed2107d1aebf7ec1a71893ab">Game::PrimitiveRenderer::drawLine</a></div><div class="ttdeci">void drawLine(Vector2f startCoords, Vector2f endCoords, Color color)</div><div class="ttdoc">Rysuje liniê miêdzy dwoma punktami na ekranie o podanym kolorze.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00110">PrimitiveRenderer.cpp:110</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_a9141a4f3c73dd4d6caa93e3141c4b8e8"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#a9141a4f3c73dd4d6caa93e3141c4b8e8">Game::PrimitiveRenderer::floodRectFill</a></div><div class="ttdeci">void floodRectFill(Point2D point, Color fillColor, Color backgroundColor)</div><div class="ttdoc">Algorytm wype³niania obszaru prostok¹tnego.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00255">PrimitiveRenderer.cpp:255</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_a9da3bc9313aa224ae7b25b150ae4147a"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#a9da3bc9313aa224ae7b25b150ae4147a">Game::PrimitiveRenderer::drawSymetricCircle</a></div><div class="ttdeci">void drawSymetricCircle(float radius, Point2D startPoint, Color color)</div><div class="ttdoc">Rysuje symetryczne ko³o na ekranie o podanym promieniu, punkcie pocz¹tkowym i kolorze.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00040">PrimitiveRenderer.cpp:40</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_aa4097eae13d52a5a1c2621d27311716d"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#aa4097eae13d52a5a1c2621d27311716d">Game::PrimitiveRenderer::borderRectFill</a></div><div class="ttdeci">void borderRectFill(Point2D point, Color fillColor, Color borderColor)</div><div class="ttdoc">Rysuje wype³niony obszar prostok¹tny, zaczynaj¹c od punktu o podanym kolorze wype³nienia i obramowani...</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00218">PrimitiveRenderer.cpp:218</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_ac3d510948436507c06a9b3f00f999bed"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#ac3d510948436507c06a9b3f00f999bed">Game::PrimitiveRenderer::drawPolygon</a></div><div class="ttdeci">void drawPolygon(vector&lt; LineSegment &gt; lines, Color color)</div><div class="ttdoc">Rysuje wielok¹t na ekranie o podanych odcinkach i kolorze.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00194">PrimitiveRenderer.cpp:194</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_ac8dcb97ea57de0201a506ded7b20fee9"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#ac8dcb97ea57de0201a506ded7b20fee9">Game::PrimitiveRenderer::drawBrokenLine</a></div><div class="ttdeci">void drawBrokenLine(vector&lt; LineSegment &gt; lines, Color color)</div><div class="ttdoc">Rysowanie linii ³amanej na ekranie, sk³adaj¹cej siê z podanych odcinków i koloru.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00125">PrimitiveRenderer.cpp:125</a></div></div>
+<div class="ttc" id="aclass_game_1_1_primitive_renderer_html_acd0095b21ccfa8947e864cbc085b6b3e"><div class="ttname"><a href="class_game_1_1_primitive_renderer.html#acd0095b21ccfa8947e864cbc085b6b3e">Game::PrimitiveRenderer::isLinesCrossing</a></div><div class="ttdeci">bool isLinesCrossing(LineSegment line1, LineSegment line2)</div><div class="ttdoc">Sprawdza, czy dwie linie przecinaj¹ siê.</div><div class="ttdef"><b>Definition</b> <a href="_primitive_renderer_8cpp_source.html#l00165">PrimitiveRenderer.cpp:165</a></div></div>
+<div class="ttc" id="anamespace_game_html"><div class="ttname"><a href="namespace_game.html">Game</a></div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00037">Engine.hpp:37</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

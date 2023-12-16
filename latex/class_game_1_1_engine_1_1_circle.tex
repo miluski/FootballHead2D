@@ -1,0 +1,213 @@
+\doxysection{Dokumentacja klasy Game\+::Engine\+::Circle}
+\hypertarget{class_game_1_1_engine_1_1_circle}{}\label{class_game_1_1_engine_1_1_circle}\index{Game::Engine::Circle@{Game::Engine::Circle}}
+
+
+{\ttfamily \#include $<$Engine.\+hpp$>$}
+
+Diagram dziedziczenia dla Game\+::Engine\+::Circle\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_game_1_1_engine_1_1_circle}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_1_1_engine_1_1_circle_a4f74671a565f3ccfb49e1368cc67e409}{Circle}} (float radius)
+\begin{DoxyCompactList}\small\item\em Konstruktor obiektu \doxylink{class_game_1_1_engine_1_1_circle}{Circle} ustawiaj¹cy promieñ ko³a. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_a459a9aef03638662fc8b3e9020590998}{draw}} ()
+\begin{DoxyCompactList}\small\item\em Rysuje obiekt \doxylink{class_game_1_1_engine_1_1_circle}{Circle} na ekranie. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_a1e176096de8594f10405d6459f24764b}{translate}} (Vector2f position)
+\begin{DoxyCompactList}\small\item\em Przesuwa ko³o do podanej pozycji. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_aa6d61d135af33e770d4d9f1dbdf89401}{rotate}} (float angle)
+\begin{DoxyCompactList}\small\item\em Obraca ko³o o podany k¹t. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_afe72e6fe77cf6b8799de590dc57d7c04}{scale}} (Vector2f scale)
+\begin{DoxyCompactList}\small\item\em Skaluje ko³o na podstawie podanego wektora skali. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_adf86ad7a48d520ce465d023f5bb31dac}{set\+Color}} (Color color)
+\begin{DoxyCompactList}\small\item\em Ustawia kolor wype³nienia ko³a. \end{DoxyCompactList}\item 
+virtual Color \mbox{\hyperlink{class_game_1_1_engine_1_1_circle_a12b4f4456a82dae333c2766163554fe6}{get\+Color}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera aktualny kolor wype³nienia ko³a. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object}{Game\+::\+Engine\+::\+Shape\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a358eee1f5c945c5caf25d32d0fe63bb2}{set\+Color}} (Color color)
+\item 
+Color \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a5fa9efa859389460468d7d276b52fae8}{get\+Color}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object}{Game\+::\+Engine\+::\+Drawable\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_drawable_object_a4aeba3cd5887b26d067eb74ea8da302e}{draw}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object}{Game\+::\+Engine\+::\+Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a1ca26733e7e3ec45942e1a8726bd5e3e}{setX}} (float x)
+\begin{DoxyCompactList}\small\item\em Ustawia wspó³rzêdn¹ X obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_ad2497dfcb90ada8a121c32fef605530e}{setY}} (float y)
+\begin{DoxyCompactList}\small\item\em Ustawia wspó³rzêdn¹ Y obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a70e0e2e2dcfdd339e7b5f07b38dc7064}{getX}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera wspó³rzêdn¹ X obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_1_1_engine_1_1_game_object_a233eb91c677b0bf36e397de46ebc166d}{getY}} ()
+\begin{DoxyCompactList}\small\item\em Pobiera wspó³rzêdn¹ Y obiektu \doxylink{class_game_1_1_engine_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegÃ³Å‚owy}
+
+
+Definicja w linii \mbox{\hyperlink{_engine_8hpp_source_l00101}{101}} pliku \mbox{\hyperlink{_engine_8hpp_source}{Engine.\+hpp}}.
+
+
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\Hypertarget{class_game_1_1_engine_1_1_circle_a4f74671a565f3ccfb49e1368cc67e409}\label{class_game_1_1_engine_1_1_circle_a4f74671a565f3ccfb49e1368cc67e409} 
+\index{Game::Engine::Circle@{Game::Engine::Circle}!Circle@{Circle}}
+\index{Circle@{Circle}!Game::Engine::Circle@{Game::Engine::Circle}}
+\doxysubsubsection{\texorpdfstring{Circle()}{Circle()}}
+{\footnotesize\ttfamily Engine\+::\+Circle\+::\+Circle (\begin{DoxyParamCaption}\item[{float}]{radius }\end{DoxyParamCaption})}
+
+
+
+Konstruktor obiektu \doxylink{class_game_1_1_engine_1_1_circle}{Circle} ustawiaj¹cy promieñ ko³a. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em radius} & Promieñ ko³a. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_circle_8cpp_source_l00010}{10}} pliku \mbox{\hyperlink{_circle_8cpp_source}{Circle.\+cpp}}.
+
+
+
+\doxysubsection{Dokumentacja funkcji skÅ‚adowych}
+\Hypertarget{class_game_1_1_engine_1_1_circle_a459a9aef03638662fc8b3e9020590998}\label{class_game_1_1_engine_1_1_circle_a459a9aef03638662fc8b3e9020590998} 
+\index{Game::Engine::Circle@{Game::Engine::Circle}!draw@{draw}}
+\index{draw@{draw}!Game::Engine::Circle@{Game::Engine::Circle}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Engine\+::\+Circle\+::draw (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Rysuje obiekt \doxylink{class_game_1_1_engine_1_1_circle}{Circle} na ekranie. 
+
+Metoda ta korzysta z g³ównego okna aplikacji do narysowania ko³a. 
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a2ab4accab8f12127c3bafc3851246b7e}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_circle_8cpp_source_l00020}{20}} pliku \mbox{\hyperlink{_circle_8cpp_source}{Circle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_circle_a12b4f4456a82dae333c2766163554fe6}\label{class_game_1_1_engine_1_1_circle_a12b4f4456a82dae333c2766163554fe6} 
+\index{Game::Engine::Circle@{Game::Engine::Circle}!getColor@{getColor}}
+\index{getColor@{getColor}!Game::Engine::Circle@{Game::Engine::Circle}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily Color Engine\+::\+Circle\+::get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Pobiera aktualny kolor wype³nienia ko³a. 
+
+\begin{DoxyReturn}{Zwraca}
+Kolor wype³nienia ko³a. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_circle_8cpp_source_l00065}{65}} pliku \mbox{\hyperlink{_circle_8cpp_source}{Circle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_circle_aa6d61d135af33e770d4d9f1dbdf89401}\label{class_game_1_1_engine_1_1_circle_aa6d61d135af33e770d4d9f1dbdf89401} 
+\index{Game::Engine::Circle@{Game::Engine::Circle}!rotate@{rotate}}
+\index{rotate@{rotate}!Game::Engine::Circle@{Game::Engine::Circle}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily void Engine\+::\+Circle\+::rotate (\begin{DoxyParamCaption}\item[{float}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Obraca ko³o o podany k¹t. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em angle} & K¹t rotacji. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_af6ceb8edc22e9e3b6773842c8c2441e7}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_circle_8cpp_source_l00038}{38}} pliku \mbox{\hyperlink{_circle_8cpp_source}{Circle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_circle_afe72e6fe77cf6b8799de590dc57d7c04}\label{class_game_1_1_engine_1_1_circle_afe72e6fe77cf6b8799de590dc57d7c04} 
+\index{Game::Engine::Circle@{Game::Engine::Circle}!scale@{scale}}
+\index{scale@{scale}!Game::Engine::Circle@{Game::Engine::Circle}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily void Engine\+::\+Circle\+::scale (\begin{DoxyParamCaption}\item[{Vector2f}]{scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Skaluje ko³o na podstawie podanego wektora skali. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em scale} & Wektor skali. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_ae1301753503a171cb70537d73cc1dfd3}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_circle_8cpp_source_l00047}{47}} pliku \mbox{\hyperlink{_circle_8cpp_source}{Circle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_circle_adf86ad7a48d520ce465d023f5bb31dac}\label{class_game_1_1_engine_1_1_circle_adf86ad7a48d520ce465d023f5bb31dac} 
+\index{Game::Engine::Circle@{Game::Engine::Circle}!setColor@{setColor}}
+\index{setColor@{setColor}!Game::Engine::Circle@{Game::Engine::Circle}}
+\doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
+{\footnotesize\ttfamily void Engine\+::\+Circle\+::set\+Color (\begin{DoxyParamCaption}\item[{Color}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Ustawia kolor wype³nienia ko³a. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em color} & Kolor wype³nienia ko³a. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_circle_8cpp_source_l00056}{56}} pliku \mbox{\hyperlink{_circle_8cpp_source}{Circle.\+cpp}}.
+
+\Hypertarget{class_game_1_1_engine_1_1_circle_a1e176096de8594f10405d6459f24764b}\label{class_game_1_1_engine_1_1_circle_a1e176096de8594f10405d6459f24764b} 
+\index{Game::Engine::Circle@{Game::Engine::Circle}!translate@{translate}}
+\index{translate@{translate}!Game::Engine::Circle@{Game::Engine::Circle}}
+\doxysubsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily void Engine\+::\+Circle\+::translate (\begin{DoxyParamCaption}\item[{Vector2f}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Przesuwa ko³o do podanej pozycji. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em position} & Nowa pozycja ko³a. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplementowana z \mbox{\hyperlink{class_game_1_1_engine_1_1_shape_object_a2d9777285d1943131e35a2e054ba1604}{Game\+::\+Engine\+::\+Shape\+Object}}.
+
+
+
+Definicja w linii \mbox{\hyperlink{_circle_8cpp_source_l00029}{29}} pliku \mbox{\hyperlink{_circle_8cpp_source}{Circle.\+cpp}}.
+
+
+
+Dokumentacja dla tej klasy zostaÅ‚a wygenerowana z plikÃ³w\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_engine_8hpp}{Engine.\+hpp}}\item 
+\mbox{\hyperlink{_circle_8cpp}{Circle.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>FootballHead2D: Plik ≈∫r√≥d≈Çowy SpriteObject.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="haalandlogo.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">FootballHead2D
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowa≈Ñ</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">SpriteObject.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_sprite_object_8cpp.html">Id≈∫ do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="_engine_8hpp.html">Engine.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_game.html">Game</a>;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="foldopen" id="foldopen00008" data-start="{" data-end="}">
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_sprite_object.html#a9242b7026bc16fe2427a048c644b848b">    8</a></span><a class="code hl_function" href="class_game_1_1_engine_1_1_sprite_object.html#a9242b7026bc16fe2427a048c644b848b">Engine::SpriteObject::SpriteObject</a>() {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>}</div>
+</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_sprite_object.html#aac809898e4e3c4a44bf528a7f9966414">   17</a></span><a class="code hl_function" href="class_game_1_1_engine_1_1_sprite_object.html#a9242b7026bc16fe2427a048c644b848b">Engine::SpriteObject::SpriteObject</a>(Texture* bitmap, Vector2f position, Vector2f scale) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    this-&gt;spriteObject.setTexture(*bitmap);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    this-&gt;spriteObject.setPosition(position.x, position.y);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    this-&gt;spriteObject.setScale(scale.x, scale.y);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">getInstance</a>().backgroundRenderTexture-&gt;draw(this-&gt;spriteObject);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_sprite_object.html#ae76c98db66acd98dcfd881ad1fefa685">   30</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_engine_1_1_sprite_object.html#ae76c98db66acd98dcfd881ad1fefa685">Engine::SpriteObject::createSpriteFrom</a>(Texture* bitmap, Vector2f position, Vector2f scale) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    this-&gt;spriteObject.setTexture(*bitmap);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    this-&gt;spriteObject.setPosition(position.x, position.y);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    this-&gt;spriteObject.setScale(scale.x, scale.y);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">getInstance</a>().backgroundRenderTexture-&gt;draw(this-&gt;spriteObject);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
+</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_sprite_object.html#ab3058a000ed2a053c1732a5bcbaf396f">   44</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_engine_1_1_sprite_object.html#ae76c98db66acd98dcfd881ad1fefa685">Engine::SpriteObject::createSpriteFrom</a>(Texture* bitmap[], <span class="keywordtype">int</span> bitmapArraySize, Vector2f positions[], Vector2f scales[]) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">getInstance</a>().backgroundRenderTexture-&gt;clear();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bitmapArraySize; i++) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        Sprite bufferSprite;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        bufferSprite.setTexture(*bitmap[i]);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        bufferSprite.setPosition(positions[i].x, positions[i].y);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        bufferSprite.setScale(scales[i].x, scales[i].y);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_function" href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">getInstance</a>().backgroundRenderTexture-&gt;draw(bufferSprite);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_sprite_object.html#a58e508efc34662896e90da10744f212d">   59</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_engine_1_1_sprite_object.html#a58e508efc34662896e90da10744f212d">Engine::SpriteObject::setCollisionRect</a>(IntRect collisionRect) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    this-&gt;spriteObject.setTextureRect(collisionRect);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
+</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="class_game_1_1_engine_1_1_sprite_object.html#a503ea24094039f67d79eb1e24592467e">   68</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_game_1_1_engine_1_1_animated_object.html#aee1575c9c783c6db45d993c140d16327">Engine::SpriteObject::animate</a>(<a class="code hl_class" href="class_game_1_1_engine_1_1_bitmap_handler.html">BitmapHandler</a> bitmap, <a class="code hl_class" href="class_game_1_1_engine_1_1_player.html">Player</a>* player) {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    player-&gt;<a class="code hl_function" href="class_game_1_1_engine_1_1_player.html#a5cfb009947a5f4f2a30867ba9c0d7901">setPlayerBitmap</a>(bitmap);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+</div>
+<div class="ttc" id="a_engine_8hpp_html"><div class="ttname"><a href="_engine_8hpp.html">Engine.hpp</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_animated_object_html_aee1575c9c783c6db45d993c140d16327"><div class="ttname"><a href="class_game_1_1_engine_1_1_animated_object.html#aee1575c9c783c6db45d993c140d16327">Game::Engine::AnimatedObject::animate</a></div><div class="ttdeci">void animate()</div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_bitmap_handler_html"><div class="ttname"><a href="class_game_1_1_engine_1_1_bitmap_handler.html">Game::Engine::BitmapHandler</a></div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00127">Engine.hpp:127</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_player_html"><div class="ttname"><a href="class_game_1_1_engine_1_1_player.html">Game::Engine::Player</a></div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00148">Engine.hpp:148</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_player_html_a5cfb009947a5f4f2a30867ba9c0d7901"><div class="ttname"><a href="class_game_1_1_engine_1_1_player.html#a5cfb009947a5f4f2a30867ba9c0d7901">Game::Engine::Player::setPlayerBitmap</a></div><div class="ttdeci">void setPlayerBitmap(BitmapHandler bitmap)</div><div class="ttdoc">Ustawia bitmapÍ gracza.</div><div class="ttdef"><b>Definition</b> <a href="_player_8cpp_source.html#l00019">Player.cpp:19</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_sprite_object_html_a58e508efc34662896e90da10744f212d"><div class="ttname"><a href="class_game_1_1_engine_1_1_sprite_object.html#a58e508efc34662896e90da10744f212d">Game::Engine::SpriteObject::setCollisionRect</a></div><div class="ttdeci">void setCollisionRect(IntRect collisionRect)</div><div class="ttdoc">Metoda ustawiajπca prostokπt kolizji dla obiektu sprite.</div><div class="ttdef"><b>Definition</b> <a href="_sprite_object_8cpp_source.html#l00059">SpriteObject.cpp:59</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_sprite_object_html_a9242b7026bc16fe2427a048c644b848b"><div class="ttname"><a href="class_game_1_1_engine_1_1_sprite_object.html#a9242b7026bc16fe2427a048c644b848b">Game::Engine::SpriteObject::SpriteObject</a></div><div class="ttdeci">SpriteObject()</div><div class="ttdoc">Konstruktor domyúlny klasy SpriteObject.</div><div class="ttdef"><b>Definition</b> <a href="_sprite_object_8cpp_source.html#l00008">SpriteObject.cpp:8</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_1_1_sprite_object_html_ae76c98db66acd98dcfd881ad1fefa685"><div class="ttname"><a href="class_game_1_1_engine_1_1_sprite_object.html#ae76c98db66acd98dcfd881ad1fefa685">Game::Engine::SpriteObject::createSpriteFrom</a></div><div class="ttdeci">void createSpriteFrom(Texture *bitmap, Vector2f position, Vector2f scale)</div><div class="ttdoc">Metoda tworzπca obiekt sprite na podstawie tekstury, pozycji i skali.</div><div class="ttdef"><b>Definition</b> <a href="_sprite_object_8cpp_source.html#l00030">SpriteObject.cpp:30</a></div></div>
+<div class="ttc" id="aclass_game_1_1_engine_html_ae4e76bf2cc9186b89e5eaf91cc110259"><div class="ttname"><a href="class_game_1_1_engine.html#ae4e76bf2cc9186b89e5eaf91cc110259">Game::Engine::getInstance</a></div><div class="ttdeci">static Engine &amp; getInstance()</div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00044">Engine.hpp:44</a></div></div>
+<div class="ttc" id="anamespace_game_html"><div class="ttname"><a href="namespace_game.html">Game</a></div><div class="ttdef"><b>Definition</b> <a href="_engine_8hpp_source.html#l00037">Engine.hpp:37</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

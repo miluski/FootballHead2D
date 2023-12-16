@@ -1,0 +1,44 @@
+\doxysection{Sprite\+Object.\+cpp}
+\hypertarget{_sprite_object_8cpp_source}{}\label{_sprite_object_8cpp_source}\mbox{\hyperlink{_sprite_object_8cpp}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_engine_8hpp}{Engine.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00003}00003\ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespace_game}{Game}};}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00008}\mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a9242b7026bc16fe2427a048c644b848b}{00008}}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a9242b7026bc16fe2427a048c644b848b}{Engine::SpriteObject::SpriteObject}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00009}00009\ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00017}\mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_aac809898e4e3c4a44bf528a7f9966414}{00017}}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a9242b7026bc16fe2427a048c644b848b}{Engine::SpriteObject::SpriteObject}}(Texture*\ bitmap,\ Vector2f\ position,\ Vector2f\ scale)\ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00018}00018\ \ \ \ \ this-\/>spriteObject.setTexture(*bitmap);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00019}00019\ \ \ \ \ this-\/>spriteObject.setPosition(position.x,\ position.y);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00020}00020\ \ \ \ \ this-\/>spriteObject.setScale(scale.x,\ scale.y);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00021}00021\ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_ae4e76bf2cc9186b89e5eaf91cc110259}{getInstance}}().backgroundRenderTexture-\/>draw(this-\/>spriteObject);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00030}\mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_ae76c98db66acd98dcfd881ad1fefa685}{00030}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_ae76c98db66acd98dcfd881ad1fefa685}{Engine::SpriteObject::createSpriteFrom}}(Texture*\ bitmap,\ Vector2f\ position,\ Vector2f\ scale)\ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00031}00031\ \ \ \ \ this-\/>spriteObject.setTexture(*bitmap);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00032}00032\ \ \ \ \ this-\/>spriteObject.setPosition(position.x,\ position.y);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00033}00033\ \ \ \ \ this-\/>spriteObject.setScale(scale.x,\ scale.y);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00034}00034\ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_ae4e76bf2cc9186b89e5eaf91cc110259}{getInstance}}().backgroundRenderTexture-\/>draw(this-\/>spriteObject);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00044}\mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_ab3058a000ed2a053c1732a5bcbaf396f}{00044}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_ae76c98db66acd98dcfd881ad1fefa685}{Engine::SpriteObject::createSpriteFrom}}(Texture*\ bitmap[],\ \textcolor{keywordtype}{int}\ bitmapArraySize,\ Vector2f\ positions[],\ Vector2f\ scales[])\ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00045}00045\ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_ae4e76bf2cc9186b89e5eaf91cc110259}{getInstance}}().backgroundRenderTexture-\/>clear();}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ bitmapArraySize;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ Sprite\ bufferSprite;}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ bufferSprite.setTexture(*bitmap[i]);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ bufferSprite.setPosition(positions[i].x,\ positions[i].y);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ bufferSprite.setScale(scales[i].x,\ scales[i].y);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_1_1_engine_ae4e76bf2cc9186b89e5eaf91cc110259}{getInstance}}().backgroundRenderTexture-\/>draw(bufferSprite);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00052}00052\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00053}00053\ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00059}\mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a58e508efc34662896e90da10744f212d}{00059}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a58e508efc34662896e90da10744f212d}{Engine::SpriteObject::setCollisionRect}}(IntRect\ collisionRect)\ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00060}00060\ \ \ \ \ this-\/>spriteObject.setTextureRect(collisionRect);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00061}00061\ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00068}\mbox{\hyperlink{class_game_1_1_engine_1_1_sprite_object_a503ea24094039f67d79eb1e24592467e}{00068}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_1_1_engine_1_1_animated_object_aee1575c9c783c6db45d993c140d16327}{Engine::SpriteObject::animate}}(\mbox{\hyperlink{class_game_1_1_engine_1_1_bitmap_handler}{BitmapHandler}}\ bitmap,\ \mbox{\hyperlink{class_game_1_1_engine_1_1_player}{Player}}*\ player)\ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00069}00069\ \ \ \ \ player-\/>\mbox{\hyperlink{class_game_1_1_engine_1_1_player_a5cfb009947a5f4f2a30867ba9c0d7901}{setPlayerBitmap}}(bitmap);}
+\DoxyCodeLine{\Hypertarget{_sprite_object_8cpp_source_l00070}00070\ \}}
+
+\end{DoxyCode}
