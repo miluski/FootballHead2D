@@ -1240,7 +1240,7 @@ void Engine::setGameBackground(string currentTime) {
         leftPlayer.isDisabled = false;
         leftPlayer.isFreezed = false;
         rightPlayer.isDisabled = false;
-        rightPlayer.isDisabled = false;
+        rightPlayer.isFreezed = false;
         isEffectActive = false;
         effectDurationAtPlayerTimer.restart();
     }
@@ -1371,7 +1371,6 @@ void Engine::checkIsCollisionWithEffect() {
                     leftPlayer.isFreezed = true;
                 else
                     rightPlayer.isFreezed = true;
-                effectDurationAtPlayerTimer.restart();
             break;
             case 2:
                 leftPlayer.isDisabled = true;
